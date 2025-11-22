@@ -1,0 +1,56 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import List, Optional
+from datetime import date, datetime
+from typing_extensions import Literal
+
+from pydantic import Field as FieldInfo
+
+from ...._models import BaseModel
+from ...transactions.ai_insight import AIInsight
+
+__all__ = ["AuditRetrieveReportResponse", "Finding", "PeriodCovered"]
+
+
+class Finding(BaseModel):
+    description: Optional[str] = None
+
+    regulatory_breach: Optional[str] = FieldInfo(alias="regulatoryBreach", default=None)
+
+    related_entities: Optional[List[str]] = FieldInfo(alias="relatedEntities", default=None)
+
+    severity: Optional[Literal["Low", "Medium", "High", "Critical"]] = None
+
+    type: Optional[Literal["violation", "observation", "recommendation"]] = None
+
+
+class PeriodCovered(BaseModel):
+    end_date: Optional[date] = FieldInfo(alias="endDate", default=None)
+
+    start_date: Optional[date] = FieldInfo(alias="startDate", default=None)
+
+
+class AuditRetrieveReportResponse(BaseModel):
+    audit_date: datetime = FieldInfo(alias="auditDate")
+    """Date and time when the audit report was generated."""
+
+    audit_id: str = FieldInfo(alias="auditId")
+    """Unique identifier for the audit report."""
+
+    findings: List[Finding]
+    """Detailed findings, including violations, observations, and recommendations."""
+
+    overall_compliance_score: int = FieldInfo(alias="overallComplianceScore")
+    """Overall compliance score (0-100), indicating adherence to regulations."""
+
+    period_covered: PeriodCovered = FieldInfo(alias="periodCovered")
+    """The time period covered by the audit."""
+
+    recommended_actions: List[AIInsight] = FieldInfo(alias="recommendedActions")
+    """AI-generated actionable recommendations to improve compliance."""
+
+    status: Literal["processing", "completed", "failed"]
+    """Current status of the audit."""
+
+    summary: str
+    """A summary of the audit findings."""
