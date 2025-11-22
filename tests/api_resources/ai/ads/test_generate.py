@@ -20,7 +20,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestGenerate:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.advanced(
@@ -30,7 +29,6 @@ class TestGenerate:
         )
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_advanced_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.advanced(
@@ -53,7 +51,6 @@ class TestGenerate:
         )
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.generate.with_raw_response.advanced(
@@ -67,7 +64,6 @@ class TestGenerate:
         generate = response.parse()
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.generate.with_streaming_response.advanced(
@@ -83,7 +79,6 @@ class TestGenerate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.standard(
@@ -93,7 +88,6 @@ class TestGenerate:
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_standard_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.standard(
@@ -106,7 +100,6 @@ class TestGenerate:
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.generate.with_raw_response.standard(
@@ -120,7 +113,6 @@ class TestGenerate:
         generate = response.parse()
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.generate.with_streaming_response.standard(
@@ -142,7 +134,6 @@ class TestAsyncGenerate:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.advanced(
@@ -152,7 +143,6 @@ class TestAsyncGenerate:
         )
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_advanced_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.advanced(
@@ -175,7 +165,6 @@ class TestAsyncGenerate:
         )
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.generate.with_raw_response.advanced(
@@ -189,7 +178,6 @@ class TestAsyncGenerate:
         generate = await response.parse()
         assert_matches_type(GenerateAdvancedResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.generate.with_streaming_response.advanced(
@@ -205,7 +193,6 @@ class TestAsyncGenerate:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.standard(
@@ -215,7 +202,6 @@ class TestAsyncGenerate:
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_standard_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.standard(
@@ -228,7 +214,6 @@ class TestAsyncGenerate:
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.generate.with_raw_response.standard(
@@ -242,7 +227,6 @@ class TestAsyncGenerate:
         generate = await response.parse()
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.generate.with_streaming_response.standard(

@@ -21,7 +21,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestGoals:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.create(
@@ -32,7 +31,6 @@ class TestGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.create(
@@ -47,7 +45,6 @@ class TestGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.create(
@@ -62,7 +59,6 @@ class TestGoals:
         goal = response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.create(
@@ -79,7 +75,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.retrieve(
@@ -87,7 +82,6 @@ class TestGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.retrieve(
@@ -99,7 +93,6 @@ class TestGoals:
         goal = response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.retrieve(
@@ -113,7 +106,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
@@ -121,7 +113,6 @@ class TestGoals:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.update(
@@ -129,7 +120,6 @@ class TestGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.update(
@@ -144,7 +134,6 @@ class TestGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.update(
@@ -156,7 +145,6 @@ class TestGoals:
         goal = response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.update(
@@ -170,7 +158,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
@@ -178,13 +165,11 @@ class TestGoals:
                 goal_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.list()
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.list(
@@ -193,7 +178,6 @@ class TestGoals:
         )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.list()
@@ -203,7 +187,6 @@ class TestGoals:
         goal = response.parse()
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.list() as response:
@@ -215,7 +198,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.delete(
@@ -223,7 +205,6 @@ class TestGoals:
         )
         assert goal is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.delete(
@@ -235,7 +216,6 @@ class TestGoals:
         goal = response.parse()
         assert goal is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.delete(
@@ -249,7 +229,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
@@ -263,7 +242,6 @@ class TestAsyncGoals:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.create(
@@ -274,7 +252,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.create(
@@ -289,7 +266,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.create(
@@ -304,7 +280,6 @@ class TestAsyncGoals:
         goal = await response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.create(
@@ -321,7 +296,6 @@ class TestAsyncGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.retrieve(
@@ -329,7 +303,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.retrieve(
@@ -341,7 +314,6 @@ class TestAsyncGoals:
         goal = await response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.retrieve(
@@ -355,7 +327,6 @@ class TestAsyncGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
@@ -363,7 +334,6 @@ class TestAsyncGoals:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.update(
@@ -371,7 +341,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.update(
@@ -386,7 +355,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.update(
@@ -398,7 +366,6 @@ class TestAsyncGoals:
         goal = await response.parse()
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.update(
@@ -412,7 +379,6 @@ class TestAsyncGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
@@ -420,13 +386,11 @@ class TestAsyncGoals:
                 goal_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.list()
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.list(
@@ -435,7 +399,6 @@ class TestAsyncGoals:
         )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.list()
@@ -445,7 +408,6 @@ class TestAsyncGoals:
         goal = await response.parse()
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.list() as response:
@@ -457,7 +419,6 @@ class TestAsyncGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.delete(
@@ -465,7 +426,6 @@ class TestAsyncGoals:
         )
         assert goal is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.delete(
@@ -477,7 +437,6 @@ class TestAsyncGoals:
         goal = await response.parse()
         assert goal is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.delete(
@@ -491,7 +450,6 @@ class TestAsyncGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):

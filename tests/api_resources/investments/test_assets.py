@@ -17,7 +17,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAssets:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_search(self, client: JamesBurvelOcallaghanIii) -> None:
         asset = client.investments.assets.search(
@@ -25,7 +24,6 @@ class TestAssets:
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_search_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         asset = client.investments.assets.search(
@@ -36,7 +34,6 @@ class TestAssets:
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_search(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.investments.assets.with_raw_response.search(
@@ -48,7 +45,6 @@ class TestAssets:
         asset = response.parse()
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_search(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.investments.assets.with_streaming_response.search(
@@ -68,7 +64,6 @@ class TestAsyncAssets:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_search(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         asset = await async_client.investments.assets.search(
@@ -76,7 +71,6 @@ class TestAsyncAssets:
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_search_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         asset = await async_client.investments.assets.search(
@@ -87,7 +81,6 @@ class TestAsyncAssets:
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_search(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.investments.assets.with_raw_response.search(
@@ -99,7 +92,6 @@ class TestAsyncAssets:
         asset = await response.parse()
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_search(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.investments.assets.with_streaming_response.search(
