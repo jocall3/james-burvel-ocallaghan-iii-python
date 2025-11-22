@@ -27,7 +27,7 @@ class TestIncubator:
     @parametrize
     def test_method_list_pitches_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         incubator = client.ai.incubator.list_pitches(
-            limit=10,
+            limit=2,
             offset=0,
             status="feedback_required",
         )
@@ -71,7 +71,7 @@ class TestAsyncIncubator:
     @parametrize
     async def test_method_list_pitches_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         incubator = await async_client.ai.incubator.list_pitches(
-            limit=10,
+            limit=2,
             offset=0,
             status="feedback_required",
         )

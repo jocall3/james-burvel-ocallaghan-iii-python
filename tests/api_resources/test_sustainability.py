@@ -25,6 +25,7 @@ class TestSustainability:
     def test_method_purchase_carbon_offsets(self, client: JamesBurvelOcallaghanIii) -> None:
         sustainability = client.sustainability.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         )
         assert_matches_type(SustainabilityPurchaseCarbonOffsetsResponse, sustainability, path=["response"])
@@ -34,8 +35,9 @@ class TestSustainability:
     def test_method_purchase_carbon_offsets_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         sustainability = client.sustainability.purchase_carbon_offsets(
             amount_kg_co2e=500,
-            payment_account_id="acc_chase_checking_4567",
             offset_project="Verified Carbon Standard Project X",
+            payment_account_id="acc_chase_checking_4567",
+            auto_offset_monthly=False,
         )
         assert_matches_type(SustainabilityPurchaseCarbonOffsetsResponse, sustainability, path=["response"])
 
@@ -44,6 +46,7 @@ class TestSustainability:
     def test_raw_response_purchase_carbon_offsets(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.sustainability.with_raw_response.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         )
 
@@ -57,6 +60,7 @@ class TestSustainability:
     def test_streaming_response_purchase_carbon_offsets(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.sustainability.with_streaming_response.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         ) as response:
             assert not response.is_closed
@@ -106,6 +110,7 @@ class TestAsyncSustainability:
     async def test_method_purchase_carbon_offsets(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         sustainability = await async_client.sustainability.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         )
         assert_matches_type(SustainabilityPurchaseCarbonOffsetsResponse, sustainability, path=["response"])
@@ -117,8 +122,9 @@ class TestAsyncSustainability:
     ) -> None:
         sustainability = await async_client.sustainability.purchase_carbon_offsets(
             amount_kg_co2e=500,
-            payment_account_id="acc_chase_checking_4567",
             offset_project="Verified Carbon Standard Project X",
+            payment_account_id="acc_chase_checking_4567",
+            auto_offset_monthly=False,
         )
         assert_matches_type(SustainabilityPurchaseCarbonOffsetsResponse, sustainability, path=["response"])
 
@@ -127,6 +133,7 @@ class TestAsyncSustainability:
     async def test_raw_response_purchase_carbon_offsets(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.sustainability.with_raw_response.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         )
 
@@ -142,6 +149,7 @@ class TestAsyncSustainability:
     ) -> None:
         async with async_client.sustainability.with_streaming_response.purchase_carbon_offsets(
             amount_kg_co2e=500,
+            offset_project="Verified Carbon Standard Project X",
             payment_account_id="acc_chase_checking_4567",
         ) as response:
             assert not response.is_closed

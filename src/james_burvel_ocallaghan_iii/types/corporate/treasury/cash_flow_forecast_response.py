@@ -20,69 +20,86 @@ __all__ = [
 
 
 class InflowForecastBySource(BaseModel):
+    ai_confidence: Optional[float] = FieldInfo(alias="aiConfidence", default=None)
+    """AI's confidence score for this inflow source."""
+
     amount: Optional[float] = None
+    """Projected amount from this source."""
 
     source: Optional[str] = None
+    """Source of inflow."""
 
 
 class InflowForecast(BaseModel):
-    by_source: Optional[List[InflowForecastBySource]] = FieldInfo(alias="bySource", default=None)
+    by_source: List[InflowForecastBySource] = FieldInfo(alias="bySource")
+    """Breakdown of inflows by source."""
 
-    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
+    total_projected: float = FieldInfo(alias="totalProjected")
+    """Total projected inflows."""
 
 
 class OutflowForecastByCategory(BaseModel):
+    ai_confidence: Optional[float] = FieldInfo(alias="aiConfidence", default=None)
+    """AI's confidence score for this outflow category."""
+
     amount: Optional[float] = None
+    """Projected amount for this category."""
 
     category: Optional[str] = None
+    """Category of outflow."""
 
 
 class OutflowForecast(BaseModel):
-    by_category: Optional[List[OutflowForecastByCategory]] = FieldInfo(alias="byCategory", default=None)
+    by_category: List[OutflowForecastByCategory] = FieldInfo(alias="byCategory")
+    """Breakdown of outflows by category."""
 
-    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
+    total_projected: float = FieldInfo(alias="totalProjected")
+    """Total projected outflows."""
 
 
 class ProjectedBalance(BaseModel):
-    date: Optional[datetime.date] = None
+    date: datetime.date
+    """Date of the projected balance."""
 
-    projected_cash: Optional[float] = FieldInfo(alias="projectedCash", default=None)
+    projected_cash: float = FieldInfo(alias="projectedCash")
+    """Projected cash balance on this date."""
 
-    scenario: Optional[Literal["most_likely", "worst_case", "best_case"]] = None
+    scenario: Literal["most_likely", "best_case", "worst_case", "custom"]
+    """The scenario for this projection."""
 
 
 class CashFlowForecastResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-generated actionable recommendations for treasury optimization."""
+    """AI-generated recommendations for treasury optimization."""
 
     currency: str
-    """The primary currency of the forecast (ISO 4217 code)."""
+    """The primary currency of the forecast."""
 
     forecast_id: str = FieldInfo(alias="forecastId")
     """Unique identifier for the cash flow forecast."""
 
     inflow_forecast: InflowForecast = FieldInfo(alias="inflowForecast")
-    """Detailed forecast of expected cash inflows."""
+    """Forecasted cash inflows."""
 
     liquidity_risk_score: int = FieldInfo(alias="liquidityRiskScore")
-    """AI-assessed risk score (0-100) for liquidity issues during the forecast period."""
+    """AI-assessed score for liquidity risk (0-100, higher is riskier)."""
 
     outflow_forecast: OutflowForecast = FieldInfo(alias="outflowForecast")
-    """Detailed forecast of expected cash outflows."""
+    """Forecasted cash outflows."""
 
-    overall_status: Literal["positive_outlook", "stable", "potential_deficit", "critical_deficit"] = FieldInfo(
+    overall_status: Literal["positive_outlook", "neutral", "potential_deficit", "critical_risk"] = FieldInfo(
         alias="overallStatus"
     )
-    """Overall assessment of the forecasted cash flow."""
+    """Overall assessment of the cash flow outlook."""
 
     period: str
-    """The time period covered by the forecast."""
+    """The period covered by the forecast."""
 
     projected_balances: List[ProjectedBalance] = FieldInfo(alias="projectedBalances")
-    """
-    Projected cash balances at various points in the forecast horizon, possibly
-    across scenarios.
-    """
+    """Time-series of projected cash balances under different scenarios."""
 
-    generated_on: Optional[datetime.datetime] = FieldInfo(alias="generatedOn", default=None)
+    forecast_timestamp: Optional[datetime.datetime] = FieldInfo(alias="forecastTimestamp", default=None)
     """Timestamp when the forecast was generated."""
+
+    scenario_analysis_summary: Optional[str] = FieldInfo(alias="scenarioAnalysisSummary", default=None)
+    """Summary of 'what-if' scenario analysis included in the forecast."""

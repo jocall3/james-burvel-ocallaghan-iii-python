@@ -45,7 +45,7 @@ class TestCorporate:
                 "zip": "90210",
             },
             date_of_birth=parse_date("1970-01-01"),
-            identification_number="identificationNumber",
+            id_number="idNumber",
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 
@@ -112,7 +112,7 @@ class TestAsyncCorporate:
                 "zip": "90210",
             },
             date_of_birth=parse_date("1970-01-01"),
-            identification_number="identificationNumber",
+            id_number="idNumber",
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 

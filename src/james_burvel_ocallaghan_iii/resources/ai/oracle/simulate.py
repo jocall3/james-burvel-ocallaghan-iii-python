@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -49,10 +49,7 @@ class SimulateResource(SyncAPIResource):
         *,
         prompt: str,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        duration_years: int | Omit = omit,
-        initial_state: Optional[simulate_run_advanced_params.InitialState] | Omit = omit,
-        sensitivity_analysis_params: Optional[Iterable[simulate_run_advanced_params.SensitivityAnalysisParam]]
-        | Omit = omit,
+        global_parameters: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,16 +64,12 @@ class SimulateResource(SyncAPIResource):
         analysis.
 
         Args:
-          prompt: Natural language description of the complex simulation goal.
+          prompt: A high-level natural language prompt describing the complex simulation.
 
-          scenarios: A list of distinct hypothetical scenarios to run.
+          scenarios: A list of one or more detailed scenarios to simulate.
 
-          duration_years: Overall duration of the simulation in years.
-
-          initial_state: Optional: Override current user financial data for the simulation's starting
-              point.
-
-          sensitivity_analysis_params: Parameters to vary for sensitivity analysis within scenarios.
+          global_parameters: Optional: Parameters that apply to all scenarios unless overridden (e.g.,
+              overall economic growth rate).
 
           extra_headers: Send extra headers
 
@@ -92,9 +85,7 @@ class SimulateResource(SyncAPIResource):
                 {
                     "prompt": prompt,
                     "scenarios": scenarios,
-                    "duration_years": duration_years,
-                    "initial_state": initial_state,
-                    "sensitivity_analysis_params": sensitivity_analysis_params,
+                    "global_parameters": global_parameters,
                 },
                 simulate_run_advanced_params.SimulateRunAdvancedParams,
             ),
@@ -108,7 +99,7 @@ class SimulateResource(SyncAPIResource):
         self,
         *,
         prompt: str,
-        parameters: Optional[Dict[str, object]] | Omit = omit,
+        parameters: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -122,10 +113,10 @@ class SimulateResource(SyncAPIResource):
         state and provides a summary.
 
         Args:
-          prompt: Natural language description of the financial scenario to simulate.
+          prompt: A natural language description of the 'what-if' scenario to simulate.
 
-          parameters: Optional: Structured parameters to guide the AI simulation (e.g., duration,
-              amount, riskTolerance).
+          parameters: Optional: Structured parameters to guide the simulation (e.g., duration,
+              amount).
 
           extra_headers: Send extra headers
 
@@ -176,10 +167,7 @@ class AsyncSimulateResource(AsyncAPIResource):
         *,
         prompt: str,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        duration_years: int | Omit = omit,
-        initial_state: Optional[simulate_run_advanced_params.InitialState] | Omit = omit,
-        sensitivity_analysis_params: Optional[Iterable[simulate_run_advanced_params.SensitivityAnalysisParam]]
-        | Omit = omit,
+        global_parameters: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -194,16 +182,12 @@ class AsyncSimulateResource(AsyncAPIResource):
         analysis.
 
         Args:
-          prompt: Natural language description of the complex simulation goal.
+          prompt: A high-level natural language prompt describing the complex simulation.
 
-          scenarios: A list of distinct hypothetical scenarios to run.
+          scenarios: A list of one or more detailed scenarios to simulate.
 
-          duration_years: Overall duration of the simulation in years.
-
-          initial_state: Optional: Override current user financial data for the simulation's starting
-              point.
-
-          sensitivity_analysis_params: Parameters to vary for sensitivity analysis within scenarios.
+          global_parameters: Optional: Parameters that apply to all scenarios unless overridden (e.g.,
+              overall economic growth rate).
 
           extra_headers: Send extra headers
 
@@ -219,9 +203,7 @@ class AsyncSimulateResource(AsyncAPIResource):
                 {
                     "prompt": prompt,
                     "scenarios": scenarios,
-                    "duration_years": duration_years,
-                    "initial_state": initial_state,
-                    "sensitivity_analysis_params": sensitivity_analysis_params,
+                    "global_parameters": global_parameters,
                 },
                 simulate_run_advanced_params.SimulateRunAdvancedParams,
             ),
@@ -235,7 +217,7 @@ class AsyncSimulateResource(AsyncAPIResource):
         self,
         *,
         prompt: str,
-        parameters: Optional[Dict[str, object]] | Omit = omit,
+        parameters: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -249,10 +231,10 @@ class AsyncSimulateResource(AsyncAPIResource):
         state and provides a summary.
 
         Args:
-          prompt: Natural language description of the financial scenario to simulate.
+          prompt: A natural language description of the 'what-if' scenario to simulate.
 
-          parameters: Optional: Structured parameters to guide the AI simulation (e.g., duration,
-              amount, riskTolerance).
+          parameters: Optional: Structured parameters to guide the simulation (e.g., duration,
+              amount).
 
           extra_headers: Send extra headers
 

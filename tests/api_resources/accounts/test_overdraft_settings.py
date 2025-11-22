@@ -74,7 +74,7 @@ class TestOverdraftSettings:
             account_id="acc_chase_checking_4567",
             enabled=False,
             fee_preference="decline_if_over_limit",
-            linked_savings_account_id=None,
+            linked_savings_account_id="acc_new_savings_5678",
             link_to_savings=False,
             protection_limit=750,
         )
@@ -177,7 +177,7 @@ class TestAsyncOverdraftSettings:
             account_id="acc_chase_checking_4567",
             enabled=False,
             fee_preference="decline_if_over_limit",
-            linked_savings_account_id=None,
+            linked_savings_account_id="acc_new_savings_5678",
             link_to_savings=False,
             protection_limit=750,
         )

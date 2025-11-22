@@ -6,7 +6,6 @@ from typing import Union, Optional
 from datetime import date
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["GoalCreateParams"]
@@ -14,31 +13,27 @@ __all__ = ["GoalCreateParams"]
 
 class GoalCreateParams(TypedDict, total=False):
     name: Required[str]
-    """Name for the new financial goal."""
-
-    risk_tolerance: Required[
-        Annotated[Literal["low", "medium", "aggressive", "very_aggressive"], PropertyInfo(alias="riskTolerance")]
-    ]
-    """The risk tolerance for the investment strategy associated with this goal."""
+    """Name of the new financial goal."""
 
     target_amount: Required[Annotated[float, PropertyInfo(alias="targetAmount")]]
-    """The target amount to save/invest for this goal."""
+    """The target amount to save or achieve."""
 
     target_date: Required[Annotated[Union[str, date], PropertyInfo(alias="targetDate", format="iso8601")]]
-    """The target date by which to achieve the goal."""
+    """The target date for the goal."""
 
-    type: Required[
-        Literal[
-            "retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "investment_growth", "other"
-        ]
-    ]
+    type: Required[Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "custom"]]
     """Type of financial goal."""
 
     generate_ai_plan: Annotated[bool, PropertyInfo(alias="generateAIPlan")]
-    """If true, AI will automatically generate a strategic plan for this goal."""
+    """If true, AI will generate a strategic plan to achieve the goal."""
 
     initial_contribution: Annotated[float, PropertyInfo(alias="initialContribution")]
-    """Optional: Initial amount to contribute to this goal."""
+    """Optional: An initial amount contributed to the goal."""
 
-    linked_account_ids: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="linkedAccountIds")]
-    """Optional: List of accounts to associate with this goal for contributions."""
+    linked_account_id: Annotated[Optional[str], PropertyInfo(alias="linkedAccountId")]
+    """Optional: The ID of a primary account to link for contributions."""
+
+    risk_tolerance: Annotated[
+        Literal["conservative", "balanced", "medium", "aggressive", "speculative"], PropertyInfo(alias="riskTolerance")
+    ]
+    """Risk tolerance for investments related to this goal."""

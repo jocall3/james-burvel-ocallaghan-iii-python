@@ -13,13 +13,15 @@ __all__ = ["ChatSendMessageResponse"]
 
 class ChatSendMessageResponse(BaseModel):
     session_id: str = FieldInfo(alias="sessionId")
-    """The ID of the current conversation session."""
-
-    text: str
-    """The AI Advisor's natural language response."""
+    """The ID of the conversation session."""
 
     function_calls: Optional[List[AIFunctionCall]] = FieldInfo(alias="functionCalls", default=None)
-    """If the AI intends to use a tool, this provides the function call details."""
+    """Optional: A list of tool/function calls the AI wants the client to execute."""
 
     proactive_insights: Optional[List[AIInsight]] = FieldInfo(alias="proactiveInsights", default=None)
-    """AI-generated proactive insights or recommendations."""
+    """
+    Optional: A list of AI-generated insights or alerts related to the conversation.
+    """
+
+    text: Optional[str] = None
+    """The AI Advisor's natural language response."""

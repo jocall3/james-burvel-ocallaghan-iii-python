@@ -50,6 +50,7 @@ class APIKeysResource(SyncAPIResource):
         name: str,
         scopes: SequenceNotStr[str],
         expires_in_days: Optional[int] | Omit = omit,
+        is_secret_key: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,10 +65,13 @@ class APIKeysResource(SyncAPIResource):
         Args:
           name: A descriptive name for the new API key.
 
-          scopes: A list of OAuth2 scopes to grant to this API key.
+          scopes: List of desired permissions (scopes) for the API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If omitted, the key does not
+          expires_in_days: Optional: Number of days until the API key expires. If not provided, it will not
               expire.
+
+          is_secret_key: If true, generates a secret key (suitable for server-to-server) with a 'db*sk*'
+              prefix. Otherwise, generates a public key ('db*pk*').
 
           extra_headers: Send extra headers
 
@@ -84,6 +88,7 @@ class APIKeysResource(SyncAPIResource):
                     "name": name,
                     "scopes": scopes,
                     "expires_in_days": expires_in_days,
+                    "is_secret_key": is_secret_key,
                 },
                 api_key_create_params.APIKeyCreateParams,
             ),
@@ -173,6 +178,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         name: str,
         scopes: SequenceNotStr[str],
         expires_in_days: Optional[int] | Omit = omit,
+        is_secret_key: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -187,10 +193,13 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         Args:
           name: A descriptive name for the new API key.
 
-          scopes: A list of OAuth2 scopes to grant to this API key.
+          scopes: List of desired permissions (scopes) for the API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If omitted, the key does not
+          expires_in_days: Optional: Number of days until the API key expires. If not provided, it will not
               expire.
+
+          is_secret_key: If true, generates a secret key (suitable for server-to-server) with a 'db*sk*'
+              prefix. Otherwise, generates a public key ('db*pk*').
 
           extra_headers: Send extra headers
 
@@ -207,6 +216,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
                     "name": name,
                     "scopes": scopes,
                     "expires_in_days": expires_in_days,
+                    "is_secret_key": is_secret_key,
                 },
                 api_key_create_params.APIKeyCreateParams,
             ),

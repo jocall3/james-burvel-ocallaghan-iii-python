@@ -1,58 +1,60 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
-from ...transactions.ai_insight import AIInsight
 
-__all__ = ["SimulationResponse", "KeyImpact", "RiskAnalysis", "RiskAnalysisStressTestResult"]
+__all__ = ["SimulationResponse", "KeyImpact", "Recommendation", "RiskAnalysis"]
 
 
 class KeyImpact(BaseModel):
-    metric: Optional[str] = None
+    metric: str
+    """The financial metric being impacted."""
+
+    value: str
+    """The projected value or range for the metric."""
 
     severity: Optional[Literal["low", "medium", "high"]] = None
+    """The severity of the impact (e.g., positive or negative significant change)."""
 
-    value: Optional[str] = None
 
+class Recommendation(BaseModel):
+    description: str
+    """Detailed explanation of the recommendation."""
 
-class RiskAnalysisStressTestResult(BaseModel):
-    impact: Optional[str] = None
+    title: str
+    """A concise title for the recommendation."""
 
-    scenario: Optional[str] = None
+    action_trigger: Optional[str] = FieldInfo(alias="actionTrigger", default=None)
+    """An identifier or URI to trigger a specific action within the application."""
 
 
 class RiskAnalysis(BaseModel):
     max_drawdown: Optional[float] = FieldInfo(alias="maxDrawdown", default=None)
-    """Maximum expected percentage drop from a peak value."""
+    """Worst historical decline from a peak (e.g., 0.25 for 25% drop)."""
 
-    stress_test_results: Optional[List[RiskAnalysisStressTestResult]] = FieldInfo(
-        alias="stressTestResults", default=None
-    )
+    scenario_analysis: Optional[object] = FieldInfo(alias="scenarioAnalysis", default=None)
+    """Further details on how different adverse scenarios impact the outcome."""
 
     volatility_index: Optional[float] = FieldInfo(alias="volatilityIndex", default=None)
-    """An index representing the expected volatility of the outcome."""
+    """A measure of market or portfolio volatility (e.g., standard deviation)."""
 
 
 class SimulationResponse(BaseModel):
     key_impacts: List[KeyImpact] = FieldInfo(alias="keyImpacts")
-    """Key financial metrics and their projected values/changes."""
+    """Key financial metrics and their projected impact."""
 
     narrative_summary: str = FieldInfo(alias="narrativeSummary")
-    """A natural language summary of the simulation's findings."""
-
-    recommendations: List[AIInsight]
-    """Actionable recommendations derived from the simulation."""
-
-    risk_analysis: Optional[RiskAnalysis] = FieldInfo(alias="riskAnalysis", default=None)
-    """Detailed analysis of risks and potential stress test scenarios."""
+    """A natural language summary of the simulation results."""
 
     simulation_id: str = FieldInfo(alias="simulationId")
     """Unique identifier for the completed simulation."""
 
-    generated_on: Optional[datetime] = FieldInfo(alias="generatedOn", default=None)
-    """Timestamp when the simulation was generated."""
+    recommendations: Optional[List[Recommendation]] = None
+    """Actionable AI-driven recommendations based on the simulation."""
+
+    risk_analysis: Optional[RiskAnalysis] = FieldInfo(alias="riskAnalysis", default=None)
+    """Detailed analysis of potential risks associated with the simulated scenario."""

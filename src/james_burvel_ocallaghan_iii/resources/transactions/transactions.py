@@ -140,7 +140,7 @@ class TransactionsResource(SyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -206,7 +206,7 @@ class TransactionsResource(SyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction. Can be hierarchical.
+          category: The new category to assign to the transaction. Supports hierarchical categories.
 
           apply_to_future: If true, the AI will learn from this correction and apply it to similar future
               transactions.
@@ -244,8 +244,9 @@ class TransactionsResource(SyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
-        contact_preferred: Literal["email", "phone", "in_app"] | Omit = omit,
+        reason: Literal[
+            "unauthorized", "duplicate", "incorrect_amount", "service_not_received", "damaged_goods", "other"
+        ],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -263,9 +264,7 @@ class TransactionsResource(SyncAPIResource):
 
           reason: The primary reason for disputing the transaction.
 
-          contact_preferred: Preferred method for our team to contact the user regarding the dispute.
-
-          supporting_documents: URLs to supporting documents (e.g., screenshots, travel itineraries).
+          supporting_documents: Optional URLs to supporting documents (e.g., screenshots, photos).
 
           extra_headers: Send extra headers
 
@@ -283,7 +282,6 @@ class TransactionsResource(SyncAPIResource):
                 {
                     "details": details,
                     "reason": reason,
-                    "contact_preferred": contact_preferred,
                     "supporting_documents": supporting_documents,
                 },
                 transaction_dispute_params.TransactionDisputeParams,
@@ -424,7 +422,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -490,7 +488,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction. Can be hierarchical.
+          category: The new category to assign to the transaction. Supports hierarchical categories.
 
           apply_to_future: If true, the AI will learn from this correction and apply it to similar future
               transactions.
@@ -528,8 +526,9 @@ class AsyncTransactionsResource(AsyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
-        contact_preferred: Literal["email", "phone", "in_app"] | Omit = omit,
+        reason: Literal[
+            "unauthorized", "duplicate", "incorrect_amount", "service_not_received", "damaged_goods", "other"
+        ],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -547,9 +546,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           reason: The primary reason for disputing the transaction.
 
-          contact_preferred: Preferred method for our team to contact the user regarding the dispute.
-
-          supporting_documents: URLs to supporting documents (e.g., screenshots, travel itineraries).
+          supporting_documents: Optional URLs to supporting documents (e.g., screenshots, photos).
 
           extra_headers: Send extra headers
 
@@ -567,7 +564,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
                 {
                     "details": details,
                     "reason": reason,
-                    "contact_preferred": contact_preferred,
                     "supporting_documents": supporting_documents,
                 },
                 transaction_dispute_params.TransactionDisputeParams,

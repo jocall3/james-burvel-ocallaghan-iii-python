@@ -16,28 +16,28 @@ class WebhookSubscription(BaseModel):
     """Unique identifier for the webhook subscription."""
 
     callback_url: str = FieldInfo(alias="callbackUrl")
-    """The URL where webhook events will be sent."""
+    """The URL to which webhook events will be sent."""
 
     events: List[str]
     """
-    A list of event types this webhook is subscribed to (e.g.,
-    'transaction.created', 'account.updated').
+    List of event types subscribed to (e.g., 'transaction.created',
+    'user.login_failed').
     """
 
     failure_count: int = FieldInfo(alias="failureCount")
     """Number of consecutive failed delivery attempts."""
 
-    status: Literal["active", "paused", "suspended"]
-    """Current status of the webhook subscription."""
+    status: Literal["active", "paused", "failed"]
+    """Current status of the subscription."""
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """Timestamp when the webhook was created."""
+    """Timestamp when the webhook subscription was created."""
 
     last_triggered: Optional[datetime] = FieldInfo(alias="lastTriggered", default=None)
     """Timestamp of the last successful webhook delivery."""
 
     secret: Optional[str] = None
-    """Optional: A secret key used to sign webhook payloads for verification.
-
-    Not returned on GET.
+    """
+    The shared secret used to sign webhook payloads, null after creation for
+    security.
     """

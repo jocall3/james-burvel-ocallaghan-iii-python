@@ -27,7 +27,7 @@ class TestAds:
     @parametrize
     def test_method_list_generated_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         ad = client.ai.ads.list_generated(
-            limit=10,
+            limit=2,
             offset=0,
             status="done",
         )
@@ -113,7 +113,7 @@ class TestAsyncAds:
     @parametrize
     async def test_method_list_generated_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         ad = await async_client.ai.ads.list_generated(
-            limit=10,
+            limit=2,
             offset=0,
             status="done",
         )

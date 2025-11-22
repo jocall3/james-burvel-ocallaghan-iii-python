@@ -33,6 +33,7 @@ class TestAPIKeys:
             name="My Analytics Service Key",
             scopes=["read:accounts", "read:transactions"],
             expires_in_days=90,
+            is_secret_key=False,
         )
         assert_matches_type(APIKey, api_key, path=["response"])
 
@@ -156,6 +157,7 @@ class TestAsyncAPIKeys:
             name="My Analytics Service Key",
             scopes=["read:accounts", "read:transactions"],
             expires_in_days=90,
+            is_secret_key=False,
         )
         assert_matches_type(APIKey, api_key, path=["response"])
 

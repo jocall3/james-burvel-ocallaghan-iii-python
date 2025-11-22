@@ -36,6 +36,7 @@ class TestWebhooks:
             callback_url="https://my-analytics-app.com/webhooks/transactions",
             events=["transaction.created", "transaction.updated"],
             secret="my_custom_webhook_secret_123",
+            status="active",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
@@ -82,6 +83,7 @@ class TestWebhooks:
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
             events=["transaction.created", "user.login_failed"],
+            secret="a_new_secure_secret_for_signing",
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
@@ -212,6 +214,7 @@ class TestAsyncWebhooks:
             callback_url="https://my-analytics-app.com/webhooks/transactions",
             events=["transaction.created", "transaction.updated"],
             secret="my_custom_webhook_secret_123",
+            status="active",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
@@ -258,6 +261,7 @@ class TestAsyncWebhooks:
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
             events=["transaction.created", "user.login_failed"],
+            secret="a_new_secure_secret_for_signing",
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])

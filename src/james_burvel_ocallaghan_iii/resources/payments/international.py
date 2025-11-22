@@ -54,7 +54,7 @@ class InternationalResource(SyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Optional[Literal["proprietary_ai", "market", "partner_bank"]] | Omit = omit,
+        fx_rate_provider: Literal["proprietary_ai", "standard_interbank", "third_party"] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -69,23 +69,23 @@ class InternationalResource(SyncAPIResource):
         tracking capabilities.
 
         Args:
-          amount: The amount of money to send in the `sourceCurrency`.
+          amount: The amount to send from the source account in `sourceCurrency`.
 
           beneficiary: Details of the recipient for the international payment.
 
-          purpose: A clear and concise purpose for the payment.
+          purpose: A short description or purpose for the payment.
 
-          source_account_id: The ID of the source account from which funds will be sent.
+          source_account_id: The ID of the user's account from which funds will be sent.
 
           source_currency: The currency of the source account (ISO 4217 code).
 
-          target_currency: The target currency for the beneficiary (ISO 4217 code).
+          target_currency: The currency the beneficiary will receive (ISO 4217 code).
 
-          fx_rate_lock: If true, attempts to lock the FX rate at the time of initiation.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate. May incur a small fee.
 
-          fx_rate_provider: Optional: Preferred FX rate provider for the conversion.
+          fx_rate_provider: Preferred FX rate provider for the conversion.
 
-          reference_id: Optional: An external reference ID for this payment.
+          reference_id: Optional: An internal reference ID or invoice number for the payment.
 
           extra_headers: Send extra headers
 
@@ -182,7 +182,7 @@ class AsyncInternationalResource(AsyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Optional[Literal["proprietary_ai", "market", "partner_bank"]] | Omit = omit,
+        fx_rate_provider: Literal["proprietary_ai", "standard_interbank", "third_party"] | Omit = omit,
         reference_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -197,23 +197,23 @@ class AsyncInternationalResource(AsyncAPIResource):
         tracking capabilities.
 
         Args:
-          amount: The amount of money to send in the `sourceCurrency`.
+          amount: The amount to send from the source account in `sourceCurrency`.
 
           beneficiary: Details of the recipient for the international payment.
 
-          purpose: A clear and concise purpose for the payment.
+          purpose: A short description or purpose for the payment.
 
-          source_account_id: The ID of the source account from which funds will be sent.
+          source_account_id: The ID of the user's account from which funds will be sent.
 
           source_currency: The currency of the source account (ISO 4217 code).
 
-          target_currency: The target currency for the beneficiary (ISO 4217 code).
+          target_currency: The currency the beneficiary will receive (ISO 4217 code).
 
-          fx_rate_lock: If true, attempts to lock the FX rate at the time of initiation.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate. May incur a small fee.
 
-          fx_rate_provider: Optional: Preferred FX rate provider for the conversion.
+          fx_rate_provider: Preferred FX rate provider for the conversion.
 
-          reference_id: Optional: An external reference ID for this payment.
+          reference_id: Optional: An internal reference ID or invoice number for the payment.
 
           extra_headers: Send extra headers
 

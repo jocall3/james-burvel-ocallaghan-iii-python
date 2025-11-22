@@ -78,12 +78,11 @@ class TestApplications:
             repayment_term_months=36,
             additional_notes="Funds needed to replace a broken HVAC system.",
             co_applicant={
-                "credit_score": 720,
                 "email": "jane.doe@example.com",
                 "income": 75000,
                 "name": "Jane Doe",
+                "credit_score": 720,
             },
-            desired_interest_rate=0,
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])
 
@@ -184,12 +183,11 @@ class TestAsyncApplications:
             repayment_term_months=36,
             additional_notes="Funds needed to replace a broken HVAC system.",
             co_applicant={
-                "credit_score": 720,
                 "email": "jane.doe@example.com",
                 "income": 75000,
                 "name": "Jane Doe",
+                "credit_score": 720,
             },
-            desired_interest_rate=0,
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])
 

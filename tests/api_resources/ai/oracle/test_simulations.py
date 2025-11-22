@@ -72,7 +72,7 @@ class TestSimulations:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.list(
-            limit=10,
+            limit=2,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
@@ -199,7 +199,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.list(
-            limit=10,
+            limit=2,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])

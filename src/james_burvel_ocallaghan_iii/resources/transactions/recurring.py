@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Union
 from datetime import date
 from typing_extensions import Literal
 
@@ -53,9 +53,10 @@ class RecurringResource(SyncAPIResource):
         category: str,
         currency: str,
         description: str,
-        frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
+        frequency: Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"],
+        linked_account_id: str,
         start_date: Union[str, date],
-        linked_account_id: Optional[str] | Omit = omit,
+        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,20 +68,21 @@ class RecurringResource(SyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: The expected amount of the recurring transaction.
+          amount: The amount of each recurring transaction.
 
           category: Category of the recurring transaction.
 
-          currency: The currency of the transaction (ISO 4217 code).
+          currency: The currency of the recurring transaction.
 
-          description: Description for the new recurring transaction.
+          description: Description of the new recurring transaction.
 
-          frequency: How often the transaction is expected to occur.
+          frequency: How often the transaction occurs.
 
-          start_date: The date the first recurring transaction is expected.
+          linked_account_id: The ID of the account from which this recurring transaction typically occurs.
 
-          linked_account_id: Optional: The account from which this recurring transaction will be paid or
-              received.
+          start_date: The date the recurring transaction is expected to start.
+
+          status: Initial status of the recurring transaction.
 
           extra_headers: Send extra headers
 
@@ -99,8 +101,9 @@ class RecurringResource(SyncAPIResource):
                     "currency": currency,
                     "description": description,
                     "frequency": frequency,
-                    "start_date": start_date,
                     "linked_account_id": linked_account_id,
+                    "start_date": start_date,
+                    "status": status,
                 },
                 recurring_create_params.RecurringCreateParams,
             ),
@@ -160,9 +163,10 @@ class AsyncRecurringResource(AsyncAPIResource):
         category: str,
         currency: str,
         description: str,
-        frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
+        frequency: Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"],
+        linked_account_id: str,
         start_date: Union[str, date],
-        linked_account_id: Optional[str] | Omit = omit,
+        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -174,20 +178,21 @@ class AsyncRecurringResource(AsyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: The expected amount of the recurring transaction.
+          amount: The amount of each recurring transaction.
 
           category: Category of the recurring transaction.
 
-          currency: The currency of the transaction (ISO 4217 code).
+          currency: The currency of the recurring transaction.
 
-          description: Description for the new recurring transaction.
+          description: Description of the new recurring transaction.
 
-          frequency: How often the transaction is expected to occur.
+          frequency: How often the transaction occurs.
 
-          start_date: The date the first recurring transaction is expected.
+          linked_account_id: The ID of the account from which this recurring transaction typically occurs.
 
-          linked_account_id: Optional: The account from which this recurring transaction will be paid or
-              received.
+          start_date: The date the recurring transaction is expected to start.
+
+          status: Initial status of the recurring transaction.
 
           extra_headers: Send extra headers
 
@@ -206,8 +211,9 @@ class AsyncRecurringResource(AsyncAPIResource):
                     "currency": currency,
                     "description": description,
                     "frequency": frequency,
-                    "start_date": start_date,
                     "linked_account_id": linked_account_id,
+                    "start_date": start_date,
+                    "status": status,
                 },
                 recurring_create_params.RecurringCreateParams,
             ),

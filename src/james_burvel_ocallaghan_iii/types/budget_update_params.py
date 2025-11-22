@@ -13,32 +13,42 @@ __all__ = ["BudgetUpdateParams", "Category"]
 
 class BudgetUpdateParams(TypedDict, total=False):
     alert_threshold: Annotated[Optional[int], PropertyInfo(alias="alertThreshold")]
-    """Updated percentage threshold for budget alerts."""
+    """Updated percentage for budget alert threshold."""
 
     categories: Iterable[Category]
-    """Updated or new categories for the budget.
+    """Updated breakdown of the budget by categories.
 
-    Existing categories not included will remain unchanged unless explicitly set to
-    null/0.
+    Existing categories will be updated, new ones added.
     """
 
     end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
-    """The updated end date of the budget period."""
+    """Updated end date of the budget period."""
 
     name: str
-    """Updated name for the budget."""
+    """Updated name of the budget."""
 
-    period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"]
-    """The updated frequency or period of the budget."""
+    period: Literal["weekly", "monthly", "quarterly", "annually", "custom"]
+    """Updated recurrence period of the budget."""
+
+    reset_spent_amounts: Annotated[bool, PropertyInfo(alias="resetSpentAmounts")]
+    """If true, resets `spentAmount` for all categories and total to 0.
+
+    Useful for starting a new cycle of a recurring budget.
+    """
 
     start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
-    """The updated start date of the budget period."""
+    """Updated start date of the budget period."""
+
+    status: Literal["active", "completed", "archived", "overspent"]
+    """Updated status of the budget."""
 
     total_amount: Annotated[float, PropertyInfo(alias="totalAmount")]
-    """The updated total allocated budget amount."""
+    """Updated total allocated budget amount."""
 
 
 class Category(TypedDict, total=False):
     allocated: Required[float]
+    """Amount allocated to this category."""
 
     name: Required[str]
+    """Category name."""

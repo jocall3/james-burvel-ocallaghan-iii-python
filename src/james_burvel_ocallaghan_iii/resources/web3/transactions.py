@@ -50,19 +50,12 @@ class TransactionsResource(SyncAPIResource):
         amount: float,
         asset_symbol: str,
         blockchain_network: Literal[
-            "Ethereum",
-            "Solana",
-            "Polygon",
-            "BinanceSmartChain",
-            "Avalanche",
-            "Arbitrum",
-            "Optimism",
-            "Bitcoin",
-            "other",
+            "Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"
         ],
         recipient_address: str,
         source_wallet_id: str,
-        gas_price_gwei: Optional[int] | Omit = omit,
+        gas_limit: Optional[int] | Omit = omit,
+        gas_price_gwei: Optional[float] | Omit = omit,
         memo: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -77,20 +70,21 @@ class TransactionsResource(SyncAPIResource):
         signature).
 
         Args:
-          amount: The amount of crypto asset to transfer.
+          amount: The amount of cryptocurrency to transfer.
 
-          asset_symbol: The ticker symbol of the crypto asset (e.g., ETH, USDC).
+          asset_symbol: The symbol of the cryptocurrency to transfer (e.g., ETH, USDC).
 
-          blockchain_network: The blockchain network on which to execute the transfer.
+          blockchain_network: The blockchain network on which the transfer will occur.
 
-          recipient_address: The public blockchain address of the recipient.
+          recipient_address: The recipient's blockchain address.
 
-          source_wallet_id: The ID of the connected wallet from which to send funds.
+          source_wallet_id: The ID of the connected wallet from which to transfer.
+
+          gas_limit: Optional: Maximum gas units to consume for the transaction.
 
           gas_price_gwei: Optional: Desired gas price in Gwei for Ethereum-based transactions.
 
-          memo: Optional: A short memo or note to include with the transaction (if supported by
-              network).
+          memo: Optional: A short memo or note for the transaction (supported by some chains).
 
           extra_headers: Send extra headers
 
@@ -109,6 +103,7 @@ class TransactionsResource(SyncAPIResource):
                     "blockchain_network": blockchain_network,
                     "recipient_address": recipient_address,
                     "source_wallet_id": source_wallet_id,
+                    "gas_limit": gas_limit,
                     "gas_price_gwei": gas_price_gwei,
                     "memo": memo,
                 },
@@ -147,19 +142,12 @@ class AsyncTransactionsResource(AsyncAPIResource):
         amount: float,
         asset_symbol: str,
         blockchain_network: Literal[
-            "Ethereum",
-            "Solana",
-            "Polygon",
-            "BinanceSmartChain",
-            "Avalanche",
-            "Arbitrum",
-            "Optimism",
-            "Bitcoin",
-            "other",
+            "Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"
         ],
         recipient_address: str,
         source_wallet_id: str,
-        gas_price_gwei: Optional[int] | Omit = omit,
+        gas_limit: Optional[int] | Omit = omit,
+        gas_price_gwei: Optional[float] | Omit = omit,
         memo: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -174,20 +162,21 @@ class AsyncTransactionsResource(AsyncAPIResource):
         signature).
 
         Args:
-          amount: The amount of crypto asset to transfer.
+          amount: The amount of cryptocurrency to transfer.
 
-          asset_symbol: The ticker symbol of the crypto asset (e.g., ETH, USDC).
+          asset_symbol: The symbol of the cryptocurrency to transfer (e.g., ETH, USDC).
 
-          blockchain_network: The blockchain network on which to execute the transfer.
+          blockchain_network: The blockchain network on which the transfer will occur.
 
-          recipient_address: The public blockchain address of the recipient.
+          recipient_address: The recipient's blockchain address.
 
-          source_wallet_id: The ID of the connected wallet from which to send funds.
+          source_wallet_id: The ID of the connected wallet from which to transfer.
+
+          gas_limit: Optional: Maximum gas units to consume for the transaction.
 
           gas_price_gwei: Optional: Desired gas price in Gwei for Ethereum-based transactions.
 
-          memo: Optional: A short memo or note to include with the transaction (if supported by
-              network).
+          memo: Optional: A short memo or note for the transaction (supported by some chains).
 
           extra_headers: Send extra headers
 
@@ -206,6 +195,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
                     "blockchain_network": blockchain_network,
                     "recipient_address": recipient_address,
                     "source_wallet_id": source_wallet_id,
+                    "gas_limit": gas_limit,
                     "gas_price_gwei": gas_price_gwei,
                     "memo": memo,
                 },

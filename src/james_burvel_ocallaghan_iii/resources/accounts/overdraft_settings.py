@@ -82,7 +82,7 @@ class OverdraftSettingsResource(SyncAPIResource):
         account_id: str,
         *,
         enabled: bool | Omit = omit,
-        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_first"] | Omit = omit,
+        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
         link_to_savings: bool | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
@@ -98,15 +98,15 @@ class OverdraftSettingsResource(SyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Set to true to enable, false to disable overdraft protection.
+          enabled: Whether overdraft protection should be enabled or disabled.
 
-          fee_preference: New preference for how overdrafts should be handled.
+          fee_preference: The new preference for how overdrafts should be handled.
 
-          linked_savings_account_id: The new linked savings account ID, or null to remove link.
+          linked_savings_account_id: The new savings account to link, or null to unlink.
 
-          link_to_savings: Set to true to link to savings, false to unlink.
+          link_to_savings: Whether to enable or disable linking to a savings account.
 
-          protection_limit: The new maximum amount for overdraft protection.
+          protection_limit: The new maximum overdraft amount. Set to null to remove.
 
           extra_headers: Send extra headers
 
@@ -195,7 +195,7 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         account_id: str,
         *,
         enabled: bool | Omit = omit,
-        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_first"] | Omit = omit,
+        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
         link_to_savings: bool | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
@@ -211,15 +211,15 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Set to true to enable, false to disable overdraft protection.
+          enabled: Whether overdraft protection should be enabled or disabled.
 
-          fee_preference: New preference for how overdrafts should be handled.
+          fee_preference: The new preference for how overdrafts should be handled.
 
-          linked_savings_account_id: The new linked savings account ID, or null to remove link.
+          linked_savings_account_id: The new savings account to link, or null to unlink.
 
-          link_to_savings: Set to true to link to savings, false to unlink.
+          link_to_savings: Whether to enable or disable linking to a savings account.
 
-          protection_limit: The new maximum amount for overdraft protection.
+          protection_limit: The new maximum overdraft amount. Set to null to remove.
 
           extra_headers: Send extra headers
 

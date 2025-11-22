@@ -33,7 +33,7 @@ class TestAnomalies:
         anomaly = client.corporate.anomalies.list(
             end_date=parse_date("2024-12-31"),
             entity_type="Transaction",
-            limit=10,
+            limit=2,
             offset=0,
             severity="Critical",
             start_date=parse_date("2024-01-01"),
@@ -137,7 +137,7 @@ class TestAsyncAnomalies:
         anomaly = await async_client.corporate.anomalies.list(
             end_date=parse_date("2024-12-31"),
             entity_type="Transaction",
-            limit=10,
+            limit=2,
             offset=0,
             severity="Critical",
             start_date=parse_date("2024-01-01"),

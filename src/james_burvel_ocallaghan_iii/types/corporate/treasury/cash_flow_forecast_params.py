@@ -14,7 +14,4 @@ class CashFlowForecastParams(TypedDict, total=False):
     """The number of days into the future for the cash flow forecast."""
 
     include_scenario_analysis: Annotated[bool, PropertyInfo(alias="includeScenarioAnalysis")]
-    """
-    If true, the forecast will include best-case and worst-case scenarios in
-    addition to most likely.
-    """
+    """If true, the forecast will include best-case and worst-case scenarios."""

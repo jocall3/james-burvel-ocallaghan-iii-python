@@ -12,22 +12,25 @@ __all__ = ["GoalUpdateParams"]
 
 
 class GoalUpdateParams(TypedDict, total=False):
+    current_amount: Annotated[float, PropertyInfo(alias="currentAmount")]
+    """Updated current amount accumulated towards the goal."""
+
     name: str
-    """Updated name for the financial goal."""
+    """Updated name of the financial goal."""
 
     regenerate_ai_plan: Annotated[bool, PropertyInfo(alias="regenerateAIPlan")]
     """If true, the AI will regenerate the strategic plan based on updated parameters."""
 
     risk_tolerance: Annotated[
-        Literal["low", "medium", "aggressive", "very_aggressive"], PropertyInfo(alias="riskTolerance")
+        Literal["conservative", "balanced", "medium", "aggressive", "speculative"], PropertyInfo(alias="riskTolerance")
     ]
-    """Updated risk tolerance for the investment strategy."""
+    """Updated risk tolerance for this goal."""
 
-    status: Literal["on_track", "ahead_of_schedule", "behind_schedule", "achieved", "cancelled"]
+    status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused"]
     """Updated status of the goal's progress."""
 
     target_amount: Annotated[float, PropertyInfo(alias="targetAmount")]
-    """The updated target amount for this goal."""
+    """Updated target amount for the goal."""
 
     target_date: Annotated[Union[str, date], PropertyInfo(alias="targetDate", format="iso8601")]
-    """The updated target date for achieving the goal."""
+    """Updated target date for the goal."""

@@ -23,7 +23,7 @@ class Category(BaseModel):
     """Remaining amount in this category."""
 
     spent: float
-    """Amount spent in this category so far."""
+    """Amount spent in this category."""
 
 
 class Budget(BaseModel):
@@ -31,27 +31,27 @@ class Budget(BaseModel):
     """Unique identifier for the budget."""
 
     categories: List[Category]
-    """Breakdown of the budget by categories."""
+    """Breakdown of the budget by category."""
 
     end_date: date = FieldInfo(alias="endDate")
-    """The end date of the budget period."""
+    """The end date of the current budget period."""
 
     name: str
-    """User-defined name for the budget."""
+    """Name of the budget."""
 
-    period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"]
-    """The frequency or period of the budget."""
+    period: Literal["weekly", "monthly", "quarterly", "annually", "custom"]
+    """The recurrence period of the budget."""
 
     remaining_amount: float = FieldInfo(alias="remainingAmount")
-    """The remaining amount in the budget."""
+    """The remaining amount in this budget period."""
 
     spent_amount: float = FieldInfo(alias="spentAmount")
-    """The total amount spent against the budget so far."""
+    """The amount spent so far in this budget period."""
 
     start_date: date = FieldInfo(alias="startDate")
-    """The start date of the budget period."""
+    """The start date of the current budget period."""
 
-    status: Literal["active", "completed", "archived"]
+    status: Literal["active", "completed", "archived", "overspent"]
     """Current status of the budget."""
 
     total_amount: float = FieldInfo(alias="totalAmount")
@@ -61,4 +61,7 @@ class Budget(BaseModel):
     """AI-generated recommendations related to budget performance."""
 
     alert_threshold: Optional[int] = FieldInfo(alias="alertThreshold", default=None)
-    """Percentage threshold at which an alert should be triggered (e.g., 80% spent)."""
+    """
+    Percentage of budget spent at which an alert should be triggered (e.g., 80 for
+    80% spent).
+    """

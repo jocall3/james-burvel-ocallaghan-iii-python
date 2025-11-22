@@ -12,14 +12,15 @@ __all__ = ["PitchSubmitFeedbackParams", "Answer"]
 
 class PitchSubmitFeedbackParams(TypedDict, total=False):
     answers: Optional[Iterable[Answer]]
-    """Structured answers to specific questions posed by Quantum Weaver."""
+    """Specific answers to previously asked questions."""
 
     feedback: Optional[str]
-    """General feedback or additional narrative for Quantum Weaver."""
+    """General feedback or additional information for Quantum Weaver."""
 
 
 class Answer(TypedDict, total=False):
     answer: Required[str]
-    """The answer to the specific AI question."""
+    """The answer to the question."""
 
     question_id: Required[Annotated[str, PropertyInfo(alias="questionId")]]
+    """The ID of the question being answered."""

@@ -83,6 +83,7 @@ class CardsResource(SyncAPIResource):
         holder_name: str,
         purpose: str,
         associated_employee_id: Optional[str] | Omit = omit,
+        currency: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -96,15 +97,17 @@ class CardsResource(SyncAPIResource):
         and temporary projects.
 
         Args:
-          controls: Specific spending controls for this virtual card.
+          controls: Specific spending controls and limits for this virtual card.
 
-          expiration_date: The expiration date for the virtual card.
+          expiration_date: Expiration date of the virtual card.
 
-          holder_name: Name for the virtual card holder (can be a campaign, project, or individual).
+          holder_name: Name of the entity or campaign for which the virtual card is issued.
 
-          purpose: Clear purpose of the virtual card's use.
+          purpose: The purpose or use case for this virtual card.
 
-          associated_employee_id: Optional: Employee ID if associated with an individual.
+          associated_employee_id: Optional: ID of the employee responsible for this virtual card.
+
+          currency: The primary currency of the virtual card.
 
           extra_headers: Send extra headers
 
@@ -123,6 +126,7 @@ class CardsResource(SyncAPIResource):
                     "holder_name": holder_name,
                     "purpose": purpose,
                     "associated_employee_id": associated_employee_id,
+                    "currency": currency,
                 },
                 card_create_virtual_params.CardCreateVirtualParams,
             ),
@@ -191,13 +195,13 @@ class CardsResource(SyncAPIResource):
         including AI categorization and compliance flags.
 
         Args:
-          end_date: Retrieve items up to this date (inclusive).
+          end_date: End date for filtering results (inclusive). Format: YYYY-MM-DD.
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           offset: Number of items to skip before starting to collect the result set.
 
-          start_date: Retrieve items from this date (inclusive).
+          start_date: Start date for filtering results (inclusive). Format: YYYY-MM-DD.
 
           extra_headers: Send extra headers
 
@@ -233,14 +237,15 @@ class CardsResource(SyncAPIResource):
         self,
         card_id: str,
         *,
-        atm_withdrawals: bool | Omit = omit,
-        contactless_payments: bool | Omit = omit,
-        daily_limit: Optional[float] | Omit = omit,
-        international_transactions: bool | Omit = omit,
+        atm_withdrawals: bool,
+        contactless_payments: bool,
+        daily_limit: float,
+        international_transactions: bool,
+        monthly_limit: float,
+        online_transactions: bool,
+        single_transaction_limit: float,
         merchant_category_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
-        monthly_limit: Optional[float] | Omit = omit,
-        online_transactions: bool | Omit = omit,
-        single_transaction_limit: Optional[float] | Omit = omit,
+        time_based_restrictions: Optional[card_update_controls_params.TimeBasedRestrictions] | Omit = omit,
         vendor_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -257,23 +262,21 @@ class CardsResource(SyncAPIResource):
         Args:
           atm_withdrawals: Allow or disallow ATM cash withdrawals.
 
-          contactless_payments: Allow or disallow contactless (NFC) payments.
+          contactless_payments: Allow or disallow contactless payments.
 
-          daily_limit: Maximum spending limit per day.
+          daily_limit: Maximum spending allowed per day.
 
-          international_transactions: Allow or disallow transactions outside the primary country.
+          international_transactions: Allow or disallow international transactions.
 
-          merchant_category_restrictions: List of allowed or disallowed merchant categories (e.g., 'Restaurants',
-              'Travel').
+          monthly_limit: Maximum spending allowed per month.
 
-          monthly_limit: Maximum spending limit per month.
+          online_transactions: Allow or disallow online transactions.
 
-          online_transactions: Allow or disallow online purchases.
+          single_transaction_limit: Maximum amount allowed for a single transaction.
 
-          single_transaction_limit: Maximum amount for a single transaction.
+          merchant_category_restrictions: List of merchant categories (MCCs) allowed or blocked.
 
-          vendor_restrictions: List of allowed or disallowed specific vendors/merchants (e.g., 'Amazon',
-              'Uber').
+          vendor_restrictions: Specific vendors allowed or blocked.
 
           extra_headers: Send extra headers
 
@@ -293,10 +296,11 @@ class CardsResource(SyncAPIResource):
                     "contactless_payments": contactless_payments,
                     "daily_limit": daily_limit,
                     "international_transactions": international_transactions,
-                    "merchant_category_restrictions": merchant_category_restrictions,
                     "monthly_limit": monthly_limit,
                     "online_transactions": online_transactions,
                     "single_transaction_limit": single_transaction_limit,
+                    "merchant_category_restrictions": merchant_category_restrictions,
+                    "time_based_restrictions": time_based_restrictions,
                     "vendor_restrictions": vendor_restrictions,
                 },
                 card_update_controls_params.CardUpdateControlsParams,
@@ -359,6 +363,7 @@ class AsyncCardsResource(AsyncAPIResource):
         holder_name: str,
         purpose: str,
         associated_employee_id: Optional[str] | Omit = omit,
+        currency: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -372,15 +377,17 @@ class AsyncCardsResource(AsyncAPIResource):
         and temporary projects.
 
         Args:
-          controls: Specific spending controls for this virtual card.
+          controls: Specific spending controls and limits for this virtual card.
 
-          expiration_date: The expiration date for the virtual card.
+          expiration_date: Expiration date of the virtual card.
 
-          holder_name: Name for the virtual card holder (can be a campaign, project, or individual).
+          holder_name: Name of the entity or campaign for which the virtual card is issued.
 
-          purpose: Clear purpose of the virtual card's use.
+          purpose: The purpose or use case for this virtual card.
 
-          associated_employee_id: Optional: Employee ID if associated with an individual.
+          associated_employee_id: Optional: ID of the employee responsible for this virtual card.
+
+          currency: The primary currency of the virtual card.
 
           extra_headers: Send extra headers
 
@@ -399,6 +406,7 @@ class AsyncCardsResource(AsyncAPIResource):
                     "holder_name": holder_name,
                     "purpose": purpose,
                     "associated_employee_id": associated_employee_id,
+                    "currency": currency,
                 },
                 card_create_virtual_params.CardCreateVirtualParams,
             ),
@@ -467,13 +475,13 @@ class AsyncCardsResource(AsyncAPIResource):
         including AI categorization and compliance flags.
 
         Args:
-          end_date: Retrieve items up to this date (inclusive).
+          end_date: End date for filtering results (inclusive). Format: YYYY-MM-DD.
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           offset: Number of items to skip before starting to collect the result set.
 
-          start_date: Retrieve items from this date (inclusive).
+          start_date: Start date for filtering results (inclusive). Format: YYYY-MM-DD.
 
           extra_headers: Send extra headers
 
@@ -509,14 +517,15 @@ class AsyncCardsResource(AsyncAPIResource):
         self,
         card_id: str,
         *,
-        atm_withdrawals: bool | Omit = omit,
-        contactless_payments: bool | Omit = omit,
-        daily_limit: Optional[float] | Omit = omit,
-        international_transactions: bool | Omit = omit,
+        atm_withdrawals: bool,
+        contactless_payments: bool,
+        daily_limit: float,
+        international_transactions: bool,
+        monthly_limit: float,
+        online_transactions: bool,
+        single_transaction_limit: float,
         merchant_category_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
-        monthly_limit: Optional[float] | Omit = omit,
-        online_transactions: bool | Omit = omit,
-        single_transaction_limit: Optional[float] | Omit = omit,
+        time_based_restrictions: Optional[card_update_controls_params.TimeBasedRestrictions] | Omit = omit,
         vendor_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -533,23 +542,21 @@ class AsyncCardsResource(AsyncAPIResource):
         Args:
           atm_withdrawals: Allow or disallow ATM cash withdrawals.
 
-          contactless_payments: Allow or disallow contactless (NFC) payments.
+          contactless_payments: Allow or disallow contactless payments.
 
-          daily_limit: Maximum spending limit per day.
+          daily_limit: Maximum spending allowed per day.
 
-          international_transactions: Allow or disallow transactions outside the primary country.
+          international_transactions: Allow or disallow international transactions.
 
-          merchant_category_restrictions: List of allowed or disallowed merchant categories (e.g., 'Restaurants',
-              'Travel').
+          monthly_limit: Maximum spending allowed per month.
 
-          monthly_limit: Maximum spending limit per month.
+          online_transactions: Allow or disallow online transactions.
 
-          online_transactions: Allow or disallow online purchases.
+          single_transaction_limit: Maximum amount allowed for a single transaction.
 
-          single_transaction_limit: Maximum amount for a single transaction.
+          merchant_category_restrictions: List of merchant categories (MCCs) allowed or blocked.
 
-          vendor_restrictions: List of allowed or disallowed specific vendors/merchants (e.g., 'Amazon',
-              'Uber').
+          vendor_restrictions: Specific vendors allowed or blocked.
 
           extra_headers: Send extra headers
 
@@ -569,10 +576,11 @@ class AsyncCardsResource(AsyncAPIResource):
                     "contactless_payments": contactless_payments,
                     "daily_limit": daily_limit,
                     "international_transactions": international_transactions,
-                    "merchant_category_restrictions": merchant_category_restrictions,
                     "monthly_limit": monthly_limit,
                     "online_transactions": online_transactions,
                     "single_transaction_limit": single_transaction_limit,
+                    "merchant_category_restrictions": merchant_category_restrictions,
+                    "time_based_restrictions": time_based_restrictions,
                     "vendor_restrictions": vendor_restrictions,
                 },
                 card_update_controls_params.CardUpdateControlsParams,

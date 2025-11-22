@@ -12,34 +12,38 @@ __all__ = ["Web3RetrieveNFTsResponse", "Web3RetrieveNFTsResponseItem", "Web3Retr
 
 class Web3RetrieveNFTsResponseItemAttribute(BaseModel):
     trait_type: Optional[str] = None
+    """The type of trait."""
 
     value: Optional[str] = None
+    """The value of the trait."""
 
 
 class Web3RetrieveNFTsResponseItem(BaseModel):
     id: str
     """Unique identifier for the NFT within ."""
 
-    blockchain_network: Literal["Ethereum", "Solana", "Polygon", "other"] = FieldInfo(alias="blockchainNetwork")
-    """The blockchain network where the NFT resides."""
+    blockchain_network: Literal["Ethereum", "Solana", "Polygon", "Binance Smart Chain"] = FieldInfo(
+        alias="blockchainNetwork"
+    )
+    """The blockchain network the NFT resides on."""
 
     collection_name: str = FieldInfo(alias="collectionName")
     """Name of the NFT collection."""
 
     contract_address: str = FieldInfo(alias="contractAddress")
-    """The smart contract address of the NFT collection."""
+    """The contract address of the NFT collection."""
 
     image_url: str = FieldInfo(alias="imageUrl")
-    """URL to the NFT's image or media."""
+    """URL to the NFT's image or metadata."""
 
     name: str
-    """Name or title of the specific NFT."""
+    """Specific name or title of the NFT."""
 
     owner_address: str = FieldInfo(alias="ownerAddress")
     """The blockchain address of the current owner."""
 
     token_id: str = FieldInfo(alias="tokenId")
-    """The unique ID of the NFT within its contract."""
+    """The unique token ID of the NFT within its collection."""
 
     attributes: Optional[List[Web3RetrieveNFTsResponseItemAttribute]] = None
     """List of traits/attributes of the NFT."""
@@ -48,10 +52,13 @@ class Web3RetrieveNFTsResponseItem(BaseModel):
     """Description of the NFT."""
 
     estimated_value_usd: Optional[float] = FieldInfo(alias="estimatedValueUSD", default=None)
-    """AI-estimated current market value of the NFT in USD."""
+    """AI's estimated current market value of the NFT in USD."""
 
     last_sale_price_usd: Optional[float] = FieldInfo(alias="lastSalePriceUSD", default=None)
-    """The last known sale price of the NFT in USD."""
+    """Last known sale price of this NFT in USD."""
+
+    metadata_url: Optional[str] = FieldInfo(alias="metadataUrl", default=None)
+    """URL to the NFT's metadata JSON."""
 
 
 Web3RetrieveNFTsResponse: TypeAlias = List[Web3RetrieveNFTsResponseItem]

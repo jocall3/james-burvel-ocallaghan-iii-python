@@ -17,34 +17,34 @@ class CorporateCard(BaseModel):
     """Unique identifier for the corporate card."""
 
     card_number_mask: str = FieldInfo(alias="cardNumberMask")
-    """Masked card number for display."""
+    """Masked card number for display (e.g., last 4 digits)."""
 
     card_type: Literal["physical", "virtual"] = FieldInfo(alias="cardType")
     """Type of card (physical or virtual)."""
 
     controls: CorporateCardControls
-    """Granular spending controls applied to this card."""
+    """Granular spending controls and limits for the card."""
 
     created_date: datetime = FieldInfo(alias="createdDate")
-    """Date and time the card was created."""
+    """Date when the card was created/issued."""
 
     expiration_date: date = FieldInfo(alias="expirationDate")
-    """Card expiration date."""
+    """Expiration date of the card."""
 
     frozen: bool
-    """True if the card is temporarily frozen and cannot be used."""
+    """Indicates if the card is temporarily frozen (no transactions allowed)."""
 
     holder_name: str = FieldInfo(alias="holderName")
-    """Name of the cardholder (employee or campaign name)."""
+    """Name of the employee or entity holding the card."""
 
-    status: Literal["Active", "Suspended", "Deactivated", "Expired"]
+    status: Literal["Active", "Suspended", "Cancelled", "Expired"]
     """Current status of the card."""
 
     associated_employee_id: Optional[str] = FieldInfo(alias="associatedEmployeeId", default=None)
-    """Optional: Employee ID if associated with a specific individual."""
+    """Optional: ID of the employee associated with the card."""
+
+    currency: Optional[str] = None
+    """The primary currency of the card."""
 
     spending_policy_id: Optional[str] = FieldInfo(alias="spendingPolicyId", default=None)
-    """Optional: ID of the overarching corporate spending policy this card adheres to."""
-
-    usage_purpose: Optional[str] = FieldInfo(alias="usagePurpose", default=None)
-    """A description of the card's intended use or purpose."""
+    """Optional: ID of the corporate spending policy this card adheres to."""

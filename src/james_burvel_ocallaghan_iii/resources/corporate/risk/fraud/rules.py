@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict
 from typing_extensions import Literal
 
 import httpx
@@ -49,11 +48,13 @@ class RulesResource(SyncAPIResource):
         self,
         *,
         action: rule_create_params.Action,
-        criteria: Dict[str, object],
+        criteria: rule_create_params.Criteria,
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
+        ai_learning_enabled: bool | Omit = omit,
+        priority: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,17 +68,21 @@ class RulesResource(SyncAPIResource):
         threat landscapes.
 
         Args:
-          action: Action to take when the rule is triggered.
+          action: The automated action to take when this rule is triggered.
 
-          criteria: JSON object defining the conditions to trigger the rule.
+          criteria: The conditions that trigger this fraud rule.
 
-          description: Description of what the rule will detect.
+          description: Detailed description of what the rule detects.
 
-          name: Name of the new fraud detection rule.
+          name: Name of the new fraud rule.
 
-          severity: Default severity for anomalies detected by this rule.
+          severity: The default severity assigned to anomalies detected by this rule.
 
           status: Initial status of the rule.
+
+          ai_learning_enabled: If true, AI continuously learns and refines this rule.
+
+          priority: Processing priority of the rule (higher is more urgent).
 
           extra_headers: Send extra headers
 
@@ -97,6 +102,8 @@ class RulesResource(SyncAPIResource):
                     "name": name,
                     "severity": severity,
                     "status": status,
+                    "ai_learning_enabled": ai_learning_enabled,
+                    "priority": priority,
                 },
                 rule_create_params.RuleCreateParams,
             ),
@@ -111,9 +118,11 @@ class RulesResource(SyncAPIResource):
         rule_id: str,
         *,
         action: rule_update_params.Action | Omit = omit,
-        criteria: Dict[str, object] | Omit = omit,
+        ai_learning_enabled: bool | Omit = omit,
+        criteria: rule_update_params.Criteria | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
+        priority: int | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -128,15 +137,21 @@ class RulesResource(SyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          action: Updated action to take when the rule is triggered.
+          action: Updated automated action to take when this rule is triggered. All fields are
+              optional for partial updates.
 
-          criteria: Updated JSON object defining the trigger conditions.
+          ai_learning_enabled: Update AI learning status for this rule.
 
-          description: Updated description.
+          criteria: Updated conditions that trigger this fraud rule. All fields are optional for
+              partial updates.
 
-          name: Updated name of the rule.
+          description: Updated description of what the rule detects.
 
-          severity: Updated default severity level.
+          name: Updated name of the fraud rule.
+
+          priority: Updated processing priority of the rule.
+
+          severity: Updated default severity assigned to anomalies.
 
           status: Updated status of the rule.
 
@@ -155,9 +170,11 @@ class RulesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "action": action,
+                    "ai_learning_enabled": ai_learning_enabled,
                     "criteria": criteria,
                     "description": description,
                     "name": name,
+                    "priority": priority,
                     "severity": severity,
                     "status": status,
                 },
@@ -251,11 +268,13 @@ class AsyncRulesResource(AsyncAPIResource):
         self,
         *,
         action: rule_create_params.Action,
-        criteria: Dict[str, object],
+        criteria: rule_create_params.Criteria,
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
+        ai_learning_enabled: bool | Omit = omit,
+        priority: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -269,17 +288,21 @@ class AsyncRulesResource(AsyncAPIResource):
         threat landscapes.
 
         Args:
-          action: Action to take when the rule is triggered.
+          action: The automated action to take when this rule is triggered.
 
-          criteria: JSON object defining the conditions to trigger the rule.
+          criteria: The conditions that trigger this fraud rule.
 
-          description: Description of what the rule will detect.
+          description: Detailed description of what the rule detects.
 
-          name: Name of the new fraud detection rule.
+          name: Name of the new fraud rule.
 
-          severity: Default severity for anomalies detected by this rule.
+          severity: The default severity assigned to anomalies detected by this rule.
 
           status: Initial status of the rule.
+
+          ai_learning_enabled: If true, AI continuously learns and refines this rule.
+
+          priority: Processing priority of the rule (higher is more urgent).
 
           extra_headers: Send extra headers
 
@@ -299,6 +322,8 @@ class AsyncRulesResource(AsyncAPIResource):
                     "name": name,
                     "severity": severity,
                     "status": status,
+                    "ai_learning_enabled": ai_learning_enabled,
+                    "priority": priority,
                 },
                 rule_create_params.RuleCreateParams,
             ),
@@ -313,9 +338,11 @@ class AsyncRulesResource(AsyncAPIResource):
         rule_id: str,
         *,
         action: rule_update_params.Action | Omit = omit,
-        criteria: Dict[str, object] | Omit = omit,
+        ai_learning_enabled: bool | Omit = omit,
+        criteria: rule_update_params.Criteria | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
+        priority: int | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -330,15 +357,21 @@ class AsyncRulesResource(AsyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          action: Updated action to take when the rule is triggered.
+          action: Updated automated action to take when this rule is triggered. All fields are
+              optional for partial updates.
 
-          criteria: Updated JSON object defining the trigger conditions.
+          ai_learning_enabled: Update AI learning status for this rule.
 
-          description: Updated description.
+          criteria: Updated conditions that trigger this fraud rule. All fields are optional for
+              partial updates.
 
-          name: Updated name of the rule.
+          description: Updated description of what the rule detects.
 
-          severity: Updated default severity level.
+          name: Updated name of the fraud rule.
+
+          priority: Updated processing priority of the rule.
+
+          severity: Updated default severity assigned to anomalies.
 
           status: Updated status of the rule.
 
@@ -357,9 +390,11 @@ class AsyncRulesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "action": action,
+                    "ai_learning_enabled": ai_learning_enabled,
                     "criteria": criteria,
                     "description": description,
                     "name": name,
+                    "priority": priority,
                     "severity": severity,
                     "status": status,
                 },

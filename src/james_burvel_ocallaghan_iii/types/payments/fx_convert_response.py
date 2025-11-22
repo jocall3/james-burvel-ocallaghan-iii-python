@@ -16,27 +16,28 @@ class FxConvertResponse(BaseModel):
     """Unique identifier for the currency conversion."""
 
     conversion_timestamp: datetime = FieldInfo(alias="conversionTimestamp")
-    """Timestamp when the conversion was completed."""
+    """Timestamp of the conversion."""
+
+    fees_applied: float = FieldInfo(alias="feesApplied")
+    """Any fees charged for the conversion."""
 
     fx_rate_applied: float = FieldInfo(alias="fxRateApplied")
-    """The foreign exchange rate applied (targetCurrency per sourceCurrency)."""
+    """The exchange rate applied (targetCurrency / sourceCurrency)."""
 
     source_amount: float = FieldInfo(alias="sourceAmount")
-    """Amount converted from the source currency."""
+    """Amount of source currency converted."""
 
     source_currency: str = FieldInfo(alias="sourceCurrency")
-    """Source currency of the conversion."""
+    """Source currency code."""
 
-    status: Literal["completed", "failed"]
+    status: Literal["completed", "pending_review", "failed"]
     """Status of the currency conversion."""
 
     target_amount: float = FieldInfo(alias="targetAmount")
-    """Amount received in the target currency."""
+    """Amount of target currency received."""
+
+    target_currency: Optional[str] = FieldInfo(alias="targetCurrency", default=None)
+    """Target currency code."""
 
     transaction_id: Optional[str] = FieldInfo(alias="transactionId", default=None)
-    """
-    The transaction ID associated with the conversion in the user's account history.
-    """
-
-    fees_applied: Optional[float] = FieldInfo(alias="feesApplied", default=None)
-    """Any fees applied to the conversion."""
+    """The ID of the internal transaction recording the conversion."""

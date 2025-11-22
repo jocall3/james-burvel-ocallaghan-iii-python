@@ -83,7 +83,8 @@ class AccountsResource(SyncAPIResource):
         *,
         country_code: str,
         institution_name: str,
-        provider: Optional[Literal["plaid", "mx", "finicity", "other"]] | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        provider_type: Optional[Literal["plaid", "mx", "finicity", "other"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -97,11 +98,13 @@ class AccountsResource(SyncAPIResource):
         third-party tokenized flow.
 
         Args:
-          country_code: ISO 3166-1 alpha-2 country code of the institution.
+          country_code: The ISO 3166-1 alpha-2 country code of the institution.
 
-          institution_name: The name of the external financial institution to link.
+          institution_name: The name of the financial institution to link.
 
-          provider: Optional: Specific financial data aggregator to use.
+          metadata: Optional: Additional provider-specific metadata for linking.
+
+          provider_type: Optional: The type of third-party linking provider to use.
 
           extra_headers: Send extra headers
 
@@ -117,7 +120,8 @@ class AccountsResource(SyncAPIResource):
                 {
                     "country_code": country_code,
                     "institution_name": institution_name,
-                    "provider": provider,
+                    "metadata": metadata,
+                    "provider_type": provider_type,
                 },
                 account_link_new_institution_params.AccountLinkNewInstitutionParams,
             ),
@@ -274,7 +278,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         country_code: str,
         institution_name: str,
-        provider: Optional[Literal["plaid", "mx", "finicity", "other"]] | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        provider_type: Optional[Literal["plaid", "mx", "finicity", "other"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -288,11 +293,13 @@ class AsyncAccountsResource(AsyncAPIResource):
         third-party tokenized flow.
 
         Args:
-          country_code: ISO 3166-1 alpha-2 country code of the institution.
+          country_code: The ISO 3166-1 alpha-2 country code of the institution.
 
-          institution_name: The name of the external financial institution to link.
+          institution_name: The name of the financial institution to link.
 
-          provider: Optional: Specific financial data aggregator to use.
+          metadata: Optional: Additional provider-specific metadata for linking.
+
+          provider_type: Optional: The type of third-party linking provider to use.
 
           extra_headers: Send extra headers
 
@@ -308,7 +315,8 @@ class AsyncAccountsResource(AsyncAPIResource):
                 {
                     "country_code": country_code,
                     "institution_name": institution_name,
-                    "provider": provider,
+                    "metadata": metadata,
+                    "provider_type": provider_type,
                 },
                 account_link_new_institution_params.AccountLinkNewInstitutionParams,
             ),

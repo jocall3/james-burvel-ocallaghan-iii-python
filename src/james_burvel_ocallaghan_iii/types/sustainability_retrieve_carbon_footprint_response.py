@@ -11,21 +11,31 @@ __all__ = ["SustainabilityRetrieveCarbonFootprintResponse", "BreakdownByCategory
 
 
 class BreakdownByCategory(BaseModel):
-    carbon_footprint_kg_co2e: Optional[float] = FieldInfo(alias="carbonFootprintKgCO2e", default=None)
+    carbon_footprint_kg_co2e: float = FieldInfo(alias="carbonFootprintKgCO2e")
+    """Carbon footprint for this category in Kg CO2e."""
 
-    category: Optional[str] = None
+    category: str
+    """Name of the spending category."""
 
-    percentage: Optional[float] = None
+    percentage: float
+    """Percentage of the total carbon footprint for this category."""
 
 
 class OffsetRecommendation(BaseModel):
-    cost_per_ton_usd: Optional[float] = FieldInfo(alias="costPerTonUSD", default=None)
+    cost_per_ton_usd: float = FieldInfo(alias="costPerTonUSD")
+    """Cost per ton of CO2e offset in USD."""
 
-    offset_amount_kg_co2e: Optional[float] = FieldInfo(alias="offsetAmountKgCO2e", default=None)
+    offset_amount_kg_co2e: float = FieldInfo(alias="offsetAmountKgCO2e")
+    """Amount of CO2e to offset (e.g., matching user's footprint)."""
 
-    project: Optional[str] = None
+    project: str
+    """Recommended carbon offset project name."""
 
-    total_cost_usd: Optional[float] = FieldInfo(alias="totalCostUSD", default=None)
+    total_cost_usd: float = FieldInfo(alias="totalCostUSD")
+    """Total estimated cost to purchase the recommended offset amount."""
+
+    project_details_url: Optional[str] = FieldInfo(alias="projectDetailsUrl", default=None)
+    """URL for more information about the project."""
 
 
 class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
@@ -33,13 +43,10 @@ class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
     """AI-generated insights and recommendations for reducing carbon footprint."""
 
     breakdown_by_category: List[BreakdownByCategory] = FieldInfo(alias="breakdownByCategory")
-    """
-    Breakdown of the carbon footprint by categories (e.g., Transportation, Food,
-    Housing).
-    """
+    """Breakdown of the carbon footprint by category (e.g., transportation, food)."""
 
     period: str
-    """The time period covered by the report."""
+    """The period covered by the report."""
 
     report_id: str = FieldInfo(alias="reportId")
     """Unique identifier for the carbon footprint report."""
@@ -50,4 +57,4 @@ class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
     offset_recommendations: Optional[List[OffsetRecommendation]] = FieldInfo(
         alias="offsetRecommendations", default=None
     )
-    """Recommendations for purchasing carbon offsets."""
+    """Suggestions for carbon offset projects."""

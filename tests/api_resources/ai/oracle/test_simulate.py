@@ -27,23 +27,7 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -57,27 +41,33 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
+                    "duration_years": 10,
+                    "name": "Job Loss & Mild Market Recovery",
+                    "description": "Simulates a job loss event for 6 months, followed by a mild market recovery over 3 years.",
                     "events": [
                         {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
                             "type": "job_loss",
-                            "start_month": 1,
+                            "details": {
+                                "duration_months": 6,
+                                "severance_amount": 10000,
+                                "new_job_salary_multiplier": 0.9,
+                                "unemployment_benefits": 2000,
+                            },
+                            "year_in_simulation": 1,
                         },
                         {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
                             "type": "market_downturn",
-                            "start_month": 1,
+                            "details": {
+                                "impact_percentage": 0.15,
+                                "recovery_years": 3,
+                            },
+                            "year_in_simulation": 1,
                         },
                     ],
-                    "name": "Job Loss & Mild Market Recovery",
-                    "duration_years": 10,
+                    "market_conditions": {
+                        "average_annual_return": 0.07,
+                        "volatility": 0.15,
+                    },
                     "sensitivity_analysis_params": [
                         {
                             "max": 0.07,
@@ -88,19 +78,7 @@ class TestSimulate:
                     ],
                 }
             ],
-            duration_years=10,
-            initial_state={
-                "monthly_income_override": 8000,
-                "net_worth_override": 500000,
-            },
-            sensitivity_analysis_params=[
-                {
-                    "max": 0.07,
-                    "min": 0.03,
-                    "param_name": "marketRecoveryRate",
-                    "step": 0.01,
-                }
-            ],
+            global_parameters={},
         )
         assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
 
@@ -111,23 +89,7 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -145,23 +107,7 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -188,9 +134,9 @@ class TestSimulate:
         simulate = client.ai.oracle.simulate.run_standard(
             prompt="What if I invest an additional $1,000 per month into my aggressive growth portfolio for the next 5 years?",
             parameters={
-                "durationYears": "bar",
-                "monthlyInvestmentAmount": "bar",
-                "riskTolerance": "bar",
+                "durationYears": 5,
+                "monthlyInvestmentAmount": 1000,
+                "riskTolerance": "aggressive",
             },
         )
         assert_matches_type(SimulationResponse, simulate, path=["response"])
@@ -234,23 +180,7 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -264,27 +194,33 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
+                    "duration_years": 10,
+                    "name": "Job Loss & Mild Market Recovery",
+                    "description": "Simulates a job loss event for 6 months, followed by a mild market recovery over 3 years.",
                     "events": [
                         {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
                             "type": "job_loss",
-                            "start_month": 1,
+                            "details": {
+                                "duration_months": 6,
+                                "severance_amount": 10000,
+                                "new_job_salary_multiplier": 0.9,
+                                "unemployment_benefits": 2000,
+                            },
+                            "year_in_simulation": 1,
                         },
                         {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
                             "type": "market_downturn",
-                            "start_month": 1,
+                            "details": {
+                                "impact_percentage": 0.15,
+                                "recovery_years": 3,
+                            },
+                            "year_in_simulation": 1,
                         },
                     ],
-                    "name": "Job Loss & Mild Market Recovery",
-                    "duration_years": 10,
+                    "market_conditions": {
+                        "average_annual_return": 0.07,
+                        "volatility": 0.15,
+                    },
                     "sensitivity_analysis_params": [
                         {
                             "max": 0.07,
@@ -295,19 +231,7 @@ class TestAsyncSimulate:
                     ],
                 }
             ],
-            duration_years=10,
-            initial_state={
-                "monthly_income_override": 8000,
-                "net_worth_override": 500000,
-            },
-            sensitivity_analysis_params=[
-                {
-                    "max": 0.07,
-                    "min": 0.03,
-                    "param_name": "marketRecoveryRate",
-                    "step": 0.01,
-                }
-            ],
+            global_parameters={},
         )
         assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
 
@@ -318,23 +242,7 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -352,23 +260,7 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "events": [
-                        {
-                            "details": {
-                                "durationMonths": "bar",
-                                "severanceAmount": "bar",
-                                "unemploymentBenefits": "bar",
-                            },
-                            "type": "job_loss",
-                        },
-                        {
-                            "details": {
-                                "impactPercentage": "bar",
-                                "recoveryYears": "bar",
-                            },
-                            "type": "market_downturn",
-                        },
-                    ],
+                    "duration_years": 10,
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -395,9 +287,9 @@ class TestAsyncSimulate:
         simulate = await async_client.ai.oracle.simulate.run_standard(
             prompt="What if I invest an additional $1,000 per month into my aggressive growth portfolio for the next 5 years?",
             parameters={
-                "durationYears": "bar",
-                "monthlyInvestmentAmount": "bar",
-                "riskTolerance": "bar",
+                "durationYears": 5,
+                "monthlyInvestmentAmount": 1000,
+                "riskTolerance": "aggressive",
             },
         )
         assert_matches_type(SimulationResponse, simulate, path=["response"])
