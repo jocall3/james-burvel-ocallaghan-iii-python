@@ -33,7 +33,6 @@ user = client.users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 print(user.id)
 ```
@@ -59,7 +58,6 @@ async def main() -> None:
         email="alice.w@example.com",
         name="Alice Wonderland",
         password="SecureP@ssw0rd2024!",
-        phone="+1-555-987-6543",
     )
     print(user.id)
 
@@ -96,7 +94,6 @@ async def main() -> None:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
         print(user.id)
 
@@ -126,7 +123,6 @@ user = client.users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
     address={},
 )
 print(user.address)
@@ -152,7 +148,6 @@ try:
         email="alice.w@example.com",
         name="Alice Wonderland",
         password="SecureP@ssw0rd2024!",
-        phone="+1-555-987-6543",
     )
 except james_burvel_ocallaghan_iii.APIConnectionError as e:
     print("The server could not be reached")
@@ -200,7 +195,6 @@ client.with_options(max_retries=5).users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 ```
 
@@ -228,7 +222,6 @@ client.with_options(timeout=5.0).users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 ```
 
@@ -274,7 +267,6 @@ response = client.users.with_raw_response.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -297,7 +289,6 @@ with client.users.with_streaming_response.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

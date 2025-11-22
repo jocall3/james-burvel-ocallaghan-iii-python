@@ -18,7 +18,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.developers import webhook_create_params, webhook_update_params
+from ...types.developers import webhook_list_params, webhook_create_params, webhook_update_params
 from ...types.developers.webhook_subscription import WebhookSubscription
 from ...types.developers.webhook_list_response import WebhookListResponse
 
@@ -51,7 +51,6 @@ class WebhooksResource(SyncAPIResource):
         callback_url: str,
         events: SequenceNotStr[str],
         secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,13 +66,10 @@ class WebhooksResource(SyncAPIResource):
         Args:
           callback_url: The URL to which webhook events will be sent.
 
-          events: List of event types to subscribe to (e.g., 'transaction.created',
-              'account.updated').
+          events: List of event types to subscribe to.
 
-          secret: Optional: A secret string for signing webhook payloads. If not provided, one
-              will be auto-generated.
-
-          status: Initial status of the subscription.
+          secret: Optional: A custom shared secret for verifying webhook payloads. If omitted, one
+              will be generated.
 
           extra_headers: Send extra headers
 
@@ -90,7 +86,6 @@ class WebhooksResource(SyncAPIResource):
                     "callback_url": callback_url,
                     "events": events,
                     "secret": secret,
-                    "status": status,
                 },
                 webhook_create_params.WebhookCreateParams,
             ),
@@ -105,9 +100,8 @@ class WebhooksResource(SyncAPIResource):
         subscription_id: str,
         *,
         callback_url: str | Omit = omit,
-        events: Optional[SequenceNotStr[str]] | Omit = omit,
-        secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
+        events: SequenceNotStr[str] | Omit = omit,
+        status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -120,14 +114,11 @@ class WebhooksResource(SyncAPIResource):
         subscribed events, or activation status.
 
         Args:
-          callback_url: New URL for the webhook endpoint.
+          callback_url: Updated URL where webhook events will be sent.
 
-          events: Updated list of event types to subscribe to.
+          events: Updated list of event types subscribed to.
 
-          secret: Optional: A new secret string for signing webhook payloads. Providing this will
-              replace the existing secret.
-
-          status: New status for the subscription.
+          status: Updated status of the webhook subscription.
 
           extra_headers: Send extra headers
 
@@ -145,7 +136,6 @@ class WebhooksResource(SyncAPIResource):
                 {
                     "callback_url": callback_url,
                     "events": events,
-                    "secret": secret,
                     "status": status,
                 },
                 webhook_update_params.WebhookUpdateParams,
@@ -159,6 +149,8 @@ class WebhooksResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -170,11 +162,34 @@ class WebhooksResource(SyncAPIResource):
         Retrieves a list of all active webhook subscriptions for the authenticated
         developer application, detailing endpoint URLs, subscribed events, and current
         status.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/developers/webhooks",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    webhook_list_params.WebhookListParams,
+                ),
             ),
             cast_to=WebhookListResponse,
         )
@@ -241,7 +256,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
         callback_url: str,
         events: SequenceNotStr[str],
         secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -257,13 +271,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Args:
           callback_url: The URL to which webhook events will be sent.
 
-          events: List of event types to subscribe to (e.g., 'transaction.created',
-              'account.updated').
+          events: List of event types to subscribe to.
 
-          secret: Optional: A secret string for signing webhook payloads. If not provided, one
-              will be auto-generated.
-
-          status: Initial status of the subscription.
+          secret: Optional: A custom shared secret for verifying webhook payloads. If omitted, one
+              will be generated.
 
           extra_headers: Send extra headers
 
@@ -280,7 +291,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
                     "callback_url": callback_url,
                     "events": events,
                     "secret": secret,
-                    "status": status,
                 },
                 webhook_create_params.WebhookCreateParams,
             ),
@@ -295,9 +305,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
         subscription_id: str,
         *,
         callback_url: str | Omit = omit,
-        events: Optional[SequenceNotStr[str]] | Omit = omit,
-        secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
+        events: SequenceNotStr[str] | Omit = omit,
+        status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -310,14 +319,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
         subscribed events, or activation status.
 
         Args:
-          callback_url: New URL for the webhook endpoint.
+          callback_url: Updated URL where webhook events will be sent.
 
-          events: Updated list of event types to subscribe to.
+          events: Updated list of event types subscribed to.
 
-          secret: Optional: A new secret string for signing webhook payloads. Providing this will
-              replace the existing secret.
-
-          status: New status for the subscription.
+          status: Updated status of the webhook subscription.
 
           extra_headers: Send extra headers
 
@@ -335,7 +341,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 {
                     "callback_url": callback_url,
                     "events": events,
-                    "secret": secret,
                     "status": status,
                 },
                 webhook_update_params.WebhookUpdateParams,
@@ -349,6 +354,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -360,11 +367,34 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Retrieves a list of all active webhook subscriptions for the authenticated
         developer application, detailing endpoint URLs, subscribed events, and current
         status.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/developers/webhooks",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    webhook_list_params.WebhookListParams,
+                ),
             ),
             cast_to=WebhookListResponse,
         )

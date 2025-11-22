@@ -19,22 +19,22 @@ class Device(BaseModel):
     """Last known IP address of the device."""
 
     last_active: datetime = FieldInfo(alias="lastActive")
-    """Timestamp of last activity from this device."""
+    """Timestamp of the last activity from this device."""
 
     model: str
-    """Device model."""
+    """Model of the device."""
 
     os: str
-    """Operating system and version."""
+    """Operating system of the device."""
 
-    trust_level: Literal["trusted", "untrusted", "pending_verification"] = FieldInfo(alias="trustLevel")
+    trust_level: Literal["trusted", "pending_verification", "untrusted", "blocked"] = FieldInfo(alias="trustLevel")
     """Security trust level of the device."""
 
     type: Literal["mobile", "desktop", "tablet", "smart_watch"]
-    """Type of device."""
+    """Type of the device."""
 
     device_name: Optional[str] = FieldInfo(alias="deviceName", default=None)
-    """User-defined name for the device."""
+    """User-assigned name for the device."""
 
     push_token: Optional[str] = FieldInfo(alias="pushToken", default=None)
     """Push notification token for the device."""

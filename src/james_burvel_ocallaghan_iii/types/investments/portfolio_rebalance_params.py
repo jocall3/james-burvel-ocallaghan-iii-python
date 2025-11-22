@@ -12,14 +12,20 @@ __all__ = ["PortfolioRebalanceParams"]
 class PortfolioRebalanceParams(TypedDict, total=False):
     target_risk_tolerance: Required[
         Annotated[
-            Literal["conservative", "balanced", "medium", "aggressive", "speculative"],
+            Literal["conservative", "moderate", "aggressive", "very_aggressive"],
             PropertyInfo(alias="targetRiskTolerance"),
         ]
     ]
-    """The desired risk tolerance for the portfolio after rebalancing."""
+    """The desired risk tolerance for rebalancing the portfolio."""
 
     confirmation_required: Annotated[bool, PropertyInfo(alias="confirmationRequired")]
-    """If true, explicit user confirmation is required before trades are executed."""
+    """
+    If true, user confirmation is required before executing actual trades after a
+    dry run.
+    """
 
     dry_run: Annotated[bool, PropertyInfo(alias="dryRun")]
-    """If true, the AI will only propose trades without executing them."""
+    """If true, only simulate the rebalance without executing trades.
+
+    Returns proposed trades.
+    """

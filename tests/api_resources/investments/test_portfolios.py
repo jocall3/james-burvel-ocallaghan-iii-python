@@ -28,7 +28,7 @@ class TestPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
@@ -40,7 +40,7 @@ class TestPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
             ai_auto_allocate=True,
             linked_account_id="acc_chase_checking_4567",
@@ -54,7 +54,7 @@ class TestPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         )
 
@@ -70,7 +70,7 @@ class TestPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         ) as response:
             assert not response.is_closed
@@ -137,8 +137,8 @@ class TestPortfolios:
         portfolio = client.investments.portfolios.update(
             portfolio_id="portfolio_equity_growth",
             ai_rebalancing_frequency="quarterly",
-            name="Refined Growth Portfolio",
-            risk_tolerance="medium",
+            name="Revised Growth Portfolio",
+            risk_tolerance="conservative",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
 
@@ -184,6 +184,15 @@ class TestPortfolios:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        portfolio = client.investments.portfolios.list(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(PortfolioListResponse, portfolio, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.investments.portfolios.with_raw_response.list()
 
@@ -209,7 +218,7 @@ class TestPortfolios:
     def test_method_rebalance(self, client: JamesBurvelOcallaghanIii) -> None:
         portfolio = client.investments.portfolios.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         )
         assert_matches_type(PortfolioRebalanceResponse, portfolio, path=["response"])
 
@@ -218,7 +227,7 @@ class TestPortfolios:
     def test_method_rebalance_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         portfolio = client.investments.portfolios.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
             confirmation_required=True,
             dry_run=True,
         )
@@ -229,7 +238,7 @@ class TestPortfolios:
     def test_raw_response_rebalance(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.investments.portfolios.with_raw_response.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         )
 
         assert response.is_closed is True
@@ -242,7 +251,7 @@ class TestPortfolios:
     def test_streaming_response_rebalance(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.investments.portfolios.with_streaming_response.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -258,7 +267,7 @@ class TestPortfolios:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `portfolio_id` but received ''"):
             client.investments.portfolios.with_raw_response.rebalance(
                 portfolio_id="",
-                target_risk_tolerance="medium",
+                target_risk_tolerance="conservative",
             )
 
 
@@ -274,7 +283,7 @@ class TestAsyncPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
@@ -286,7 +295,7 @@ class TestAsyncPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
             ai_auto_allocate=True,
             linked_account_id="acc_chase_checking_4567",
@@ -300,7 +309,7 @@ class TestAsyncPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         )
 
@@ -316,7 +325,7 @@ class TestAsyncPortfolios:
             currency="USD",
             initial_investment=10000,
             name="My First Growth Portfolio",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
             type="diversified",
         ) as response:
             assert not response.is_closed
@@ -383,8 +392,8 @@ class TestAsyncPortfolios:
         portfolio = await async_client.investments.portfolios.update(
             portfolio_id="portfolio_equity_growth",
             ai_rebalancing_frequency="quarterly",
-            name="Refined Growth Portfolio",
-            risk_tolerance="medium",
+            name="Revised Growth Portfolio",
+            risk_tolerance="conservative",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
 
@@ -430,6 +439,15 @@ class TestAsyncPortfolios:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        portfolio = await async_client.investments.portfolios.list(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(PortfolioListResponse, portfolio, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.investments.portfolios.with_raw_response.list()
 
@@ -455,7 +473,7 @@ class TestAsyncPortfolios:
     async def test_method_rebalance(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         portfolio = await async_client.investments.portfolios.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         )
         assert_matches_type(PortfolioRebalanceResponse, portfolio, path=["response"])
 
@@ -464,7 +482,7 @@ class TestAsyncPortfolios:
     async def test_method_rebalance_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         portfolio = await async_client.investments.portfolios.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
             confirmation_required=True,
             dry_run=True,
         )
@@ -475,7 +493,7 @@ class TestAsyncPortfolios:
     async def test_raw_response_rebalance(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.investments.portfolios.with_raw_response.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         )
 
         assert response.is_closed is True
@@ -488,7 +506,7 @@ class TestAsyncPortfolios:
     async def test_streaming_response_rebalance(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.investments.portfolios.with_streaming_response.rebalance(
             portfolio_id="portfolio_equity_growth",
-            target_risk_tolerance="medium",
+            target_risk_tolerance="conservative",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -504,5 +522,5 @@ class TestAsyncPortfolios:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `portfolio_id` but received ''"):
             await async_client.investments.portfolios.with_raw_response.rebalance(
                 portfolio_id="",
-                target_risk_tolerance="medium",
+                target_risk_tolerance="conservative",
             )

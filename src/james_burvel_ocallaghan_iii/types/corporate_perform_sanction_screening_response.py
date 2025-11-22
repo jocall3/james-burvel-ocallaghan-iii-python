@@ -12,25 +12,31 @@ __all__ = ["CorporatePerformSanctionScreeningResponse", "MatchDetail"]
 
 
 class MatchDetail(BaseModel):
-    list_name: str = FieldInfo(alias="listName")
-    """The name of the sanction list where a match was found."""
+    list_name: Optional[str] = FieldInfo(alias="listName", default=None)
+    """Name of the sanction list where a match was found."""
 
-    matched_name: str = FieldInfo(alias="matchedName")
-    """The name of the entry on the sanction list that matched."""
+    matched_name: Optional[str] = FieldInfo(alias="matchedName", default=None)
+    """The name on the sanction list that matched."""
 
-    reason: str
-    """Reason for the potential match."""
+    public_url: Optional[str] = FieldInfo(alias="publicUrl", default=None)
+    """Optional: URL to public record of the sanction list entry."""
 
-    score: float
-    """Match score (0-1), indicating confidence of the match."""
+    reason: Optional[str] = None
+    """Reason for the match (e.g., exact name, alias, partial match)."""
+
+    score: Optional[float] = None
+    """Match confidence score (0-1)."""
 
 
 class CorporatePerformSanctionScreeningResponse(BaseModel):
+    match_details: List[MatchDetail] = FieldInfo(alias="matchDetails")
+    """Details of any potential or exact matches found."""
+
     match_found: bool = FieldInfo(alias="matchFound")
     """True if any potential matches were found on sanction lists."""
 
     screening_id: str = FieldInfo(alias="screeningId")
-    """Unique identifier for this screening request."""
+    """Unique identifier for this screening operation."""
 
     screening_timestamp: datetime = FieldInfo(alias="screeningTimestamp")
     """Timestamp when the screening was performed."""
@@ -38,8 +44,5 @@ class CorporatePerformSanctionScreeningResponse(BaseModel):
     status: Literal["clear", "potential_match", "confirmed_match", "error"]
     """Overall status of the screening result."""
 
-    ai_confidence_score: Optional[float] = FieldInfo(alias="aiConfidenceScore", default=None)
-    """AI's confidence (0-1) in the accuracy of the screening result."""
-
-    match_details: Optional[List[MatchDetail]] = FieldInfo(alias="matchDetails", default=None)
-    """Details of any potential matches found."""
+    message: Optional[str] = None
+    """An optional message providing more context on the status."""

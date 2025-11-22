@@ -13,58 +13,50 @@ __all__ = ["FraudRule", "Action", "Criteria"]
 
 class Action(BaseModel):
     details: str
-    """Detailed description of the action."""
+    """Details or instructions for the action."""
 
-    type: Literal["flag", "alert", "block", "auto_review", "mfa_challenge"]
-    """The type of action to take (e.g., flag for review, block transaction)."""
+    type: Literal["block", "alert", "auto_review", "manual_review", "request_mfa"]
+    """Type of action to perform."""
 
-    target_channels: Optional[List[Literal["email", "sms", "push", "in_app", "dashboard", "api_webhook"]]] = FieldInfo(
-        alias="targetChannels", default=None
-    )
-    """Channels to send alerts/notifications to."""
+    target_team: Optional[str] = FieldInfo(alias="targetTeam", default=None)
+    """The team or department to notify for alerts/reviews."""
 
 
 class Criteria(BaseModel):
     account_inactivity_days: Optional[int] = FieldInfo(alias="accountInactivityDays", default=None)
-    """Number of days an account must be inactive to trigger the rule."""
+    """Number of days an account must be inactive for the rule to apply."""
 
     country_of_origin: Optional[List[str]] = FieldInfo(alias="countryOfOrigin", default=None)
-    """Transaction origin countries to match (ISO 3166-1 alpha-2)."""
+    """List of ISO 2-letter country codes for transaction origin."""
 
     geographic_distance_km: Optional[int] = FieldInfo(alias="geographicDistanceKm", default=None)
-    """Minimum geographic distance from user's usual activity to trigger."""
-
-    keywords_in_description: Optional[List[str]] = FieldInfo(alias="keywordsInDescription", default=None)
-    """Keywords or phrases in transaction description to flag."""
+    """Minimum geographic distance (in km) from recent activity for anomaly."""
 
     last_login_days: Optional[int] = FieldInfo(alias="lastLoginDays", default=None)
-    """If transaction is far from last login within this many days."""
+    """Number of days since last user login for anomaly detection."""
 
     no_travel_notification: Optional[bool] = FieldInfo(alias="noTravelNotification", default=None)
-    """True if no travel notification was filed for geographic mismatch."""
+    """If true, rule applies only if no prior travel notification was made."""
 
     payment_count_min: Optional[int] = FieldInfo(alias="paymentCountMin", default=None)
-    """Minimum number of payments within a timeframe to trigger."""
+    """Minimum number of payments in a timeframe."""
 
     recipient_country_risk_level: Optional[List[Literal["Low", "Medium", "High", "Very High"]]] = FieldInfo(
         alias="recipientCountryRiskLevel", default=None
     )
-    """Recipient countries by risk level to match."""
+    """List of risk levels for recipient countries."""
 
     recipient_new: Optional[bool] = FieldInfo(alias="recipientNew", default=None)
-    """True if the recipient is a new beneficiary."""
+    """If true, recipient must be a new payee."""
 
     timeframe_hours: Optional[int] = FieldInfo(alias="timeframeHours", default=None)
-    """Timeframe in hours for payment count criteria."""
-
-    transaction_amount_max: Optional[float] = FieldInfo(alias="transactionAmountMax", default=None)
-    """Maximum transaction amount to trigger the rule."""
+    """Timeframe in hours for payment count or other event aggregations."""
 
     transaction_amount_min: Optional[float] = FieldInfo(alias="transactionAmountMin", default=None)
-    """Minimum transaction amount to trigger the rule."""
+    """Minimum transaction amount to consider."""
 
-    transaction_type: Optional[Literal["debit", "credit", "all"]] = FieldInfo(alias="transactionType", default=None)
-    """Type of transaction to monitor."""
+    transaction_type: Optional[Literal["debit", "credit"]] = FieldInfo(alias="transactionType", default=None)
+    """Specific transaction type (e.g., debit, credit)."""
 
 
 class FraudRule(BaseModel):
@@ -72,16 +64,16 @@ class FraudRule(BaseModel):
     """Unique identifier for the fraud detection rule."""
 
     action: Action
-    """The automated action to take when this rule is triggered."""
+    """Action to take when a fraud rule is triggered."""
 
     created_at: datetime = FieldInfo(alias="createdAt")
     """Timestamp when the rule was created."""
 
     created_by: str = FieldInfo(alias="createdBy")
-    """Identifier of the user or system that created the rule."""
+    """Identifier of who created the rule (e.g., user ID, 'system:ai-risk-engine')."""
 
     criteria: Criteria
-    """The conditions that trigger this fraud rule."""
+    """Criteria that define when a fraud rule should trigger."""
 
     description: str
     """Detailed description of what the rule detects."""
@@ -93,13 +85,7 @@ class FraudRule(BaseModel):
     """Name of the fraud rule."""
 
     severity: Literal["Low", "Medium", "High", "Critical"]
-    """The default severity assigned to anomalies detected by this rule."""
+    """Severity level when this rule is triggered."""
 
     status: Literal["active", "inactive", "draft"]
     """Current status of the rule."""
-
-    ai_learning_enabled: Optional[bool] = FieldInfo(alias="aiLearningEnabled", default=None)
-    """Indicates if AI continuously learns and refines this rule."""
-
-    priority: Optional[int] = None
-    """Processing priority of the rule (higher is more urgent)."""

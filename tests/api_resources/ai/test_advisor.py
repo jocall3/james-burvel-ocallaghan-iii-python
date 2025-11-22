@@ -25,6 +25,15 @@ class TestAdvisor:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_list_tools_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        advisor = client.ai.advisor.list_tools(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(AdvisorListToolsResponse, advisor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_list_tools(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.advisor.with_raw_response.list_tools()
 
@@ -55,6 +64,15 @@ class TestAsyncAdvisor:
     @parametrize
     async def test_method_list_tools(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         advisor = await async_client.ai.advisor.list_tools()
+        assert_matches_type(AdvisorListToolsResponse, advisor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_tools_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        advisor = await async_client.ai.advisor.list_tools(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(AdvisorListToolsResponse, advisor, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing import Union, Iterable
 from datetime import date
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import budget_create_params, budget_update_params
+from ..types import budget_list_params, budget_create_params, budget_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -51,12 +51,12 @@ class BudgetsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         name: str,
-        period: Literal["weekly", "monthly", "quarterly", "annually", "custom"],
+        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
         start_date: Union[str, date],
         total_amount: float,
         ai_auto_populate: bool | Omit = omit,
-        alert_threshold: Optional[int] | Omit = omit,
-        categories: Optional[Iterable[budget_create_params.Category]] | Omit = omit,
+        alert_threshold: int | Omit = omit,
+        categories: Iterable[budget_create_params.Category] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -69,23 +69,22 @@ class BudgetsResource(SyncAPIResource):
         categories and amounts.
 
         Args:
-          end_date: The end date of the budget period.
+          end_date: End date of the budget period.
 
           name: Name of the new budget.
 
-          period: The recurrence period of the budget.
+          period: The frequency or period of the budget.
 
-          start_date: The start date of the budget period.
+          start_date: Start date of the budget period.
 
-          total_amount: The total amount allocated for the budget.
+          total_amount: Total amount allocated for the entire budget.
 
-          ai_auto_populate: If true, AI will automatically suggest and populate budget categories and
-              amounts based on historical spending.
+          ai_auto_populate: If true, AI will automatically populate categories and amounts based on
+              historical spending.
 
-          alert_threshold: Percentage of budget spent at which an alert should be triggered.
+          alert_threshold: Percentage threshold at which an alert is triggered.
 
-          categories: Optional: Initial breakdown of the budget by categories. If omitted and
-              `aiAutoPopulate` is true, AI will generate.
+          categories: Initial breakdown of the budget by categories.
 
           extra_headers: Send extra headers
 
@@ -154,14 +153,12 @@ class BudgetsResource(SyncAPIResource):
         self,
         budget_id: str,
         *,
-        alert_threshold: Optional[int] | Omit = omit,
+        alert_threshold: int | Omit = omit,
         categories: Iterable[budget_update_params.Category] | Omit = omit,
         end_date: Union[str, date] | Omit = omit,
         name: str | Omit = omit,
-        period: Literal["weekly", "monthly", "quarterly", "annually", "custom"] | Omit = omit,
-        reset_spent_amounts: bool | Omit = omit,
         start_date: Union[str, date] | Omit = omit,
-        status: Literal["active", "completed", "archived", "overspent"] | Omit = omit,
+        status: Literal["active", "archived", "ended"] | Omit = omit,
         total_amount: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -175,7 +172,7 @@ class BudgetsResource(SyncAPIResource):
         categories.
 
         Args:
-          alert_threshold: Updated percentage for budget alert threshold.
+          alert_threshold: Updated percentage threshold for alerts.
 
           categories: Updated breakdown of the budget by categories. Existing categories will be
               updated, new ones added.
@@ -184,16 +181,11 @@ class BudgetsResource(SyncAPIResource):
 
           name: Updated name of the budget.
 
-          period: Updated recurrence period of the budget.
-
-          reset_spent_amounts: If true, resets `spentAmount` for all categories and total to 0. Useful for
-              starting a new cycle of a recurring budget.
-
           start_date: Updated start date of the budget period.
 
           status: Updated status of the budget.
 
-          total_amount: Updated total allocated budget amount.
+          total_amount: Updated total amount for the entire budget.
 
           extra_headers: Send extra headers
 
@@ -213,8 +205,6 @@ class BudgetsResource(SyncAPIResource):
                     "categories": categories,
                     "end_date": end_date,
                     "name": name,
-                    "period": period,
-                    "reset_spent_amounts": reset_spent_amounts,
                     "start_date": start_date,
                     "status": status,
                     "total_amount": total_amount,
@@ -230,6 +220,8 @@ class BudgetsResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -240,11 +232,34 @@ class BudgetsResource(SyncAPIResource):
         """
         Retrieves a list of all active and historical budgets for the authenticated
         user.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/budgets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    budget_list_params.BudgetListParams,
+                ),
             ),
             cast_to=BudgetListResponse,
         )
@@ -309,12 +324,12 @@ class AsyncBudgetsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         name: str,
-        period: Literal["weekly", "monthly", "quarterly", "annually", "custom"],
+        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
         start_date: Union[str, date],
         total_amount: float,
         ai_auto_populate: bool | Omit = omit,
-        alert_threshold: Optional[int] | Omit = omit,
-        categories: Optional[Iterable[budget_create_params.Category]] | Omit = omit,
+        alert_threshold: int | Omit = omit,
+        categories: Iterable[budget_create_params.Category] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,23 +342,22 @@ class AsyncBudgetsResource(AsyncAPIResource):
         categories and amounts.
 
         Args:
-          end_date: The end date of the budget period.
+          end_date: End date of the budget period.
 
           name: Name of the new budget.
 
-          period: The recurrence period of the budget.
+          period: The frequency or period of the budget.
 
-          start_date: The start date of the budget period.
+          start_date: Start date of the budget period.
 
-          total_amount: The total amount allocated for the budget.
+          total_amount: Total amount allocated for the entire budget.
 
-          ai_auto_populate: If true, AI will automatically suggest and populate budget categories and
-              amounts based on historical spending.
+          ai_auto_populate: If true, AI will automatically populate categories and amounts based on
+              historical spending.
 
-          alert_threshold: Percentage of budget spent at which an alert should be triggered.
+          alert_threshold: Percentage threshold at which an alert is triggered.
 
-          categories: Optional: Initial breakdown of the budget by categories. If omitted and
-              `aiAutoPopulate` is true, AI will generate.
+          categories: Initial breakdown of the budget by categories.
 
           extra_headers: Send extra headers
 
@@ -412,14 +426,12 @@ class AsyncBudgetsResource(AsyncAPIResource):
         self,
         budget_id: str,
         *,
-        alert_threshold: Optional[int] | Omit = omit,
+        alert_threshold: int | Omit = omit,
         categories: Iterable[budget_update_params.Category] | Omit = omit,
         end_date: Union[str, date] | Omit = omit,
         name: str | Omit = omit,
-        period: Literal["weekly", "monthly", "quarterly", "annually", "custom"] | Omit = omit,
-        reset_spent_amounts: bool | Omit = omit,
         start_date: Union[str, date] | Omit = omit,
-        status: Literal["active", "completed", "archived", "overspent"] | Omit = omit,
+        status: Literal["active", "archived", "ended"] | Omit = omit,
         total_amount: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -433,7 +445,7 @@ class AsyncBudgetsResource(AsyncAPIResource):
         categories.
 
         Args:
-          alert_threshold: Updated percentage for budget alert threshold.
+          alert_threshold: Updated percentage threshold for alerts.
 
           categories: Updated breakdown of the budget by categories. Existing categories will be
               updated, new ones added.
@@ -442,16 +454,11 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
           name: Updated name of the budget.
 
-          period: Updated recurrence period of the budget.
-
-          reset_spent_amounts: If true, resets `spentAmount` for all categories and total to 0. Useful for
-              starting a new cycle of a recurring budget.
-
           start_date: Updated start date of the budget period.
 
           status: Updated status of the budget.
 
-          total_amount: Updated total allocated budget amount.
+          total_amount: Updated total amount for the entire budget.
 
           extra_headers: Send extra headers
 
@@ -471,8 +478,6 @@ class AsyncBudgetsResource(AsyncAPIResource):
                     "categories": categories,
                     "end_date": end_date,
                     "name": name,
-                    "period": period,
-                    "reset_spent_amounts": reset_spent_amounts,
                     "start_date": start_date,
                     "status": status,
                     "total_amount": total_amount,
@@ -488,6 +493,8 @@ class AsyncBudgetsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -498,11 +505,34 @@ class AsyncBudgetsResource(AsyncAPIResource):
         """
         Retrieves a list of all active and historical budgets for the authenticated
         user.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/budgets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    budget_list_params.BudgetListParams,
+                ),
             ),
             cast_to=BudgetListResponse,
         )

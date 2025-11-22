@@ -13,7 +13,7 @@ __all__ = ["AnomalyListParams"]
 
 class AnomalyListParams(TypedDict, total=False):
     end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
-    """End date for filtering results (inclusive). Format: YYYY-MM-DD."""
+    """End date for filtering results (inclusive, YYYY-MM-DD)."""
 
     entity_type: Annotated[
         Literal["PaymentOrder", "Transaction", "Counterparty", "CorporateCard", "Invoice"],
@@ -22,7 +22,7 @@ class AnomalyListParams(TypedDict, total=False):
     """Filter anomalies by the type of financial entity they are related to."""
 
     limit: int
-    """Maximum number of items to return in the response."""
+    """Maximum number of items to return in a single page."""
 
     offset: int
     """Number of items to skip before starting to collect the result set."""
@@ -31,7 +31,7 @@ class AnomalyListParams(TypedDict, total=False):
     """Filter anomalies by their AI-assessed severity level."""
 
     start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
-    """Start date for filtering results (inclusive). Format: YYYY-MM-DD."""
+    """Start date for filtering results (inclusive, YYYY-MM-DD)."""
 
     status: Literal["New", "Under Review", "Escalated", "Dismissed", "Resolved"]
     """Filter anomalies by their current review status."""

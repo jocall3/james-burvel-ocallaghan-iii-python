@@ -19,13 +19,10 @@ class APIKey(BaseModel):
     """Timestamp when the API key was created."""
 
     prefix: str
-    """
-    The visible prefix of the API key, indicating its type (e.g., public/secret,
-    test/prod).
-    """
+    """The non-secret prefix of the API key, used for identification."""
 
     scopes: List[str]
-    """List of permissions (scopes) granted to this API key."""
+    """List of permissions granted to this API key."""
 
     status: Literal["active", "revoked", "expired"]
     """Current status of the API key."""
@@ -34,7 +31,4 @@ class APIKey(BaseModel):
     """Timestamp when the API key will expire, if set."""
 
     last_used: Optional[datetime] = FieldInfo(alias="lastUsed", default=None)
-    """Timestamp of the last successful use of this API key."""
-
-    name: Optional[str] = None
-    """User-friendly name for the API key."""
+    """Timestamp of the last time this API key was used."""

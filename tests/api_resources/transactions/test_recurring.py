@@ -37,21 +37,6 @@ class TestRecurring:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
-        recurring = client.transactions.recurring.create(
-            amount=55.5,
-            category="Health & Fitness",
-            currency="USD",
-            description="New Gym Membership",
-            frequency="monthly",
-            linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
-            status="active",
-        )
-        assert_matches_type(RecurringTransaction, recurring, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.recurring.with_raw_response.create(
             amount=55.5,
@@ -92,6 +77,15 @@ class TestRecurring:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         recurring = client.transactions.recurring.list()
+        assert_matches_type(RecurringListResponse, recurring, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        recurring = client.transactions.recurring.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -138,21 +132,6 @@ class TestAsyncRecurring:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        recurring = await async_client.transactions.recurring.create(
-            amount=55.5,
-            category="Health & Fitness",
-            currency="USD",
-            description="New Gym Membership",
-            frequency="monthly",
-            linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
-            status="active",
-        )
-        assert_matches_type(RecurringTransaction, recurring, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.recurring.with_raw_response.create(
             amount=55.5,
@@ -193,6 +172,15 @@ class TestAsyncRecurring:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         recurring = await async_client.transactions.recurring.list()
+        assert_matches_type(RecurringListResponse, recurring, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        recurring = await async_client.transactions.recurring.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -45,7 +45,9 @@ class AssetsResource(SyncAPIResource):
         self,
         *,
         query: str,
+        limit: int | Omit = omit,
         min_esg_score: float | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,7 +62,11 @@ class AssetsResource(SyncAPIResource):
         Args:
           query: Search query for asset name or symbol.
 
+          limit: Maximum number of items to return in a single page.
+
           min_esg_score: Minimum desired ESG score (0-10).
+
+          offset: Number of items to skip before starting to collect the result set.
 
           extra_headers: Send extra headers
 
@@ -80,7 +86,9 @@ class AssetsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "query": query,
+                        "limit": limit,
                         "min_esg_score": min_esg_score,
+                        "offset": offset,
                     },
                     asset_search_params.AssetSearchParams,
                 ),
@@ -113,7 +121,9 @@ class AsyncAssetsResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        limit: int | Omit = omit,
         min_esg_score: float | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -128,7 +138,11 @@ class AsyncAssetsResource(AsyncAPIResource):
         Args:
           query: Search query for asset name or symbol.
 
+          limit: Maximum number of items to return in a single page.
+
           min_esg_score: Minimum desired ESG score (0-10).
+
+          offset: Number of items to skip before starting to collect the result set.
 
           extra_headers: Send extra headers
 
@@ -148,7 +162,9 @@ class AsyncAssetsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "query": query,
+                        "limit": limit,
                         "min_esg_score": min_esg_score,
+                        "offset": offset,
                     },
                     asset_search_params.AssetSearchParams,
                 ),

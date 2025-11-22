@@ -14,19 +14,19 @@ __all__ = ["CardCreateVirtualParams"]
 
 class CardCreateVirtualParams(TypedDict, total=False):
     controls: Required[CorporateCardControlsParam]
-    """Specific spending controls and limits for this virtual card."""
+    """Specific spending controls for this virtual card."""
 
     expiration_date: Required[Annotated[Union[str, date], PropertyInfo(alias="expirationDate", format="iso8601")]]
-    """Expiration date of the virtual card."""
+    """Expiration date for the virtual card (YYYY-MM-DD)."""
 
     holder_name: Required[Annotated[str, PropertyInfo(alias="holderName")]]
-    """Name of the entity or campaign for which the virtual card is issued."""
+    """Name to appear on the virtual card."""
 
     purpose: Required[str]
-    """The purpose or use case for this virtual card."""
+    """Brief description of the virtual card's purpose."""
 
     associated_employee_id: Annotated[Optional[str], PropertyInfo(alias="associatedEmployeeId")]
-    """Optional: ID of the employee responsible for this virtual card."""
+    """Optional: ID of the employee or department this card is for."""
 
-    currency: str
-    """The primary currency of the virtual card."""
+    spending_policy_id: Annotated[Optional[str], PropertyInfo(alias="spendingPolicyId")]
+    """Optional: ID of a spending policy to link with this virtual card."""

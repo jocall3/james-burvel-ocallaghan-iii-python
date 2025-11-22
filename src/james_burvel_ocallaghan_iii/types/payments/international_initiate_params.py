@@ -12,33 +12,31 @@ __all__ = ["InternationalInitiateParams", "Beneficiary"]
 
 class InternationalInitiateParams(TypedDict, total=False):
     amount: Required[float]
-    """The amount to send from the source account in `sourceCurrency`."""
+    """The amount to send in the source currency."""
 
     beneficiary: Required[Beneficiary]
-    """Details of the recipient for the international payment."""
+    """Details of the payment beneficiary."""
 
     purpose: Required[str]
-    """A short description or purpose for the payment."""
+    """Purpose of the payment."""
 
     source_account_id: Required[Annotated[str, PropertyInfo(alias="sourceAccountId")]]
-    """The ID of the user's account from which funds will be sent."""
+    """The ID of the user's source account for the payment."""
 
     source_currency: Required[Annotated[str, PropertyInfo(alias="sourceCurrency")]]
-    """The currency of the source account (ISO 4217 code)."""
+    """The ISO 4217 currency code of the source funds."""
 
     target_currency: Required[Annotated[str, PropertyInfo(alias="targetCurrency")]]
-    """The currency the beneficiary will receive (ISO 4217 code)."""
+    """The ISO 4217 currency code for the beneficiary's currency."""
 
     fx_rate_lock: Annotated[bool, PropertyInfo(alias="fxRateLock")]
-    """If true, attempts to lock the quoted FX rate. May incur a small fee."""
+    """If true, attempts to lock the quoted FX rate for a short period."""
 
-    fx_rate_provider: Annotated[
-        Literal["proprietary_ai", "standard_interbank", "third_party"], PropertyInfo(alias="fxRateProvider")
-    ]
-    """Preferred FX rate provider for the conversion."""
+    fx_rate_provider: Annotated[Literal["proprietary_ai", "market_rate"], PropertyInfo(alias="fxRateProvider")]
+    """Indicates whether to use AI-optimized FX rates or standard market rates."""
 
-    reference_id: Annotated[Optional[str], PropertyInfo(alias="referenceId")]
-    """Optional: An internal reference ID or invoice number for the payment."""
+    reference: Optional[str]
+    """Optional: Your internal reference for this payment."""
 
 
 class Beneficiary(TypedDict, total=False):
@@ -48,17 +46,17 @@ class Beneficiary(TypedDict, total=False):
     bank_name: Required[Annotated[str, PropertyInfo(alias="bankName")]]
     """Name of the beneficiary's bank."""
 
-    iban: Required[str]
-    """International Bank Account Number (IBAN) of the beneficiary."""
-
     name: Required[str]
     """Full name of the beneficiary."""
 
-    swift_bic: Required[Annotated[str, PropertyInfo(alias="swiftBic")]]
-    """SWIFT/BIC code of the beneficiary's bank."""
-
     account_number: Annotated[Optional[str], PropertyInfo(alias="accountNumber")]
-    """Optional: Traditional bank account number if IBAN is not applicable."""
+    """Account number (if IBAN/SWIFT not applicable)."""
+
+    iban: Optional[str]
+    """IBAN for Eurozone transfers."""
 
     routing_number: Annotated[Optional[str], PropertyInfo(alias="routingNumber")]
-    """Optional: Routing number for US beneficiaries."""
+    """Routing number (if applicable, e.g., for US transfers)."""
+
+    swift_bic: Annotated[Optional[str], PropertyInfo(alias="swiftBic")]
+    """SWIFT/BIC code for international transfers."""

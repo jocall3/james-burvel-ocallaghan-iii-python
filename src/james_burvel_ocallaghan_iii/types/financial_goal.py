@@ -7,42 +7,25 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .transactions.ai_insight import AIInsight
 
 __all__ = ["FinancialGoal", "AIStrategicPlan", "AIStrategicPlanStep"]
 
 
 class AIStrategicPlanStep(BaseModel):
-    description: str
-    """Detailed description of the action."""
+    description: Optional[str] = None
 
-    status: Literal["pending", "in_progress", "completed", "deferred"]
-    """Current status of the step."""
+    status: Optional[Literal["pending", "in_progress", "completed"]] = None
 
-    timeline: str
-    """Suggested timeline for completion (e.g., 'Immediately', 'Quarterly')."""
-
-    title: str
-    """Title of the step."""
-
-    associated_action_id: Optional[str] = FieldInfo(alias="associatedActionId", default=None)
-    """Optional: ID of a related action (e.g., an automated transfer setup)."""
+    title: Optional[str] = None
 
 
 class AIStrategicPlan(BaseModel):
-    steps: List[AIStrategicPlanStep]
-    """Detailed, actionable steps for achieving the goal."""
+    plan_id: Optional[str] = FieldInfo(alias="planId", default=None)
 
-    summary: str
-    """Summary of the strategic plan."""
+    steps: Optional[List[AIStrategicPlanStep]] = None
 
-    title: str
-    """Title of the strategic plan."""
-
-    ai_optimized: Optional[bool] = FieldInfo(alias="aiOptimized", default=None)
-    """Indicates if the plan was optimized by AI."""
-
-    last_generated: Optional[datetime] = FieldInfo(alias="lastGenerated", default=None)
-    """Timestamp when this plan was last generated or updated."""
+    summary: Optional[str] = None
 
 
 class FinancialGoal(BaseModel):
@@ -50,39 +33,39 @@ class FinancialGoal(BaseModel):
     """Unique identifier for the financial goal."""
 
     current_amount: float = FieldInfo(alias="currentAmount")
-    """The current amount accumulated towards the goal."""
+    """The current amount saved or invested towards the goal."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp when the goal's status or details were last updated."""
+    """Timestamp when the goal's status or progress was last updated."""
 
     name: str
     """Name of the financial goal."""
 
     progress_percentage: float = FieldInfo(alias="progressPercentage")
-    """Current progress towards the goal as a percentage."""
+    """Percentage completion of the goal."""
 
-    risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] = FieldInfo(
-        alias="riskTolerance"
-    )
-    """Risk tolerance associated with investments for this goal."""
-
-    status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused"]
+    status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
     """Current status of the goal's progress."""
 
     target_amount: float = FieldInfo(alias="targetAmount")
-    """The target amount to save or achieve for this goal."""
+    """The target monetary amount for the goal."""
 
     target_date: date = FieldInfo(alias="targetDate")
-    """The target date by which the goal should be achieved."""
+    """The target completion date for the goal."""
 
-    type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "custom"]
+    type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"]
     """Type of financial goal."""
 
+    ai_insights: Optional[List[AIInsight]] = FieldInfo(alias="aiInsights", default=None)
+    """AI-driven insights and recommendations related to this goal."""
+
     ai_strategic_plan: Optional[AIStrategicPlan] = FieldInfo(alias="aiStrategicPlan", default=None)
-    """AI-generated strategic plan to achieve the goal."""
+    """AI-generated strategic plan for achieving the goal."""
 
     contributing_accounts: Optional[List[str]] = FieldInfo(alias="contributingAccounts", default=None)
     """List of account IDs contributing to this goal."""
 
-    monthly_contribution_needed: Optional[float] = FieldInfo(alias="monthlyContributionNeeded", default=None)
-    """AI's calculated monthly contribution needed to reach the goal."""
+    risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] = FieldInfo(
+        alias="riskTolerance", default=None
+    )
+    """Recommended or chosen risk tolerance for investments related to this goal."""

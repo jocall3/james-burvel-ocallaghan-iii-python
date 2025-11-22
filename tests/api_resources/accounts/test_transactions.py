@@ -9,7 +9,9 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii.types.accounts import TransactionListPendingTransactionsResponse
+from james_burvel_ocallaghan_iii.types.accounts import (
+    TransactionListPendingTransactionsResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +23,17 @@ class TestTransactions:
     @parametrize
     def test_method_list_pending_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.accounts.transactions.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
+        )
+        assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_pending_transactions_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        transaction = client.accounts.transactions.list_pending_transactions(
+            account_id="acc_chase_checking_4567",
+            limit=1,
+            offset=0,
         )
         assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
 
@@ -29,7 +41,7 @@ class TestTransactions:
     @parametrize
     def test_raw_response_list_pending_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.accounts.transactions.with_raw_response.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
         )
 
         assert response.is_closed is True
@@ -41,7 +53,7 @@ class TestTransactions:
     @parametrize
     def test_streaming_response_list_pending_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.accounts.transactions.with_streaming_response.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -56,7 +68,7 @@ class TestTransactions:
     def test_path_params_list_pending_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             client.accounts.transactions.with_raw_response.list_pending_transactions(
-                "",
+                account_id="",
             )
 
 
@@ -69,7 +81,19 @@ class TestAsyncTransactions:
     @parametrize
     async def test_method_list_pending_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.accounts.transactions.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
+        )
+        assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_pending_transactions_with_all_params(
+        self, async_client: AsyncJamesBurvelOcallaghanIii
+    ) -> None:
+        transaction = await async_client.accounts.transactions.list_pending_transactions(
+            account_id="acc_chase_checking_4567",
+            limit=1,
+            offset=0,
         )
         assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
 
@@ -77,7 +101,7 @@ class TestAsyncTransactions:
     @parametrize
     async def test_raw_response_list_pending_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.accounts.transactions.with_raw_response.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
         )
 
         assert response.is_closed is True
@@ -91,7 +115,7 @@ class TestAsyncTransactions:
         self, async_client: AsyncJamesBurvelOcallaghanIii
     ) -> None:
         async with async_client.accounts.transactions.with_streaming_response.list_pending_transactions(
-            "acc_chase_checking_4567",
+            account_id="acc_chase_checking_4567",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,5 +130,5 @@ class TestAsyncTransactions:
     async def test_path_params_list_pending_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
             await async_client.accounts.transactions.with_raw_response.list_pending_transactions(
-                "",
+                account_id="",
             )

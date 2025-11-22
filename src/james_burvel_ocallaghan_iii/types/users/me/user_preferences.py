@@ -12,35 +12,37 @@ __all__ = ["UserPreferences", "NotificationChannels"]
 
 class NotificationChannels(BaseModel):
     email: Optional[bool] = None
-    """Receive notifications via email."""
 
     in_app: Optional[bool] = FieldInfo(alias="inApp", default=None)
-    """Receive notifications within the application."""
 
     push: Optional[bool] = None
-    """Receive push notifications to connected devices."""
 
     sms: Optional[bool] = None
-    """Receive notifications via SMS."""
 
 
 class UserPreferences(BaseModel):
-    ai_interaction_mode: Optional[Literal["passive", "balanced", "proactive"]] = FieldInfo(
+    ai_interaction_mode: Optional[Literal["proactive", "balanced", "on_demand"]] = FieldInfo(
         alias="aiInteractionMode", default=None
     )
-    """How actively the AI should provide advice and suggestions."""
+    """
+    How the user prefers to interact with AI (proactive advice, balanced, or only on
+    demand).
+    """
 
     data_sharing_consent: Optional[bool] = FieldInfo(alias="dataSharingConsent", default=None)
-    """Consent for sharing anonymized data for AI improvements."""
+    """
+    Consent status for sharing anonymized data for AI improvement and personalized
+    offers.
+    """
 
     notification_channels: Optional[NotificationChannels] = FieldInfo(alias="notificationChannels", default=None)
-    """Enabled notification channels."""
+    """Preferred channels for receiving notifications."""
 
     preferred_language: Optional[str] = FieldInfo(alias="preferredLanguage", default=None)
-    """User's preferred language for the interface."""
+    """Preferred language for the user interface."""
 
-    theme: Optional[Literal["Light-Default", "Dark-Quantum", "Eco-Green", "Minimalist"]] = None
-    """User's selected UI theme."""
+    theme: Optional[str] = None
+    """Preferred UI theme (e.g., Light-Default, Dark-Quantum)."""
 
     transaction_grouping: Optional[Literal["category", "merchant", "date", "account"]] = FieldInfo(
         alias="transactionGrouping", default=None

@@ -38,14 +38,14 @@ class TestCorporate:
             entity_type="individual",
             name="John Doe",
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
             date_of_birth=parse_date("1970-01-01"),
-            id_number="idNumber",
+            identification_number="identificationNumber",
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 
@@ -105,14 +105,14 @@ class TestAsyncCorporate:
             entity_type="individual",
             name="John Doe",
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
             date_of_birth=parse_date("1970-01-01"),
-            id_number="idNumber",
+            identification_number="identificationNumber",
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 

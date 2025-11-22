@@ -25,6 +25,15 @@ class TestOffers:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_list_pre_approved_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        offer = client.lending.offers.list_pre_approved(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(OfferListPreApprovedResponse, offer, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_list_pre_approved(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.lending.offers.with_raw_response.list_pre_approved()
 
@@ -55,6 +64,15 @@ class TestAsyncOffers:
     @parametrize
     async def test_method_list_pre_approved(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         offer = await async_client.lending.offers.list_pre_approved()
+        assert_matches_type(OfferListPreApprovedResponse, offer, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_pre_approved_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        offer = await async_client.lending.offers.list_pre_approved(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(OfferListPreApprovedResponse, offer, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

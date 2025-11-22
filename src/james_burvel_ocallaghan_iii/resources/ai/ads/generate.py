@@ -48,18 +48,18 @@ class GenerateResource(SyncAPIResource):
     def advanced(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Cinematic", "Documentary", "Explainer", "Animated", "Minimalist", "Energetic"],
-        audience_target: Optional[Literal["general", "young_adult", "corporate", "small_business", "investors"]]
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
+        audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
+        background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        background_music_volume: Optional[float] | Omit = omit,
         brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
-        music_genre: Optional[str] | Omit = omit,
-        voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_narrator"]] | Omit = omit,
+        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_calm"]] | Omit = omit,
         voiceover_text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -75,30 +75,29 @@ class GenerateResource(SyncAPIResource):
         productions.
 
         Args:
-          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for landscape, 9:16 for portrait).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: The text prompt describing the desired video content.
+          prompt: The textual prompt to guide the AI video generation.
 
           style: Artistic style of the video.
 
-          audience_target: Optional: Target audience to influence tone and content.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          background_music_volume: Optional: Volume level for background music (0-1).
+          audience_target: Target audience for the ad, influencing tone and visuals.
 
-          brand_assets: Optional: URLs to brand assets (e.g., logo, specific imagery) for AI to
-              incorporate.
+          background_music_genre: Genre of background music.
 
-          brand_colors: Optional: Brand hex color codes to influence visual palette.
+          brand_assets: URLs to brand assets (e.g., logos, specific imagery) to be incorporated.
 
-          call_to_action: Optional: Details for a call-to-action overlay at the end of the video.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
 
-          music_genre: Optional: Preferred genre for background music.
+          call_to_action: Call-to-action text and URL to be displayed.
 
-          voiceover_style: Optional: Style of the AI-generated voiceover.
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
-          voiceover_text: Optional: Custom voiceover script for the video.
+          voiceover_style: Style/tone for the AI voiceover.
+
+          voiceover_text: Optional: Text for an AI-generated voiceover.
 
           extra_headers: Send extra headers
 
@@ -112,16 +111,16 @@ class GenerateResource(SyncAPIResource):
             "/ai/ads/generate/advanced",
             body=maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "audience_target": audience_target,
-                    "background_music_volume": background_music_volume,
+                    "background_music_genre": background_music_genre,
                     "brand_assets": brand_assets,
                     "brand_colors": brand_colors,
                     "call_to_action": call_to_action,
-                    "music_genre": music_genre,
+                    "keywords": keywords,
                     "voiceover_style": voiceover_style,
                     "voiceover_text": voiceover_text,
                 },
@@ -136,12 +135,12 @@ class GenerateResource(SyncAPIResource):
     def standard(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Cinematic", "Documentary", "Explainer", "Animated", "Minimalist", "Energetic"],
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
-        music_genre: Optional[str] | Omit = omit,
+        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,17 +154,17 @@ class GenerateResource(SyncAPIResource):
         content creation.
 
         Args:
-          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for landscape, 9:16 for portrait).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: The text prompt describing the desired video content.
+          prompt: The textual prompt to guide the AI video generation.
 
           style: Artistic style of the video.
 
-          brand_colors: Optional: Brand hex color codes to influence visual palette.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          music_genre: Optional: Preferred genre for background music.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
+
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
           extra_headers: Send extra headers
 
@@ -179,12 +178,12 @@ class GenerateResource(SyncAPIResource):
             "/ai/ads/generate",
             body=maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "brand_colors": brand_colors,
-                    "music_genre": music_genre,
+                    "keywords": keywords,
                 },
                 generate_standard_params.GenerateStandardParams,
             ),
@@ -218,18 +217,18 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def advanced(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Cinematic", "Documentary", "Explainer", "Animated", "Minimalist", "Energetic"],
-        audience_target: Optional[Literal["general", "young_adult", "corporate", "small_business", "investors"]]
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
+        audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
+        background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        background_music_volume: Optional[float] | Omit = omit,
         brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
-        music_genre: Optional[str] | Omit = omit,
-        voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_narrator"]] | Omit = omit,
+        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_calm"]] | Omit = omit,
         voiceover_text: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -245,30 +244,29 @@ class AsyncGenerateResource(AsyncAPIResource):
         productions.
 
         Args:
-          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for landscape, 9:16 for portrait).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: The text prompt describing the desired video content.
+          prompt: The textual prompt to guide the AI video generation.
 
           style: Artistic style of the video.
 
-          audience_target: Optional: Target audience to influence tone and content.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          background_music_volume: Optional: Volume level for background music (0-1).
+          audience_target: Target audience for the ad, influencing tone and visuals.
 
-          brand_assets: Optional: URLs to brand assets (e.g., logo, specific imagery) for AI to
-              incorporate.
+          background_music_genre: Genre of background music.
 
-          brand_colors: Optional: Brand hex color codes to influence visual palette.
+          brand_assets: URLs to brand assets (e.g., logos, specific imagery) to be incorporated.
 
-          call_to_action: Optional: Details for a call-to-action overlay at the end of the video.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
 
-          music_genre: Optional: Preferred genre for background music.
+          call_to_action: Call-to-action text and URL to be displayed.
 
-          voiceover_style: Optional: Style of the AI-generated voiceover.
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
-          voiceover_text: Optional: Custom voiceover script for the video.
+          voiceover_style: Style/tone for the AI voiceover.
+
+          voiceover_text: Optional: Text for an AI-generated voiceover.
 
           extra_headers: Send extra headers
 
@@ -282,16 +280,16 @@ class AsyncGenerateResource(AsyncAPIResource):
             "/ai/ads/generate/advanced",
             body=await async_maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "audience_target": audience_target,
-                    "background_music_volume": background_music_volume,
+                    "background_music_genre": background_music_genre,
                     "brand_assets": brand_assets,
                     "brand_colors": brand_colors,
                     "call_to_action": call_to_action,
-                    "music_genre": music_genre,
+                    "keywords": keywords,
                     "voiceover_style": voiceover_style,
                     "voiceover_text": voiceover_text,
                 },
@@ -306,12 +304,12 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def standard(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Cinematic", "Documentary", "Explainer", "Animated", "Minimalist", "Energetic"],
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
-        music_genre: Optional[str] | Omit = omit,
+        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -325,17 +323,17 @@ class AsyncGenerateResource(AsyncAPIResource):
         content creation.
 
         Args:
-          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for landscape, 9:16 for portrait).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: The text prompt describing the desired video content.
+          prompt: The textual prompt to guide the AI video generation.
 
           style: Artistic style of the video.
 
-          brand_colors: Optional: Brand hex color codes to influence visual palette.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          music_genre: Optional: Preferred genre for background music.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
+
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
           extra_headers: Send extra headers
 
@@ -349,12 +347,12 @@ class AsyncGenerateResource(AsyncAPIResource):
             "/ai/ads/generate",
             body=await async_maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "brand_colors": brand_colors,
-                    "music_genre": music_genre,
+                    "keywords": keywords,
                 },
                 generate_standard_params.GenerateStandardParams,
             ),

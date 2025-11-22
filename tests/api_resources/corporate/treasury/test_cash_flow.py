@@ -27,7 +27,7 @@ class TestCashFlow:
     @parametrize
     def test_method_forecast_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         cash_flow = client.corporate.treasury.cash_flow.forecast(
-            forecast_horizon_days=90,
+            forecast_horizon_days=7,
             include_scenario_analysis=True,
         )
         assert_matches_type(CashFlowForecastResponse, cash_flow, path=["response"])
@@ -70,7 +70,7 @@ class TestAsyncCashFlow:
     @parametrize
     async def test_method_forecast_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         cash_flow = await async_client.corporate.treasury.cash_flow.forecast(
-            forecast_horizon_days=90,
+            forecast_horizon_days=7,
             include_scenario_analysis=True,
         )
         assert_matches_type(CashFlowForecastResponse, cash_flow, path=["response"])

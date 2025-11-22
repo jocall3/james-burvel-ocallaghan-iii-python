@@ -40,7 +40,6 @@ class TestFx:
             source_currency="USD",
             target_currency="EUR",
             fx_rate_lock=True,
-            fx_rate_provider="proprietary_ai",
             target_account_id="acc_euro_savings_9876",
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])
@@ -150,7 +149,6 @@ class TestAsyncFx:
             source_currency="USD",
             target_currency="EUR",
             fx_rate_lock=True,
-            fx_rate_provider="proprietary_ai",
             target_account_id="acc_euro_savings_9876",
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])

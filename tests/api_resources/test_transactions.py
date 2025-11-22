@@ -76,7 +76,7 @@ class TestTransactions:
         transaction = client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=2,
+            limit=1,
             max_amount=100,
             min_amount=20,
             offset=0,
@@ -332,7 +332,7 @@ class TestAsyncTransactions:
         transaction = await async_client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=2,
+            limit=1,
             max_amount=100,
             min_amount=20,
             offset=0,

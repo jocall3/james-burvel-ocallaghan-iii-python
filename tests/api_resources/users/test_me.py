@@ -56,15 +56,27 @@ class TestMe:
     def test_method_update_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         me = client.users.me.update(
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
-            ai_persona="Aggressive Investor",
             name="Quantum Visionary Pro",
             phone="+1-555-999-0000",
+            preferences={
+                "ai_interaction_mode": "balanced",
+                "data_sharing_consent": True,
+                "notification_channels": {
+                    "email": True,
+                    "in_app": True,
+                    "push": True,
+                    "sms": False,
+                },
+                "preferred_language": "en-US",
+                "theme": "Dark-Quantum",
+                "transaction_grouping": "category",
+            },
         )
         assert_matches_type(User, me, path=["response"])
 
@@ -135,15 +147,27 @@ class TestAsyncMe:
     async def test_method_update_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         me = await async_client.users.me.update(
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
-            ai_persona="Aggressive Investor",
             name="Quantum Visionary Pro",
             phone="+1-555-999-0000",
+            preferences={
+                "ai_interaction_mode": "balanced",
+                "data_sharing_consent": True,
+                "notification_channels": {
+                    "email": True,
+                    "in_app": True,
+                    "push": True,
+                    "sms": False,
+                },
+                "preferred_language": "en-US",
+                "theme": "Dark-Quantum",
+                "transaction_grouping": "category",
+            },
         )
         assert_matches_type(User, me, path=["response"])
 

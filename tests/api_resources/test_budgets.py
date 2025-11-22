@@ -9,7 +9,10 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii.types import Budget, BudgetListResponse
+from james_burvel_ocallaghan_iii.types import (
+    Budget,
+    BudgetListResponse,
+)
 from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -146,14 +149,12 @@ class TestBudgets:
             alert_threshold=85,
             categories=[
                 {
-                    "allocated": 600,
+                    "allocated": 550,
                     "name": "Groceries",
                 }
             ],
             end_date=parse_date("2024-08-31"),
-            name="Revised August Household Budget",
-            period="monthly",
-            reset_spent_amounts=False,
+            name="August 2024 Revised Household Budget",
             start_date=parse_date("2024-08-01"),
             status="active",
             total_amount=3200,
@@ -198,6 +199,15 @@ class TestBudgets:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.list()
+        assert_matches_type(BudgetListResponse, budget, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        budget = client.budgets.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(BudgetListResponse, budget, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -398,14 +408,12 @@ class TestAsyncBudgets:
             alert_threshold=85,
             categories=[
                 {
-                    "allocated": 600,
+                    "allocated": 550,
                     "name": "Groceries",
                 }
             ],
             end_date=parse_date("2024-08-31"),
-            name="Revised August Household Budget",
-            period="monthly",
-            reset_spent_amounts=False,
+            name="August 2024 Revised Household Budget",
             start_date=parse_date("2024-08-01"),
             status="active",
             total_amount=3200,
@@ -450,6 +458,15 @@ class TestAsyncBudgets:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.list()
+        assert_matches_type(BudgetListResponse, budget, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        budget = await async_client.budgets.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(BudgetListResponse, budget, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

@@ -12,13 +12,10 @@ __all__ = ["SustainabilityPurchaseCarbonOffsetsResponse"]
 
 class SustainabilityPurchaseCarbonOffsetsResponse(BaseModel):
     amount_offset_kg_co2e: float = FieldInfo(alias="amountOffsetKgCO2e")
-    """Amount of CO2 equivalent offset in kilograms."""
-
-    project_supported: str = FieldInfo(alias="projectSupported")
-    """Name of the carbon offset project supported."""
+    """The amount of carbon dioxide equivalent offset by this purchase."""
 
     purchase_date: datetime = FieldInfo(alias="purchaseDate")
-    """Date and time of the purchase."""
+    """Timestamp of the purchase."""
 
     purchase_id: str = FieldInfo(alias="purchaseId")
     """Unique identifier for the carbon offset purchase."""
@@ -27,7 +24,10 @@ class SustainabilityPurchaseCarbonOffsetsResponse(BaseModel):
     """Total cost of the carbon offset purchase in USD."""
 
     certificate_url: Optional[str] = FieldInfo(alias="certificateUrl", default=None)
-    """URL to the carbon offset certificate."""
+    """URL to the official carbon offset certificate."""
+
+    project_supported: Optional[str] = FieldInfo(alias="projectSupported", default=None)
+    """The carbon offset project supported."""
 
     transaction_id: Optional[str] = FieldInfo(alias="transactionId", default=None)
-    """The ID of the internal transaction recording the purchase."""
+    """The ID of the internal financial transaction for this purchase."""

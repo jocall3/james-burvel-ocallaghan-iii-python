@@ -17,7 +17,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.developers import api_key_create_params
+from ...types.developers import api_key_list_params, api_key_create_params
 from ...types.developers.api_key import APIKey
 from ...types.developers.api_key_list_response import APIKeyListResponse
 
@@ -50,7 +50,6 @@ class APIKeysResource(SyncAPIResource):
         name: str,
         scopes: SequenceNotStr[str],
         expires_in_days: Optional[int] | Omit = omit,
-        is_secret_key: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,15 +62,12 @@ class APIKeysResource(SyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A descriptive name for the new API key.
+          name: A descriptive name for the API key.
 
-          scopes: List of desired permissions (scopes) for the API key.
+          scopes: List of permissions to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If not provided, it will not
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, it will not
               expire.
-
-          is_secret_key: If true, generates a secret key (suitable for server-to-server) with a 'db*sk*'
-              prefix. Otherwise, generates a public key ('db*pk*').
 
           extra_headers: Send extra headers
 
@@ -88,7 +84,6 @@ class APIKeysResource(SyncAPIResource):
                     "name": name,
                     "scopes": scopes,
                     "expires_in_days": expires_in_days,
-                    "is_secret_key": is_secret_key,
                 },
                 api_key_create_params.APIKeyCreateParams,
             ),
@@ -101,6 +96,8 @@ class APIKeysResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,11 +105,36 @@ class APIKeysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIKeyListResponse:
-        """Retrieves a list of API keys issued to the authenticated developer application."""
+        """
+        Retrieves a list of API keys issued to the authenticated developer application.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/developers/api-keys",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    api_key_list_params.APIKeyListParams,
+                ),
             ),
             cast_to=APIKeyListResponse,
         )
@@ -178,7 +200,6 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         name: str,
         scopes: SequenceNotStr[str],
         expires_in_days: Optional[int] | Omit = omit,
-        is_secret_key: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -191,15 +212,12 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A descriptive name for the new API key.
+          name: A descriptive name for the API key.
 
-          scopes: List of desired permissions (scopes) for the API key.
+          scopes: List of permissions to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If not provided, it will not
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, it will not
               expire.
-
-          is_secret_key: If true, generates a secret key (suitable for server-to-server) with a 'db*sk*'
-              prefix. Otherwise, generates a public key ('db*pk*').
 
           extra_headers: Send extra headers
 
@@ -216,7 +234,6 @@ class AsyncAPIKeysResource(AsyncAPIResource):
                     "name": name,
                     "scopes": scopes,
                     "expires_in_days": expires_in_days,
-                    "is_secret_key": is_secret_key,
                 },
                 api_key_create_params.APIKeyCreateParams,
             ),
@@ -229,6 +246,8 @@ class AsyncAPIKeysResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -236,11 +255,36 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIKeyListResponse:
-        """Retrieves a list of API keys issued to the authenticated developer application."""
+        """
+        Retrieves a list of API keys issued to the authenticated developer application.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/developers/api-keys",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    api_key_list_params.APIKeyListParams,
+                ),
             ),
             cast_to=APIKeyListResponse,
         )

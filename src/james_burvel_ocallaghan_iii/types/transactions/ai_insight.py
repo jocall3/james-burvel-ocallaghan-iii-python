@@ -13,18 +13,27 @@ __all__ = ["AIInsight"]
 
 class AIInsight(BaseModel):
     id: str
-    """Unique identifier for the insight."""
+    """Unique identifier for the AI insight."""
 
     category: Literal[
-        "spending", "saving", "investing", "budget", "security", "sustainability", "financial_health", "corporate"
+        "spending",
+        "saving",
+        "investing",
+        "budgeting",
+        "security",
+        "financial_goals",
+        "sustainability",
+        "corporate_treasury",
+        "compliance",
+        "other",
     ]
     """Category of the insight (e.g., spending, saving, investing)."""
 
     description: str
-    """Detailed description of the insight."""
+    """Detailed explanation of the insight."""
 
     severity: Literal["low", "medium", "high", "critical"]
-    """The severity or urgency of the insight."""
+    """AI-assessed severity or importance of the insight."""
 
     timestamp: datetime
     """Timestamp when the insight was generated."""
@@ -33,4 +42,10 @@ class AIInsight(BaseModel):
     """A concise title for the insight."""
 
     actionable_recommendation: Optional[str] = FieldInfo(alias="actionableRecommendation", default=None)
-    """A concrete, actionable step the user can take based on the insight."""
+    """Optional: A concrete action the user can take based on the insight."""
+
+    action_trigger: Optional[str] = FieldInfo(alias="actionTrigger", default=None)
+    """
+    Optional: A programmatic trigger or deep link to initiate the recommended
+    action.
+    """

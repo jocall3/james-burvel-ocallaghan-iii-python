@@ -18,7 +18,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.users.me import device_register_params
+from ....types.users.me import device_list_params, device_register_params
 from ....types.users.me.device import Device
 from ....types.users.me.device_list_response import DeviceListResponse
 
@@ -48,6 +48,8 @@ class DevicesResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,11 +61,34 @@ class DevicesResource(SyncAPIResource):
         Retrieves a list of all devices linked to the user's account, including mobile
         phones, tablets, and desktops, indicating their last active status and security
         posture.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/users/me/devices",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    device_list_params.DeviceListParams,
+                ),
             ),
             cast_to=DeviceListResponse,
         )
@@ -126,17 +151,18 @@ class DevicesResource(SyncAPIResource):
         MFA enrollment flow.
 
         Args:
-          device_type: Type of device being registered.
+          device_type: Type of the device being registered.
 
           model: Model of the device.
 
-          os: Operating system and version of the device.
+          os: Operating system of the device.
 
-          biometric_signature: Base64 encoded biometric signature for initial enrollment (if applicable).
+          biometric_signature: Optional: Base64 encoded biometric signature for initial enrollment (e.g., for
+              Passkey registration).
 
-          device_name: User-defined name for the device.
+          device_name: Optional: A friendly name for the device.
 
-          push_token: Push notification token for the device.
+          push_token: Optional: Push notification token for the device.
 
           extra_headers: Send extra headers
 
@@ -189,6 +215,8 @@ class AsyncDevicesResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -200,11 +228,34 @@ class AsyncDevicesResource(AsyncAPIResource):
         Retrieves a list of all devices linked to the user's account, including mobile
         phones, tablets, and desktops, indicating their last active status and security
         posture.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/users/me/devices",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    device_list_params.DeviceListParams,
+                ),
             ),
             cast_to=DeviceListResponse,
         )
@@ -267,17 +318,18 @@ class AsyncDevicesResource(AsyncAPIResource):
         MFA enrollment flow.
 
         Args:
-          device_type: Type of device being registered.
+          device_type: Type of the device being registered.
 
           model: Model of the device.
 
-          os: Operating system and version of the device.
+          os: Operating system of the device.
 
-          biometric_signature: Base64 encoded biometric signature for initial enrollment (if applicable).
+          biometric_signature: Optional: Base64 encoded biometric signature for initial enrollment (e.g., for
+              Passkey registration).
 
-          device_name: User-defined name for the device.
+          device_name: Optional: A friendly name for the device.
 
-          push_token: Push notification token for the device.
+          push_token: Optional: Push notification token for the device.
 
           extra_headers: Send extra headers
 

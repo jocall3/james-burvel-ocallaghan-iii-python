@@ -2,7 +2,6 @@
 
 from typing import Optional
 from datetime import date, datetime
-from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -18,13 +17,13 @@ class SecurityStatus(BaseModel):
     """Indicates if biometric authentication is enrolled."""
 
     last_login: Optional[datetime] = FieldInfo(alias="lastLogin", default=None)
-    """Timestamp of the user's last successful login."""
+    """Timestamp of the last successful login."""
 
     last_login_ip: Optional[str] = FieldInfo(alias="lastLoginIp", default=None)
-    """IP address from which the last successful login occurred."""
+    """IP address of the last successful login."""
 
     two_factor_enabled: Optional[bool] = FieldInfo(alias="twoFactorEnabled", default=None)
-    """Indicates if two-factor authentication is enabled."""
+    """Indicates if two-factor authentication (2FA) is enabled."""
 
 
 class User(BaseModel):
@@ -32,39 +31,36 @@ class User(BaseModel):
     """Unique identifier for the user."""
 
     email: str
-    """Unique email address of the user."""
+    """Primary email address of the user."""
+
+    identity_verified: bool = FieldInfo(alias="identityVerified")
+    """Indicates if the user's identity has been verified (e.g., via KYC)."""
 
     name: str
     """Full name of the user."""
 
     address: Optional[Address] = None
-    """User's residential address."""
 
     ai_persona: Optional[str] = FieldInfo(alias="aiPersona", default=None)
-    """AI-assigned financial persona based on user behavior and preferences."""
+    """AI-identified financial persona for tailored advice."""
 
     date_of_birth: Optional[date] = FieldInfo(alias="dateOfBirth", default=None)
-    """User's date of birth."""
+    """Date of birth of the user (YYYY-MM-DD)."""
 
     gamification_level: Optional[int] = FieldInfo(alias="gamificationLevel", default=None)
-    """Current gamification level of the user."""
-
-    identity_verified: Optional[bool] = FieldInfo(alias="identityVerified", default=None)
-    """Indicates if the user's identity has been fully verified (KYC/AML)."""
+    """Current gamification level."""
 
     loyalty_points: Optional[int] = FieldInfo(alias="loyaltyPoints", default=None)
-    """Total loyalty points accumulated by the user."""
+    """Current balance of loyalty points."""
 
-    loyalty_tier: Optional[Literal["Bronze", "Silver", "Gold", "Platinum", "Zenith Platinum"]] = FieldInfo(
-        alias="loyaltyTier", default=None
-    )
-    """Current loyalty tier of the user."""
+    loyalty_tier: Optional[str] = FieldInfo(alias="loyaltyTier", default=None)
+    """Current loyalty program tier."""
 
     phone: Optional[str] = None
-    """Phone number of the user."""
+    """Primary phone number of the user."""
 
     preferences: Optional[UserPreferences] = None
-    """User's personalization and experience preferences."""
+    """User's personalized preferences for the platform."""
 
     security_status: Optional[SecurityStatus] = FieldInfo(alias="securityStatus", default=None)
-    """Current security status and settings for the user."""
+    """Security-related status for the user account."""

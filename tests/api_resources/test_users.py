@@ -72,7 +72,6 @@ class TestUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])
 
@@ -83,15 +82,15 @@ class TestUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1990-01-01"),
+            date_of_birth=parse_date("1990-05-10"),
+            phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])
 
@@ -102,7 +101,6 @@ class TestUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
 
         assert response.is_closed is True
@@ -117,7 +115,6 @@ class TestUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -187,7 +184,6 @@ class TestAsyncUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])
 
@@ -198,15 +194,15 @@ class TestAsyncUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             address={
-                "city": "Quantumville",
+                "city": "Anytown",
                 "country": "USA",
                 "state": "CA",
-                "street": "100 Innovation Drive",
+                "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1990-01-01"),
+            date_of_birth=parse_date("1990-05-10"),
+            phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])
 
@@ -217,7 +213,6 @@ class TestAsyncUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
 
         assert response.is_closed is True
@@ -232,7 +227,6 @@ class TestAsyncUsers:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

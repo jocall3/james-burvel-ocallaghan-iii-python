@@ -24,7 +24,7 @@ class TestSimulations:
     @parametrize
     def test_method_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
@@ -32,7 +32,7 @@ class TestSimulations:
     @parametrize
     def test_raw_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulations.with_raw_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -44,7 +44,7 @@ class TestSimulations:
     @parametrize
     def test_streaming_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.oracle.simulations.with_streaming_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -72,7 +72,7 @@ class TestSimulations:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.list(
-            limit=2,
+            limit=1,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
@@ -103,7 +103,7 @@ class TestSimulations:
     @parametrize
     def test_method_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert simulation is None
 
@@ -111,7 +111,7 @@ class TestSimulations:
     @parametrize
     def test_raw_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulations.with_raw_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -123,7 +123,7 @@ class TestSimulations:
     @parametrize
     def test_streaming_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.oracle.simulations.with_streaming_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -151,7 +151,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
@@ -159,7 +159,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulations.with_raw_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -171,7 +171,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.oracle.simulations.with_streaming_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -199,7 +199,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.list(
-            limit=2,
+            limit=1,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
@@ -230,7 +230,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_method_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert simulation is None
 
@@ -238,7 +238,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulations.with_raw_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -250,7 +250,7 @@ class TestAsyncSimulations:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.oracle.simulations.with_streaming_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -6,46 +6,36 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["CorporateCardControls", "TimeBasedRestrictions"]
-
-
-class TimeBasedRestrictions(BaseModel):
-    daily_end_time: Optional[str] = FieldInfo(alias="dailyEndTime", default=None)
-    """End time for allowed transactions (HH:MM)."""
-
-    daily_start_time: Optional[str] = FieldInfo(alias="dailyStartTime", default=None)
-    """Start time for allowed transactions (HH:MM)."""
-
-    weekdays_only: Optional[bool] = FieldInfo(alias="weekdaysOnly", default=None)
-    """Only allow transactions on weekdays."""
+__all__ = ["CorporateCardControls"]
 
 
 class CorporateCardControls(BaseModel):
-    atm_withdrawals: bool = FieldInfo(alias="atmWithdrawals")
-    """Allow or disallow ATM cash withdrawals."""
+    atm_withdrawals: Optional[bool] = FieldInfo(alias="atmWithdrawals", default=None)
+    """If true, ATM cash withdrawals are allowed."""
 
-    contactless_payments: bool = FieldInfo(alias="contactlessPayments")
-    """Allow or disallow contactless payments."""
+    contactless_payments: Optional[bool] = FieldInfo(alias="contactlessPayments", default=None)
+    """If true, contactless payments are allowed."""
 
-    daily_limit: float = FieldInfo(alias="dailyLimit")
-    """Maximum spending allowed per day."""
+    daily_limit: Optional[float] = FieldInfo(alias="dailyLimit", default=None)
+    """Maximum spending limit per day (null for no limit)."""
 
-    international_transactions: bool = FieldInfo(alias="internationalTransactions")
-    """Allow or disallow international transactions."""
-
-    monthly_limit: float = FieldInfo(alias="monthlyLimit")
-    """Maximum spending allowed per month."""
-
-    online_transactions: bool = FieldInfo(alias="onlineTransactions")
-    """Allow or disallow online transactions."""
-
-    single_transaction_limit: float = FieldInfo(alias="singleTransactionLimit")
-    """Maximum amount allowed for a single transaction."""
+    international_transactions: Optional[bool] = FieldInfo(alias="internationalTransactions", default=None)
+    """If true, international transactions are allowed."""
 
     merchant_category_restrictions: Optional[List[str]] = FieldInfo(alias="merchantCategoryRestrictions", default=None)
-    """List of merchant categories (MCCs) allowed or blocked."""
+    """List of allowed merchant categories.
 
-    time_based_restrictions: Optional[TimeBasedRestrictions] = FieldInfo(alias="timeBasedRestrictions", default=None)
+    If empty, all are allowed unless explicitly denied.
+    """
+
+    monthly_limit: Optional[float] = FieldInfo(alias="monthlyLimit", default=None)
+    """Maximum spending limit per month (null for no limit)."""
+
+    online_transactions: Optional[bool] = FieldInfo(alias="onlineTransactions", default=None)
+    """If true, online transactions are allowed."""
+
+    single_transaction_limit: Optional[float] = FieldInfo(alias="singleTransactionLimit", default=None)
+    """Maximum amount for a single transaction (null for no limit)."""
 
     vendor_restrictions: Optional[List[str]] = FieldInfo(alias="vendorRestrictions", default=None)
-    """Specific vendors allowed or blocked."""
+    """List of allowed vendors/merchants by name."""

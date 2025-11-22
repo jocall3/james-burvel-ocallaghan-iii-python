@@ -69,11 +69,11 @@ class PreferencesResource(SyncAPIResource):
     def update(
         self,
         *,
-        ai_interaction_mode: Literal["passive", "balanced", "proactive"] | Omit = omit,
+        ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
         data_sharing_consent: bool | Omit = omit,
         notification_channels: preference_update_params.NotificationChannels | Omit = omit,
         preferred_language: str | Omit = omit,
-        theme: Literal["Light-Default", "Dark-Quantum", "Eco-Green", "Minimalist"] | Omit = omit,
+        theme: str | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -88,15 +88,17 @@ class PreferencesResource(SyncAPIResource):
         settings.
 
         Args:
-          ai_interaction_mode: How actively the AI should provide advice and suggestions.
+          ai_interaction_mode: How the user prefers to interact with AI (proactive advice, balanced, or only on
+              demand).
 
-          data_sharing_consent: Consent for sharing anonymized data for AI improvements.
+          data_sharing_consent: Consent status for sharing anonymized data for AI improvement and personalized
+              offers.
 
-          notification_channels: Enabled notification channels.
+          notification_channels: Preferred channels for receiving notifications.
 
-          preferred_language: User's preferred language for the interface.
+          preferred_language: Preferred language for the user interface.
 
-          theme: User's selected UI theme.
+          theme: Preferred UI theme (e.g., Light-Default, Dark-Quantum).
 
           transaction_grouping: Default grouping preference for transaction lists.
 
@@ -174,11 +176,11 @@ class AsyncPreferencesResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        ai_interaction_mode: Literal["passive", "balanced", "proactive"] | Omit = omit,
+        ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
         data_sharing_consent: bool | Omit = omit,
         notification_channels: preference_update_params.NotificationChannels | Omit = omit,
         preferred_language: str | Omit = omit,
-        theme: Literal["Light-Default", "Dark-Quantum", "Eco-Green", "Minimalist"] | Omit = omit,
+        theme: str | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -193,15 +195,17 @@ class AsyncPreferencesResource(AsyncAPIResource):
         settings.
 
         Args:
-          ai_interaction_mode: How actively the AI should provide advice and suggestions.
+          ai_interaction_mode: How the user prefers to interact with AI (proactive advice, balanced, or only on
+              demand).
 
-          data_sharing_consent: Consent for sharing anonymized data for AI improvements.
+          data_sharing_consent: Consent status for sharing anonymized data for AI improvement and personalized
+              offers.
 
-          notification_channels: Enabled notification channels.
+          notification_channels: Preferred channels for receiving notifications.
 
-          preferred_language: User's preferred language for the interface.
+          preferred_language: Preferred language for the user interface.
 
-          theme: User's selected UI theme.
+          theme: Preferred UI theme (e.g., Light-Default, Dark-Quantum).
 
           transaction_grouping: Default grouping preference for transaction lists.
 

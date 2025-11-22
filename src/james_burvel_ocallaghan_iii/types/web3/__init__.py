@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from .wallet_list_params import WalletListParams as WalletListParams
 from .wallet_list_response import WalletListResponse as WalletListResponse
 from .wallet_connect_params import WalletConnectParams as WalletConnectParams
 from .crypto_wallet_connection import CryptoWalletConnection as CryptoWalletConnection
+from .wallet_retrieve_balances_params import WalletRetrieveBalancesParams as WalletRetrieveBalancesParams
 from .wallet_retrieve_balances_response import WalletRetrieveBalancesResponse as WalletRetrieveBalancesResponse
 from .transaction_initiate_transfer_params import TransactionInitiateTransferParams as TransactionInitiateTransferParams
 from .transaction_initiate_transfer_response import (

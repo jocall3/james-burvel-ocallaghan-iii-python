@@ -20,52 +20,35 @@ __all__ = [
 
 
 class InflowForecastBySource(BaseModel):
-    ai_confidence: Optional[float] = FieldInfo(alias="aiConfidence", default=None)
-    """AI's confidence score for this inflow source."""
-
     amount: Optional[float] = None
-    """Projected amount from this source."""
 
     source: Optional[str] = None
-    """Source of inflow."""
 
 
 class InflowForecast(BaseModel):
-    by_source: List[InflowForecastBySource] = FieldInfo(alias="bySource")
-    """Breakdown of inflows by source."""
+    by_source: Optional[List[InflowForecastBySource]] = FieldInfo(alias="bySource", default=None)
 
-    total_projected: float = FieldInfo(alias="totalProjected")
-    """Total projected inflows."""
+    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
 
 
 class OutflowForecastByCategory(BaseModel):
-    ai_confidence: Optional[float] = FieldInfo(alias="aiConfidence", default=None)
-    """AI's confidence score for this outflow category."""
-
     amount: Optional[float] = None
-    """Projected amount for this category."""
 
     category: Optional[str] = None
-    """Category of outflow."""
 
 
 class OutflowForecast(BaseModel):
-    by_category: List[OutflowForecastByCategory] = FieldInfo(alias="byCategory")
-    """Breakdown of outflows by category."""
+    by_category: Optional[List[OutflowForecastByCategory]] = FieldInfo(alias="byCategory", default=None)
 
-    total_projected: float = FieldInfo(alias="totalProjected")
-    """Total projected outflows."""
+    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
 
 
 class ProjectedBalance(BaseModel):
-    date: datetime.date
-    """Date of the projected balance."""
+    date: Optional[datetime.date] = None
 
-    projected_cash: float = FieldInfo(alias="projectedCash")
-    """Projected cash balance on this date."""
+    projected_cash: Optional[float] = FieldInfo(alias="projectedCash", default=None)
 
-    scenario: Literal["most_likely", "best_case", "worst_case", "custom"]
-    """The scenario for this projection."""
+    scenario: Optional[Literal["most_likely", "best_case", "worst_case"]] = None
 
 
 class CashFlowForecastResponse(BaseModel):
@@ -73,33 +56,27 @@ class CashFlowForecastResponse(BaseModel):
     """AI-generated recommendations for treasury optimization."""
 
     currency: str
-    """The primary currency of the forecast."""
+    """The currency of the forecast."""
 
     forecast_id: str = FieldInfo(alias="forecastId")
-    """Unique identifier for the cash flow forecast."""
+    """Unique identifier for the cash flow forecast report."""
 
     inflow_forecast: InflowForecast = FieldInfo(alias="inflowForecast")
-    """Forecasted cash inflows."""
+    """Forecast of cash inflows by source."""
 
     liquidity_risk_score: int = FieldInfo(alias="liquidityRiskScore")
-    """AI-assessed score for liquidity risk (0-100, higher is riskier)."""
+    """AI-assessed risk score for liquidity (0-100, lower is better)."""
 
     outflow_forecast: OutflowForecast = FieldInfo(alias="outflowForecast")
-    """Forecasted cash outflows."""
+    """Forecast of cash outflows by category."""
 
-    overall_status: Literal["positive_outlook", "neutral", "potential_deficit", "critical_risk"] = FieldInfo(
+    overall_status: Literal["positive_outlook", "negative_outlook", "stable", "uncertain"] = FieldInfo(
         alias="overallStatus"
     )
-    """Overall assessment of the cash flow outlook."""
+    """Overall assessment of the projected cash flow."""
 
     period: str
     """The period covered by the forecast."""
 
     projected_balances: List[ProjectedBalance] = FieldInfo(alias="projectedBalances")
-    """Time-series of projected cash balances under different scenarios."""
-
-    forecast_timestamp: Optional[datetime.datetime] = FieldInfo(alias="forecastTimestamp", default=None)
-    """Timestamp when the forecast was generated."""
-
-    scenario_analysis_summary: Optional[str] = FieldInfo(alias="scenarioAnalysisSummary", default=None)
-    """Summary of 'what-if' scenario analysis included in the forecast."""
+    """Projected cash balances at key dates, potentially across different scenarios."""

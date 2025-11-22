@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from .devices import (
@@ -42,6 +44,7 @@ from ....types.user import User
 from ....types.users import me_update_params
 from ...._base_client import make_request_options
 from ....types.address_param import AddressParam
+from ....types.users.me.user_preferences_param import UserPreferencesParam
 
 __all__ = ["MeResource", "AsyncMeResource"]
 
@@ -105,9 +108,9 @@ class MeResource(SyncAPIResource):
         self,
         *,
         address: AddressParam | Omit = omit,
-        ai_persona: str | Omit = omit,
         name: str | Omit = omit,
-        phone: str | Omit = omit,
+        phone: Optional[str] | Omit = omit,
+        preferences: UserPreferencesParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -120,13 +123,13 @@ class MeResource(SyncAPIResource):
         information.
 
         Args:
-          address: Updated residential address of the user.
-
-          ai_persona: User's self-selected or AI-adjusted financial persona.
+          address: Updated address details.
 
           name: Updated full name of the user.
 
-          phone: Updated phone number of the user.
+          phone: Updated primary phone number of the user.
+
+          preferences: Updated personalization preferences.
 
           extra_headers: Send extra headers
 
@@ -141,9 +144,9 @@ class MeResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "address": address,
-                    "ai_persona": ai_persona,
                     "name": name,
                     "phone": phone,
+                    "preferences": preferences,
                 },
                 me_update_params.MeUpdateParams,
             ),
@@ -213,9 +216,9 @@ class AsyncMeResource(AsyncAPIResource):
         self,
         *,
         address: AddressParam | Omit = omit,
-        ai_persona: str | Omit = omit,
         name: str | Omit = omit,
-        phone: str | Omit = omit,
+        phone: Optional[str] | Omit = omit,
+        preferences: UserPreferencesParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -228,13 +231,13 @@ class AsyncMeResource(AsyncAPIResource):
         information.
 
         Args:
-          address: Updated residential address of the user.
-
-          ai_persona: User's self-selected or AI-adjusted financial persona.
+          address: Updated address details.
 
           name: Updated full name of the user.
 
-          phone: Updated phone number of the user.
+          phone: Updated primary phone number of the user.
+
+          preferences: Updated personalization preferences.
 
           extra_headers: Send extra headers
 
@@ -249,9 +252,9 @@ class AsyncMeResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "address": address,
-                    "ai_persona": ai_persona,
                     "name": name,
                     "phone": phone,
+                    "preferences": preferences,
                 },
                 me_update_params.MeUpdateParams,
             ),

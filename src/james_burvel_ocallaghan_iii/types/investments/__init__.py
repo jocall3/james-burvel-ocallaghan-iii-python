@@ -5,6 +5,7 @@ from __future__ import annotations
 from .asset_search_params import AssetSearchParams as AssetSearchParams
 from .investment_portfolio import InvestmentPortfolio as InvestmentPortfolio
 from .asset_search_response import AssetSearchResponse as AssetSearchResponse
+from .portfolio_list_params import PortfolioListParams as PortfolioListParams
 from .portfolio_create_params import PortfolioCreateParams as PortfolioCreateParams
 from .portfolio_list_response import PortfolioListResponse as PortfolioListResponse
 from .portfolio_update_params import PortfolioUpdateParams as PortfolioUpdateParams

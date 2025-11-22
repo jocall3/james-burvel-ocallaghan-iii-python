@@ -17,34 +17,34 @@ class CorporateCard(BaseModel):
     """Unique identifier for the corporate card."""
 
     card_number_mask: str = FieldInfo(alias="cardNumberMask")
-    """Masked card number for display (e.g., last 4 digits)."""
+    """Masked card number for display purposes."""
 
     card_type: Literal["physical", "virtual"] = FieldInfo(alias="cardType")
-    """Type of card (physical or virtual)."""
+    """Type of the card (physical or virtual)."""
 
     controls: CorporateCardControls
-    """Granular spending controls and limits for the card."""
+    """Granular spending controls for a corporate card."""
 
     created_date: datetime = FieldInfo(alias="createdDate")
-    """Date when the card was created/issued."""
+    """Timestamp when the card was created."""
+
+    currency: str
+    """Currency of the card's limits and transactions."""
 
     expiration_date: date = FieldInfo(alias="expirationDate")
-    """Expiration date of the card."""
+    """Expiration date of the card (YYYY-MM-DD)."""
 
     frozen: bool
-    """Indicates if the card is temporarily frozen (no transactions allowed)."""
+    """If true, the card is temporarily frozen and cannot be used."""
 
     holder_name: str = FieldInfo(alias="holderName")
-    """Name of the employee or entity holding the card."""
+    """Name of the card holder."""
 
-    status: Literal["Active", "Suspended", "Cancelled", "Expired"]
+    status: Literal["Active", "Suspended", "Deactivated", "Pending Activation"]
     """Current status of the card."""
 
     associated_employee_id: Optional[str] = FieldInfo(alias="associatedEmployeeId", default=None)
-    """Optional: ID of the employee associated with the card."""
-
-    currency: Optional[str] = None
-    """The primary currency of the card."""
+    """Optional: ID of the employee associated with this card."""
 
     spending_policy_id: Optional[str] = FieldInfo(alias="spendingPolicyId", default=None)
-    """Optional: ID of the corporate spending policy this card adheres to."""
+    """Optional: ID of the overarching spending policy applied to this card."""
