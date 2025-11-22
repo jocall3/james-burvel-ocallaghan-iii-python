@@ -68,7 +68,9 @@ class TestWallets:
             signed_message="0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
             wallet_address="0x123abc456def7890...",
             wallet_provider="MetaMask",
-            grant_write_access=True,
+            message_to_sign="messageToSign",
+            read_access=True,
+            write_access=True,
         )
         assert_matches_type(CryptoWalletConnection, wallet, path=["response"])
 
@@ -199,7 +201,9 @@ class TestAsyncWallets:
             signed_message="0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
             wallet_address="0x123abc456def7890...",
             wallet_provider="MetaMask",
-            grant_write_access=True,
+            message_to_sign="messageToSign",
+            read_access=True,
+            write_access=True,
         )
         assert_matches_type(CryptoWalletConnection, wallet, path=["response"])
 

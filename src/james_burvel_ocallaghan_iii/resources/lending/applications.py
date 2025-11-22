@@ -83,12 +83,12 @@ class ApplicationsResource(SyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "debt_consolidation", "home_improvement", "medical_expenses", "education", "business_startup", "other"
+            "debt_consolidation", "home_improvement", "medical_expense", "education", "business_startup", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
         co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
-        collateral_details: Optional[application_submit_params.CollateralDetails] | Omit = omit,
+        desired_interest_rate: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,15 +104,16 @@ class ApplicationsResource(SyncAPIResource):
         Args:
           loan_amount: The desired loan amount.
 
-          loan_purpose: The purpose of the loan.
+          loan_purpose: The purpose for which the loan is requested.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the underwriting process.
+          additional_notes: Any additional relevant information for the loan application.
 
           co_applicant: Optional details for a co-applicant.
 
-          collateral_details: Optional details about collateral for secured loans.
+          desired_interest_rate: Optional: User's desired interest rate (AI will try to match or offer best
+              possible).
 
           extra_headers: Send extra headers
 
@@ -131,7 +132,7 @@ class ApplicationsResource(SyncAPIResource):
                     "repayment_term_months": repayment_term_months,
                     "additional_notes": additional_notes,
                     "co_applicant": co_applicant,
-                    "collateral_details": collateral_details,
+                    "desired_interest_rate": desired_interest_rate,
                 },
                 application_submit_params.ApplicationSubmitParams,
             ),
@@ -201,12 +202,12 @@ class AsyncApplicationsResource(AsyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "debt_consolidation", "home_improvement", "medical_expenses", "education", "business_startup", "other"
+            "debt_consolidation", "home_improvement", "medical_expense", "education", "business_startup", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
         co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
-        collateral_details: Optional[application_submit_params.CollateralDetails] | Omit = omit,
+        desired_interest_rate: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -222,15 +223,16 @@ class AsyncApplicationsResource(AsyncAPIResource):
         Args:
           loan_amount: The desired loan amount.
 
-          loan_purpose: The purpose of the loan.
+          loan_purpose: The purpose for which the loan is requested.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the underwriting process.
+          additional_notes: Any additional relevant information for the loan application.
 
           co_applicant: Optional details for a co-applicant.
 
-          collateral_details: Optional details about collateral for secured loans.
+          desired_interest_rate: Optional: User's desired interest rate (AI will try to match or offer best
+              possible).
 
           extra_headers: Send extra headers
 
@@ -249,7 +251,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
                     "repayment_term_months": repayment_term_months,
                     "additional_notes": additional_notes,
                     "co_applicant": co_applicant,
-                    "collateral_details": collateral_details,
+                    "desired_interest_rate": desired_interest_rate,
                 },
                 application_submit_params.ApplicationSubmitParams,
             ),

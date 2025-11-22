@@ -117,10 +117,10 @@ class ChatResource(SyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          message: The user's natural language input to the AI Advisor.
+          message: The user's natural language message or query for the AI Advisor.
 
-          function_response: Optional: The output from a tool function that the AI previously requested to be
-              executed by the client.
+          function_response: Optional: If the user is responding to a tool call, this contains the output
+              from the tool's execution.
 
           session_id: Optional: The ID of an ongoing conversation session to maintain context.
 
@@ -242,10 +242,10 @@ class AsyncChatResource(AsyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          message: The user's natural language input to the AI Advisor.
+          message: The user's natural language message or query for the AI Advisor.
 
-          function_response: Optional: The output from a tool function that the AI previously requested to be
-              executed by the client.
+          function_response: Optional: If the user is responding to a tool call, this contains the output
+              from the tool's execution.
 
           session_id: Optional: The ID of an ongoing conversation session to maintain context.
 

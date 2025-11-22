@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import date, datetime
 from typing_extensions import Literal
 
@@ -15,13 +15,11 @@ __all__ = ["AuditRetrieveReportResponse", "Finding", "PeriodCovered"]
 class Finding(BaseModel):
     description: Optional[str] = None
 
-    regulatory_breach: Optional[str] = FieldInfo(alias="regulatoryBreach", default=None)
-
     related_entities: Optional[List[str]] = FieldInfo(alias="relatedEntities", default=None)
 
     severity: Optional[Literal["Low", "Medium", "High", "Critical"]] = None
 
-    type: Optional[Literal["violation", "observation", "recommendation"]] = None
+    type: Optional[Literal["finding", "observation", "recommendation"]] = None
 
 
 class PeriodCovered(BaseModel):
@@ -38,19 +36,22 @@ class AuditRetrieveReportResponse(BaseModel):
     """Unique identifier for the audit report."""
 
     findings: List[Finding]
-    """Detailed findings, including violations, observations, and recommendations."""
+    """Detailed findings, observations, and recommendations."""
 
     overall_compliance_score: int = FieldInfo(alias="overallComplianceScore")
-    """Overall compliance score (0-100), indicating adherence to regulations."""
+    """An overall score (0-100) indicating the level of compliance."""
 
     period_covered: PeriodCovered = FieldInfo(alias="periodCovered")
-    """The time period covered by the audit."""
+    """The date range covered by the audit."""
 
     recommended_actions: List[AIInsight] = FieldInfo(alias="recommendedActions")
     """AI-generated actionable recommendations to improve compliance."""
 
-    status: Literal["processing", "completed", "failed"]
-    """Current status of the audit."""
+    status: Literal["initiated", "processing", "completed", "failed"]
+    """Current status of the audit generation."""
 
     summary: str
-    """A summary of the audit findings."""
+    """A high-level summary of the audit findings."""
+
+    regulatory_adherence: Optional[Dict[str, str]] = FieldInfo(alias="regulatoryAdherence", default=None)
+    """Specific adherence status for each regulatory framework audited."""

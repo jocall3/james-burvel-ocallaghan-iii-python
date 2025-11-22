@@ -64,11 +64,13 @@ class WebhooksResource(SyncAPIResource):
         account update) via a provided callback URL.
 
         Args:
-          callback_url: The URL to which webhook events should be sent.
+          callback_url: The URL where webhook events will be sent.
 
-          events: List of event types to subscribe to.
+          events: A list of event types to subscribe to (e.g., 'transaction.created',
+              'account.updated').
 
-          secret: Optional: A secret string used to sign webhook payloads, verifying origin.
+          secret: Optional: A secret string to use for signing webhook payloads, ensuring
+              authenticity. If not provided, one will be generated.
 
           extra_headers: Send extra headers
 
@@ -100,8 +102,7 @@ class WebhooksResource(SyncAPIResource):
         *,
         callback_url: str | Omit = omit,
         events: SequenceNotStr[str] | Omit = omit,
-        secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
+        status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -114,13 +115,12 @@ class WebhooksResource(SyncAPIResource):
         subscribed events, or activation status.
 
         Args:
-          callback_url: The updated URL for webhook deliveries.
+          callback_url: The new URL where webhook events should be sent.
 
-          events: The new list of event types to subscribe to. Overwrites existing list.
+          events: The updated list of event types to subscribe to. Sending an empty array might
+              disable all events.
 
-          secret: Optional: A new secret string to update or set for webhook payload signing.
-
-          status: Updated status of the subscription.
+          status: The new status for the webhook subscription (e.g., 'active', 'paused').
 
           extra_headers: Send extra headers
 
@@ -138,7 +138,6 @@ class WebhooksResource(SyncAPIResource):
                 {
                     "callback_url": callback_url,
                     "events": events,
-                    "secret": secret,
                     "status": status,
                 },
                 webhook_update_params.WebhookUpdateParams,
@@ -247,11 +246,13 @@ class AsyncWebhooksResource(AsyncAPIResource):
         account update) via a provided callback URL.
 
         Args:
-          callback_url: The URL to which webhook events should be sent.
+          callback_url: The URL where webhook events will be sent.
 
-          events: List of event types to subscribe to.
+          events: A list of event types to subscribe to (e.g., 'transaction.created',
+              'account.updated').
 
-          secret: Optional: A secret string used to sign webhook payloads, verifying origin.
+          secret: Optional: A secret string to use for signing webhook payloads, ensuring
+              authenticity. If not provided, one will be generated.
 
           extra_headers: Send extra headers
 
@@ -283,8 +284,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         *,
         callback_url: str | Omit = omit,
         events: SequenceNotStr[str] | Omit = omit,
-        secret: Optional[str] | Omit = omit,
-        status: Literal["active", "paused"] | Omit = omit,
+        status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -297,13 +297,12 @@ class AsyncWebhooksResource(AsyncAPIResource):
         subscribed events, or activation status.
 
         Args:
-          callback_url: The updated URL for webhook deliveries.
+          callback_url: The new URL where webhook events should be sent.
 
-          events: The new list of event types to subscribe to. Overwrites existing list.
+          events: The updated list of event types to subscribe to. Sending an empty array might
+              disable all events.
 
-          secret: Optional: A new secret string to update or set for webhook payload signing.
-
-          status: Updated status of the subscription.
+          status: The new status for the webhook subscription (e.g., 'active', 'paused').
 
           extra_headers: Send extra headers
 
@@ -321,7 +320,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 {
                     "callback_url": callback_url,
                     "events": events,
-                    "secret": secret,
                     "status": status,
                 },
                 webhook_update_params.WebhookUpdateParams,

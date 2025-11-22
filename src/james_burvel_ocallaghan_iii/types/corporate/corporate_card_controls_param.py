@@ -13,30 +13,36 @@ __all__ = ["CorporateCardControlsParam"]
 
 class CorporateCardControlsParam(TypedDict, total=False):
     atm_withdrawals: Annotated[bool, PropertyInfo(alias="atmWithdrawals")]
-    """Allow ATM withdrawals."""
+    """Allow or disallow ATM cash withdrawals."""
 
     contactless_payments: Annotated[bool, PropertyInfo(alias="contactlessPayments")]
-    """Allow contactless payments."""
+    """Allow or disallow contactless (NFC) payments."""
 
     daily_limit: Annotated[Optional[float], PropertyInfo(alias="dailyLimit")]
     """Maximum spending limit per day."""
 
     international_transactions: Annotated[bool, PropertyInfo(alias="internationalTransactions")]
-    """Allow international transactions."""
+    """Allow or disallow transactions outside the primary country."""
 
     merchant_category_restrictions: Annotated[
         Optional[SequenceNotStr[str]], PropertyInfo(alias="merchantCategoryRestrictions")
     ]
-    """List of allowed or disallowed merchant categories."""
+    """
+    List of allowed or disallowed merchant categories (e.g., 'Restaurants',
+    'Travel').
+    """
 
     monthly_limit: Annotated[Optional[float], PropertyInfo(alias="monthlyLimit")]
     """Maximum spending limit per month."""
 
     online_transactions: Annotated[bool, PropertyInfo(alias="onlineTransactions")]
-    """Allow online transactions."""
+    """Allow or disallow online purchases."""
 
     single_transaction_limit: Annotated[Optional[float], PropertyInfo(alias="singleTransactionLimit")]
     """Maximum amount for a single transaction."""
 
     vendor_restrictions: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="vendorRestrictions")]
-    """List of specific allowed or disallowed vendors/merchants."""
+    """
+    List of allowed or disallowed specific vendors/merchants (e.g., 'Amazon',
+    'Uber').
+    """

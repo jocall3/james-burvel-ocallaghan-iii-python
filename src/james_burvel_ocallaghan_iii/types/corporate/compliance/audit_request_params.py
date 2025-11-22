@@ -6,7 +6,6 @@ from typing import List, Union, Optional
 from datetime import date
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["AuditRequestParams"]
@@ -16,7 +15,7 @@ class AuditRequestParams(TypedDict, total=False):
     audit_scope: Required[
         Annotated[
             Literal[
-                "all_transactions", "corporate_cards", "international_payments", "user_onboarding", "specific_accounts"
+                "all_transactions", "corporate_cards", "specific_accounts", "international_payments", "user_onboarding"
             ],
             PropertyInfo(alias="auditScope"),
         ]
@@ -24,20 +23,18 @@ class AuditRequestParams(TypedDict, total=False):
     """The scope of the compliance audit."""
 
     end_date: Required[Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]]
-    """End date for the audit period (inclusive)."""
+    """The end date for the audit period (inclusive)."""
 
     regulatory_frameworks: Required[
         Annotated[
-            List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX"]], PropertyInfo(alias="regulatoryFrameworks")
+            List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "PSD2", "SOX", "CCPA"]],
+            PropertyInfo(alias="regulatoryFrameworks"),
         ]
     ]
-    """List of regulatory frameworks to audit against."""
+    """List of regulatory frameworks against which to audit."""
 
     start_date: Required[Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]]
-    """Start date for the audit period (inclusive)."""
+    """The start date for the audit period (inclusive)."""
 
-    specific_account_ids: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="specificAccountIds")]
-    """
-    Optional: List of specific account IDs to include if `auditScope` is
-    'specific_accounts'.
-    """
+    additional_notes: Annotated[Optional[str], PropertyInfo(alias="additionalNotes")]
+    """Any additional notes or specific areas of focus for the audit."""

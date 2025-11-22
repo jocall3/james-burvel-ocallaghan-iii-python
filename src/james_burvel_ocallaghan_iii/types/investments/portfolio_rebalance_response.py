@@ -14,7 +14,7 @@ __all__ = ["PortfolioRebalanceResponse", "ProposedTrade"]
 class ProposedTrade(BaseModel):
     action: Optional[Literal["buy", "sell"]] = None
 
-    estimated_cost_revenue: Optional[float] = FieldInfo(alias="estimatedCostRevenue", default=None)
+    estimated_price: Optional[float] = FieldInfo(alias="estimatedPrice", default=None)
 
     quantity: Optional[float] = None
 
@@ -28,20 +28,23 @@ class PortfolioRebalanceResponse(BaseModel):
     rebalance_id: str = FieldInfo(alias="rebalanceId")
     """Unique identifier for the rebalancing operation."""
 
-    status: Literal["analyzing", "pending_confirmation", "executing", "completed", "failed", "cancelled"]
+    status: Literal["analyzing", "proposed", "pending_confirmation", "executing", "completed", "failed"]
     """Current status of the rebalancing operation."""
 
-    status_message: str = FieldInfo(alias="statusMessage")
-    """A descriptive message about the current status."""
-
     confirmation_expires_at: Optional[datetime] = FieldInfo(alias="confirmationExpiresAt", default=None)
-    """Timestamp when pending confirmation will expire."""
+    """Timestamp when the proposed rebalance expires if not confirmed."""
 
     confirmation_required: Optional[bool] = FieldInfo(alias="confirmationRequired", default=None)
-    """Indicates if user confirmation is needed to proceed with trades."""
+    """Indicates if user confirmation is required before execution."""
 
     estimated_impact: Optional[str] = FieldInfo(alias="estimatedImpact", default=None)
     """AI's estimated impact of the rebalancing on portfolio metrics."""
 
+    last_updated: Optional[datetime] = FieldInfo(alias="lastUpdated", default=None)
+    """Timestamp of the last status update."""
+
     proposed_trades: Optional[List[ProposedTrade]] = FieldInfo(alias="proposedTrades", default=None)
-    """Details of proposed trades if status is 'pending_confirmation' or 'executing'."""
+    """List of proposed buy/sell trades if status is 'proposed'."""
+
+    status_message: Optional[str] = FieldInfo(alias="statusMessage", default=None)
+    """A descriptive message about the current status."""

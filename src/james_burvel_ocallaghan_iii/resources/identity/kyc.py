@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
 from typing_extensions import Literal
 
@@ -76,9 +76,9 @@ class KYCResource(SyncAPIResource):
         document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement"],
         expiration_date: Union[str, date],
         issue_date: Union[str, date],
+        additional_notes: Optional[str] | Omit = omit,
         address_proof_image: Union[str, Base64FileInput, None] | Omit = omit,
         document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        live_selfie_image: Union[str, Base64FileInput, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -92,23 +92,23 @@ class KYCResource(SyncAPIResource):
         crucial for higher service tiers and regulatory adherence.
 
         Args:
-          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2 code).
+          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2).
 
           document_front_image: Base64 encoded image of the front side of the document.
 
-          document_number: The official document number.
+          document_number: The unique identifier number from the document.
 
           document_type: Type of KYC document being submitted.
 
-          expiration_date: Date the document expires.
+          expiration_date: The date the document expires.
 
-          issue_date: Date the document was issued.
+          issue_date: The date the document was issued.
 
-          address_proof_image: Base64 encoded image of an address proof (e.g., utility bill).
+          additional_notes: Any additional notes or comments for the KYC review team.
+
+          address_proof_image: Base64 encoded image of an address proof document (e.g., utility bill).
 
           document_back_image: Base64 encoded image of the back side of the document (if applicable).
-
-          live_selfie_image: Base64 encoded image of a live selfie for liveness detection.
 
           extra_headers: Send extra headers
 
@@ -128,9 +128,9 @@ class KYCResource(SyncAPIResource):
                     "document_type": document_type,
                     "expiration_date": expiration_date,
                     "issue_date": issue_date,
+                    "additional_notes": additional_notes,
                     "address_proof_image": address_proof_image,
                     "document_back_image": document_back_image,
-                    "live_selfie_image": live_selfie_image,
                 },
                 kyc_submit_params.KYCSubmitParams,
             ),
@@ -192,9 +192,9 @@ class AsyncKYCResource(AsyncAPIResource):
         document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement"],
         expiration_date: Union[str, date],
         issue_date: Union[str, date],
+        additional_notes: Optional[str] | Omit = omit,
         address_proof_image: Union[str, Base64FileInput, None] | Omit = omit,
         document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        live_selfie_image: Union[str, Base64FileInput, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -208,23 +208,23 @@ class AsyncKYCResource(AsyncAPIResource):
         crucial for higher service tiers and regulatory adherence.
 
         Args:
-          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2 code).
+          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2).
 
           document_front_image: Base64 encoded image of the front side of the document.
 
-          document_number: The official document number.
+          document_number: The unique identifier number from the document.
 
           document_type: Type of KYC document being submitted.
 
-          expiration_date: Date the document expires.
+          expiration_date: The date the document expires.
 
-          issue_date: Date the document was issued.
+          issue_date: The date the document was issued.
 
-          address_proof_image: Base64 encoded image of an address proof (e.g., utility bill).
+          additional_notes: Any additional notes or comments for the KYC review team.
+
+          address_proof_image: Base64 encoded image of an address proof document (e.g., utility bill).
 
           document_back_image: Base64 encoded image of the back side of the document (if applicable).
-
-          live_selfie_image: Base64 encoded image of a live selfie for liveness detection.
 
           extra_headers: Send extra headers
 
@@ -244,9 +244,9 @@ class AsyncKYCResource(AsyncAPIResource):
                     "document_type": document_type,
                     "expiration_date": expiration_date,
                     "issue_date": issue_date,
+                    "additional_notes": additional_notes,
                     "address_proof_image": address_proof_image,
                     "document_back_image": document_back_image,
-                    "live_selfie_image": live_selfie_image,
                 },
                 kyc_submit_params.KYCSubmitParams,
             ),

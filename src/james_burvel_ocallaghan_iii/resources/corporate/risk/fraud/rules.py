@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict
 from typing_extensions import Literal
 
 import httpx
@@ -49,12 +49,11 @@ class RulesResource(SyncAPIResource):
         self,
         *,
         action: rule_create_params.Action,
-        criteria: object,
+        criteria: Dict[str, object],
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
-        priority: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,17 +67,17 @@ class RulesResource(SyncAPIResource):
         threat landscapes.
 
         Args:
-          criteria: The dynamic object defining the conditions that trigger the rule.
+          action: Action to take when the rule is triggered.
 
-          description: Detailed description of what the rule should detect.
+          criteria: JSON object defining the conditions to trigger the rule.
 
-          name: A descriptive name for the new rule.
+          description: Description of what the rule will detect.
 
-          severity: Severity level for anomalies detected by this rule.
+          name: Name of the new fraud detection rule.
+
+          severity: Default severity for anomalies detected by this rule.
 
           status: Initial status of the rule.
-
-          priority: Optional: Priority level for rule evaluation.
 
           extra_headers: Send extra headers
 
@@ -98,7 +97,6 @@ class RulesResource(SyncAPIResource):
                     "name": name,
                     "severity": severity,
                     "status": status,
-                    "priority": priority,
                 },
                 rule_create_params.RuleCreateParams,
             ),
@@ -116,7 +114,6 @@ class RulesResource(SyncAPIResource):
         criteria: Dict[str, object] | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
-        priority: Optional[int] | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -131,15 +128,15 @@ class RulesResource(SyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          criteria: The updated dynamic object defining the conditions.
+          action: Updated action to take when the rule is triggered.
 
-          description: Updated description of the rule.
+          criteria: Updated JSON object defining the trigger conditions.
 
-          name: Updated name for the fraud rule.
+          description: Updated description.
 
-          priority: Updated priority level for rule evaluation.
+          name: Updated name of the rule.
 
-          severity: Updated severity level.
+          severity: Updated default severity level.
 
           status: Updated status of the rule.
 
@@ -161,7 +158,6 @@ class RulesResource(SyncAPIResource):
                     "criteria": criteria,
                     "description": description,
                     "name": name,
-                    "priority": priority,
                     "severity": severity,
                     "status": status,
                 },
@@ -255,12 +251,11 @@ class AsyncRulesResource(AsyncAPIResource):
         self,
         *,
         action: rule_create_params.Action,
-        criteria: object,
+        criteria: Dict[str, object],
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
-        priority: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -274,17 +269,17 @@ class AsyncRulesResource(AsyncAPIResource):
         threat landscapes.
 
         Args:
-          criteria: The dynamic object defining the conditions that trigger the rule.
+          action: Action to take when the rule is triggered.
 
-          description: Detailed description of what the rule should detect.
+          criteria: JSON object defining the conditions to trigger the rule.
 
-          name: A descriptive name for the new rule.
+          description: Description of what the rule will detect.
 
-          severity: Severity level for anomalies detected by this rule.
+          name: Name of the new fraud detection rule.
+
+          severity: Default severity for anomalies detected by this rule.
 
           status: Initial status of the rule.
-
-          priority: Optional: Priority level for rule evaluation.
 
           extra_headers: Send extra headers
 
@@ -304,7 +299,6 @@ class AsyncRulesResource(AsyncAPIResource):
                     "name": name,
                     "severity": severity,
                     "status": status,
-                    "priority": priority,
                 },
                 rule_create_params.RuleCreateParams,
             ),
@@ -322,7 +316,6 @@ class AsyncRulesResource(AsyncAPIResource):
         criteria: Dict[str, object] | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
-        priority: Optional[int] | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -337,15 +330,15 @@ class AsyncRulesResource(AsyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          criteria: The updated dynamic object defining the conditions.
+          action: Updated action to take when the rule is triggered.
 
-          description: Updated description of the rule.
+          criteria: Updated JSON object defining the trigger conditions.
 
-          name: Updated name for the fraud rule.
+          description: Updated description.
 
-          priority: Updated priority level for rule evaluation.
+          name: Updated name of the rule.
 
-          severity: Updated severity level.
+          severity: Updated default severity level.
 
           status: Updated status of the rule.
 
@@ -367,7 +360,6 @@ class AsyncRulesResource(AsyncAPIResource):
                     "criteria": criteria,
                     "description": description,
                     "name": name,
-                    "priority": priority,
                     "severity": severity,
                     "status": status,
                 },

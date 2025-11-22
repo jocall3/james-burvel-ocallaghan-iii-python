@@ -18,10 +18,10 @@ class Web3RetrieveNFTsResponseItemAttribute(BaseModel):
 
 class Web3RetrieveNFTsResponseItem(BaseModel):
     id: str
-    """Unique identifier for the NFT (often a combination of contract and token ID)."""
+    """Unique identifier for the NFT within ."""
 
     blockchain_network: Literal["Ethereum", "Solana", "Polygon", "other"] = FieldInfo(alias="blockchainNetwork")
-    """The blockchain network on which the NFT exists."""
+    """The blockchain network where the NFT resides."""
 
     collection_name: str = FieldInfo(alias="collectionName")
     """Name of the NFT collection."""
@@ -30,19 +30,19 @@ class Web3RetrieveNFTsResponseItem(BaseModel):
     """The smart contract address of the NFT collection."""
 
     image_url: str = FieldInfo(alias="imageUrl")
-    """URL to the NFT's image."""
+    """URL to the NFT's image or media."""
 
     name: str
-    """Name of the specific NFT."""
+    """Name or title of the specific NFT."""
 
     owner_address: str = FieldInfo(alias="ownerAddress")
     """The blockchain address of the current owner."""
 
     token_id: str = FieldInfo(alias="tokenId")
-    """The unique token ID within the collection."""
+    """The unique ID of the NFT within its contract."""
 
     attributes: Optional[List[Web3RetrieveNFTsResponseItemAttribute]] = None
-    """List of traits and attributes of the NFT."""
+    """List of traits/attributes of the NFT."""
 
     description: Optional[str] = None
     """Description of the NFT."""
@@ -51,7 +51,7 @@ class Web3RetrieveNFTsResponseItem(BaseModel):
     """AI-estimated current market value of the NFT in USD."""
 
     last_sale_price_usd: Optional[float] = FieldInfo(alias="lastSalePriceUSD", default=None)
-    """Last known sale price of this specific NFT in USD."""
+    """The last known sale price of the NFT in USD."""
 
 
 Web3RetrieveNFTsResponse: TypeAlias = List[Web3RetrieveNFTsResponseItem]

@@ -24,15 +24,12 @@ class TestRules:
     @parametrize
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         rule = client.corporate.risk.fraud.rules.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -50,16 +47,15 @@ class TestRules:
                 "type": "auto_review",
             },
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
             severity="Critical",
             status="active",
-            priority=60,
         )
         assert_matches_type(FraudRule, rule, path=["response"])
 
@@ -67,15 +63,12 @@ class TestRules:
     @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.corporate.risk.fraud.rules.with_raw_response.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -92,15 +85,12 @@ class TestRules:
     @parametrize
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.corporate.risk.fraud.rules.with_streaming_response.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -136,9 +126,8 @@ class TestRules:
                 "transactionAmountMin": "bar",
                 "accountInactivityDays": "bar",
             },
-            description="Revised: Flags transactions over a higher threshold from dormant accounts.",
-            name="Updated High Value Transaction Rule",
-            priority=55,
+            description="Revised logic for flagging large transactions from dormant accounts with lower thresholds.",
+            name="Revised High Value Transaction Rule",
             severity="High",
             status="inactive",
         )
@@ -258,15 +247,12 @@ class TestAsyncRules:
     @parametrize
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         rule = await async_client.corporate.risk.fraud.rules.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -284,16 +270,15 @@ class TestAsyncRules:
                 "type": "auto_review",
             },
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
             severity="Critical",
             status="active",
-            priority=60,
         )
         assert_matches_type(FraudRule, rule, path=["response"])
 
@@ -301,15 +286,12 @@ class TestAsyncRules:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.corporate.risk.fraud.rules.with_raw_response.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -326,15 +308,12 @@ class TestAsyncRules:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.corporate.risk.fraud.rules.with_streaming_response.create(
-            action={
-                "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
-                "type": "auto_review",
-            },
+            action={},
             criteria={
-                "paymentCountMin": 3,
-                "timeframeHours": 24,
-                "recipientNew": True,
-                "recipientCountryRiskLevel": ["High", "Very High"],
+                "paymentCountMin": "bar",
+                "timeframeHours": "bar",
+                "recipientNew": "bar",
+                "recipientCountryRiskLevel": "bar",
             },
             description="Detects multiple international payments to new beneficiaries in high-risk countries within a short timeframe.",
             name="Suspicious International Payment Pattern",
@@ -370,9 +349,8 @@ class TestAsyncRules:
                 "transactionAmountMin": "bar",
                 "accountInactivityDays": "bar",
             },
-            description="Revised: Flags transactions over a higher threshold from dormant accounts.",
-            name="Updated High Value Transaction Rule",
-            priority=55,
+            description="Revised logic for flagging large transactions from dormant accounts with lower thresholds.",
+            name="Revised High Value Transaction Rule",
             severity="High",
             status="inactive",
         )

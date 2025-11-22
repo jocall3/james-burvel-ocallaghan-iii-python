@@ -11,19 +11,25 @@ __all__ = ["FxRetrieveRatesResponse", "CurrentRate", "HistoricalVolatility", "Pr
 
 
 class CurrentRate(BaseModel):
-    ask: Optional[float] = None
+    ask: float
+    """The ask price (rate at which you can buy base currency)."""
 
-    bid: Optional[float] = None
+    bid: float
+    """The bid price (rate at which you can sell base currency)."""
 
-    mid: Optional[float] = None
+    mid: float
+    """The mid-market rate."""
 
-    timestamp: Optional[datetime.datetime] = None
+    timestamp: datetime.datetime
+    """Timestamp of the current rate."""
 
 
 class HistoricalVolatility(BaseModel):
     past30_days: Optional[float] = FieldInfo(alias="past30Days", default=None)
+    """Average daily volatility over the past 30 days."""
 
     past7_days: Optional[float] = FieldInfo(alias="past7Days", default=None)
+    """Average daily volatility over the past 7 days."""
 
 
 class PredictiveRate(BaseModel):
@@ -43,13 +49,13 @@ class FxRetrieveRatesResponse(BaseModel):
     """The base currency for the rate."""
 
     current_rate: CurrentRate = FieldInfo(alias="currentRate")
-    """Current real-time foreign exchange rates."""
+    """Real-time current foreign exchange rates."""
 
     target_currency: str = FieldInfo(alias="targetCurrency")
     """The target currency for the rate."""
 
     historical_volatility: Optional[HistoricalVolatility] = FieldInfo(alias="historicalVolatility", default=None)
-    """Historical volatility metrics for the currency pair."""
+    """Historical volatility data for the currency pair."""
 
     predictive_rates: Optional[List[PredictiveRate]] = FieldInfo(alias="predictiveRates", default=None)
-    """AI-predicted foreign exchange rates for future dates with confidence intervals."""
+    """AI-predicted future foreign exchange rates."""

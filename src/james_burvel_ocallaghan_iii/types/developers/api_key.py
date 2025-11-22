@@ -19,19 +19,19 @@ class APIKey(BaseModel):
     """Timestamp when the API key was created."""
 
     prefix: str
-    """The visible prefix of the API key (the full key is secret and not exposed)."""
+    """A short, non-sensitive prefix of the API key for identification."""
 
     scopes: List[str]
-    """List of OAuth2 scopes associated with this API key."""
+    """A list of OAuth2 scopes granted to this API key."""
 
     status: Literal["active", "revoked", "expired"]
     """Current status of the API key."""
 
     expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
-    """Timestamp when the API key will expire, if set."""
+    """Optional: Timestamp when the API key will expire."""
 
     last_used: Optional[datetime] = FieldInfo(alias="lastUsed", default=None)
-    """Timestamp of the last successful use of this API key."""
+    """Timestamp of the last successful API call made with this key."""
 
     name: Optional[str] = None
-    """A friendly name given to the API key for identification."""
+    """A user-defined name or description for the API key."""

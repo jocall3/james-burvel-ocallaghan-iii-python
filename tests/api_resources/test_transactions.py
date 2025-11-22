@@ -76,7 +76,7 @@ class TestTransactions:
         transaction = client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=10,
             max_amount=100,
             min_amount=20,
             offset=0,
@@ -182,6 +182,7 @@ class TestTransactions:
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
             details="I did not authorize this purchase. My card may have been compromised and I was traveling internationally on this date.",
             reason="unauthorized",
+            contact_preferred="email",
             supporting_documents=["https://demobank.com/uploads/flight_ticket.png"],
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
@@ -332,7 +333,7 @@ class TestAsyncTransactions:
         transaction = await async_client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=10,
             max_amount=100,
             min_amount=20,
             offset=0,
@@ -438,6 +439,7 @@ class TestAsyncTransactions:
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
             details="I did not authorize this purchase. My card may have been compromised and I was traveling internationally on this date.",
             reason="unauthorized",
+            contact_preferred="email",
             supporting_documents=["https://demobank.com/uploads/flight_ticket.png"],
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])

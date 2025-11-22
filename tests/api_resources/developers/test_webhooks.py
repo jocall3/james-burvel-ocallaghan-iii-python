@@ -81,8 +81,7 @@ class TestWebhooks:
         webhook = client.developers.webhooks.update(
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
-            events=["transaction.updated"],
-            secret="my_new_webhook_secret_456",
+            events=["transaction.created", "user.login_failed"],
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
@@ -258,8 +257,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.developers.webhooks.update(
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
-            events=["transaction.updated"],
-            secret="my_new_webhook_secret_456",
+            events=["transaction.created", "user.login_failed"],
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])

@@ -146,15 +146,14 @@ class TestBudgets:
             alert_threshold=85,
             categories=[
                 {
-                    "allocated": 1600,
-                    "name": "Rent",
+                    "allocated": 400,
+                    "name": "Travel",
                 }
             ],
             end_date=parse_date("2024-09-30"),
-            name="September Household Budget",
+            name="September Living & Travel Expenses",
             period="monthly",
             start_date=parse_date("2024-09-01"),
-            status="active",
             total_amount=3200,
         )
         assert_matches_type(Budget, budget, path=["response"])
@@ -397,15 +396,14 @@ class TestAsyncBudgets:
             alert_threshold=85,
             categories=[
                 {
-                    "allocated": 1600,
-                    "name": "Rent",
+                    "allocated": 400,
+                    "name": "Travel",
                 }
             ],
             end_date=parse_date("2024-09-30"),
-            name="September Household Budget",
+            name="September Living & Travel Expenses",
             period="monthly",
             start_date=parse_date("2024-09-01"),
-            status="active",
             total_amount=3200,
         )
         assert_matches_type(Budget, budget, path=["response"])

@@ -13,24 +13,16 @@ __all__ = ["TransactionDisputeResponse"]
 
 class TransactionDisputeResponse(BaseModel):
     dispute_id: str = FieldInfo(alias="disputeId")
-    """Unique identifier for the dispute."""
+    """Unique identifier for the dispute case."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
     """Timestamp when the dispute status was last updated."""
 
-    status: Literal[
-        "pending",
-        "under_review",
-        "investigation",
-        "escalated",
-        "resolved_in_favor_user",
-        "resolved_in_favor_merchant",
-        "rejected",
-    ]
+    status: Literal["pending", "under_review", "escalated", "resolved", "rejected"]
     """Current status of the dispute."""
 
     next_steps: Optional[str] = FieldInfo(alias="nextSteps", default=None)
-    """Guidance on what to expect next or actions required from the user."""
+    """Actionable next steps for the user or expected timeline."""
 
     resolution_details: Optional[str] = FieldInfo(alias="resolutionDetails", default=None)
-    """Details provided if the dispute has been resolved or rejected."""
+    """Details provided upon resolution or rejection of the dispute."""

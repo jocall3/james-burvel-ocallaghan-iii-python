@@ -27,7 +27,7 @@ class AccountTypeBreakdown(BaseModel):
 class AILiquidityAssessment(BaseModel):
     message: Optional[str] = None
 
-    status: Optional[Literal["optimal", "sufficient", "tight", "critical"]] = None
+    status: Optional[Literal["optimal", "sufficient", "constrained", "critical"]] = None
 
 
 class CurrencyBreakdown(BaseModel):
@@ -46,13 +46,16 @@ class ShortTermInvestments(BaseModel):
 
 class TreasuryGetLiquidityPositionsResponse(BaseModel):
     account_type_breakdown: List[AccountTypeBreakdown] = FieldInfo(alias="accountTypeBreakdown")
-    """Breakdown of liquid assets by account type."""
+    """
+    Breakdown of liquid assets by account type (e.g., Checking, Savings, Money
+    Market).
+    """
 
     ai_liquidity_assessment: AILiquidityAssessment = FieldInfo(alias="aiLiquidityAssessment")
-    """AI's overall assessment of current liquidity."""
+    """AI's overall assessment of the current liquidity posture."""
 
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven recommendations for liquidity management."""
+    """AI-generated actionable recommendations for liquidity management."""
 
     currency_breakdown: List[CurrencyBreakdown] = FieldInfo(alias="currencyBreakdown")
     """Breakdown of liquid assets by currency."""
@@ -61,7 +64,7 @@ class TreasuryGetLiquidityPositionsResponse(BaseModel):
     """Timestamp of the liquidity snapshot."""
 
     total_liquid_assets: float = FieldInfo(alias="totalLiquidAssets")
-    """Total value of all liquid assets (cash, short-term investments)."""
+    """Total value of all liquid assets across the organization."""
 
     short_term_investments: Optional[ShortTermInvestments] = FieldInfo(alias="shortTermInvestments", default=None)
-    """Summary of short-term investment holdings."""
+    """Overview of short-term investment holdings."""

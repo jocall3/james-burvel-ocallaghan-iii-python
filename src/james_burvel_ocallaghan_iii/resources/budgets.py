@@ -51,7 +51,7 @@ class BudgetsResource(SyncAPIResource):
         *,
         end_date: Union[str, date],
         name: str,
-        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
+        period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"],
         start_date: Union[str, date],
         total_amount: float,
         ai_auto_populate: bool | Omit = omit,
@@ -69,23 +69,22 @@ class BudgetsResource(SyncAPIResource):
         categories and amounts.
 
         Args:
-          end_date: End date of the budget period.
+          end_date: The end date of the budget period.
 
           name: Name for the new budget.
 
-          period: Recurrence period of the budget.
+          period: The frequency or period of the budget.
 
-          start_date: Start date of the budget period.
+          start_date: The start date of the budget period.
 
-          total_amount: Total allocated amount for the budget.
+          total_amount: The total amount allocated for the budget.
 
-          ai_auto_populate: If true, AI will automatically suggest and fill in budget categories and amounts
-              based on spending history.
+          ai_auto_populate: If true, AI will intelligently auto-populate remaining categories and amounts
+              based on historical spending.
 
-          alert_threshold: Percentage threshold at which an alert is triggered.
+          alert_threshold: Percentage threshold for budget alerts.
 
-          categories: Initial breakdown of the budget by categories (can be partially defined for AI
-              auto-population).
+          categories: Initial breakdown of the budget by categories.
 
           extra_headers: Send extra headers
 
@@ -158,9 +157,8 @@ class BudgetsResource(SyncAPIResource):
         categories: Iterable[budget_update_params.Category] | Omit = omit,
         end_date: Union[str, date] | Omit = omit,
         name: str | Omit = omit,
-        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"] | Omit = omit,
+        period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"] | Omit = omit,
         start_date: Union[str, date] | Omit = omit,
-        status: Literal["active", "completed", "upcoming", "archived"] | Omit = omit,
         total_amount: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -174,22 +172,20 @@ class BudgetsResource(SyncAPIResource):
         categories.
 
         Args:
-          alert_threshold: Updated percentage threshold for alerts.
+          alert_threshold: Updated percentage threshold for budget alerts.
 
-          categories: Updated breakdown of the budget by categories. Existing categories not provided
-              will remain unchanged.
+          categories: Updated or new categories for the budget. Existing categories not included will
+              remain unchanged unless explicitly set to null/0.
 
-          end_date: Updated end date of the budget period.
+          end_date: The updated end date of the budget period.
 
-          name: Updated name of the budget.
+          name: Updated name for the budget.
 
-          period: Updated recurrence period of the budget.
+          period: The updated frequency or period of the budget.
 
-          start_date: Updated start date of the budget period.
+          start_date: The updated start date of the budget period.
 
-          status: Updated status of the budget.
-
-          total_amount: Updated total allocated amount for the budget.
+          total_amount: The updated total allocated budget amount.
 
           extra_headers: Send extra headers
 
@@ -211,7 +207,6 @@ class BudgetsResource(SyncAPIResource):
                     "name": name,
                     "period": period,
                     "start_date": start_date,
-                    "status": status,
                     "total_amount": total_amount,
                 },
                 budget_update_params.BudgetUpdateParams,
@@ -304,7 +299,7 @@ class AsyncBudgetsResource(AsyncAPIResource):
         *,
         end_date: Union[str, date],
         name: str,
-        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
+        period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"],
         start_date: Union[str, date],
         total_amount: float,
         ai_auto_populate: bool | Omit = omit,
@@ -322,23 +317,22 @@ class AsyncBudgetsResource(AsyncAPIResource):
         categories and amounts.
 
         Args:
-          end_date: End date of the budget period.
+          end_date: The end date of the budget period.
 
           name: Name for the new budget.
 
-          period: Recurrence period of the budget.
+          period: The frequency or period of the budget.
 
-          start_date: Start date of the budget period.
+          start_date: The start date of the budget period.
 
-          total_amount: Total allocated amount for the budget.
+          total_amount: The total amount allocated for the budget.
 
-          ai_auto_populate: If true, AI will automatically suggest and fill in budget categories and amounts
-              based on spending history.
+          ai_auto_populate: If true, AI will intelligently auto-populate remaining categories and amounts
+              based on historical spending.
 
-          alert_threshold: Percentage threshold at which an alert is triggered.
+          alert_threshold: Percentage threshold for budget alerts.
 
-          categories: Initial breakdown of the budget by categories (can be partially defined for AI
-              auto-population).
+          categories: Initial breakdown of the budget by categories.
 
           extra_headers: Send extra headers
 
@@ -411,9 +405,8 @@ class AsyncBudgetsResource(AsyncAPIResource):
         categories: Iterable[budget_update_params.Category] | Omit = omit,
         end_date: Union[str, date] | Omit = omit,
         name: str | Omit = omit,
-        period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"] | Omit = omit,
+        period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"] | Omit = omit,
         start_date: Union[str, date] | Omit = omit,
-        status: Literal["active", "completed", "upcoming", "archived"] | Omit = omit,
         total_amount: float | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -427,22 +420,20 @@ class AsyncBudgetsResource(AsyncAPIResource):
         categories.
 
         Args:
-          alert_threshold: Updated percentage threshold for alerts.
+          alert_threshold: Updated percentage threshold for budget alerts.
 
-          categories: Updated breakdown of the budget by categories. Existing categories not provided
-              will remain unchanged.
+          categories: Updated or new categories for the budget. Existing categories not included will
+              remain unchanged unless explicitly set to null/0.
 
-          end_date: Updated end date of the budget period.
+          end_date: The updated end date of the budget period.
 
-          name: Updated name of the budget.
+          name: Updated name for the budget.
 
-          period: Updated recurrence period of the budget.
+          period: The updated frequency or period of the budget.
 
-          start_date: Updated start date of the budget period.
+          start_date: The updated start date of the budget period.
 
-          status: Updated status of the budget.
-
-          total_amount: Updated total allocated amount for the budget.
+          total_amount: The updated total allocated budget amount.
 
           extra_headers: Send extra headers
 
@@ -464,7 +455,6 @@ class AsyncBudgetsResource(AsyncAPIResource):
                     "name": name,
                     "period": period,
                     "start_date": start_date,
-                    "status": status,
                     "total_amount": total_amount,
                 },
                 budget_update_params.BudgetUpdateParams,

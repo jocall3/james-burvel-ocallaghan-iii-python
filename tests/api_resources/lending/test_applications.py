@@ -83,11 +83,7 @@ class TestApplications:
                 "income": 75000,
                 "name": "Jane Doe",
             },
-            collateral_details={
-                "description": "Primary residence at 123 Main St.",
-                "type": "real_estate",
-                "value": 250000,
-            },
+            desired_interest_rate=0,
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])
 
@@ -193,11 +189,7 @@ class TestAsyncApplications:
                 "income": 75000,
                 "name": "Jane Doe",
             },
-            collateral_details={
-                "description": "Primary residence at 123 Main St.",
-                "type": "real_estate",
-                "value": 250000,
-            },
+            desired_interest_rate=0,
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])
 

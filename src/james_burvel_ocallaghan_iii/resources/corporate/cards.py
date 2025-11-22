@@ -98,13 +98,13 @@ class CardsResource(SyncAPIResource):
         Args:
           controls: Specific spending controls for this virtual card.
 
-          expiration_date: Expiration date for the virtual card.
+          expiration_date: The expiration date for the virtual card.
 
-          holder_name: Name for the virtual card holder or its purpose.
+          holder_name: Name for the virtual card holder (can be a campaign, project, or individual).
 
-          purpose: Brief description of the virtual card's intended use.
+          purpose: Clear purpose of the virtual card's use.
 
-          associated_employee_id: Optional: Employee ID to associate with this virtual card.
+          associated_employee_id: Optional: Employee ID if associated with an individual.
 
           extra_headers: Send extra headers
 
@@ -191,13 +191,13 @@ class CardsResource(SyncAPIResource):
         including AI categorization and compliance flags.
 
         Args:
-          end_date: Filter results up to this date (inclusive, YYYY-MM-DD).
+          end_date: Retrieve items up to this date (inclusive).
 
           limit: Maximum number of items to return.
 
           offset: Number of items to skip before starting to collect the result set.
 
-          start_date: Filter results from this date (inclusive, YYYY-MM-DD).
+          start_date: Retrieve items from this date (inclusive).
 
           extra_headers: Send extra headers
 
@@ -255,23 +255,25 @@ class CardsResource(SyncAPIResource):
         adherence.
 
         Args:
-          atm_withdrawals: Allow ATM withdrawals.
+          atm_withdrawals: Allow or disallow ATM cash withdrawals.
 
-          contactless_payments: Allow contactless payments.
+          contactless_payments: Allow or disallow contactless (NFC) payments.
 
           daily_limit: Maximum spending limit per day.
 
-          international_transactions: Allow international transactions.
+          international_transactions: Allow or disallow transactions outside the primary country.
 
-          merchant_category_restrictions: List of allowed or disallowed merchant categories.
+          merchant_category_restrictions: List of allowed or disallowed merchant categories (e.g., 'Restaurants',
+              'Travel').
 
           monthly_limit: Maximum spending limit per month.
 
-          online_transactions: Allow online transactions.
+          online_transactions: Allow or disallow online purchases.
 
           single_transaction_limit: Maximum amount for a single transaction.
 
-          vendor_restrictions: List of specific allowed or disallowed vendors/merchants.
+          vendor_restrictions: List of allowed or disallowed specific vendors/merchants (e.g., 'Amazon',
+              'Uber').
 
           extra_headers: Send extra headers
 
@@ -372,13 +374,13 @@ class AsyncCardsResource(AsyncAPIResource):
         Args:
           controls: Specific spending controls for this virtual card.
 
-          expiration_date: Expiration date for the virtual card.
+          expiration_date: The expiration date for the virtual card.
 
-          holder_name: Name for the virtual card holder or its purpose.
+          holder_name: Name for the virtual card holder (can be a campaign, project, or individual).
 
-          purpose: Brief description of the virtual card's intended use.
+          purpose: Clear purpose of the virtual card's use.
 
-          associated_employee_id: Optional: Employee ID to associate with this virtual card.
+          associated_employee_id: Optional: Employee ID if associated with an individual.
 
           extra_headers: Send extra headers
 
@@ -465,13 +467,13 @@ class AsyncCardsResource(AsyncAPIResource):
         including AI categorization and compliance flags.
 
         Args:
-          end_date: Filter results up to this date (inclusive, YYYY-MM-DD).
+          end_date: Retrieve items up to this date (inclusive).
 
           limit: Maximum number of items to return.
 
           offset: Number of items to skip before starting to collect the result set.
 
-          start_date: Filter results from this date (inclusive, YYYY-MM-DD).
+          start_date: Retrieve items from this date (inclusive).
 
           extra_headers: Send extra headers
 
@@ -529,23 +531,25 @@ class AsyncCardsResource(AsyncAPIResource):
         adherence.
 
         Args:
-          atm_withdrawals: Allow ATM withdrawals.
+          atm_withdrawals: Allow or disallow ATM cash withdrawals.
 
-          contactless_payments: Allow contactless payments.
+          contactless_payments: Allow or disallow contactless (NFC) payments.
 
           daily_limit: Maximum spending limit per day.
 
-          international_transactions: Allow international transactions.
+          international_transactions: Allow or disallow transactions outside the primary country.
 
-          merchant_category_restrictions: List of allowed or disallowed merchant categories.
+          merchant_category_restrictions: List of allowed or disallowed merchant categories (e.g., 'Restaurants',
+              'Travel').
 
           monthly_limit: Maximum spending limit per month.
 
-          online_transactions: Allow online transactions.
+          online_transactions: Allow or disallow online purchases.
 
           single_transaction_limit: Maximum amount for a single transaction.
 
-          vendor_restrictions: List of specific allowed or disallowed vendors/merchants.
+          vendor_restrictions: List of allowed or disallowed specific vendors/merchants (e.g., 'Amazon',
+              'Uber').
 
           extra_headers: Send extra headers
 

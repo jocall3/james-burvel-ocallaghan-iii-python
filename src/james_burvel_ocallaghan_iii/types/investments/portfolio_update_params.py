@@ -7,32 +7,20 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["PortfolioUpdateParams", "TargetAllocation"]
+__all__ = ["PortfolioUpdateParams"]
 
 
 class PortfolioUpdateParams(TypedDict, total=False):
     ai_rebalancing_frequency: Annotated[
-        Literal["monthly", "quarterly", "semi_annually", "annually", "manual"],
+        Optional[Literal["never", "monthly", "quarterly", "semi_annually", "annually"]],
         PropertyInfo(alias="aiRebalancingFrequency"),
     ]
-    """Updated frequency for AI-driven portfolio rebalancing."""
+    """Updated frequency for AI-driven rebalancing recommendations."""
 
     name: str
-    """New name for the investment portfolio."""
+    """Updated name of the portfolio."""
 
     risk_tolerance: Annotated[
-        Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"],
-        PropertyInfo(alias="riskTolerance"),
+        Literal["low", "medium", "aggressive", "very_aggressive"], PropertyInfo(alias="riskTolerance")
     ]
-    """Updated risk tolerance for this portfolio."""
-
-    target_allocation: Annotated[Optional[TargetAllocation], PropertyInfo(alias="targetAllocation")]
-    """Optional: Target asset allocation percentages for rebalancing."""
-
-
-class TargetAllocation(TypedDict, total=False):
-    bonds: float
-
-    cash: float
-
-    equities: float
+    """Updated risk tolerance for the portfolio. May trigger rebalancing suggestions."""

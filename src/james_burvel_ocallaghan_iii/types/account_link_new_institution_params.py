@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -17,8 +17,5 @@ class AccountLinkNewInstitutionParams(TypedDict, total=False):
     institution_name: Required[Annotated[str, PropertyInfo(alias="institutionName")]]
     """The name of the external financial institution to link."""
 
-    provider: Optional[str]
-    """
-    Optional: Specify a financial data aggregation provider (e.g., 'Plaid',
-    'Finicity').
-    """
+    provider: Optional[Literal["plaid", "mx", "finicity", "other"]]
+    """Optional: Specific financial data aggregator to use."""

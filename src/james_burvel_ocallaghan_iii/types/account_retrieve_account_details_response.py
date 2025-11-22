@@ -22,30 +22,30 @@ class AccountRetrieveAccountDetailsResponseBalanceHistory(BaseModel):
 
 
 class AccountRetrieveAccountDetailsResponseProjectedCashFlow(BaseModel):
-    confidence_score: Optional[float] = FieldInfo(alias="confidenceScore", default=None)
-    """AI's confidence score (0-100) for the accuracy of the projection."""
+    confidence_score: Optional[int] = FieldInfo(alias="confidenceScore", default=None)
+    """AI's confidence score (0-100) in the accuracy of the projection."""
 
     days30: Optional[float] = None
-    """Projected net cash flow for the next 30 days."""
+    """AI-projected net cash flow for the next 30 days."""
 
     days90: Optional[float] = None
-    """Projected net cash flow for the next 90 days."""
+    """AI-projected net cash flow for the next 90 days."""
 
 
 class AccountRetrieveAccountDetailsResponse(LinkedAccount):
     account_holder: Optional[str] = FieldInfo(alias="accountHolder", default=None)
-    """Name of the account holder."""
+    """Name of the primary account holder."""
 
     balance_history: Optional[List[AccountRetrieveAccountDetailsResponseBalanceHistory]] = FieldInfo(
         alias="balanceHistory", default=None
     )
-    """Historical daily balances for the account (e.g., last 30 days)."""
+    """Historical daily balances for the account."""
 
     interest_rate: Optional[float] = FieldInfo(alias="interestRate", default=None)
-    """Annual interest rate for the account (if applicable)."""
+    """Annual interest rate for the account (e.g., for savings or loans)."""
 
     opened_date: Optional[datetime.date] = FieldInfo(alias="openedDate", default=None)
-    """Date the account was opened."""
+    """Date when the account was opened."""
 
     projected_cash_flow: Optional[AccountRetrieveAccountDetailsResponseProjectedCashFlow] = FieldInfo(
         alias="projectedCashFlow", default=None
@@ -53,4 +53,7 @@ class AccountRetrieveAccountDetailsResponse(LinkedAccount):
     """AI-driven projection of future cash flow for the account."""
 
     transactions_count: Optional[int] = FieldInfo(alias="transactionsCount", default=None)
-    """Total number of transactions in the account (last 12 months)."""
+    """
+    Total number of transactions in the account's history (or within a default
+    period).
+    """

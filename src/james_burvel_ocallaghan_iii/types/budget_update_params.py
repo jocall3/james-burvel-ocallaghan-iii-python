@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union, Iterable, Optional
 from datetime import date
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -13,34 +13,32 @@ __all__ = ["BudgetUpdateParams", "Category"]
 
 class BudgetUpdateParams(TypedDict, total=False):
     alert_threshold: Annotated[Optional[int], PropertyInfo(alias="alertThreshold")]
-    """Updated percentage threshold for alerts."""
+    """Updated percentage threshold for budget alerts."""
 
     categories: Iterable[Category]
-    """Updated breakdown of the budget by categories.
+    """Updated or new categories for the budget.
 
-    Existing categories not provided will remain unchanged.
+    Existing categories not included will remain unchanged unless explicitly set to
+    null/0.
     """
 
     end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
-    """Updated end date of the budget period."""
+    """The updated end date of the budget period."""
 
     name: str
-    """Updated name of the budget."""
+    """Updated name for the budget."""
 
-    period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"]
-    """Updated recurrence period of the budget."""
+    period: Literal["weekly", "monthly", "quarterly", "yearly", "custom"]
+    """The updated frequency or period of the budget."""
 
     start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
-    """Updated start date of the budget period."""
-
-    status: Literal["active", "completed", "upcoming", "archived"]
-    """Updated status of the budget."""
+    """The updated start date of the budget period."""
 
     total_amount: Annotated[float, PropertyInfo(alias="totalAmount")]
-    """Updated total allocated amount for the budget."""
+    """The updated total allocated budget amount."""
 
 
 class Category(TypedDict, total=False):
-    allocated: float
+    allocated: Required[float]
 
-    name: str
+    name: Required[str]

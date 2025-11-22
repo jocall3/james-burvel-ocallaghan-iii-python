@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
@@ -36,25 +37,28 @@ class TopEsgHolding(BaseModel):
 
 class InvestmentAnalyzeImpactResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven recommendations to improve the ESG profile of the portfolio."""
+    """AI-generated recommendations to improve the portfolio's ESG impact."""
 
     benchmark_esg_score: float = FieldInfo(alias="benchmarkESGScore")
-    """Average ESG score for a comparable market benchmark."""
+    """ESG score of a relevant market benchmark for comparison."""
 
     breakdown_by_esg_factors: BreakdownByEsgFactors = FieldInfo(alias="breakdownByESGFactors")
     """
-    Breakdown of the portfolio's ESG score into environmental, social, and
-    governance components.
+    Breakdown of the portfolio's ESG score by Environmental, Social, and Governance
+    factors.
     """
 
     lowest_esg_holdings: List[LowestEsgHolding] = FieldInfo(alias="lowestESGHoldings")
-    """List of lowest-scoring holdings by their individual ESG score."""
+    """Top 3 holdings with the lowest ESG scores (potential areas for improvement)."""
 
     overall_esg_score: float = FieldInfo(alias="overallESGScore")
-    """Overall aggregated ESG score for the entire portfolio."""
+    """Overall ESG score of the entire portfolio."""
 
     portfolio_id: str = FieldInfo(alias="portfolioId")
     """The ID of the investment portfolio analyzed."""
 
     top_esg_holdings: List[TopEsgHolding] = FieldInfo(alias="topESGHoldings")
-    """List of top holdings by their individual ESG score."""
+    """Top 3 holdings with the highest ESG scores."""
+
+    last_analyzed: Optional[datetime] = FieldInfo(alias="lastAnalyzed", default=None)
+    """Timestamp when the ESG analysis was last performed."""

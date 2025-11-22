@@ -12,8 +12,7 @@ __all__ = ["CorporatePerformSanctionScreeningResponse", "MatchDetail"]
 
 
 class MatchDetail(BaseModel):
-    additional_info: Optional[object] = FieldInfo(alias="additionalInfo", default=None)
-    """Additional data from the sanctions list entry."""
+    additional_info: Optional[str] = FieldInfo(alias="additionalInfo", default=None)
 
     list_name: Optional[str] = FieldInfo(alias="listName", default=None)
 
@@ -26,19 +25,22 @@ class MatchDetail(BaseModel):
 
 class CorporatePerformSanctionScreeningResponse(BaseModel):
     match_found: bool = FieldInfo(alias="matchFound")
-    """True if any potential matches were found, false otherwise."""
+    """True if a potential match was found on any sanction list."""
 
     screening_id: str = FieldInfo(alias="screeningId")
-    """Unique identifier for this screening operation."""
+    """Unique identifier for this screening request."""
 
     screening_timestamp: datetime = FieldInfo(alias="screeningTimestamp")
     """Timestamp when the screening was performed."""
 
-    status: Literal["clear", "potential_match", "confirmed_match", "error"]
-    """Overall status of the sanction screening."""
+    status: Literal["clear", "potential_match", "high_match", "error"]
+    """Overall status of the screening result."""
+
+    ai_recommendation: Optional[str] = FieldInfo(alias="aiRecommendation", default=None)
+    """AI-generated recommendation based on the screening result."""
 
     ai_risk_score: Optional[int] = FieldInfo(alias="aiRiskScore", default=None)
-    """AI-calculated risk score (0-100) based on screening results."""
+    """AI-calculated risk score for the screened entity (0-100)."""
 
     match_details: Optional[List[MatchDetail]] = FieldInfo(alias="matchDetails", default=None)
-    """Details of any potential matches found during screening."""
+    """Details of any potential matches found."""

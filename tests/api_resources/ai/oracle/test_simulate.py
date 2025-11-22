@@ -27,20 +27,19 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -53,25 +52,78 @@ class TestSimulate:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_run_advanced_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        simulate = client.ai.oracle.simulate.run_advanced(
+            prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
+            scenarios=[
+                {
+                    "events": [
+                        {
+                            "details": {
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
+                            },
+                            "type": "job_loss",
+                            "start_month": 1,
+                        },
+                        {
+                            "details": {
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
+                            },
+                            "type": "market_downturn",
+                            "start_month": 1,
+                        },
+                    ],
+                    "name": "Job Loss & Mild Market Recovery",
+                    "duration_years": 10,
+                    "sensitivity_analysis_params": [
+                        {
+                            "max": 0.07,
+                            "min": 0.03,
+                            "param_name": "marketRecoveryRate",
+                            "step": 0.01,
+                        }
+                    ],
+                }
+            ],
+            duration_years=10,
+            initial_state={
+                "monthly_income_override": 8000,
+                "net_worth_override": 500000,
+            },
+            sensitivity_analysis_params=[
+                {
+                    "max": 0.07,
+                    "min": 0.03,
+                    "param_name": "marketRecoveryRate",
+                    "step": 0.01,
+                }
+            ],
+        )
+        assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_run_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulate.with_raw_response.run_advanced(
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -93,20 +145,19 @@ class TestSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -137,9 +188,9 @@ class TestSimulate:
         simulate = client.ai.oracle.simulate.run_standard(
             prompt="What if I invest an additional $1,000 per month into my aggressive growth portfolio for the next 5 years?",
             parameters={
-                "durationYears": 5,
-                "monthlyInvestmentAmount": 1000,
-                "riskTolerance": "aggressive",
+                "durationYears": "bar",
+                "monthlyInvestmentAmount": "bar",
+                "riskTolerance": "bar",
             },
         )
         assert_matches_type(SimulationResponse, simulate, path=["response"])
@@ -183,20 +234,19 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -209,25 +259,78 @@ class TestAsyncSimulate:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_run_advanced_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        simulate = await async_client.ai.oracle.simulate.run_advanced(
+            prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
+            scenarios=[
+                {
+                    "events": [
+                        {
+                            "details": {
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
+                            },
+                            "type": "job_loss",
+                            "start_month": 1,
+                        },
+                        {
+                            "details": {
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
+                            },
+                            "type": "market_downturn",
+                            "start_month": 1,
+                        },
+                    ],
+                    "name": "Job Loss & Mild Market Recovery",
+                    "duration_years": 10,
+                    "sensitivity_analysis_params": [
+                        {
+                            "max": 0.07,
+                            "min": 0.03,
+                            "param_name": "marketRecoveryRate",
+                            "step": 0.01,
+                        }
+                    ],
+                }
+            ],
+            duration_years=10,
+            initial_state={
+                "monthly_income_override": 8000,
+                "net_worth_override": 500000,
+            },
+            sensitivity_analysis_params=[
+                {
+                    "max": 0.07,
+                    "min": 0.03,
+                    "param_name": "marketRecoveryRate",
+                    "step": 0.01,
+                }
+            ],
+        )
+        assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_raw_response_run_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulate.with_raw_response.run_advanced(
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -249,20 +352,19 @@ class TestAsyncSimulate:
             prompt="Evaluate the long-term impact of a sudden job loss combined with a variable market downturn, analyzing worst-case and best-case recovery scenarios over a decade.",
             scenarios=[
                 {
-                    "duration_years": 10,
                     "events": [
                         {
                             "details": {
-                                "durationMonths": 6,
-                                "severanceAmount": 10000,
-                                "unemploymentBenefits": 2000,
+                                "durationMonths": "bar",
+                                "severanceAmount": "bar",
+                                "unemploymentBenefits": "bar",
                             },
                             "type": "job_loss",
                         },
                         {
                             "details": {
-                                "impactPercentage": 0.15,
-                                "recoveryYears": 3,
+                                "impactPercentage": "bar",
+                                "recoveryYears": "bar",
                             },
                             "type": "market_downturn",
                         },
@@ -293,9 +395,9 @@ class TestAsyncSimulate:
         simulate = await async_client.ai.oracle.simulate.run_standard(
             prompt="What if I invest an additional $1,000 per month into my aggressive growth portfolio for the next 5 years?",
             parameters={
-                "durationYears": 5,
-                "monthlyInvestmentAmount": 1000,
-                "riskTolerance": "aggressive",
+                "durationYears": "bar",
+                "monthlyInvestmentAmount": "bar",
+                "riskTolerance": "bar",
             },
         )
         assert_matches_type(SimulationResponse, simulate, path=["response"])

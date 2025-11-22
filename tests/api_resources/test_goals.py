@@ -23,6 +23,7 @@ class TestGoals:
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -34,13 +35,13 @@ class TestGoals:
     def test_method_create_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
             generate_ai_plan=True,
             initial_contribution=1000,
-            linked_account_id="linkedAccountId",
-            risk_tolerance="conservative",
+            linked_account_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -49,6 +50,7 @@ class TestGoals:
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.goals.with_raw_response.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -64,6 +66,7 @@ class TestGoals:
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.goals.with_streaming_response.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -133,7 +136,7 @@ class TestGoals:
             goal_id="goal_retirement_2050",
             name="Early Retirement by 2045",
             regenerate_ai_plan=True,
-            risk_tolerance="conservative",
+            risk_tolerance="low",
             status="ahead_of_schedule",
             target_amount=1200000,
             target_date=parse_date("2045-12-31"),
@@ -255,6 +258,7 @@ class TestAsyncGoals:
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -266,13 +270,13 @@ class TestAsyncGoals:
     async def test_method_create_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
             generate_ai_plan=True,
             initial_contribution=1000,
-            linked_account_id="linkedAccountId",
-            risk_tolerance="conservative",
+            linked_account_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -281,6 +285,7 @@ class TestAsyncGoals:
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.goals.with_raw_response.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -296,6 +301,7 @@ class TestAsyncGoals:
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.goals.with_streaming_response.create(
             name="Dream Vacation Fund",
+            risk_tolerance="medium",
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
@@ -365,7 +371,7 @@ class TestAsyncGoals:
             goal_id="goal_retirement_2050",
             name="Early Retirement by 2045",
             regenerate_ai_plan=True,
-            risk_tolerance="conservative",
+            risk_tolerance="low",
             status="ahead_of_schedule",
             target_amount=1200000,
             target_date=parse_date("2045-12-31"),

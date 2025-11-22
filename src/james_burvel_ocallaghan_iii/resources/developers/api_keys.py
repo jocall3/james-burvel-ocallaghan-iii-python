@@ -62,11 +62,12 @@ class APIKeysResource(SyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A friendly name for the new API key.
+          name: A descriptive name for the new API key.
 
-          scopes: List of OAuth2 scopes that this API key should have access to.
+          scopes: A list of OAuth2 scopes to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If null, it does not expire.
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, the key does not
+              expire.
 
           extra_headers: Send extra headers
 
@@ -184,11 +185,12 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A friendly name for the new API key.
+          name: A descriptive name for the new API key.
 
-          scopes: List of OAuth2 scopes that this API key should have access to.
+          scopes: A list of OAuth2 scopes to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If null, it does not expire.
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, the key does not
+              expire.
 
           extra_headers: Send extra headers
 
