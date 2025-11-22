@@ -9,7 +9,10 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii.types import FinancialGoal, GoalListResponse
+from james_burvel_ocallaghan_iii.types import (
+    FinancialGoal,
+    GoalListResponse,
+)
 from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -37,10 +40,10 @@ class TestGoals:
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
+            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             generate_ai_plan=True,
             initial_contribution=1000,
-            linked_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -131,13 +134,13 @@ class TestGoals:
     def test_method_update_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.update(
             goal_id="goal_retirement_2050",
-            current_amount=350000,
-            name="Early Retirement by 2045",
-            regenerate_ai_plan=True,
+            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            generate_ai_plan=True,
+            name="Revised Retirement Fund Goal",
             risk_tolerance="conservative",
-            status="ahead_of_schedule",
+            status="paused",
             target_amount=1200000,
-            target_date=parse_date("2045-12-31"),
+            target_date=parse_date("2029-12-31"),
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -179,6 +182,15 @@ class TestGoals:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.list()
+        assert_matches_type(GoalListResponse, goal, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        goal = client.goals.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -270,10 +282,10 @@ class TestAsyncGoals:
             target_amount=15000,
             target_date=parse_date("2026-06-30"),
             type="large_purchase",
+            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             generate_ai_plan=True,
             initial_contribution=1000,
-            linked_account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            risk_tolerance="medium",
+            risk_tolerance="conservative",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -364,13 +376,13 @@ class TestAsyncGoals:
     async def test_method_update_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.update(
             goal_id="goal_retirement_2050",
-            current_amount=350000,
-            name="Early Retirement by 2045",
-            regenerate_ai_plan=True,
+            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            generate_ai_plan=True,
+            name="Revised Retirement Fund Goal",
             risk_tolerance="conservative",
-            status="ahead_of_schedule",
+            status="paused",
             target_amount=1200000,
-            target_date=parse_date("2045-12-31"),
+            target_date=parse_date("2029-12-31"),
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -412,6 +424,15 @@ class TestAsyncGoals:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.list()
+        assert_matches_type(GoalListResponse, goal, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        goal = await async_client.goals.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

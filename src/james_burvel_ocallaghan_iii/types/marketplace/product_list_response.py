@@ -1,85 +1,83 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import date
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = [
-    "ProductListResponse",
-    "ProductListResponseItem",
-    "ProductListResponseItemEstimatedImpactOnBudget",
-    "ProductListResponseItemOfferDetails",
-]
+__all__ = ["ProductListResponse", "Data", "DataOfferDetails"]
 
 
-class ProductListResponseItemEstimatedImpactOnBudget(BaseModel):
-    monthly_cost: Optional[float] = FieldInfo(alias="monthlyCost", default=None)
-    """Estimated monthly cost from this product (e.g., financing)."""
+class DataOfferDetails(BaseModel):
+    code: Optional[str] = None
+    """Optional redemption code."""
 
-    monthly_savings: Optional[float] = FieldInfo(alias="monthlySavings", default=None)
-    """Estimated monthly savings from this product (if applicable)."""
+    type: Optional[Literal["discount", "special_rate", "free_trial"]] = None
 
-    overall_budget_impact: Optional[Literal["positive", "neutral", "negative"]] = FieldInfo(
-        alias="overallBudgetImpact", default=None
-    )
-    """Overall impact on user's budget."""
-
-    payback_period_months: Optional[int] = FieldInfo(alias="paybackPeriodMonths", default=None)
-    """Estimated number of months to recoup initial investment/cost."""
+    value: Optional[str] = None
 
 
-class ProductListResponseItemOfferDetails(BaseModel):
-    discount_percentage: Optional[float] = FieldInfo(alias="discountPercentage", default=None)
-    """Discount percentage."""
-
-    offer_code: Optional[str] = FieldInfo(alias="offerCode", default=None)
-    """Promotional code."""
-
-    valid_until: Optional[date] = FieldInfo(alias="validUntil", default=None)
-    """Offer valid until date."""
-
-
-class ProductListResponseItem(BaseModel):
+class Data(BaseModel):
     id: str
     """Unique identifier for the marketplace product."""
 
-    ai_recommendation_score: float = FieldInfo(alias="aiRecommendationScore")
-    """AI's recommendation score (0-1) for this user."""
+    ai_personalization_score: float = FieldInfo(alias="aiPersonalizationScore")
+    """AI's score for how well this product is personalized to the user (0-1)."""
 
-    category: str
-    """Category of the product."""
-
-    currency: str
-    """Currency of the product price."""
+    category: Literal[
+        "loans",
+        "insurance",
+        "credit_cards",
+        "investments",
+        "budgeting_tools",
+        "smart_home",
+        "travel",
+        "education",
+        "health",
+    ]
+    """Category of the product/service."""
 
     description: str
-    """Description of the product."""
+    """Detailed description of the product/service."""
 
-    image_url: str = FieldInfo(alias="imageUrl")
-    """URL to the product image."""
+    image_url: Optional[str] = FieldInfo(alias="imageUrl", default=None)
+    """URL to an image representing the product."""
 
     name: str
-    """Name of the product."""
+    """Name of the product/service."""
 
-    personalization_reason: str = FieldInfo(alias="personalizationReason")
-    """AI's explanation for why this product is recommended."""
+    price: str
+    """Pricing information (can be a range or fixed text)."""
 
-    price: float
-    """Price of the product."""
+    provider: str
+    """Provider or vendor of the product/service."""
 
-    vendor: str
-    """Vendor or brand of the product."""
+    rating: float
+    """Average user rating for the product (0-5)."""
 
-    estimated_impact_on_budget: Optional[ProductListResponseItemEstimatedImpactOnBudget] = FieldInfo(
-        alias="estimatedImpactOnBudget", default=None
-    )
-    """AI's estimated financial impact of purchasing this product."""
+    ai_recommendation_reason: Optional[str] = FieldInfo(alias="aiRecommendationReason", default=None)
+    """AI-generated explanation for recommending this product."""
 
-    offer_details: Optional[ProductListResponseItemOfferDetails] = FieldInfo(alias="offerDetails", default=None)
+    offer_details: Optional[DataOfferDetails] = FieldInfo(alias="offerDetails", default=None)
+    """Details of any special offers associated with the product."""
+
+    product_url: Optional[str] = FieldInfo(alias="productUrl", default=None)
+    """Direct URL to the product on the provider's website."""
 
 
-ProductListResponse: TypeAlias = List[ProductListResponseItem]
+class ProductListResponse(BaseModel):
+    limit: int
+    """The maximum number of items returned in the current page."""
+
+    offset: int
+    """The number of items skipped before the current page."""
+
+    total: int
+    """The total number of items available across all pages."""
+
+    data: Optional[List[Data]] = None
+
+    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    """The offset for the next page of results, if available. Null if no more pages."""

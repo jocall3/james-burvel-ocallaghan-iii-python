@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
@@ -16,16 +16,10 @@ class WebhookCreateParams(TypedDict, total=False):
     """The URL to which webhook events will be sent."""
 
     events: Required[SequenceNotStr[str]]
-    """
-    List of event types to subscribe to (e.g., 'transaction.created',
-    'account.updated').
-    """
+    """List of event types to subscribe to."""
 
     secret: Optional[str]
-    """Optional: A secret string for signing webhook payloads.
+    """Optional: A custom shared secret for verifying webhook payloads.
 
-    If not provided, one will be auto-generated.
+    If omitted, one will be generated.
     """
-
-    status: Literal["active", "paused"]
-    """Initial status of the subscription."""

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -53,7 +52,6 @@ class FxResource(SyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Literal["proprietary_ai", "standard_interbank", "third_party"] | Omit = omit,
         target_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -67,21 +65,18 @@ class FxResource(SyncAPIResource):
         balance or into a specified account.
 
         Args:
-          source_account_id: The ID of the user's account from which funds will be converted.
+          source_account_id: The ID of the account from which funds will be converted.
 
-          source_amount: The amount to convert from the source account in `sourceCurrency`.
+          source_amount: The amount to convert from the source currency.
 
-          source_currency: The currency to convert from (ISO 4217 code).
+          source_currency: The ISO 4217 currency code of the source funds.
 
-          target_currency: The currency to convert to (ISO 4217 code).
+          target_currency: The ISO 4217 currency code for the target currency.
 
-          fx_rate_lock: If true, attempts to lock the quoted FX rate. May incur a small fee.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate for a short period.
 
-          fx_rate_provider: Preferred FX rate provider for the conversion.
-
-          target_account_id: Optional: The ID of the target account to receive the converted funds. If
-              omitted, funds are converted within the source account's currency capabilities
-              or a new balance is created.
+          target_account_id: Optional: The ID of the account to deposit the converted funds. If null, funds
+              are held in a wallet/balance.
 
           extra_headers: Send extra headers
 
@@ -100,7 +95,6 @@ class FxResource(SyncAPIResource):
                     "source_currency": source_currency,
                     "target_currency": target_currency,
                     "fx_rate_lock": fx_rate_lock,
-                    "fx_rate_provider": fx_rate_provider,
                     "target_account_id": target_account_id,
                 },
                 fx_convert_params.FxConvertParams,
@@ -192,7 +186,6 @@ class AsyncFxResource(AsyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Literal["proprietary_ai", "standard_interbank", "third_party"] | Omit = omit,
         target_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -206,21 +199,18 @@ class AsyncFxResource(AsyncAPIResource):
         balance or into a specified account.
 
         Args:
-          source_account_id: The ID of the user's account from which funds will be converted.
+          source_account_id: The ID of the account from which funds will be converted.
 
-          source_amount: The amount to convert from the source account in `sourceCurrency`.
+          source_amount: The amount to convert from the source currency.
 
-          source_currency: The currency to convert from (ISO 4217 code).
+          source_currency: The ISO 4217 currency code of the source funds.
 
-          target_currency: The currency to convert to (ISO 4217 code).
+          target_currency: The ISO 4217 currency code for the target currency.
 
-          fx_rate_lock: If true, attempts to lock the quoted FX rate. May incur a small fee.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate for a short period.
 
-          fx_rate_provider: Preferred FX rate provider for the conversion.
-
-          target_account_id: Optional: The ID of the target account to receive the converted funds. If
-              omitted, funds are converted within the source account's currency capabilities
-              or a new balance is created.
+          target_account_id: Optional: The ID of the account to deposit the converted funds. If null, funds
+              are held in a wallet/balance.
 
           extra_headers: Send extra headers
 
@@ -239,7 +229,6 @@ class AsyncFxResource(AsyncAPIResource):
                     "source_currency": source_currency,
                     "target_currency": target_currency,
                     "fx_rate_lock": fx_rate_lock,
-                    "fx_rate_provider": fx_rate_provider,
                     "target_account_id": target_account_id,
                 },
                 fx_convert_params.FxConvertParams,

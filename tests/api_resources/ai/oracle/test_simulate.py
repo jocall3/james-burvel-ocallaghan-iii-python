@@ -28,6 +28,7 @@ class TestSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -42,32 +43,24 @@ class TestSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
-                    "name": "Job Loss & Mild Market Recovery",
-                    "description": "Simulates a job loss event for 6 months, followed by a mild market recovery over 3 years.",
                     "events": [
                         {
-                            "type": "job_loss",
                             "details": {
-                                "duration_months": 6,
-                                "severance_amount": 10000,
-                                "new_job_salary_multiplier": 0.9,
-                                "unemployment_benefits": 2000,
+                                "durationMonths": 6,
+                                "severanceAmount": 10000,
+                                "unemploymentBenefits": 2000,
                             },
-                            "year_in_simulation": 1,
+                            "type": "job_loss",
                         },
                         {
-                            "type": "market_downturn",
                             "details": {
-                                "impact_percentage": 0.15,
-                                "recovery_years": 3,
+                                "impactPercentage": 0.15,
+                                "recoveryYears": 3,
                             },
-                            "year_in_simulation": 1,
+                            "type": "market_downturn",
                         },
                     ],
-                    "market_conditions": {
-                        "average_annual_return": 0.07,
-                        "volatility": 0.15,
-                    },
+                    "name": "Job Loss & Mild Market Recovery",
                     "sensitivity_analysis_params": [
                         {
                             "max": 0.07,
@@ -78,7 +71,14 @@ class TestSimulate:
                     ],
                 }
             ],
-            global_parameters={},
+            global_economic_factors={
+                "inflation_rate": 0.03,
+                "interest_rate_baseline": 0.05,
+            },
+            personal_assumptions={
+                "annual_savings_rate": 0.15,
+                "risk_tolerance": "aggressive",
+            },
         )
         assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
 
@@ -90,6 +90,7 @@ class TestSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -108,6 +109,7 @@ class TestSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -181,6 +183,7 @@ class TestAsyncSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -195,32 +198,24 @@ class TestAsyncSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
-                    "name": "Job Loss & Mild Market Recovery",
-                    "description": "Simulates a job loss event for 6 months, followed by a mild market recovery over 3 years.",
                     "events": [
                         {
-                            "type": "job_loss",
                             "details": {
-                                "duration_months": 6,
-                                "severance_amount": 10000,
-                                "new_job_salary_multiplier": 0.9,
-                                "unemployment_benefits": 2000,
+                                "durationMonths": 6,
+                                "severanceAmount": 10000,
+                                "unemploymentBenefits": 2000,
                             },
-                            "year_in_simulation": 1,
+                            "type": "job_loss",
                         },
                         {
-                            "type": "market_downturn",
                             "details": {
-                                "impact_percentage": 0.15,
-                                "recovery_years": 3,
+                                "impactPercentage": 0.15,
+                                "recoveryYears": 3,
                             },
-                            "year_in_simulation": 1,
+                            "type": "market_downturn",
                         },
                     ],
-                    "market_conditions": {
-                        "average_annual_return": 0.07,
-                        "volatility": 0.15,
-                    },
+                    "name": "Job Loss & Mild Market Recovery",
                     "sensitivity_analysis_params": [
                         {
                             "max": 0.07,
@@ -231,7 +226,14 @@ class TestAsyncSimulate:
                     ],
                 }
             ],
-            global_parameters={},
+            global_economic_factors={
+                "inflation_rate": 0.03,
+                "interest_rate_baseline": 0.05,
+            },
+            personal_assumptions={
+                "annual_savings_rate": 0.15,
+                "risk_tolerance": "aggressive",
+            },
         )
         assert_matches_type(AdvancedSimulationResponse, simulate, path=["response"])
 
@@ -243,6 +245,7 @@ class TestAsyncSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],
@@ -261,6 +264,7 @@ class TestAsyncSimulate:
             scenarios=[
                 {
                     "duration_years": 10,
+                    "events": [{}, {}],
                     "name": "Job Loss & Mild Market Recovery",
                 }
             ],

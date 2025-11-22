@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -12,28 +12,22 @@ __all__ = ["FxConvertParams"]
 
 class FxConvertParams(TypedDict, total=False):
     source_account_id: Required[Annotated[str, PropertyInfo(alias="sourceAccountId")]]
-    """The ID of the user's account from which funds will be converted."""
+    """The ID of the account from which funds will be converted."""
 
     source_amount: Required[Annotated[float, PropertyInfo(alias="sourceAmount")]]
-    """The amount to convert from the source account in `sourceCurrency`."""
+    """The amount to convert from the source currency."""
 
     source_currency: Required[Annotated[str, PropertyInfo(alias="sourceCurrency")]]
-    """The currency to convert from (ISO 4217 code)."""
+    """The ISO 4217 currency code of the source funds."""
 
     target_currency: Required[Annotated[str, PropertyInfo(alias="targetCurrency")]]
-    """The currency to convert to (ISO 4217 code)."""
+    """The ISO 4217 currency code for the target currency."""
 
     fx_rate_lock: Annotated[bool, PropertyInfo(alias="fxRateLock")]
-    """If true, attempts to lock the quoted FX rate. May incur a small fee."""
-
-    fx_rate_provider: Annotated[
-        Literal["proprietary_ai", "standard_interbank", "third_party"], PropertyInfo(alias="fxRateProvider")
-    ]
-    """Preferred FX rate provider for the conversion."""
+    """If true, attempts to lock the quoted FX rate for a short period."""
 
     target_account_id: Annotated[Optional[str], PropertyInfo(alias="targetAccountId")]
-    """Optional: The ID of the target account to receive the converted funds.
+    """Optional: The ID of the account to deposit the converted funds.
 
-    If omitted, funds are converted within the source account's currency
-    capabilities or a new balance is created.
+    If null, funds are held in a wallet/balance.
     """

@@ -1,7 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
@@ -10,14 +8,14 @@ __all__ = ["UserLoginResponse"]
 
 
 class UserLoginResponse(BaseModel):
-    access_token: Optional[str] = FieldInfo(alias="accessToken", default=None)
-    """JWT access token for authenticated API requests."""
+    access_token: str = FieldInfo(alias="accessToken")
+    """JWT access token to authenticate subsequent API requests."""
 
-    expires_in: Optional[int] = FieldInfo(alias="expiresIn", default=None)
+    expires_in: int = FieldInfo(alias="expiresIn")
     """Lifetime of the access token in seconds."""
 
-    refresh_token: Optional[str] = FieldInfo(alias="refreshToken", default=None)
-    """Token used to obtain a new access token without re-authenticating."""
+    refresh_token: str = FieldInfo(alias="refreshToken")
+    """Token used to obtain new access tokens without re-authenticating."""
 
-    token_type: Optional[str] = FieldInfo(alias="tokenType", default=None)
-    """Type of the token, usually 'Bearer'."""
+    token_type: str = FieldInfo(alias="tokenType")
+    """Type of the access token."""

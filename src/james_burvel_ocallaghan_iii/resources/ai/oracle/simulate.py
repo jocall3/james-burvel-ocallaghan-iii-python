@@ -49,7 +49,8 @@ class SimulateResource(SyncAPIResource):
         *,
         prompt: str,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        global_parameters: Optional[object] | Omit = omit,
+        global_economic_factors: Optional[simulate_run_advanced_params.GlobalEconomicFactors] | Omit = omit,
+        personal_assumptions: Optional[simulate_run_advanced_params.PersonalAssumptions] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,12 +65,11 @@ class SimulateResource(SyncAPIResource):
         analysis.
 
         Args:
-          prompt: A high-level natural language prompt describing the complex simulation.
+          prompt: A natural language prompt describing the complex, multi-variable scenario.
 
-          scenarios: A list of one or more detailed scenarios to simulate.
+          global_economic_factors: Optional: Global economic conditions to apply to all scenarios.
 
-          global_parameters: Optional: Parameters that apply to all scenarios unless overridden (e.g.,
-              overall economic growth rate).
+          personal_assumptions: Optional: Personal financial assumptions to override defaults.
 
           extra_headers: Send extra headers
 
@@ -85,7 +85,8 @@ class SimulateResource(SyncAPIResource):
                 {
                     "prompt": prompt,
                     "scenarios": scenarios,
-                    "global_parameters": global_parameters,
+                    "global_economic_factors": global_economic_factors,
+                    "personal_assumptions": personal_assumptions,
                 },
                 simulate_run_advanced_params.SimulateRunAdvancedParams,
             ),
@@ -113,10 +114,10 @@ class SimulateResource(SyncAPIResource):
         state and provides a summary.
 
         Args:
-          prompt: A natural language description of the 'what-if' scenario to simulate.
+          prompt: A natural language prompt describing the 'what-if' scenario.
 
-          parameters: Optional: Structured parameters to guide the simulation (e.g., duration,
-              amount).
+          parameters: Optional structured parameters to guide the simulation (e.g., duration, amount,
+              risk tolerance).
 
           extra_headers: Send extra headers
 
@@ -167,7 +168,8 @@ class AsyncSimulateResource(AsyncAPIResource):
         *,
         prompt: str,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        global_parameters: Optional[object] | Omit = omit,
+        global_economic_factors: Optional[simulate_run_advanced_params.GlobalEconomicFactors] | Omit = omit,
+        personal_assumptions: Optional[simulate_run_advanced_params.PersonalAssumptions] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -182,12 +184,11 @@ class AsyncSimulateResource(AsyncAPIResource):
         analysis.
 
         Args:
-          prompt: A high-level natural language prompt describing the complex simulation.
+          prompt: A natural language prompt describing the complex, multi-variable scenario.
 
-          scenarios: A list of one or more detailed scenarios to simulate.
+          global_economic_factors: Optional: Global economic conditions to apply to all scenarios.
 
-          global_parameters: Optional: Parameters that apply to all scenarios unless overridden (e.g.,
-              overall economic growth rate).
+          personal_assumptions: Optional: Personal financial assumptions to override defaults.
 
           extra_headers: Send extra headers
 
@@ -203,7 +204,8 @@ class AsyncSimulateResource(AsyncAPIResource):
                 {
                     "prompt": prompt,
                     "scenarios": scenarios,
-                    "global_parameters": global_parameters,
+                    "global_economic_factors": global_economic_factors,
+                    "personal_assumptions": personal_assumptions,
                 },
                 simulate_run_advanced_params.SimulateRunAdvancedParams,
             ),
@@ -231,10 +233,10 @@ class AsyncSimulateResource(AsyncAPIResource):
         state and provides a summary.
 
         Args:
-          prompt: A natural language description of the 'what-if' scenario to simulate.
+          prompt: A natural language prompt describing the 'what-if' scenario.
 
-          parameters: Optional: Structured parameters to guide the simulation (e.g., duration,
-              amount).
+          parameters: Optional structured parameters to guide the simulation (e.g., duration, amount,
+              risk tolerance).
 
           extra_headers: Send extra headers
 

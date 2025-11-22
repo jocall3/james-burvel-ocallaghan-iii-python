@@ -18,7 +18,12 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.investments import portfolio_create_params, portfolio_update_params, portfolio_rebalance_params
+from ...types.investments import (
+    portfolio_list_params,
+    portfolio_create_params,
+    portfolio_update_params,
+    portfolio_rebalance_params,
+)
 from ...types.investments.investment_portfolio import InvestmentPortfolio
 from ...types.investments.portfolio_list_response import PortfolioListResponse
 from ...types.investments.portfolio_rebalance_response import PortfolioRebalanceResponse
@@ -52,8 +57,8 @@ class PortfoliosResource(SyncAPIResource):
         currency: str,
         initial_investment: float,
         name: str,
-        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"],
-        type: Literal["equities", "bonds", "diversified", "retirement", "crypto", "custom"],
+        risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
+        type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
         ai_auto_allocate: bool | Omit = omit,
         linked_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -67,20 +72,20 @@ class PortfoliosResource(SyncAPIResource):
         Creates a new investment portfolio, with options for initial asset allocation.
 
         Args:
-          currency: The base currency of the portfolio.
+          currency: ISO 4217 currency code of the portfolio.
 
-          initial_investment: Initial amount to invest in this portfolio.
+          initial_investment: Initial amount to invest into the portfolio.
 
           name: Name for the new investment portfolio.
 
           risk_tolerance: Desired risk tolerance for this portfolio.
 
-          type: Type or strategy of the investment portfolio.
+          type: General type or strategy of the portfolio.
 
-          ai_auto_allocate: If true, AI will automatically suggest and allocate assets based on risk
+          ai_auto_allocate: If true, AI will automatically allocate initial investment based on risk
               tolerance.
 
-          linked_account_id: Optional: The ID of a linked bank account to draw initial investment from.
+          linked_account_id: Optional: ID of a linked account to fund the initial investment.
 
           extra_headers: Send extra headers
 
@@ -148,9 +153,10 @@ class PortfoliosResource(SyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        ai_rebalancing_frequency: Literal["never", "monthly", "quarterly", "annually"] | Omit = omit,
+        ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "never"]]
+        | Omit = omit,
         name: str | Omit = omit,
-        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
+        risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -167,7 +173,7 @@ class PortfoliosResource(SyncAPIResource):
 
           name: Updated name of the portfolio.
 
-          risk_tolerance: Updated risk tolerance for this portfolio.
+          risk_tolerance: Updated risk tolerance for this portfolio. May trigger rebalancing.
 
           extra_headers: Send extra headers
 
@@ -198,6 +204,8 @@ class PortfoliosResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -205,11 +213,36 @@ class PortfoliosResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PortfolioListResponse:
-        """Retrieves a summary of all investment portfolios linked to the user's account."""
+        """
+        Retrieves a summary of all investment portfolios linked to the user's account.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/investments/portfolios",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    portfolio_list_params.PortfolioListParams,
+                ),
             ),
             cast_to=PortfolioListResponse,
         )
@@ -218,7 +251,7 @@ class PortfoliosResource(SyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        target_risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"],
+        target_risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
         confirmation_required: bool | Omit = omit,
         dry_run: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -233,11 +266,13 @@ class PortfoliosResource(SyncAPIResource):
         based on a target risk tolerance or strategy.
 
         Args:
-          target_risk_tolerance: The desired risk tolerance for the portfolio after rebalancing.
+          target_risk_tolerance: The desired risk tolerance for rebalancing the portfolio.
 
-          confirmation_required: If true, explicit user confirmation is required before trades are executed.
+          confirmation_required: If true, user confirmation is required before executing actual trades after a
+              dry run.
 
-          dry_run: If true, the AI will only propose trades without executing them.
+          dry_run: If true, only simulate the rebalance without executing trades. Returns proposed
+              trades.
 
           extra_headers: Send extra headers
 
@@ -292,8 +327,8 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         currency: str,
         initial_investment: float,
         name: str,
-        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"],
-        type: Literal["equities", "bonds", "diversified", "retirement", "crypto", "custom"],
+        risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
+        type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
         ai_auto_allocate: bool | Omit = omit,
         linked_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -307,20 +342,20 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         Creates a new investment portfolio, with options for initial asset allocation.
 
         Args:
-          currency: The base currency of the portfolio.
+          currency: ISO 4217 currency code of the portfolio.
 
-          initial_investment: Initial amount to invest in this portfolio.
+          initial_investment: Initial amount to invest into the portfolio.
 
           name: Name for the new investment portfolio.
 
           risk_tolerance: Desired risk tolerance for this portfolio.
 
-          type: Type or strategy of the investment portfolio.
+          type: General type or strategy of the portfolio.
 
-          ai_auto_allocate: If true, AI will automatically suggest and allocate assets based on risk
+          ai_auto_allocate: If true, AI will automatically allocate initial investment based on risk
               tolerance.
 
-          linked_account_id: Optional: The ID of a linked bank account to draw initial investment from.
+          linked_account_id: Optional: ID of a linked account to fund the initial investment.
 
           extra_headers: Send extra headers
 
@@ -388,9 +423,10 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        ai_rebalancing_frequency: Literal["never", "monthly", "quarterly", "annually"] | Omit = omit,
+        ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "never"]]
+        | Omit = omit,
         name: str | Omit = omit,
-        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
+        risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -407,7 +443,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
           name: Updated name of the portfolio.
 
-          risk_tolerance: Updated risk tolerance for this portfolio.
+          risk_tolerance: Updated risk tolerance for this portfolio. May trigger rebalancing.
 
           extra_headers: Send extra headers
 
@@ -438,6 +474,8 @@ class AsyncPortfoliosResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -445,11 +483,36 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PortfolioListResponse:
-        """Retrieves a summary of all investment portfolios linked to the user's account."""
+        """
+        Retrieves a summary of all investment portfolios linked to the user's account.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/investments/portfolios",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    portfolio_list_params.PortfolioListParams,
+                ),
             ),
             cast_to=PortfolioListResponse,
         )
@@ -458,7 +521,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        target_risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"],
+        target_risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
         confirmation_required: bool | Omit = omit,
         dry_run: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -473,11 +536,13 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         based on a target risk tolerance or strategy.
 
         Args:
-          target_risk_tolerance: The desired risk tolerance for the portfolio after rebalancing.
+          target_risk_tolerance: The desired risk tolerance for rebalancing the portfolio.
 
-          confirmation_required: If true, explicit user confirmation is required before trades are executed.
+          confirmation_required: If true, user confirmation is required before executing actual trades after a
+              dry run.
 
-          dry_run: If true, the AI will only propose trades without executing them.
+          dry_run: If true, only simulate the rebalance without executing trades. Returns proposed
+              trades.
 
           extra_headers: Send extra headers
 

@@ -57,7 +57,7 @@ from james_burvel_ocallaghan_iii.types.users.me import Device, DeviceListRespons
 
 Methods:
 
-- <code title="get /users/me/devices">client.users.me.devices.<a href="./src/james_burvel_ocallaghan_iii/resources/users/me/devices.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/users/me/device_list_response.py">DeviceListResponse</a></code>
+- <code title="get /users/me/devices">client.users.me.devices.<a href="./src/james_burvel_ocallaghan_iii/resources/users/me/devices.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/users/me/device_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/users/me/device_list_response.py">DeviceListResponse</a></code>
 - <code title="delete /users/me/devices/{deviceId}">client.users.me.devices.<a href="./src/james_burvel_ocallaghan_iii/resources/users/me/devices.py">deregister</a>(device_id) -> None</code>
 - <code title="post /users/me/devices">client.users.me.devices.<a href="./src/james_burvel_ocallaghan_iii/resources/users/me/devices.py">register</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/users/me/device_register_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/users/me/device.py">Device</a></code>
 
@@ -86,15 +86,16 @@ from james_burvel_ocallaghan_iii.types import (
     AccountLinkNewInstitutionResponse,
     AccountListLinkedAccountsResponse,
     AccountRetrieveAccountDetailsResponse,
+    AccountRetrieveAccountStatementsResponse,
 )
 ```
 
 Methods:
 
 - <code title="post /accounts/link">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">link_new_institution</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/account_link_new_institution_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/account_link_new_institution_response.py">AccountLinkNewInstitutionResponse</a></code>
-- <code title="get /accounts/me">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">list_linked_accounts</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/account_list_linked_accounts_response.py">AccountListLinkedAccountsResponse</a></code>
+- <code title="get /accounts/me">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">list_linked_accounts</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/account_list_linked_accounts_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/account_list_linked_accounts_response.py">AccountListLinkedAccountsResponse</a></code>
 - <code title="get /accounts/{accountId}/details">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">retrieve_account_details</a>(account_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/account_retrieve_account_details_response.py">AccountRetrieveAccountDetailsResponse</a></code>
-- <code title="get /accounts/{accountId}/statements">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">retrieve_account_statements</a>(account_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/account_retrieve_account_statements_params.py">params</a>) -> BinaryAPIResponse</code>
+- <code title="get /accounts/{accountId}/statements">client.accounts.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/accounts.py">retrieve_account_statements</a>(account_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/account_retrieve_account_statements_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/account_retrieve_account_statements_response.py">AccountRetrieveAccountStatementsResponse</a></code>
 
 ## Transactions
 
@@ -106,7 +107,7 @@ from james_burvel_ocallaghan_iii.types.accounts import TransactionListPendingTra
 
 Methods:
 
-- <code title="get /accounts/{accountId}/transactions/pending">client.accounts.transactions.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/transactions.py">list_pending_transactions</a>(account_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/accounts/transaction_list_pending_transactions_response.py">TransactionListPendingTransactionsResponse</a></code>
+- <code title="get /accounts/{accountId}/transactions/pending">client.accounts.transactions.<a href="./src/james_burvel_ocallaghan_iii/resources/accounts/transactions.py">list_pending_transactions</a>(account_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/accounts/transaction_list_pending_transactions_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/accounts/transaction_list_pending_transactions_response.py">TransactionListPendingTransactionsResponse</a></code>
 
 ## OverdraftSettings
 
@@ -155,7 +156,7 @@ from james_burvel_ocallaghan_iii.types.transactions import (
 Methods:
 
 - <code title="post /transactions/recurring">client.transactions.recurring.<a href="./src/james_burvel_ocallaghan_iii/resources/transactions/recurring.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/transactions/recurring_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/transactions/recurring_transaction.py">RecurringTransaction</a></code>
-- <code title="get /transactions/recurring">client.transactions.recurring.<a href="./src/james_burvel_ocallaghan_iii/resources/transactions/recurring.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/transactions/recurring_list_response.py">RecurringListResponse</a></code>
+- <code title="get /transactions/recurring">client.transactions.recurring.<a href="./src/james_burvel_ocallaghan_iii/resources/transactions/recurring.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/transactions/recurring_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/transactions/recurring_list_response.py">RecurringListResponse</a></code>
 
 ## Insights
 
@@ -185,7 +186,7 @@ Methods:
 - <code title="post /budgets">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/budget_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/budget.py">Budget</a></code>
 - <code title="get /budgets/{budgetId}">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">retrieve</a>(budget_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/budget.py">Budget</a></code>
 - <code title="put /budgets/{budgetId}">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">update</a>(budget_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/budget_update_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/budget.py">Budget</a></code>
-- <code title="get /budgets">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/budget_list_response.py">BudgetListResponse</a></code>
+- <code title="get /budgets">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/budget_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/budget_list_response.py">BudgetListResponse</a></code>
 - <code title="delete /budgets/{budgetId}">client.budgets.<a href="./src/james_burvel_ocallaghan_iii/resources/budgets.py">delete</a>(budget_id) -> None</code>
 
 # Investments
@@ -207,7 +208,7 @@ Methods:
 - <code title="post /investments/portfolios">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/investments/portfolio_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/investment_portfolio.py">InvestmentPortfolio</a></code>
 - <code title="get /investments/portfolios/{portfolioId}">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">retrieve</a>(portfolio_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/investment_portfolio.py">InvestmentPortfolio</a></code>
 - <code title="put /investments/portfolios/{portfolioId}">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">update</a>(portfolio_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/investments/portfolio_update_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/investment_portfolio.py">InvestmentPortfolio</a></code>
-- <code title="get /investments/portfolios">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/portfolio_list_response.py">PortfolioListResponse</a></code>
+- <code title="get /investments/portfolios">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/investments/portfolio_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/portfolio_list_response.py">PortfolioListResponse</a></code>
 - <code title="post /investments/portfolios/{portfolioId}/rebalance">client.investments.portfolios.<a href="./src/james_burvel_ocallaghan_iii/resources/investments/portfolios.py">rebalance</a>(portfolio_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/investments/portfolio_rebalance_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/investments/portfolio_rebalance_response.py">PortfolioRebalanceResponse</a></code>
 
 ## Assets
@@ -234,7 +235,7 @@ from james_burvel_ocallaghan_iii.types.ai import AdvisorListToolsResponse
 
 Methods:
 
-- <code title="get /ai/advisor/tools">client.ai.advisor.<a href="./src/james_burvel_ocallaghan_iii/resources/ai/advisor/advisor.py">list_tools</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/ai/advisor_list_tools_response.py">AdvisorListToolsResponse</a></code>
+- <code title="get /ai/advisor/tools">client.ai.advisor.<a href="./src/james_burvel_ocallaghan_iii/resources/ai/advisor/advisor.py">list_tools</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/ai/advisor_list_tools_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/ai/advisor_list_tools_response.py">AdvisorListToolsResponse</a></code>
 
 ### Chat
 
@@ -242,7 +243,6 @@ Types:
 
 ```python
 from james_burvel_ocallaghan_iii.types.ai.advisor import (
-    AIFunctionCall,
     ChatRetrieveHistoryResponse,
     ChatSendMessageResponse,
 )
@@ -373,7 +373,7 @@ from james_burvel_ocallaghan_iii.types.corporate import (
 
 Methods:
 
-- <code title="get /corporate/cards">client.corporate.cards.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/cards.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/card_list_response.py">CardListResponse</a></code>
+- <code title="get /corporate/cards">client.corporate.cards.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/cards.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/card_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/card_list_response.py">CardListResponse</a></code>
 - <code title="post /corporate/cards/virtual">client.corporate.cards.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/cards.py">create_virtual</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/card_create_virtual_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/corporate_card.py">CorporateCard</a></code>
 - <code title="post /corporate/cards/{cardId}/freeze">client.corporate.cards.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/cards.py">freeze</a>(card_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/card_freeze_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/corporate_card.py">CorporateCard</a></code>
 - <code title="get /corporate/cards/{cardId}/transactions">client.corporate.cards.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/cards.py">list_transactions</a>(card_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/card_list_transactions_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/paginated_transactions.py">PaginatedTransactions</a></code>
@@ -450,7 +450,7 @@ Methods:
 
 - <code title="post /corporate/risk/fraud/rules">client.corporate.risk.fraud.rules.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/risk/fraud/rules.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/rule_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/fraud_rule.py">FraudRule</a></code>
 - <code title="put /corporate/risk/fraud/rules/{ruleId}">client.corporate.risk.fraud.rules.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/risk/fraud/rules.py">update</a>(rule_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/rule_update_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/fraud_rule.py">FraudRule</a></code>
-- <code title="get /corporate/risk/fraud/rules">client.corporate.risk.fraud.rules.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/risk/fraud/rules.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/rule_list_response.py">RuleListResponse</a></code>
+- <code title="get /corporate/risk/fraud/rules">client.corporate.risk.fraud.rules.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/risk/fraud/rules.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/rule_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/corporate/risk/fraud/rule_list_response.py">RuleListResponse</a></code>
 - <code title="delete /corporate/risk/fraud/rules/{ruleId}">client.corporate.risk.fraud.rules.<a href="./src/james_burvel_ocallaghan_iii/resources/corporate/risk/fraud/rules.py">delete</a>(rule_id) -> None</code>
 
 # Web3
@@ -463,7 +463,7 @@ from james_burvel_ocallaghan_iii.types import Web3RetrieveNFTsResponse
 
 Methods:
 
-- <code title="get /web3/nfts">client.web3.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/web3.py">retrieve_nfts</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/web3_retrieve_nfts_response.py">Web3RetrieveNFTsResponse</a></code>
+- <code title="get /web3/nfts">client.web3.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/web3.py">retrieve_nfts</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/web3_retrieve_nfts_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/web3_retrieve_nfts_response.py">Web3RetrieveNFTsResponse</a></code>
 
 ## Wallets
 
@@ -479,9 +479,9 @@ from james_burvel_ocallaghan_iii.types.web3 import (
 
 Methods:
 
-- <code title="get /web3/wallets">client.web3.wallets.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/wallets.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/web3/wallet_list_response.py">WalletListResponse</a></code>
+- <code title="get /web3/wallets">client.web3.wallets.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/wallets.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/web3/wallet_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/web3/wallet_list_response.py">WalletListResponse</a></code>
 - <code title="post /web3/wallets">client.web3.wallets.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/wallets.py">connect</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/web3/wallet_connect_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/web3/crypto_wallet_connection.py">CryptoWalletConnection</a></code>
-- <code title="get /web3/wallets/{walletId}/balances">client.web3.wallets.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/wallets.py">retrieve_balances</a>(wallet_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/web3/wallet_retrieve_balances_response.py">WalletRetrieveBalancesResponse</a></code>
+- <code title="get /web3/wallets/{walletId}/balances">client.web3.wallets.<a href="./src/james_burvel_ocallaghan_iii/resources/web3/wallets.py">retrieve_balances</a>(wallet_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/web3/wallet_retrieve_balances_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/web3/wallet_retrieve_balances_response.py">WalletRetrieveBalancesResponse</a></code>
 
 ## Transactions
 
@@ -576,7 +576,7 @@ from james_burvel_ocallaghan_iii.types.lending import LoanOffer, OfferListPreApp
 
 Methods:
 
-- <code title="get /lending/offers/pre-approved">client.lending.offers.<a href="./src/james_burvel_ocallaghan_iii/resources/lending/offers.py">list_pre_approved</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/lending/offer_list_pre_approved_response.py">OfferListPreApprovedResponse</a></code>
+- <code title="get /lending/offers/pre-approved">client.lending.offers.<a href="./src/james_burvel_ocallaghan_iii/resources/lending/offers.py">list_pre_approved</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/lending/offer_list_pre_approved_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/lending/offer_list_pre_approved_response.py">OfferListPreApprovedResponse</a></code>
 
 # Developers
 
@@ -592,7 +592,7 @@ Methods:
 
 - <code title="post /developers/webhooks">client.developers.webhooks.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/webhooks.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/developers/webhook_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/webhook_subscription.py">WebhookSubscription</a></code>
 - <code title="put /developers/webhooks/{subscriptionId}">client.developers.webhooks.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/webhooks.py">update</a>(subscription_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/developers/webhook_update_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/webhook_subscription.py">WebhookSubscription</a></code>
-- <code title="get /developers/webhooks">client.developers.webhooks.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/webhooks.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/webhook_list_response.py">WebhookListResponse</a></code>
+- <code title="get /developers/webhooks">client.developers.webhooks.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/webhooks.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/developers/webhook_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/webhook_list_response.py">WebhookListResponse</a></code>
 - <code title="delete /developers/webhooks/{subscriptionId}">client.developers.webhooks.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/webhooks.py">delete</a>(subscription_id) -> None</code>
 
 ## APIKeys
@@ -606,7 +606,7 @@ from james_burvel_ocallaghan_iii.types.developers import APIKey, APIKeyListRespo
 Methods:
 
 - <code title="post /developers/api-keys">client.developers.api_keys.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/api_keys.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/developers/api_key_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/api_key.py">APIKey</a></code>
-- <code title="get /developers/api-keys">client.developers.api_keys.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/api_keys.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/api_key_list_response.py">APIKeyListResponse</a></code>
+- <code title="get /developers/api-keys">client.developers.api_keys.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/api_keys.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/developers/api_key_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/developers/api_key_list_response.py">APIKeyListResponse</a></code>
 - <code title="delete /developers/api-keys/{keyId}">client.developers.api_keys.<a href="./src/james_burvel_ocallaghan_iii/resources/developers/api_keys.py">revoke</a>(key_id) -> None</code>
 
 # Identity
@@ -637,7 +637,7 @@ Methods:
 - <code title="post /goals">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">create</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/goal_create_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/financial_goal.py">FinancialGoal</a></code>
 - <code title="get /goals/{goalId}">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">retrieve</a>(goal_id) -> <a href="./src/james_burvel_ocallaghan_iii/types/financial_goal.py">FinancialGoal</a></code>
 - <code title="put /goals/{goalId}">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">update</a>(goal_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/goal_update_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/financial_goal.py">FinancialGoal</a></code>
-- <code title="get /goals">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">list</a>() -> <a href="./src/james_burvel_ocallaghan_iii/types/goal_list_response.py">GoalListResponse</a></code>
+- <code title="get /goals">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/goal_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/goal_list_response.py">GoalListResponse</a></code>
 - <code title="delete /goals/{goalId}">client.goals.<a href="./src/james_burvel_ocallaghan_iii/resources/goals.py">delete</a>(goal_id) -> None</code>
 
 # Marketplace
@@ -647,15 +647,9 @@ Methods:
 Types:
 
 ```python
-from james_burvel_ocallaghan_iii.types.marketplace import (
-    ProductListResponse,
-    ProductClaimOfferResponse,
-    ProductSimulatePurchaseResponse,
-)
+from james_burvel_ocallaghan_iii.types.marketplace import ProductListResponse
 ```
 
 Methods:
 
 - <code title="get /marketplace/products">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_list_response.py">ProductListResponse</a></code>
-- <code title="post /marketplace/products/{productId}/claim-offer">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">claim_offer</a>(product_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_claim_offer_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_claim_offer_response.py">ProductClaimOfferResponse</a></code>
-- <code title="post /marketplace/products/{productId}/simulate-purchase">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">simulate_purchase</a>(product_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_simulate_purchase_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_simulate_purchase_response.py">ProductSimulatePurchaseResponse</a></code>

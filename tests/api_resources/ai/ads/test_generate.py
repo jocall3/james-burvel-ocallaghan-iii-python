@@ -24,7 +24,6 @@ class TestGenerate:
     @parametrize
     def test_method_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -35,20 +34,20 @@ class TestGenerate:
     @parametrize
     def test_method_advanced_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
+            aspect_ratio="16:9",
             audience_target="corporate",
-            background_music_volume=0.5,
-            brand_assets=["https://example.com"],
+            background_music_genre="corporate",
+            brand_assets=["https://demobank.com/assets/corporate_logo.png"],
             brand_colors=["#0000FF", "#FFD700"],
             call_to_action={
+                "display_time_seconds": 5,
                 "text": "Learn more at DemoBank.com/business",
                 "url": "https://demobank.com/business",
-                "display_time_seconds": 5,
             },
-            music_genre="uplifting_corporate",
+            keywords=["innovation", "fintech", "startup"],
             voiceover_style="male_professional",
             voiceover_text=": Your business, powered by intelligent finance.",
         )
@@ -58,7 +57,6 @@ class TestGenerate:
     @parametrize
     def test_raw_response_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.generate.with_raw_response.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -73,7 +71,6 @@ class TestGenerate:
     @parametrize
     def test_streaming_response_advanced(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.generate.with_streaming_response.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -90,7 +87,6 @@ class TestGenerate:
     @parametrize
     def test_method_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -101,12 +97,12 @@ class TestGenerate:
     @parametrize
     def test_method_standard_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         generate = client.ai.ads.generate.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
+            aspect_ratio="16:9",
             brand_colors=["#0000FF", "#FFD700"],
-            music_genre="uplifting_corporate",
+            keywords=["innovation", "fintech", "startup"],
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
@@ -114,7 +110,6 @@ class TestGenerate:
     @parametrize
     def test_raw_response_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.generate.with_raw_response.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -129,7 +124,6 @@ class TestGenerate:
     @parametrize
     def test_streaming_response_standard(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.generate.with_streaming_response.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -152,7 +146,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_method_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -163,20 +156,20 @@ class TestAsyncGenerate:
     @parametrize
     async def test_method_advanced_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
+            aspect_ratio="16:9",
             audience_target="corporate",
-            background_music_volume=0.5,
-            brand_assets=["https://example.com"],
+            background_music_genre="corporate",
+            brand_assets=["https://demobank.com/assets/corporate_logo.png"],
             brand_colors=["#0000FF", "#FFD700"],
             call_to_action={
+                "display_time_seconds": 5,
                 "text": "Learn more at DemoBank.com/business",
                 "url": "https://demobank.com/business",
-                "display_time_seconds": 5,
             },
-            music_genre="uplifting_corporate",
+            keywords=["innovation", "fintech", "startup"],
             voiceover_style="male_professional",
             voiceover_text=": Your business, powered by intelligent finance.",
         )
@@ -186,7 +179,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_raw_response_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.generate.with_raw_response.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -201,7 +193,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_streaming_response_advanced(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.generate.with_streaming_response.advanced(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -218,7 +209,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_method_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -229,12 +219,12 @@ class TestAsyncGenerate:
     @parametrize
     async def test_method_standard_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         generate = await async_client.ai.ads.generate.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
+            aspect_ratio="16:9",
             brand_colors=["#0000FF", "#FFD700"],
-            music_genre="uplifting_corporate",
+            keywords=["innovation", "fintech", "startup"],
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
@@ -242,7 +232,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_raw_response_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.generate.with_raw_response.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
@@ -257,7 +246,6 @@ class TestAsyncGenerate:
     @parametrize
     async def test_streaming_response_standard(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.generate.with_streaming_response.standard(
-            aspect_ratio="16:9",
             length_seconds=15,
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",

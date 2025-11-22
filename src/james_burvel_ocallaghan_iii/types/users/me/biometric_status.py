@@ -21,10 +21,10 @@ class EnrolledBiometric(BaseModel):
 
 class BiometricStatus(BaseModel):
     biometrics_enrolled: bool = FieldInfo(alias="biometricsEnrolled")
-    """True if any biometric data is currently enrolled for the user."""
+    """Overall status indicating if any biometrics are enrolled."""
 
     enrolled_biometrics: List[EnrolledBiometric] = FieldInfo(alias="enrolledBiometrics")
-    """List of currently enrolled biometric methods and their associated devices."""
+    """List of specific biometric types and devices enrolled."""
 
     last_used: Optional[datetime] = FieldInfo(alias="lastUsed", default=None)
     """Timestamp of the last successful biometric authentication."""

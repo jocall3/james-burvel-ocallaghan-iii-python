@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -18,11 +17,8 @@ class TransactionDisputeResponse(BaseModel):
     last_updated: datetime = FieldInfo(alias="lastUpdated")
     """Timestamp when the dispute status was last updated."""
 
-    status: Literal["pending", "under_review", "accepted", "rejected", "resolved"]
+    next_steps: str = FieldInfo(alias="nextSteps")
+    """Guidance on what to expect next in the dispute process."""
+
+    status: Literal["pending", "under_review", "requires_more_info", "resolved", "rejected"]
     """Current status of the dispute."""
-
-    next_steps: Optional[str] = FieldInfo(alias="nextSteps", default=None)
-    """Guidance on what will happen next or what action the user needs to take."""
-
-    rejection_reason: Optional[str] = FieldInfo(alias="rejectionReason", default=None)
-    """If the dispute was rejected, the reason for rejection."""

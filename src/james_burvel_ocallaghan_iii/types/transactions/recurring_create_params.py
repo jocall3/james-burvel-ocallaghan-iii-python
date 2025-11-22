@@ -13,25 +13,22 @@ __all__ = ["RecurringCreateParams"]
 
 class RecurringCreateParams(TypedDict, total=False):
     amount: Required[float]
-    """The amount of each recurring transaction."""
+    """Amount of the recurring transaction."""
 
     category: Required[str]
     """Category of the recurring transaction."""
 
     currency: Required[str]
-    """The currency of the recurring transaction."""
+    """ISO 4217 currency code."""
 
     description: Required[str]
-    """Description of the new recurring transaction."""
+    """Description of the recurring transaction."""
 
-    frequency: Required[Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"]]
-    """How often the transaction occurs."""
+    frequency: Required[Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"]]
+    """Frequency of the recurring transaction."""
 
     linked_account_id: Required[Annotated[str, PropertyInfo(alias="linkedAccountId")]]
-    """The ID of the account from which this recurring transaction typically occurs."""
+    """ID of the account to associate with this recurring transaction."""
 
     start_date: Required[Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]]
-    """The date the recurring transaction is expected to start."""
-
-    status: Literal["active", "paused"]
-    """Initial status of the recurring transaction."""
+    """The date when this recurring transaction is expected to start."""

@@ -17,66 +17,57 @@ __all__ = [
 
 
 class ScenarioResultLiquidityMetrics(BaseModel):
-    emergency_fund_depletion_months: Optional[int] = FieldInfo(alias="emergencyFundDepletionMonths", default=None)
-    """How many months the emergency fund lasted."""
-
     min_cash_balance: Optional[float] = FieldInfo(alias="minCashBalance", default=None)
-    """The lowest cash balance reached during the simulation."""
+    """Minimum cash balance reached during the scenario."""
 
     recovery_time_months: Optional[int] = FieldInfo(alias="recoveryTimeMonths", default=None)
-    """Time (in months) to recover from a financial shock, if applicable."""
+    """Time in months to recover to pre-event financial state."""
 
 
 class ScenarioResultSensitivityAnalysisGraphData(BaseModel):
     outcome_value: Optional[float] = FieldInfo(alias="outcomeValue", default=None)
-    """The resulting key outcome value."""
 
     param_value: Optional[float] = FieldInfo(alias="paramValue", default=None)
-    """The value of the varied parameter."""
 
 
 class ScenarioResultSensitivityAnalysisGraph(BaseModel):
-    data: List[ScenarioResultSensitivityAnalysisGraphData]
-    """Data points for plotting the parameter's impact on a key outcome."""
+    data: Optional[List[ScenarioResultSensitivityAnalysisGraphData]] = None
 
-    param_name: str = FieldInfo(alias="paramName")
-    """The name of the parameter varied in the sensitivity analysis."""
+    param_name: Optional[str] = FieldInfo(alias="paramName", default=None)
 
 
 class ScenarioResult(BaseModel):
     narrative_summary: str = FieldInfo(alias="narrativeSummary")
-    """Summary of results specific to this scenario."""
+    """Summary of results for this specific scenario."""
 
     scenario_name: str = FieldInfo(alias="scenarioName")
-    """Name of the simulated scenario."""
+    """Name of the individual scenario."""
 
-    detailed_financial_projections: Optional[object] = FieldInfo(alias="detailedFinancialProjections", default=None)
-    """Time-series data for various financial metrics (e.g., monthly cash balance)."""
+    ai_insights: Optional[List[AIInsight]] = FieldInfo(alias="aiInsights", default=None)
+    """Specific AI insights for this scenario."""
 
     final_net_worth_projected: Optional[float] = FieldInfo(alias="finalNetWorthProjected", default=None)
     """Projected net worth at the end of the simulation period for this scenario."""
 
     liquidity_metrics: Optional[ScenarioResultLiquidityMetrics] = FieldInfo(alias="liquidityMetrics", default=None)
-    """Key liquidity indicators for the scenario."""
 
     sensitivity_analysis_graphs: Optional[List[ScenarioResultSensitivityAnalysisGraph]] = FieldInfo(
         alias="sensitivityAnalysisGraphs", default=None
     )
-    """Data points for visualizing sensitivity analysis of key parameters."""
+    """
+    Data for generating sensitivity analysis charts (e.g., how net worth changes as
+    a variable is adjusted).
+    """
 
 
 class AdvancedSimulationResponse(BaseModel):
     overall_summary: str = FieldInfo(alias="overallSummary")
-    """A high-level summary of the simulation across all scenarios."""
+    """A high-level summary of findings across all scenarios."""
 
     scenario_results: List[ScenarioResult] = FieldInfo(alias="scenarioResults")
-    """Detailed results for each simulated scenario."""
 
     simulation_id: str = FieldInfo(alias="simulationId")
-    """Unique identifier for the advanced simulation."""
-
-    comparison_analysis: Optional[object] = FieldInfo(alias="comparisonAnalysis", default=None)
-    """Quantitative comparison across scenarios (e.g., best-case vs. worst-case NPV)."""
+    """Unique identifier for the completed advanced simulation."""
 
     strategic_recommendations: Optional[List[AIInsight]] = FieldInfo(alias="strategicRecommendations", default=None)
-    """Overarching strategic recommendations derived from the complex simulation."""
+    """Overarching strategic recommendations derived from the comparison of scenarios."""

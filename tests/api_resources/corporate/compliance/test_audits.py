@@ -40,7 +40,7 @@ class TestAudits:
             end_date=parse_date("2024-06-30"),
             regulatory_frameworks=["AML", "PCI-DSS"],
             start_date=parse_date("2024-01-01"),
-            specific_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            additional_context="additionalContext",
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 
@@ -143,7 +143,7 @@ class TestAsyncAudits:
             end_date=parse_date("2024-06-30"),
             regulatory_frameworks=["AML", "PCI-DSS"],
             start_date=parse_date("2024-01-01"),
-            specific_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            additional_context="additionalContext",
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 

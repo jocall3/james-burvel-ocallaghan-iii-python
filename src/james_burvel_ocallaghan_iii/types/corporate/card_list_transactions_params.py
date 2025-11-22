@@ -13,13 +13,13 @@ __all__ = ["CardListTransactionsParams"]
 
 class CardListTransactionsParams(TypedDict, total=False):
     end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
-    """End date for filtering results (inclusive). Format: YYYY-MM-DD."""
+    """End date for filtering results (inclusive, YYYY-MM-DD)."""
 
     limit: int
-    """Maximum number of items to return in the response."""
+    """Maximum number of items to return in a single page."""
 
     offset: int
     """Number of items to skip before starting to collect the result set."""
 
     start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
-    """Start date for filtering results (inclusive). Format: YYYY-MM-DD."""
+    """Start date for filtering results (inclusive, YYYY-MM-DD)."""

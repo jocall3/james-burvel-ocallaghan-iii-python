@@ -19,7 +19,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.transactions import recurring_create_params
+from ...types.transactions import recurring_list_params, recurring_create_params
 from ...types.transactions.recurring_transaction import RecurringTransaction
 from ...types.transactions.recurring_list_response import RecurringListResponse
 
@@ -53,10 +53,9 @@ class RecurringResource(SyncAPIResource):
         category: str,
         currency: str,
         description: str,
-        frequency: Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"],
+        frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
         linked_account_id: str,
         start_date: Union[str, date],
-        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,21 +67,19 @@ class RecurringResource(SyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: The amount of each recurring transaction.
+          amount: Amount of the recurring transaction.
 
           category: Category of the recurring transaction.
 
-          currency: The currency of the recurring transaction.
+          currency: ISO 4217 currency code.
 
-          description: Description of the new recurring transaction.
+          description: Description of the recurring transaction.
 
-          frequency: How often the transaction occurs.
+          frequency: Frequency of the recurring transaction.
 
-          linked_account_id: The ID of the account from which this recurring transaction typically occurs.
+          linked_account_id: ID of the account to associate with this recurring transaction.
 
-          start_date: The date the recurring transaction is expected to start.
-
-          status: Initial status of the recurring transaction.
+          start_date: The date when this recurring transaction is expected to start.
 
           extra_headers: Send extra headers
 
@@ -103,7 +100,6 @@ class RecurringResource(SyncAPIResource):
                     "frequency": frequency,
                     "linked_account_id": linked_account_id,
                     "start_date": start_date,
-                    "status": status,
                 },
                 recurring_create_params.RecurringCreateParams,
             ),
@@ -116,6 +112,8 @@ class RecurringResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -126,11 +124,34 @@ class RecurringResource(SyncAPIResource):
         """
         Retrieves a list of all detected or user-defined recurring transactions, useful
         for budget tracking and subscription management.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/transactions/recurring",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    recurring_list_params.RecurringListParams,
+                ),
             ),
             cast_to=RecurringListResponse,
         )
@@ -163,10 +184,9 @@ class AsyncRecurringResource(AsyncAPIResource):
         category: str,
         currency: str,
         description: str,
-        frequency: Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"],
+        frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
         linked_account_id: str,
         start_date: Union[str, date],
-        status: Literal["active", "paused"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,21 +198,19 @@ class AsyncRecurringResource(AsyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: The amount of each recurring transaction.
+          amount: Amount of the recurring transaction.
 
           category: Category of the recurring transaction.
 
-          currency: The currency of the recurring transaction.
+          currency: ISO 4217 currency code.
 
-          description: Description of the new recurring transaction.
+          description: Description of the recurring transaction.
 
-          frequency: How often the transaction occurs.
+          frequency: Frequency of the recurring transaction.
 
-          linked_account_id: The ID of the account from which this recurring transaction typically occurs.
+          linked_account_id: ID of the account to associate with this recurring transaction.
 
-          start_date: The date the recurring transaction is expected to start.
-
-          status: Initial status of the recurring transaction.
+          start_date: The date when this recurring transaction is expected to start.
 
           extra_headers: Send extra headers
 
@@ -213,7 +231,6 @@ class AsyncRecurringResource(AsyncAPIResource):
                     "frequency": frequency,
                     "linked_account_id": linked_account_id,
                     "start_date": start_date,
-                    "status": status,
                 },
                 recurring_create_params.RecurringCreateParams,
             ),
@@ -226,6 +243,8 @@ class AsyncRecurringResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -236,11 +255,34 @@ class AsyncRecurringResource(AsyncAPIResource):
         """
         Retrieves a list of all detected or user-defined recurring transactions, useful
         for budget tracking and subscription management.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/transactions/recurring",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    recurring_list_params.RecurringListParams,
+                ),
             ),
             cast_to=RecurringListResponse,
         )

@@ -16,39 +16,25 @@ class ApplicationSubmitParams(TypedDict, total=False):
 
     loan_purpose: Required[
         Annotated[
-            Literal[
-                "home_improvement",
-                "debt_consolidation",
-                "medical_expenses",
-                "education",
-                "business",
-                "vehicle",
-                "other",
-            ],
+            Literal["home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"],
             PropertyInfo(alias="loanPurpose"),
         ]
     ]
     """The purpose of the loan."""
 
     repayment_term_months: Required[Annotated[int, PropertyInfo(alias="repaymentTermMonths")]]
-    """Desired repayment term in months."""
+    """The desired repayment term in months."""
 
     additional_notes: Annotated[Optional[str], PropertyInfo(alias="additionalNotes")]
-    """Any additional information for the loan application."""
+    """Optional notes or details for the application."""
 
     co_applicant: Annotated[Optional[CoApplicant], PropertyInfo(alias="coApplicant")]
-    """Optional details if there is a co-applicant."""
+    """Optional: Details of a co-applicant for the loan."""
 
 
 class CoApplicant(TypedDict, total=False):
-    email: Required[str]
-    """Email of the co-applicant."""
+    email: str
 
-    income: Required[float]
-    """Annual income of the co-applicant."""
+    income: float
 
-    name: Required[str]
-    """Full name of the co-applicant."""
-
-    credit_score: Annotated[Optional[int], PropertyInfo(alias="creditScore")]
-    """Optional: Credit score of the co-applicant."""
+    name: str

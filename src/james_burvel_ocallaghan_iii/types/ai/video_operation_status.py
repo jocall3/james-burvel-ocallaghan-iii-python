@@ -12,22 +12,25 @@ __all__ = ["VideoOperationStatus"]
 
 class VideoOperationStatus(BaseModel):
     message: str
-    """A descriptive message about the current stage or status."""
+    """A descriptive status message."""
 
     operation_id: str = FieldInfo(alias="operationId")
     """The unique identifier for the video generation operation."""
 
     progress_percentage: int = FieldInfo(alias="progressPercentage")
-    """Current progress of the operation as a percentage."""
+    """Estimated completion percentage (0-100)."""
 
-    status: Literal["queued", "processing", "rendering", "done", "error"]
+    status: Literal["queued", "generating", "rendering", "done", "error"]
     """Current status of the video generation job."""
 
     error_message: Optional[str] = FieldInfo(alias="errorMessage", default=None)
-    """If an error occurred, a message describing the error."""
+    """Error message if the operation failed."""
 
     preview_image_uri: Optional[str] = FieldInfo(alias="previewImageUri", default=None)
-    """URL to a preview image/thumbnail of the video."""
+    """Temporary, signed URL to a preview image/thumbnail of the video."""
 
     video_uri: Optional[str] = FieldInfo(alias="videoUri", default=None)
-    """URL to the final generated video asset (available when status is 'done')."""
+    """
+    Temporary, signed URL to the generated video asset (available when status is
+    'done').
+    """

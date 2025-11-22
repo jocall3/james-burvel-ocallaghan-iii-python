@@ -40,7 +40,6 @@ class TestTransactions:
             blockchain_network="Ethereum",
             recipient_address="0xdef4567890abcdef1234567890abcdef1234567890",
             source_wallet_id="wallet_conn_eth_0xabc123",
-            gas_limit=21000,
             gas_price_gwei=50,
             memo="Payment for services",
         )
@@ -107,7 +106,6 @@ class TestAsyncTransactions:
             blockchain_network="Ethereum",
             recipient_address="0xdef4567890abcdef1234567890abcdef1234567890",
             source_wallet_id="wallet_conn_eth_0xabc123",
-            gas_limit=21000,
             gas_price_gwei=50,
             memo="Payment for services",
         )

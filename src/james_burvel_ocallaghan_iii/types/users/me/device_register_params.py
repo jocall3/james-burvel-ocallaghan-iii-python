@@ -14,19 +14,22 @@ class DeviceRegisterParams(TypedDict, total=False):
     device_type: Required[
         Annotated[Literal["mobile", "desktop", "tablet", "smart_watch"], PropertyInfo(alias="deviceType")]
     ]
-    """Type of device being registered."""
+    """Type of the device being registered."""
 
     model: Required[str]
     """Model of the device."""
 
     os: Required[str]
-    """Operating system and version of the device."""
+    """Operating system of the device."""
 
     biometric_signature: Annotated[Optional[str], PropertyInfo(alias="biometricSignature")]
-    """Base64 encoded biometric signature for initial enrollment (if applicable)."""
+    """
+    Optional: Base64 encoded biometric signature for initial enrollment (e.g., for
+    Passkey registration).
+    """
 
     device_name: Annotated[Optional[str], PropertyInfo(alias="deviceName")]
-    """User-defined name for the device."""
+    """Optional: A friendly name for the device."""
 
     push_token: Annotated[Optional[str], PropertyInfo(alias="pushToken")]
-    """Push notification token for the device."""
+    """Optional: Push notification token for the device."""

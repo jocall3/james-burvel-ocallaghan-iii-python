@@ -12,35 +12,38 @@ __all__ = ["InternationalPaymentStatus"]
 
 
 class InternationalPaymentStatus(BaseModel):
-    fees_applied: float = FieldInfo(alias="feesApplied")
-    """Total fees applied to the payment."""
-
     fx_rate_applied: float = FieldInfo(alias="fxRateApplied")
-    """The foreign exchange rate applied (targetCurrency / sourceCurrency)."""
+    """The foreign exchange rate applied (target per source currency)."""
 
     payment_id: str = FieldInfo(alias="paymentId")
     """Unique identifier for the international payment."""
 
     source_amount: float = FieldInfo(alias="sourceAmount")
-    """The amount sent from the source account."""
+    """The amount sent in the source currency."""
 
     source_currency: str = FieldInfo(alias="sourceCurrency")
-    """The currency of the source amount."""
+    """The source currency code."""
 
     status: Literal["in_progress", "held_for_review", "completed", "failed", "cancelled"]
     """Current processing status of the payment."""
 
-    target_amount: Optional[float] = FieldInfo(alias="targetAmount", default=None)
-    """The amount received by the beneficiary in target currency."""
+    target_amount: float = FieldInfo(alias="targetAmount")
+    """The amount received by the beneficiary in the target currency."""
 
     target_currency: str = FieldInfo(alias="targetCurrency")
-    """The currency the beneficiary will receive."""
+    """The target currency code."""
 
     estimated_completion_time: Optional[datetime] = FieldInfo(alias="estimatedCompletionTime", default=None)
-    """Estimated date and time when the payment will be completed."""
+    """Estimated time when the payment will be completed."""
+
+    fees_applied: Optional[float] = FieldInfo(alias="feesApplied", default=None)
+    """Total fees applied to the payment."""
 
     message: Optional[str] = None
-    """Additional messages, e.g., if payment is held for review."""
+    """
+    An optional message providing more context on the status (e.g., reason for
+    hold).
+    """
 
     tracking_url: Optional[str] = FieldInfo(alias="trackingUrl", default=None)
-    """URL to a tracking page for the payment."""
+    """URL to track the payment's progress."""

@@ -100,7 +100,7 @@ class SimulationsResource(SyncAPIResource):
         including their status and summaries.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -241,7 +241,7 @@ class AsyncSimulationsResource(AsyncAPIResource):
         including their status and summaries.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 

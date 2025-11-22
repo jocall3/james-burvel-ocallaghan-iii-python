@@ -62,7 +62,7 @@ class ChatResource(SyncAPIResource):
         session or user.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -99,9 +99,9 @@ class ChatResource(SyncAPIResource):
     def send_message(
         self,
         *,
-        session_id: str,
         function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
-        message: Optional[str] | Omit = omit,
+        message: str | Omit = omit,
+        session_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -117,11 +117,13 @@ class ChatResource(SyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          session_id: The ID of the ongoing conversation session.
-
-          function_response: Optional: The output from a tool/function call that the AI previously requested.
+          function_response: Optional: The output from a tool function that the AI previously requested to be
+              executed.
 
           message: The user's textual input to the AI Advisor.
+
+          session_id: Optional: Session ID to continue a conversation. If omitted, a new session is
+              started.
 
           extra_headers: Send extra headers
 
@@ -135,9 +137,9 @@ class ChatResource(SyncAPIResource):
             "/ai/advisor/chat",
             body=maybe_transform(
                 {
-                    "session_id": session_id,
                     "function_response": function_response,
                     "message": message,
+                    "session_id": session_id,
                 },
                 chat_send_message_params.ChatSendMessageParams,
             ),
@@ -186,7 +188,7 @@ class AsyncChatResource(AsyncAPIResource):
         session or user.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -223,9 +225,9 @@ class AsyncChatResource(AsyncAPIResource):
     async def send_message(
         self,
         *,
-        session_id: str,
         function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
-        message: Optional[str] | Omit = omit,
+        message: str | Omit = omit,
+        session_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -241,11 +243,13 @@ class AsyncChatResource(AsyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          session_id: The ID of the ongoing conversation session.
-
-          function_response: Optional: The output from a tool/function call that the AI previously requested.
+          function_response: Optional: The output from a tool function that the AI previously requested to be
+              executed.
 
           message: The user's textual input to the AI Advisor.
+
+          session_id: Optional: Session ID to continue a conversation. If omitted, a new session is
+              started.
 
           extra_headers: Send extra headers
 
@@ -259,9 +263,9 @@ class AsyncChatResource(AsyncAPIResource):
             "/ai/advisor/chat",
             body=await async_maybe_transform(
                 {
-                    "session_id": session_id,
                     "function_response": function_response,
                     "message": message,
+                    "session_id": session_id,
                 },
                 chat_send_message_params.ChatSendMessageParams,
             ),

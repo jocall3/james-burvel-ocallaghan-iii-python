@@ -12,15 +12,12 @@ __all__ = ["TransactionCategorizeParams"]
 
 class TransactionCategorizeParams(TypedDict, total=False):
     category: Required[str]
-    """The new category to assign to the transaction.
-
-    Supports hierarchical categories.
-    """
+    """The new category for the transaction. Can be hierarchical."""
 
     apply_to_future: Annotated[bool, PropertyInfo(alias="applyToFuture")]
     """
-    If true, the AI will learn from this correction and apply it to similar future
-    transactions.
+    If true, the AI will learn from this correction and try to apply it to similar
+    future transactions.
     """
 
     notes: Optional[str]

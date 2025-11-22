@@ -114,7 +114,7 @@ class CorporateResource(SyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
-        id_number: Optional[str] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -127,17 +127,19 @@ class CorporateResource(SyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: The primary country of residence or operation (ISO 3166-1 alpha-2).
+          country: Two-letter ISO country code related to the entity (e.g., country of residence,
+              registration).
 
           entity_type: The type of entity being screened.
 
-          name: The full name of the individual or organization to screen.
+          name: Full name of the individual or organization to screen.
 
-          address: Optional: Address details for improved screening.
+          address: Optional: Address details for enhanced screening.
 
-          date_of_birth: Optional: Date of birth for individuals, for better match accuracy.
+          date_of_birth: Date of birth for individuals (YYYY-MM-DD).
 
-          id_number: Optional: Government-issued ID number for individuals.
+          identification_number: Optional: Any government-issued identification number (e.g., passport, national
+              ID).
 
           extra_headers: Send extra headers
 
@@ -156,7 +158,7 @@ class CorporateResource(SyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
-                    "id_number": id_number,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),
@@ -215,7 +217,7 @@ class AsyncCorporateResource(AsyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
-        id_number: Optional[str] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -228,17 +230,19 @@ class AsyncCorporateResource(AsyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: The primary country of residence or operation (ISO 3166-1 alpha-2).
+          country: Two-letter ISO country code related to the entity (e.g., country of residence,
+              registration).
 
           entity_type: The type of entity being screened.
 
-          name: The full name of the individual or organization to screen.
+          name: Full name of the individual or organization to screen.
 
-          address: Optional: Address details for improved screening.
+          address: Optional: Address details for enhanced screening.
 
-          date_of_birth: Optional: Date of birth for individuals, for better match accuracy.
+          date_of_birth: Date of birth for individuals (YYYY-MM-DD).
 
-          id_number: Optional: Government-issued ID number for individuals.
+          identification_number: Optional: Any government-issued identification number (e.g., passport, national
+              ID).
 
           extra_headers: Send extra headers
 
@@ -257,7 +261,7 @@ class AsyncCorporateResource(AsyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
-                    "id_number": id_number,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),

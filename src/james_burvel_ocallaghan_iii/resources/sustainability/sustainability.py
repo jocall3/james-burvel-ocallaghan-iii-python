@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ...types import sustainability_purchase_carbon_offsets_params
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Query, Headers, NotGiven, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -58,9 +60,8 @@ class SustainabilityResource(SyncAPIResource):
         self,
         *,
         amount_kg_co2e: float,
-        offset_project: str,
+        offset_project: Optional[str],
         payment_account_id: str,
-        auto_offset_monthly: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -73,13 +74,11 @@ class SustainabilityResource(SyncAPIResource):
         footprint, supporting environmental initiatives.
 
         Args:
-          amount_kg_co2e: Amount of CO2 equivalent (in kilograms) to offset.
+          amount_kg_co2e: The amount of carbon dioxide equivalent to offset in kilograms.
 
-          offset_project: The name or ID of the carbon offset project to support.
+          offset_project: Optional: The specific carbon offset project to support.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          auto_offset_monthly: If true, automatically purchase offsets monthly based on estimated footprint.
+          payment_account_id: The ID of the user's account to use for payment.
 
           extra_headers: Send extra headers
 
@@ -96,7 +95,6 @@ class SustainabilityResource(SyncAPIResource):
                     "amount_kg_co2e": amount_kg_co2e,
                     "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "auto_offset_monthly": auto_offset_monthly,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),
@@ -158,9 +156,8 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         self,
         *,
         amount_kg_co2e: float,
-        offset_project: str,
+        offset_project: Optional[str],
         payment_account_id: str,
-        auto_offset_monthly: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,13 +170,11 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         footprint, supporting environmental initiatives.
 
         Args:
-          amount_kg_co2e: Amount of CO2 equivalent (in kilograms) to offset.
+          amount_kg_co2e: The amount of carbon dioxide equivalent to offset in kilograms.
 
-          offset_project: The name or ID of the carbon offset project to support.
+          offset_project: Optional: The specific carbon offset project to support.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          auto_offset_monthly: If true, automatically purchase offsets monthly based on estimated footprint.
+          payment_account_id: The ID of the user's account to use for payment.
 
           extra_headers: Send extra headers
 
@@ -196,7 +191,6 @@ class AsyncSustainabilityResource(AsyncAPIResource):
                     "amount_kg_co2e": amount_kg_co2e,
                     "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "auto_offset_monthly": auto_offset_monthly,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),

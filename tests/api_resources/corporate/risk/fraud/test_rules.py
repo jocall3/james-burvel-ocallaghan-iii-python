@@ -43,20 +43,18 @@ class TestRules:
             action={
                 "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
                 "type": "auto_review",
-                "target_channels": ["email", "dashboard"],
+                "target_team": "Fraud Prevention Team",
             },
             criteria={
                 "account_inactivity_days": 90,
                 "country_of_origin": ["US", "CA"],
                 "geographic_distance_km": 5000,
-                "keywords_in_description": ["string"],
                 "last_login_days": 7,
                 "no_travel_notification": True,
                 "payment_count_min": 3,
                 "recipient_country_risk_level": ["High", "Very High"],
                 "recipient_new": True,
                 "timeframe_hours": 24,
-                "transaction_amount_max": 100000,
                 "transaction_amount_min": 5000,
                 "transaction_type": "debit",
             },
@@ -64,8 +62,6 @@ class TestRules:
             name="Suspicious International Payment Pattern",
             severity="Critical",
             status="active",
-            ai_learning_enabled=True,
-            priority=75,
         )
         assert_matches_type(FraudRule, rule, path=["response"])
 
@@ -126,28 +122,24 @@ class TestRules:
             rule_id="fraud_rule_high_value_inactive",
             action={
                 "details": "Flag for manual review only, do not block.",
-                "type": "flag",
-                "target_channels": ["email", "dashboard"],
+                "type": "block",
+                "target_team": "Fraud Prevention Team",
             },
-            ai_learning_enabled=False,
             criteria={
                 "account_inactivity_days": 60,
                 "country_of_origin": ["US", "CA"],
                 "geographic_distance_km": 5000,
-                "keywords_in_description": ["string"],
                 "last_login_days": 7,
                 "no_travel_notification": True,
                 "payment_count_min": 3,
-                "recipient_country_risk_level": ["High", "Very High"],
+                "recipient_country_risk_level": ["Low"],
                 "recipient_new": True,
                 "timeframe_hours": 24,
-                "transaction_amount_max": 100000,
                 "transaction_amount_min": 7500,
                 "transaction_type": "debit",
             },
-            description="Revised: Flags transactions over a higher threshold from accounts that have been inactive for a shorter period.",
+            description="Revised logic for flagging high value transactions from dormant accounts.",
             name="Revised High Value Transaction Rule",
-            priority=60,
             severity="High",
             status="inactive",
         )
@@ -191,6 +183,15 @@ class TestRules:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         rule = client.corporate.risk.fraud.rules.list()
+        assert_matches_type(RuleListResponse, rule, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        rule = client.corporate.risk.fraud.rules.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(RuleListResponse, rule, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -286,20 +287,18 @@ class TestAsyncRules:
             action={
                 "details": "Hold payment, notify sender for additional verification, and escalate to compliance.",
                 "type": "auto_review",
-                "target_channels": ["email", "dashboard"],
+                "target_team": "Fraud Prevention Team",
             },
             criteria={
                 "account_inactivity_days": 90,
                 "country_of_origin": ["US", "CA"],
                 "geographic_distance_km": 5000,
-                "keywords_in_description": ["string"],
                 "last_login_days": 7,
                 "no_travel_notification": True,
                 "payment_count_min": 3,
                 "recipient_country_risk_level": ["High", "Very High"],
                 "recipient_new": True,
                 "timeframe_hours": 24,
-                "transaction_amount_max": 100000,
                 "transaction_amount_min": 5000,
                 "transaction_type": "debit",
             },
@@ -307,8 +306,6 @@ class TestAsyncRules:
             name="Suspicious International Payment Pattern",
             severity="Critical",
             status="active",
-            ai_learning_enabled=True,
-            priority=75,
         )
         assert_matches_type(FraudRule, rule, path=["response"])
 
@@ -369,28 +366,24 @@ class TestAsyncRules:
             rule_id="fraud_rule_high_value_inactive",
             action={
                 "details": "Flag for manual review only, do not block.",
-                "type": "flag",
-                "target_channels": ["email", "dashboard"],
+                "type": "block",
+                "target_team": "Fraud Prevention Team",
             },
-            ai_learning_enabled=False,
             criteria={
                 "account_inactivity_days": 60,
                 "country_of_origin": ["US", "CA"],
                 "geographic_distance_km": 5000,
-                "keywords_in_description": ["string"],
                 "last_login_days": 7,
                 "no_travel_notification": True,
                 "payment_count_min": 3,
-                "recipient_country_risk_level": ["High", "Very High"],
+                "recipient_country_risk_level": ["Low"],
                 "recipient_new": True,
                 "timeframe_hours": 24,
-                "transaction_amount_max": 100000,
                 "transaction_amount_min": 7500,
                 "transaction_type": "debit",
             },
-            description="Revised: Flags transactions over a higher threshold from accounts that have been inactive for a shorter period.",
+            description="Revised logic for flagging high value transactions from dormant accounts.",
             name="Revised High Value Transaction Rule",
-            priority=60,
             severity="High",
             status="inactive",
         )
@@ -434,6 +427,15 @@ class TestAsyncRules:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         rule = await async_client.corporate.risk.fraud.rules.list()
+        assert_matches_type(RuleListResponse, rule, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        rule = await async_client.corporate.risk.fraud.rules.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(RuleListResponse, rule, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

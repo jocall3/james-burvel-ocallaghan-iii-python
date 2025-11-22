@@ -83,7 +83,7 @@ class ApplicationsResource(SyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "home_improvement", "debt_consolidation", "medical_expenses", "education", "business", "vehicle", "other"
+            "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
@@ -105,11 +105,11 @@ class ApplicationsResource(SyncAPIResource):
 
           loan_purpose: The purpose of the loan.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the loan application.
+          additional_notes: Optional notes or details for the application.
 
-          co_applicant: Optional details if there is a co-applicant.
+          co_applicant: Optional: Details of a co-applicant for the loan.
 
           extra_headers: Send extra headers
 
@@ -197,7 +197,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "home_improvement", "debt_consolidation", "medical_expenses", "education", "business", "vehicle", "other"
+            "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
@@ -219,11 +219,11 @@ class AsyncApplicationsResource(AsyncAPIResource):
 
           loan_purpose: The purpose of the loan.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the loan application.
+          additional_notes: Optional notes or details for the application.
 
-          co_applicant: Optional details if there is a co-applicant.
+          co_applicant: Optional: Details of a co-applicant for the loan.
 
           extra_headers: Send extra headers
 

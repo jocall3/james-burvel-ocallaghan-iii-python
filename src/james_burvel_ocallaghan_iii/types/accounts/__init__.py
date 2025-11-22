@@ -6,6 +6,9 @@ from .overdraft_settings import OverdraftSettings as OverdraftSettings
 from .overdraft_setting_update_settings_params import (
     OverdraftSettingUpdateSettingsParams as OverdraftSettingUpdateSettingsParams,
 )
+from .transaction_list_pending_transactions_params import (
+    TransactionListPendingTransactionsParams as TransactionListPendingTransactionsParams,
+)
 from .transaction_list_pending_transactions_response import (
     TransactionListPendingTransactionsResponse as TransactionListPendingTransactionsResponse,
 )

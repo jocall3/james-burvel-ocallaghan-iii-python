@@ -140,7 +140,7 @@ class TransactionsResource(SyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -206,10 +206,10 @@ class TransactionsResource(SyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category to assign to the transaction. Supports hierarchical categories.
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI will learn from this correction and apply it to similar future
-              transactions.
+          apply_to_future: If true, the AI will learn from this correction and try to apply it to similar
+              future transactions.
 
           notes: Optional notes to add to the transaction.
 
@@ -244,9 +244,7 @@ class TransactionsResource(SyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal[
-            "unauthorized", "duplicate", "incorrect_amount", "service_not_received", "damaged_goods", "other"
-        ],
+        reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -264,7 +262,7 @@ class TransactionsResource(SyncAPIResource):
 
           reason: The primary reason for disputing the transaction.
 
-          supporting_documents: Optional URLs to supporting documents (e.g., screenshots, photos).
+          supporting_documents: URLs to supporting documents (e.g., receipts, communication).
 
           extra_headers: Send extra headers
 
@@ -422,7 +420,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -488,10 +486,10 @@ class AsyncTransactionsResource(AsyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category to assign to the transaction. Supports hierarchical categories.
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI will learn from this correction and apply it to similar future
-              transactions.
+          apply_to_future: If true, the AI will learn from this correction and try to apply it to similar
+              future transactions.
 
           notes: Optional notes to add to the transaction.
 
@@ -526,9 +524,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal[
-            "unauthorized", "duplicate", "incorrect_amount", "service_not_received", "damaged_goods", "other"
-        ],
+        reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -546,7 +542,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           reason: The primary reason for disputing the transaction.
 
-          supporting_documents: Optional URLs to supporting documents (e.g., screenshots, photos).
+          supporting_documents: URLs to supporting documents (e.g., receipts, communication).
 
           extra_headers: Send extra headers
 

@@ -9,7 +9,10 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii.types.developers import APIKey, APIKeyListResponse
+from james_burvel_ocallaghan_iii.types.developers import (
+    APIKey,
+    APIKeyListResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -33,7 +36,6 @@ class TestAPIKeys:
             name="My Analytics Service Key",
             scopes=["read:accounts", "read:transactions"],
             expires_in_days=90,
-            is_secret_key=False,
         )
         assert_matches_type(APIKey, api_key, path=["response"])
 
@@ -69,6 +71,15 @@ class TestAPIKeys:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         api_key = client.developers.api_keys.list()
+        assert_matches_type(APIKeyListResponse, api_key, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        api_key = client.developers.api_keys.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(APIKeyListResponse, api_key, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -157,7 +168,6 @@ class TestAsyncAPIKeys:
             name="My Analytics Service Key",
             scopes=["read:accounts", "read:transactions"],
             expires_in_days=90,
-            is_secret_key=False,
         )
         assert_matches_type(APIKey, api_key, path=["response"])
 
@@ -193,6 +203,15 @@ class TestAsyncAPIKeys:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         api_key = await async_client.developers.api_keys.list()
+        assert_matches_type(APIKeyListResponse, api_key, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        api_key = await async_client.developers.api_keys.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(APIKeyListResponse, api_key, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

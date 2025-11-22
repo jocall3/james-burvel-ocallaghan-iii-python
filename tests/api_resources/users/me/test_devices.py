@@ -9,7 +9,10 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii.types.users.me import Device, DeviceListResponse
+from james_burvel_ocallaghan_iii.types.users.me import (
+    Device,
+    DeviceListResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,6 +24,15 @@ class TestDevices:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         device = client.users.me.devices.list()
+        assert_matches_type(DeviceListResponse, device, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        device = client.users.me.devices.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(DeviceListResponse, device, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -150,6 +162,15 @@ class TestAsyncDevices:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         device = await async_client.users.me.devices.list()
+        assert_matches_type(DeviceListResponse, device, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        device = await async_client.users.me.devices.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(DeviceListResponse, device, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

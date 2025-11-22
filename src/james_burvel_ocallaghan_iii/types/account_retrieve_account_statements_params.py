@@ -15,4 +15,7 @@ class AccountRetrieveAccountStatementsParams(TypedDict, total=False):
     """Year for the statement."""
 
     format: Literal["pdf", "csv"]
-    """Desired format for the statement."""
+    """Desired format for the statement.
+
+    Use 'application/json' Accept header for download links.
+    """

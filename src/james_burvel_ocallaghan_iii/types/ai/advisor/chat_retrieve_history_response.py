@@ -7,51 +7,50 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
-from .ai_function_call import AIFunctionCall
 
-__all__ = ["ChatRetrieveHistoryResponse", "Data", "DataToolOutput"]
+__all__ = ["ChatRetrieveHistoryResponse", "Data", "DataFunctionCall", "DataFunctionResponse"]
 
 
-class DataToolOutput(BaseModel):
-    name: str
-    """The name of the tool/function that was called."""
+class DataFunctionCall(BaseModel):
+    args: Optional[object] = None
 
-    response: object
-    """The JSON output returned by the execution of the tool/function."""
+    name: Optional[str] = None
 
-    call_id: Optional[str] = FieldInfo(alias="callId", default=None)
-    """Optional: The `id` of the function call this response corresponds to."""
+
+class DataFunctionResponse(BaseModel):
+    name: Optional[str] = None
+
+    response: Optional[object] = None
 
 
 class Data(BaseModel):
     content: str
-    """The text content of the message."""
+    """The textual content of the message."""
 
-    role: Literal["user", "assistant"]
-    """The sender of the message."""
+    role: Literal["user", "assistant", "tool_call", "tool_response"]
+    """Role of the speaker (user, assistant, or tool interaction)."""
 
     timestamp: datetime
-    """The timestamp when the message was sent."""
+    """Timestamp of the message."""
 
-    tool_calls: Optional[List[AIFunctionCall]] = FieldInfo(alias="toolCalls", default=None)
-    """Optional: Tool calls made by the assistant within this message."""
+    function_call: Optional[DataFunctionCall] = FieldInfo(alias="functionCall", default=None)
+    """If role is 'tool_call', details of the tool function called by the AI."""
 
-    tool_outputs: Optional[List[DataToolOutput]] = FieldInfo(alias="toolOutputs", default=None)
-    """Optional: Tool outputs provided by the user within this message."""
+    function_response: Optional[DataFunctionResponse] = FieldInfo(alias="functionResponse", default=None)
+    """If role is 'tool_response', the output from the tool function."""
 
 
 class ChatRetrieveHistoryResponse(BaseModel):
-    data: List[Data]
-    """The list of chat messages for the current page."""
-
     limit: int
-    """The maximum number of items returned per page."""
+    """The maximum number of items returned in the current page."""
 
     offset: int
-    """The starting index of the list for pagination."""
+    """The number of items skipped before the current page."""
 
     total: int
-    """The total number of available items."""
+    """The total number of items available across all pages."""
+
+    data: Optional[List[Data]] = None
 
     next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
-    """The offset to use for the next page of results. Null if no more pages."""
+    """The offset for the next page of results, if available. Null if no more pages."""

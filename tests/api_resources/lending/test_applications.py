@@ -81,7 +81,6 @@ class TestApplications:
                 "email": "jane.doe@example.com",
                 "income": 75000,
                 "name": "Jane Doe",
-                "credit_score": 720,
             },
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])
@@ -186,7 +185,6 @@ class TestAsyncApplications:
                 "email": "jane.doe@example.com",
                 "income": 75000,
                 "name": "Jane Doe",
-                "credit_score": 720,
             },
         )
         assert_matches_type(LoanApplicationStatus, application, path=["response"])

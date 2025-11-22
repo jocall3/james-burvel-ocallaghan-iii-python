@@ -88,13 +88,13 @@ class BiometricsResource(SyncAPIResource):
         features. Requires a biometric signature for initial proof.
 
         Args:
-          biometric_signature: Base64 encoded biometric template or proof for enrollment.
+          biometric_signature: Base64 encoded representation of the biometric template or proof.
 
-          biometric_type: Type of biometric data to enroll.
+          biometric_type: The type of biometric data being enrolled.
 
-          device_id: The ID of the device on which the biometric data is being enrolled.
+          device_id: The ID of the device on which the biometric is being enrolled.
 
-          device_name: Optional: A friendly name for the device enrolling biometrics.
+          device_name: Optional: A friendly name for the device, if not already linked.
 
           extra_headers: Send extra headers
 
@@ -161,11 +161,11 @@ class BiometricsResource(SyncAPIResource):
         access protected resources, using a one-time biometric signature.
 
         Args:
-          biometric_signature: One-time, base64 encoded biometric proof for verification.
+          biometric_signature: Base64 encoded representation of the one-time biometric proof for verification.
 
-          biometric_type: Type of biometric data for verification.
+          biometric_type: The type of biometric data being verified.
 
-          device_id: The ID of the device from which the biometric verification attempt is made.
+          device_id: The ID of the device initiating the biometric verification.
 
           extra_headers: Send extra headers
 
@@ -255,13 +255,13 @@ class AsyncBiometricsResource(AsyncAPIResource):
         features. Requires a biometric signature for initial proof.
 
         Args:
-          biometric_signature: Base64 encoded biometric template or proof for enrollment.
+          biometric_signature: Base64 encoded representation of the biometric template or proof.
 
-          biometric_type: Type of biometric data to enroll.
+          biometric_type: The type of biometric data being enrolled.
 
-          device_id: The ID of the device on which the biometric data is being enrolled.
+          device_id: The ID of the device on which the biometric is being enrolled.
 
-          device_name: Optional: A friendly name for the device enrolling biometrics.
+          device_name: Optional: A friendly name for the device, if not already linked.
 
           extra_headers: Send extra headers
 
@@ -328,11 +328,11 @@ class AsyncBiometricsResource(AsyncAPIResource):
         access protected resources, using a one-time biometric signature.
 
         Args:
-          biometric_signature: One-time, base64 encoded biometric proof for verification.
+          biometric_signature: Base64 encoded representation of the one-time biometric proof for verification.
 
-          biometric_type: Type of biometric data for verification.
+          biometric_type: The type of biometric data being verified.
 
-          device_id: The ID of the device from which the biometric verification attempt is made.
+          device_id: The ID of the device initiating the biometric verification.
 
           extra_headers: Send extra headers
 

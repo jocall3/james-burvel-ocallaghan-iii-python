@@ -36,7 +36,6 @@ class TestWebhooks:
             callback_url="https://my-analytics-app.com/webhooks/transactions",
             events=["transaction.created", "transaction.updated"],
             secret="my_custom_webhook_secret_123",
-            status="active",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
@@ -83,7 +82,6 @@ class TestWebhooks:
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
             events=["transaction.created", "user.login_failed"],
-            secret="a_new_secure_secret_for_signing",
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
@@ -126,6 +124,15 @@ class TestWebhooks:
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.list()
+        assert_matches_type(WebhookListResponse, webhook, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        webhook = client.developers.webhooks.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -214,7 +221,6 @@ class TestAsyncWebhooks:
             callback_url="https://my-analytics-app.com/webhooks/transactions",
             events=["transaction.created", "transaction.updated"],
             secret="my_custom_webhook_secret_123",
-            status="active",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
@@ -261,7 +267,6 @@ class TestAsyncWebhooks:
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
             events=["transaction.created", "user.login_failed"],
-            secret="a_new_secure_secret_for_signing",
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
@@ -304,6 +309,15 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.list()
+        assert_matches_type(WebhookListResponse, webhook, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        webhook = await async_client.developers.webhooks.list(
+            limit=1,
+            offset=0,
+        )
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")

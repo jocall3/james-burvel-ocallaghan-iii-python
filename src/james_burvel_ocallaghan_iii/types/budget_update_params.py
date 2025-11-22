@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing import Union, Iterable
 from datetime import date
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -12,8 +12,8 @@ __all__ = ["BudgetUpdateParams", "Category"]
 
 
 class BudgetUpdateParams(TypedDict, total=False):
-    alert_threshold: Annotated[Optional[int], PropertyInfo(alias="alertThreshold")]
-    """Updated percentage for budget alert threshold."""
+    alert_threshold: Annotated[int, PropertyInfo(alias="alertThreshold")]
+    """Updated percentage threshold for alerts."""
 
     categories: Iterable[Category]
     """Updated breakdown of the budget by categories.
@@ -27,28 +27,17 @@ class BudgetUpdateParams(TypedDict, total=False):
     name: str
     """Updated name of the budget."""
 
-    period: Literal["weekly", "monthly", "quarterly", "annually", "custom"]
-    """Updated recurrence period of the budget."""
-
-    reset_spent_amounts: Annotated[bool, PropertyInfo(alias="resetSpentAmounts")]
-    """If true, resets `spentAmount` for all categories and total to 0.
-
-    Useful for starting a new cycle of a recurring budget.
-    """
-
     start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
     """Updated start date of the budget period."""
 
-    status: Literal["active", "completed", "archived", "overspent"]
+    status: Literal["active", "archived", "ended"]
     """Updated status of the budget."""
 
     total_amount: Annotated[float, PropertyInfo(alias="totalAmount")]
-    """Updated total allocated budget amount."""
+    """Updated total amount for the entire budget."""
 
 
 class Category(TypedDict, total=False):
-    allocated: Required[float]
-    """Amount allocated to this category."""
+    allocated: float
 
-    name: Required[str]
-    """Category name."""
+    name: str

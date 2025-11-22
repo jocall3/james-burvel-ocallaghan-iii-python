@@ -12,58 +12,55 @@ __all__ = ["GenerateAdvancedParams", "CallToAction"]
 
 
 class GenerateAdvancedParams(TypedDict, total=False):
-    aspect_ratio: Required[Annotated[Literal["16:9", "9:16", "1:1"], PropertyInfo(alias="aspectRatio")]]
-    """Aspect ratio of the video (e.g., 16:9 for landscape, 9:16 for portrait)."""
-
     length_seconds: Required[Annotated[int, PropertyInfo(alias="lengthSeconds")]]
     """Desired length of the video in seconds."""
 
     prompt: Required[str]
-    """The text prompt describing the desired video content."""
+    """The textual prompt to guide the AI video generation."""
 
-    style: Required[Literal["Cinematic", "Documentary", "Explainer", "Animated", "Minimalist", "Energetic"]]
+    style: Required[Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"]]
     """Artistic style of the video."""
 
-    audience_target: Annotated[
-        Optional[Literal["general", "young_adult", "corporate", "small_business", "investors"]],
-        PropertyInfo(alias="audienceTarget"),
-    ]
-    """Optional: Target audience to influence tone and content."""
+    aspect_ratio: Annotated[Literal["16:9", "9:16", "1:1"], PropertyInfo(alias="aspectRatio")]
+    """
+    Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
+    """
 
-    background_music_volume: Annotated[Optional[float], PropertyInfo(alias="backgroundMusicVolume")]
-    """Optional: Volume level for background music (0-1)."""
+    audience_target: Annotated[
+        Optional[Literal["general", "corporate", "investor", "youth"]], PropertyInfo(alias="audienceTarget")
+    ]
+    """Target audience for the ad, influencing tone and visuals."""
+
+    background_music_genre: Annotated[
+        Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]],
+        PropertyInfo(alias="backgroundMusicGenre"),
+    ]
+    """Genre of background music."""
 
     brand_assets: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="brandAssets")]
-    """
-    Optional: URLs to brand assets (e.g., logo, specific imagery) for AI to
-    incorporate.
-    """
+    """URLs to brand assets (e.g., logos, specific imagery) to be incorporated."""
 
     brand_colors: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="brandColors")]
-    """Optional: Brand hex color codes to influence visual palette."""
+    """Optional: Hex color codes to influence the video's aesthetic."""
 
     call_to_action: Annotated[Optional[CallToAction], PropertyInfo(alias="callToAction")]
-    """Optional: Details for a call-to-action overlay at the end of the video."""
+    """Call-to-action text and URL to be displayed."""
 
-    music_genre: Annotated[Optional[str], PropertyInfo(alias="musicGenre")]
-    """Optional: Preferred genre for background music."""
+    keywords: Optional[SequenceNotStr[str]]
+    """Optional: Additional keywords to guide the AI's content generation."""
 
     voiceover_style: Annotated[
-        Optional[Literal["male_professional", "female_friendly", "neutral_narrator"]],
-        PropertyInfo(alias="voiceoverStyle"),
+        Optional[Literal["male_professional", "female_friendly", "neutral_calm"]], PropertyInfo(alias="voiceoverStyle")
     ]
-    """Optional: Style of the AI-generated voiceover."""
+    """Style/tone for the AI voiceover."""
 
     voiceover_text: Annotated[Optional[str], PropertyInfo(alias="voiceoverText")]
-    """Optional: Custom voiceover script for the video."""
+    """Optional: Text for an AI-generated voiceover."""
 
 
 class CallToAction(TypedDict, total=False):
-    text: Required[str]
-    """Text to display for the call to action."""
+    display_time_seconds: Annotated[int, PropertyInfo(alias="displayTimeSeconds")]
 
-    url: Required[str]
-    """URL to link to when the call to action is clicked."""
+    text: str
 
-    display_time_seconds: Annotated[Optional[int], PropertyInfo(alias="displayTimeSeconds")]
-    """Duration in seconds to display the CTA at the end of the video."""
+    url: str

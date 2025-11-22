@@ -13,19 +13,13 @@ __all__ = ["APIKeyCreateParams"]
 
 class APIKeyCreateParams(TypedDict, total=False):
     name: Required[str]
-    """A descriptive name for the new API key."""
+    """A descriptive name for the API key."""
 
     scopes: Required[SequenceNotStr[str]]
-    """List of desired permissions (scopes) for the API key."""
+    """List of permissions to grant to this API key."""
 
     expires_in_days: Annotated[Optional[int], PropertyInfo(alias="expiresInDays")]
     """Optional: Number of days until the API key expires.
 
-    If not provided, it will not expire.
-    """
-
-    is_secret_key: Annotated[bool, PropertyInfo(alias="isSecretKey")]
-    """
-    If true, generates a secret key (suitable for server-to-server) with a 'db*sk*'
-    prefix. Otherwise, generates a public key ('db*pk*').
+    If omitted, it will not expire.
     """

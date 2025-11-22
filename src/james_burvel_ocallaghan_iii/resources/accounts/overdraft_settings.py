@@ -84,7 +84,7 @@ class OverdraftSettingsResource(SyncAPIResource):
         enabled: bool | Omit = omit,
         fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: bool | Omit = omit,
+        link_to_savings: Optional[bool] | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,15 +98,16 @@ class OverdraftSettingsResource(SyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Whether overdraft protection should be enabled or disabled.
+          enabled: Enable or disable overdraft protection.
 
-          fee_preference: The new preference for how overdrafts should be handled.
+          fee_preference: New preference for how overdraft fees are handled.
 
-          linked_savings_account_id: The new savings account to link, or null to unlink.
+          linked_savings_account_id: New ID of the linked savings account, if `linkToSavings` is true. Set to null to
+              unlink.
 
-          link_to_savings: Whether to enable or disable linking to a savings account.
+          link_to_savings: Enable or disable linking to a savings account for overdraft coverage.
 
-          protection_limit: The new maximum overdraft amount. Set to null to remove.
+          protection_limit: New maximum amount for overdraft protection. Set to null to remove limit.
 
           extra_headers: Send extra headers
 
@@ -197,7 +198,7 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         enabled: bool | Omit = omit,
         fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: bool | Omit = omit,
+        link_to_savings: Optional[bool] | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -211,15 +212,16 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Whether overdraft protection should be enabled or disabled.
+          enabled: Enable or disable overdraft protection.
 
-          fee_preference: The new preference for how overdrafts should be handled.
+          fee_preference: New preference for how overdraft fees are handled.
 
-          linked_savings_account_id: The new savings account to link, or null to unlink.
+          linked_savings_account_id: New ID of the linked savings account, if `linkToSavings` is true. Set to null to
+              unlink.
 
-          link_to_savings: Whether to enable or disable linking to a savings account.
+          link_to_savings: Enable or disable linking to a savings account for overdraft coverage.
 
-          protection_limit: The new maximum overdraft amount. Set to null to remove.
+          protection_limit: New maximum amount for overdraft protection. Set to null to remove limit.
 
           extra_headers: Send extra headers
 

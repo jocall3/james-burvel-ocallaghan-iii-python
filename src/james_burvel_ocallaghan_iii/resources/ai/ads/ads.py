@@ -74,7 +74,7 @@ class AdsResource(SyncAPIResource):
         the AI Ad Studio.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -186,7 +186,7 @@ class AsyncAdsResource(AsyncAPIResource):
         the AI Ad Studio.
 
         Args:
-          limit: Maximum number of items to return in the response.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
