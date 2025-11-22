@@ -13,22 +13,22 @@ __all__ = ["SimulationListResponse", "Data"]
 
 class Data(BaseModel):
     creation_date: datetime = FieldInfo(alias="creationDate")
-    """Timestamp when the simulation was created."""
+    """Timestamp when the simulation request was created."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp when the simulation status or results were last updated."""
+    """Timestamp when the simulation status was last updated."""
 
     simulation_id: str = FieldInfo(alias="simulationId")
     """Unique identifier for the simulation."""
 
-    status: Literal["processing", "completed", "failed"]
+    status: Literal["pending", "processing", "completed", "failed"]
     """Current status of the simulation."""
 
     summary: str
-    """A brief summary of the simulation's purpose or key finding."""
+    """A brief summary of what the simulation entailed."""
 
     title: str
-    """User-friendly title of the simulation."""
+    """A user-friendly title for the simulation."""
 
 
 class SimulationListResponse(BaseModel):

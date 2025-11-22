@@ -12,17 +12,17 @@ __all__ = ["TransactionInitiateTransferResponse"]
 
 
 class TransactionInitiateTransferResponse(BaseModel):
-    status: Literal["pending_signature", "pending_broadcast", "in_progress", "completed", "failed", "cancelled"]
-    """Current status of the cryptocurrency transfer."""
+    status: Literal["pending_signature", "broadcasting", "confirmed", "failed"]
+    """Current status of the crypto transfer."""
 
     transfer_id: str = FieldInfo(alias="transferId")
-    """Unique identifier for the initiated transfer."""
+    """Unique identifier for the initiated crypto transfer."""
 
     blockchain_txn_hash: Optional[str] = FieldInfo(alias="blockchainTxnHash", default=None)
-    """The transaction hash on the blockchain (if available)."""
+    """The transaction hash on the blockchain once broadcasted."""
 
-    completed_at: Optional[datetime] = FieldInfo(alias="completedAt", default=None)
-    """Timestamp when the transfer was completed (if successful)."""
+    last_updated: Optional[datetime] = FieldInfo(alias="lastUpdated", default=None)
+    """Timestamp when the status was last updated."""
 
     message: Optional[str] = None
-    """A descriptive message regarding the transfer status or next steps."""
+    """A descriptive message about the current status or required action."""

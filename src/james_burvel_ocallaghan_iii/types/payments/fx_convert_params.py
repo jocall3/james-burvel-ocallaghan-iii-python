@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -12,28 +12,23 @@ __all__ = ["FxConvertParams"]
 
 class FxConvertParams(TypedDict, total=False):
     source_account_id: Required[Annotated[str, PropertyInfo(alias="sourceAccountId")]]
-    """The ID of the account from which to deduct the source amount."""
+    """The ID of the account from which to convert funds."""
 
     source_amount: Required[Annotated[float, PropertyInfo(alias="sourceAmount")]]
     """The amount to convert from the source currency."""
 
     source_currency: Required[Annotated[str, PropertyInfo(alias="sourceCurrency")]]
-    """The currency to convert from."""
+    """The currency to convert from (ISO 4217 code)."""
 
     target_currency: Required[Annotated[str, PropertyInfo(alias="targetCurrency")]]
-    """The currency to convert to."""
+    """The currency to convert to (ISO 4217 code)."""
 
     fx_rate_lock: Annotated[bool, PropertyInfo(alias="fxRateLock")]
-    """If true, attempts to lock the quoted FX rate for the conversion."""
-
-    fx_rate_provider: Annotated[
-        Literal["proprietary_ai", "external_partner", "market_rate"], PropertyInfo(alias="fxRateProvider")
-    ]
-    """The desired provider for the foreign exchange rate."""
+    """If true, attempts to lock the FX rate at the time of conversion."""
 
     target_account_id: Annotated[Optional[str], PropertyInfo(alias="targetAccountId")]
-    """Optional: The ID of the account to credit with the converted target amount.
+    """Optional: The ID of the target account to deposit converted funds.
 
-    If omitted, converted funds remain as a floating balance or are deposited into a
-    primary account.
+    If omitted, converted funds will be deposited back to sourceAccountId (if
+    multi-currency capable) or a default linked account.
     """

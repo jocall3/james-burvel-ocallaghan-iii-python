@@ -67,19 +67,20 @@ class RecurringResource(SyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: Amount of each recurring payment.
+          amount: The expected amount of the recurring transaction.
 
-          category: Category of the new recurring transaction.
+          category: Category of the recurring transaction.
 
-          currency: Currency of the recurring transaction.
+          currency: The currency of the transaction (ISO 4217 code).
 
-          description: Description of the new recurring transaction.
+          description: Description for the new recurring transaction.
 
-          frequency: Frequency of the recurring transaction.
+          frequency: How often the transaction is expected to occur.
 
-          start_date: The date the first payment is expected or scheduled.
+          start_date: The date the first recurring transaction is expected.
 
-          linked_account_id: Optional: The account to associate with this recurring transaction.
+          linked_account_id: Optional: The account from which this recurring transaction will be paid or
+              received.
 
           extra_headers: Send extra headers
 
@@ -173,19 +174,20 @@ class AsyncRecurringResource(AsyncAPIResource):
         Defines a new recurring transaction pattern for future tracking and budgeting.
 
         Args:
-          amount: Amount of each recurring payment.
+          amount: The expected amount of the recurring transaction.
 
-          category: Category of the new recurring transaction.
+          category: Category of the recurring transaction.
 
-          currency: Currency of the recurring transaction.
+          currency: The currency of the transaction (ISO 4217 code).
 
-          description: Description of the new recurring transaction.
+          description: Description for the new recurring transaction.
 
-          frequency: Frequency of the recurring transaction.
+          frequency: How often the transaction is expected to occur.
 
-          start_date: The date the first payment is expected or scheduled.
+          start_date: The date the first recurring transaction is expected.
 
-          linked_account_id: Optional: The account to associate with this recurring transaction.
+          linked_account_id: Optional: The account from which this recurring transaction will be paid or
+              received.
 
           extra_headers: Send extra headers
 

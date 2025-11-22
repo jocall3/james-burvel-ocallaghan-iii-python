@@ -16,24 +16,21 @@ class FinancialAnomaly(BaseModel):
     """Unique identifier for the detected anomaly."""
 
     ai_confidence_score: float = FieldInfo(alias="aiConfidenceScore")
-    """AI's confidence score (0-1) in the anomaly detection."""
+    """AI's confidence in the detection and classification of this anomaly."""
 
     description: str
-    """A concise summary of the anomaly."""
+    """A brief, human-readable description of the anomaly."""
 
     entity_id: str = FieldInfo(alias="entityId")
-    """
-    The ID of the specific entity (e.g., transaction ID, user ID) related to the
-    anomaly.
-    """
+    """The ID of the primary entity related to this anomaly."""
 
     entity_type: Literal[
-        "PaymentOrder", "Transaction", "Counterparty", "CorporateCard", "Invoice", "User", "Account"
+        "PaymentOrder", "Transaction", "Counterparty", "CorporateCard", "Invoice", "User", "System"
     ] = FieldInfo(alias="entityType")
-    """The type of financial entity or activity the anomaly relates to."""
+    """The type of financial entity this anomaly is related to."""
 
     risk_score: int = FieldInfo(alias="riskScore")
-    """AI-calculated risk score (0-100) for the anomaly."""
+    """AI-calculated risk score (0-100) for this anomaly."""
 
     severity: Literal["Low", "Medium", "High", "Critical"]
     """AI-assessed severity level of the anomaly."""
@@ -45,15 +42,13 @@ class FinancialAnomaly(BaseModel):
     """Timestamp when the anomaly was detected."""
 
     details: Optional[str] = None
-    """Detailed description of the anomaly, including contributing factors."""
+    """Detailed explanation of the anomaly, including relevant context."""
 
     recommended_action: Optional[str] = FieldInfo(alias="recommendedAction", default=None)
-    """AI-recommended immediate action to address the anomaly."""
+    """AI-suggested immediate action for the anomaly."""
 
     related_transactions: Optional[List[str]] = FieldInfo(alias="relatedTransactions", default=None)
-    """List of IDs of other transactions potentially related to this anomaly."""
+    """List of IDs of other transactions or entities related to this anomaly."""
 
     resolution_notes: Optional[str] = FieldInfo(alias="resolutionNotes", default=None)
-    """
-    Notes provided by an analyst or the AI upon resolving or dismissing the anomaly.
-    """
+    """Notes added by a compliance officer upon resolving or dismissing the anomaly."""

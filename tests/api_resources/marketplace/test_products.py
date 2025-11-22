@@ -32,7 +32,7 @@ class TestProducts:
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         product = client.marketplace.products.list(
             category="Smart Home Devices",
-            limit=50,
+            limit=10,
             offset=0,
         )
         assert_matches_type(ProductListResponse, product, path=["response"])
@@ -183,7 +183,7 @@ class TestAsyncProducts:
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         product = await async_client.marketplace.products.list(
             category="Smart Home Devices",
-            limit=50,
+            limit=10,
             offset=0,
         )
         assert_matches_type(ProductListResponse, product, path=["response"])

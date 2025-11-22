@@ -14,14 +14,8 @@ class SustainabilityPurchaseCarbonOffsetsParams(TypedDict, total=False):
     amount_kg_co2e: Required[Annotated[float, PropertyInfo(alias="amountKgCO2e")]]
     """The amount of carbon (in Kg CO2e) to offset."""
 
-    offset_project: Required[Annotated[Optional[str], PropertyInfo(alias="offsetProject")]]
-    """Optional: Name or ID of a preferred carbon offset project.
-
-    If null, AI will select an optimal project.
-    """
-
     payment_account_id: Required[Annotated[str, PropertyInfo(alias="paymentAccountId")]]
-    """The ID of the user's account to debit for the purchase."""
+    """The ID of the account to use for payment."""
 
-    recurring: bool
-    """If true, sets up a recurring carbon offset purchase."""
+    offset_project: Annotated[Optional[str], PropertyInfo(alias="offsetProject")]
+    """Optional: A specific carbon offset project or standard to support."""

@@ -30,7 +30,7 @@ class TestChat:
     @parametrize
     def test_method_retrieve_history_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         chat = client.ai.advisor.chat.retrieve_history(
-            limit=50,
+            limit=10,
             offset=0,
             session_id="session-quantum-xyz-789-alpha",
         )
@@ -126,7 +126,7 @@ class TestAsyncChat:
     @parametrize
     async def test_method_retrieve_history_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         chat = await async_client.ai.advisor.chat.retrieve_history(
-            limit=50,
+            limit=10,
             offset=0,
             session_id="session-quantum-xyz-789-alpha",
         )

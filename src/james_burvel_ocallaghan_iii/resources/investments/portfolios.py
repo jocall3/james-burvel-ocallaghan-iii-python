@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -52,8 +52,8 @@ class PortfoliosResource(SyncAPIResource):
         currency: str,
         initial_investment: float,
         name: str,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"],
-        type: Literal["equities", "bonds", "diversified", "crypto", "reit", "commodities", "other"],
+        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
+        type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
         ai_auto_allocate: bool | Omit = omit,
         linked_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -67,20 +67,20 @@ class PortfoliosResource(SyncAPIResource):
         Creates a new investment portfolio, with options for initial asset allocation.
 
         Args:
-          currency: Base currency of the portfolio.
+          currency: Currency of the portfolio (ISO 4217 code).
 
-          initial_investment: Initial amount to invest in the portfolio.
+          initial_investment: Initial amount to invest in this portfolio.
 
           name: Name for the new investment portfolio.
 
-          risk_tolerance: User's risk tolerance for this portfolio.
+          risk_tolerance: Desired risk tolerance for this portfolio.
 
-          type: Primary asset type or strategy of the portfolio.
+          type: Type of investment portfolio to create.
 
-          ai_auto_allocate: If true, AI will automatically suggest and execute initial asset allocation
-              based on risk tolerance.
+          ai_auto_allocate: If true, AI will automatically suggest and allocate initial assets based on risk
+              tolerance.
 
-          linked_account_id: Optional: The account from which initial funds should be drawn.
+          linked_account_id: Optional: The account from which initial investment funds should be drawn.
 
           extra_headers: Send extra headers
 
@@ -148,10 +148,10 @@ class PortfoliosResource(SyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        ai_rebalancing_frequency: Literal["monthly", "quarterly", "semi_annually", "annually", "manual"] | Omit = omit,
+        ai_rebalancing_frequency: Optional[Literal["never", "monthly", "quarterly", "semi_annually", "annually"]]
+        | Omit = omit,
         name: str | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
-        target_allocation: Optional[portfolio_update_params.TargetAllocation] | Omit = omit,
+        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -164,13 +164,11 @@ class PortfoliosResource(SyncAPIResource):
         tolerance.
 
         Args:
-          ai_rebalancing_frequency: Updated frequency for AI-driven portfolio rebalancing.
+          ai_rebalancing_frequency: Updated frequency for AI-driven rebalancing recommendations.
 
-          name: New name for the investment portfolio.
+          name: Updated name of the portfolio.
 
-          risk_tolerance: Updated risk tolerance for this portfolio.
-
-          target_allocation: Optional: Target asset allocation percentages for rebalancing.
+          risk_tolerance: Updated risk tolerance for the portfolio. May trigger rebalancing suggestions.
 
           extra_headers: Send extra headers
 
@@ -189,7 +187,6 @@ class PortfoliosResource(SyncAPIResource):
                     "ai_rebalancing_frequency": ai_rebalancing_frequency,
                     "name": name,
                     "risk_tolerance": risk_tolerance,
-                    "target_allocation": target_allocation,
                 },
                 portfolio_update_params.PortfolioUpdateParams,
             ),
@@ -222,12 +219,10 @@ class PortfoliosResource(SyncAPIResource):
         self,
         portfolio_id: str,
         *,
+        target_risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
         confirmation_required: bool | Omit = omit,
         dry_run: bool | Omit = omit,
-        target_risk_tolerance: Optional[
-            Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"]
-        ]
-        | Omit = omit,
+        target_asset_allocation: Optional[Iterable[portfolio_rebalance_params.TargetAssetAllocation]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -240,13 +235,16 @@ class PortfoliosResource(SyncAPIResource):
         based on a target risk tolerance or strategy.
 
         Args:
-          confirmation_required: If true, user confirmation is required before executing trades (even if dryRun
-              is false).
+          target_risk_tolerance: The desired risk tolerance to rebalance the portfolio to.
 
-          dry_run: If true, the AI will only propose trades without executing them.
+          confirmation_required: If true, user confirmation is required before executing trades. Only applicable
+              if dryRun is false.
 
-          target_risk_tolerance: Optional: The desired risk tolerance for the rebalancing. If not provided, uses
-              portfolio's current risk tolerance.
+          dry_run: If true, the AI will only propose trades without executing them. Default is
+              false.
+
+          target_asset_allocation: Optional: Specific target asset allocation percentages if not relying solely on
+              AI risk tolerance.
 
           extra_headers: Send extra headers
 
@@ -262,9 +260,10 @@ class PortfoliosResource(SyncAPIResource):
             f"/investments/portfolios/{portfolio_id}/rebalance",
             body=maybe_transform(
                 {
+                    "target_risk_tolerance": target_risk_tolerance,
                     "confirmation_required": confirmation_required,
                     "dry_run": dry_run,
-                    "target_risk_tolerance": target_risk_tolerance,
+                    "target_asset_allocation": target_asset_allocation,
                 },
                 portfolio_rebalance_params.PortfolioRebalanceParams,
             ),
@@ -301,8 +300,8 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         currency: str,
         initial_investment: float,
         name: str,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"],
-        type: Literal["equities", "bonds", "diversified", "crypto", "reit", "commodities", "other"],
+        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
+        type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
         ai_auto_allocate: bool | Omit = omit,
         linked_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -316,20 +315,20 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         Creates a new investment portfolio, with options for initial asset allocation.
 
         Args:
-          currency: Base currency of the portfolio.
+          currency: Currency of the portfolio (ISO 4217 code).
 
-          initial_investment: Initial amount to invest in the portfolio.
+          initial_investment: Initial amount to invest in this portfolio.
 
           name: Name for the new investment portfolio.
 
-          risk_tolerance: User's risk tolerance for this portfolio.
+          risk_tolerance: Desired risk tolerance for this portfolio.
 
-          type: Primary asset type or strategy of the portfolio.
+          type: Type of investment portfolio to create.
 
-          ai_auto_allocate: If true, AI will automatically suggest and execute initial asset allocation
-              based on risk tolerance.
+          ai_auto_allocate: If true, AI will automatically suggest and allocate initial assets based on risk
+              tolerance.
 
-          linked_account_id: Optional: The account from which initial funds should be drawn.
+          linked_account_id: Optional: The account from which initial investment funds should be drawn.
 
           extra_headers: Send extra headers
 
@@ -397,10 +396,10 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         self,
         portfolio_id: str,
         *,
-        ai_rebalancing_frequency: Literal["monthly", "quarterly", "semi_annually", "annually", "manual"] | Omit = omit,
+        ai_rebalancing_frequency: Optional[Literal["never", "monthly", "quarterly", "semi_annually", "annually"]]
+        | Omit = omit,
         name: str | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
-        target_allocation: Optional[portfolio_update_params.TargetAllocation] | Omit = omit,
+        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -413,13 +412,11 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         tolerance.
 
         Args:
-          ai_rebalancing_frequency: Updated frequency for AI-driven portfolio rebalancing.
+          ai_rebalancing_frequency: Updated frequency for AI-driven rebalancing recommendations.
 
-          name: New name for the investment portfolio.
+          name: Updated name of the portfolio.
 
-          risk_tolerance: Updated risk tolerance for this portfolio.
-
-          target_allocation: Optional: Target asset allocation percentages for rebalancing.
+          risk_tolerance: Updated risk tolerance for the portfolio. May trigger rebalancing suggestions.
 
           extra_headers: Send extra headers
 
@@ -438,7 +435,6 @@ class AsyncPortfoliosResource(AsyncAPIResource):
                     "ai_rebalancing_frequency": ai_rebalancing_frequency,
                     "name": name,
                     "risk_tolerance": risk_tolerance,
-                    "target_allocation": target_allocation,
                 },
                 portfolio_update_params.PortfolioUpdateParams,
             ),
@@ -471,12 +467,10 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         self,
         portfolio_id: str,
         *,
+        target_risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
         confirmation_required: bool | Omit = omit,
         dry_run: bool | Omit = omit,
-        target_risk_tolerance: Optional[
-            Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"]
-        ]
-        | Omit = omit,
+        target_asset_allocation: Optional[Iterable[portfolio_rebalance_params.TargetAssetAllocation]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -489,13 +483,16 @@ class AsyncPortfoliosResource(AsyncAPIResource):
         based on a target risk tolerance or strategy.
 
         Args:
-          confirmation_required: If true, user confirmation is required before executing trades (even if dryRun
-              is false).
+          target_risk_tolerance: The desired risk tolerance to rebalance the portfolio to.
 
-          dry_run: If true, the AI will only propose trades without executing them.
+          confirmation_required: If true, user confirmation is required before executing trades. Only applicable
+              if dryRun is false.
 
-          target_risk_tolerance: Optional: The desired risk tolerance for the rebalancing. If not provided, uses
-              portfolio's current risk tolerance.
+          dry_run: If true, the AI will only propose trades without executing them. Default is
+              false.
+
+          target_asset_allocation: Optional: Specific target asset allocation percentages if not relying solely on
+              AI risk tolerance.
 
           extra_headers: Send extra headers
 
@@ -511,9 +508,10 @@ class AsyncPortfoliosResource(AsyncAPIResource):
             f"/investments/portfolios/{portfolio_id}/rebalance",
             body=await async_maybe_transform(
                 {
+                    "target_risk_tolerance": target_risk_tolerance,
                     "confirmation_required": confirmation_required,
                     "dry_run": dry_run,
-                    "target_risk_tolerance": target_risk_tolerance,
+                    "target_asset_allocation": target_asset_allocation,
                 },
                 portfolio_rebalance_params.PortfolioRebalanceParams,
             ),

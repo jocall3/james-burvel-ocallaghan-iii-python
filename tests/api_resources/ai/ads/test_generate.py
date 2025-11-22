@@ -40,7 +40,7 @@ class TestGenerate:
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
             audience_target="corporate",
-            background_music="upbeat",
+            background_music="upbeat_corporate",
             brand_assets=["https://demobank.com/assets/corporate_logo.png"],
             brand_colors=["#0000FF", "#FFD700"],
             call_to_action={
@@ -48,7 +48,8 @@ class TestGenerate:
                 "text": "Learn more at DemoBank.com/business",
                 "url": "https://demobank.com/business",
             },
-            keywords=["fintech", "startup", "innovation", "easy banking"],
+            keywords=["financial freedom", "AI banking", "startup success"],
+            subtitles_enabled=True,
             voiceover_style="male_professional",
             voiceover_text=": Your business, powered by intelligent finance.",
         )
@@ -106,7 +107,7 @@ class TestGenerate:
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
             brand_colors=["#0000FF", "#FFD700"],
-            keywords=["fintech", "startup", "innovation", "easy banking"],
+            keywords=["financial freedom", "AI banking", "startup success"],
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 
@@ -168,7 +169,7 @@ class TestAsyncGenerate:
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
             audience_target="corporate",
-            background_music="upbeat",
+            background_music="upbeat_corporate",
             brand_assets=["https://demobank.com/assets/corporate_logo.png"],
             brand_colors=["#0000FF", "#FFD700"],
             call_to_action={
@@ -176,7 +177,8 @@ class TestAsyncGenerate:
                 "text": "Learn more at DemoBank.com/business",
                 "url": "https://demobank.com/business",
             },
-            keywords=["fintech", "startup", "innovation", "easy banking"],
+            keywords=["financial freedom", "AI banking", "startup success"],
+            subtitles_enabled=True,
             voiceover_style="male_professional",
             voiceover_text=": Your business, powered by intelligent finance.",
         )
@@ -234,7 +236,7 @@ class TestAsyncGenerate:
             prompt="A captivating ad featuring a young entrepreneur using 's AI tools to grow their startup. Focus on innovation and ease of use.",
             style="Cinematic",
             brand_colors=["#0000FF", "#FFD700"],
-            keywords=["fintech", "startup", "innovation", "easy banking"],
+            keywords=["financial freedom", "AI banking", "startup success"],
         )
         assert_matches_type(GenerateStandardResponse, generate, path=["response"])
 

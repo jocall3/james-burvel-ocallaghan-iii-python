@@ -13,22 +13,25 @@ __all__ = ["ProductClaimOfferResponse"]
 
 class ProductClaimOfferResponse(BaseModel):
     message: str
-    """A descriptive message for the user about the claimed offer."""
+    """A confirmation message with redemption instructions."""
 
     offer_id: str = FieldInfo(alias="offerId")
     """Unique identifier for the claimed offer."""
 
     product_id: str = FieldInfo(alias="productId")
-    """The ID of the product the offer applies to."""
+    """The ID of the product related to the offer."""
 
-    status: Literal["claimed", "redeemed", "expired"]
+    status: Literal["claimed", "redeemed", "expired", "cancelled"]
     """Current status of the offer."""
 
+    claim_date: Optional[datetime] = FieldInfo(alias="claimDate", default=None)
+    """Timestamp when the offer was claimed."""
+
     expiration_date: Optional[datetime] = FieldInfo(alias="expirationDate", default=None)
-    """The date and time when the offer expires."""
+    """The date and time the offer expires."""
 
     redemption_code: Optional[str] = FieldInfo(alias="redemptionCode", default=None)
-    """A code to be used for redemption (if applicable)."""
+    """The code needed to redeem the offer, if applicable."""
 
     redemption_link: Optional[str] = FieldInfo(alias="redemptionLink", default=None)
-    """A direct link for redeeming the offer (if applicable)."""
+    """A direct link to redeem the offer, if applicable."""

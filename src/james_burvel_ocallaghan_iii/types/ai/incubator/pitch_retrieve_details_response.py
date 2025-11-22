@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -59,9 +59,9 @@ class PitchRetrieveDetailsResponseAIFinancialModel(BaseModel):
 
     capital_requirements: Optional[float] = FieldInfo(alias="capitalRequirements", default=None)
 
-    cost_structure_analysis: Optional[object] = FieldInfo(alias="costStructureAnalysis", default=None)
+    cost_structure_analysis: Optional[Dict[str, str]] = FieldInfo(alias="costStructureAnalysis", default=None)
 
-    revenue_breakdown: Optional[object] = FieldInfo(alias="revenueBreakdown", default=None)
+    revenue_breakdown: Optional[Dict[str, str]] = FieldInfo(alias="revenueBreakdown", default=None)
 
     sensitivity_analysis: Optional[List[PitchRetrieveDetailsResponseAIFinancialModelSensitivityAnalysis]] = FieldInfo(
         alias="sensitivityAnalysis", default=None
@@ -90,22 +90,22 @@ class PitchRetrieveDetailsResponse(QuantumWeaverState):
     ai_coaching_plan: Optional[PitchRetrieveDetailsResponseAICoachingPlan] = FieldInfo(
         alias="aiCoachingPlan", default=None
     )
-    """An AI-generated strategic coaching plan for the entrepreneur."""
+    """An AI-generated coaching plan to guide the entrepreneur."""
 
     ai_financial_model: Optional[PitchRetrieveDetailsResponseAIFinancialModel] = FieldInfo(
         alias="aiFinancialModel", default=None
     )
-    """AI-generated financial model and analysis."""
+    """AI-generated detailed financial model and projections."""
 
     ai_market_analysis: Optional[PitchRetrieveDetailsResponseAIMarketAnalysis] = FieldInfo(
         alias="aiMarketAnalysis", default=None
     )
-    """AI-driven market opportunity analysis and competitive landscape."""
+    """AI-driven analysis of market opportunity, competition, and growth."""
 
     ai_risk_assessment: Optional[PitchRetrieveDetailsResponseAIRiskAssessment] = FieldInfo(
         alias="aiRiskAssessment", default=None
     )
-    """AI's assessment of various risk factors for the venture."""
+    """AI-driven assessment of various risks associated with the venture."""
 
     investor_match_score: Optional[float] = FieldInfo(alias="investorMatchScore", default=None)
-    """AI's score on how well the pitch aligns with investor criteria."""
+    """AI's score indicating the potential match with our investment thesis."""

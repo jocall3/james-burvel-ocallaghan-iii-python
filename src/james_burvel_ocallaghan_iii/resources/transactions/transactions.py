@@ -206,9 +206,9 @@ class TransactionsResource(SyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction (can be hierarchical).
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI should learn and apply this categorization to similar future
+          apply_to_future: If true, the AI will learn from this correction and apply it to similar future
               transactions.
 
           notes: Optional notes to add to the transaction.
@@ -245,6 +245,7 @@ class TransactionsResource(SyncAPIResource):
         *,
         details: str,
         reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
+        contact_preferred: Literal["email", "phone", "in_app"] | Omit = omit,
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -260,9 +261,11 @@ class TransactionsResource(SyncAPIResource):
         Args:
           details: Detailed explanation of the dispute.
 
-          reason: Primary reason for the dispute.
+          reason: The primary reason for disputing the transaction.
 
-          supporting_documents: URLs to supporting documents (e.g., receipts, travel tickets).
+          contact_preferred: Preferred method for our team to contact the user regarding the dispute.
+
+          supporting_documents: URLs to supporting documents (e.g., screenshots, travel itineraries).
 
           extra_headers: Send extra headers
 
@@ -280,6 +283,7 @@ class TransactionsResource(SyncAPIResource):
                 {
                     "details": details,
                     "reason": reason,
+                    "contact_preferred": contact_preferred,
                     "supporting_documents": supporting_documents,
                 },
                 transaction_dispute_params.TransactionDisputeParams,
@@ -486,9 +490,9 @@ class AsyncTransactionsResource(AsyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction (can be hierarchical).
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI should learn and apply this categorization to similar future
+          apply_to_future: If true, the AI will learn from this correction and apply it to similar future
               transactions.
 
           notes: Optional notes to add to the transaction.
@@ -525,6 +529,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         *,
         details: str,
         reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
+        contact_preferred: Literal["email", "phone", "in_app"] | Omit = omit,
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -540,9 +545,11 @@ class AsyncTransactionsResource(AsyncAPIResource):
         Args:
           details: Detailed explanation of the dispute.
 
-          reason: Primary reason for the dispute.
+          reason: The primary reason for disputing the transaction.
 
-          supporting_documents: URLs to supporting documents (e.g., receipts, travel tickets).
+          contact_preferred: Preferred method for our team to contact the user regarding the dispute.
+
+          supporting_documents: URLs to supporting documents (e.g., screenshots, travel itineraries).
 
           extra_headers: Send extra headers
 
@@ -560,6 +567,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
                 {
                     "details": details,
                     "reason": reason,
+                    "contact_preferred": contact_preferred,
                     "supporting_documents": supporting_documents,
                 },
                 transaction_dispute_params.TransactionDisputeParams,

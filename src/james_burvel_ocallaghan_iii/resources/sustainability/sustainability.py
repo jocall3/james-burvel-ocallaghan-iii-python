@@ -60,9 +60,8 @@ class SustainabilityResource(SyncAPIResource):
         self,
         *,
         amount_kg_co2e: float,
-        offset_project: Optional[str],
         payment_account_id: str,
-        recurring: bool | Omit = omit,
+        offset_project: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,12 +76,9 @@ class SustainabilityResource(SyncAPIResource):
         Args:
           amount_kg_co2e: The amount of carbon (in Kg CO2e) to offset.
 
-          offset_project: Optional: Name or ID of a preferred carbon offset project. If null, AI will
-              select an optimal project.
+          payment_account_id: The ID of the account to use for payment.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          recurring: If true, sets up a recurring carbon offset purchase.
+          offset_project: Optional: A specific carbon offset project or standard to support.
 
           extra_headers: Send extra headers
 
@@ -97,9 +93,8 @@ class SustainabilityResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "amount_kg_co2e": amount_kg_co2e,
-                    "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "recurring": recurring,
+                    "offset_project": offset_project,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),
@@ -161,9 +156,8 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         self,
         *,
         amount_kg_co2e: float,
-        offset_project: Optional[str],
         payment_account_id: str,
-        recurring: bool | Omit = omit,
+        offset_project: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,12 +172,9 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         Args:
           amount_kg_co2e: The amount of carbon (in Kg CO2e) to offset.
 
-          offset_project: Optional: Name or ID of a preferred carbon offset project. If null, AI will
-              select an optimal project.
+          payment_account_id: The ID of the account to use for payment.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          recurring: If true, sets up a recurring carbon offset purchase.
+          offset_project: Optional: A specific carbon offset project or standard to support.
 
           extra_headers: Send extra headers
 
@@ -198,9 +189,8 @@ class AsyncSustainabilityResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "amount_kg_co2e": amount_kg_co2e,
-                    "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "recurring": recurring,
+                    "offset_project": offset_project,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),

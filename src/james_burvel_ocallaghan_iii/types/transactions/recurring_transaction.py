@@ -16,34 +16,34 @@ class RecurringTransaction(BaseModel):
     """Unique identifier for the recurring transaction."""
 
     amount: float
-    """Amount of each recurring payment."""
+    """Typical amount of the recurring transaction."""
 
     category: str
     """Category of the recurring transaction."""
 
     currency: str
-    """Currency of the recurring transaction."""
+    """Currency of the transaction."""
 
     description: str
     """Description of the recurring transaction."""
 
     frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"]
-    """Frequency of the recurring transaction."""
+    """How often the transaction occurs."""
 
-    next_due_date: date = FieldInfo(alias="nextDueDate")
-    """Next scheduled payment date."""
+    next_due_date: Optional[date] = FieldInfo(alias="nextDueDate", default=None)
+    """The next expected date for this recurring transaction."""
 
-    status: Literal["active", "paused", "cancelled", "completed"]
+    status: Literal["active", "inactive", "cancelled"]
     """Current status of the recurring transaction."""
 
     ai_confidence_score: Optional[float] = FieldInfo(alias="aiConfidenceScore", default=None)
-    """
-    AI's confidence score (0-1) for its detection or categorization of this
-    recurring pattern.
-    """
+    """AI's confidence in accurately identifying this as a recurring transaction."""
 
     last_paid_date: Optional[date] = FieldInfo(alias="lastPaidDate", default=None)
-    """Last date the transaction was paid."""
+    """The date the last recurring transaction occurred."""
 
     linked_account_id: Optional[str] = FieldInfo(alias="linkedAccountId", default=None)
-    """The account associated with this recurring transaction."""
+    """
+    Optional: The account from which this recurring transaction is typically paid or
+    received.
+    """

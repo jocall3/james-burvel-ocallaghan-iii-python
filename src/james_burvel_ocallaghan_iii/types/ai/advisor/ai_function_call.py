@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict
+
 from ...._models import BaseModel
 
 __all__ = ["AIFunctionCall"]
@@ -7,10 +9,10 @@ __all__ = ["AIFunctionCall"]
 
 class AIFunctionCall(BaseModel):
     id: str
-    """Unique identifier for this specific function call."""
+    """A unique ID for this specific function call instance."""
 
-    args: object
-    """A JSON object containing the arguments for the function call."""
+    args: Dict[str, object]
+    """Arguments to pass to the tool function."""
 
     name: str
-    """The name of the tool function to be called."""
+    """The name of the tool function to be invoked."""

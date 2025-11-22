@@ -114,6 +114,7 @@ class CorporateResource(SyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -126,15 +127,17 @@ class CorporateResource(SyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: Country of residence or operation (ISO 3166-1 alpha-2 code).
+          country: ISO 3166-1 alpha-2 country code relevant to the individual/entity.
 
-          entity_type: The type of entity being screened.
+          entity_type: Type of entity being screened.
 
-          name: Full name of the individual or organization to screen.
+          name: The full name of the individual or entity to screen.
 
-          address: Full address for enhanced screening.
+          address: Optional: Address details for enhanced screening accuracy.
 
-          date_of_birth: Date of birth for individual screening (YYYY-MM-DD).
+          date_of_birth: Date of birth, if screening an individual.
+
+          identification_number: Optional: Any identification number (e.g., passport, EIN).
 
           extra_headers: Send extra headers
 
@@ -153,6 +156,7 @@ class CorporateResource(SyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),
@@ -211,6 +215,7 @@ class AsyncCorporateResource(AsyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,15 +228,17 @@ class AsyncCorporateResource(AsyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: Country of residence or operation (ISO 3166-1 alpha-2 code).
+          country: ISO 3166-1 alpha-2 country code relevant to the individual/entity.
 
-          entity_type: The type of entity being screened.
+          entity_type: Type of entity being screened.
 
-          name: Full name of the individual or organization to screen.
+          name: The full name of the individual or entity to screen.
 
-          address: Full address for enhanced screening.
+          address: Optional: Address details for enhanced screening accuracy.
 
-          date_of_birth: Date of birth for individual screening (YYYY-MM-DD).
+          date_of_birth: Date of birth, if screening an individual.
+
+          identification_number: Optional: Any identification number (e.g., passport, EIN).
 
           extra_headers: Send extra headers
 
@@ -250,6 +257,7 @@ class AsyncCorporateResource(AsyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),

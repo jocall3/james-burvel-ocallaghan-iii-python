@@ -69,7 +69,7 @@ class AnomaliesResource(SyncAPIResource):
         potential action to mitigate risk and ensure compliance.
 
         Args:
-          end_date: Filter results up to this date (inclusive, YYYY-MM-DD).
+          end_date: Retrieve items up to this date (inclusive).
 
           entity_type: Filter anomalies by the type of financial entity they are related to.
 
@@ -79,7 +79,7 @@ class AnomaliesResource(SyncAPIResource):
 
           severity: Filter anomalies by their AI-assessed severity level.
 
-          start_date: Filter results from this date (inclusive, YYYY-MM-DD).
+          start_date: Retrieve items from this date (inclusive).
 
           status: Filter anomalies by their current review status.
 
@@ -206,7 +206,7 @@ class AsyncAnomaliesResource(AsyncAPIResource):
         potential action to mitigate risk and ensure compliance.
 
         Args:
-          end_date: Filter results up to this date (inclusive, YYYY-MM-DD).
+          end_date: Retrieve items up to this date (inclusive).
 
           entity_type: Filter anomalies by the type of financial entity they are related to.
 
@@ -216,7 +216,7 @@ class AsyncAnomaliesResource(AsyncAPIResource):
 
           severity: Filter anomalies by their AI-assessed severity level.
 
-          start_date: Filter results from this date (inclusive, YYYY-MM-DD).
+          start_date: Retrieve items from this date (inclusive).
 
           status: Filter anomalies by their current review status.
 

@@ -20,22 +20,23 @@ class TopCategoriesByChange(BaseModel):
 
 
 class InsightGetSpendingTrendsResponse(BaseModel):
+    ai_insights: List[AIInsight] = FieldInfo(alias="aiInsights")
+    """AI-generated insights and actionable recommendations related to spending."""
+
     overall_trend: Literal["increasing", "decreasing", "stable"] = FieldInfo(alias="overallTrend")
-    """Overall trend in spending."""
+    """Overall trend of spending."""
 
     percentage_change: float = FieldInfo(alias="percentageChange")
-    """Percentage change in spending over the period."""
+    """
+    Percentage change in spending for the period (positive for increase, negative
+    for decrease).
+    """
 
     period: str
     """The period over which the spending trend is analyzed."""
 
-    ai_insights: Optional[List[AIInsight]] = FieldInfo(alias="aiInsights", default=None)
-    """AI-driven insights and recommendations related to spending."""
+    top_categories_by_change: List[TopCategoriesByChange] = FieldInfo(alias="topCategoriesByChange")
+    """Categories with the most significant spending changes."""
 
     forecast_next_month: Optional[float] = FieldInfo(alias="forecastNextMonth", default=None)
-    """AI's forecast for total spending in the next month."""
-
-    top_categories_by_change: Optional[List[TopCategoriesByChange]] = FieldInfo(
-        alias="topCategoriesByChange", default=None
-    )
-    """Top categories with significant spending changes."""
+    """AI's forecasted total spending for the next month."""

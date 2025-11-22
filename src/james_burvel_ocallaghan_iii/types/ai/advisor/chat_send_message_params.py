@@ -12,12 +12,12 @@ __all__ = ["ChatSendMessageParams", "FunctionResponse"]
 
 class ChatSendMessageParams(TypedDict, total=False):
     message: Required[str]
-    """The user's natural language input to the AI Advisor."""
+    """The user's natural language message or query for the AI Advisor."""
 
     function_response: Annotated[Optional[FunctionResponse], PropertyInfo(alias="functionResponse")]
     """
-    Optional: The output from a tool function that the AI previously requested to be
-    executed by the client.
+    Optional: If the user is responding to a tool call, this contains the output
+    from the tool's execution.
     """
 
     session_id: Annotated[Optional[str], PropertyInfo(alias="sessionId")]
@@ -26,7 +26,7 @@ class ChatSendMessageParams(TypedDict, total=False):
 
 class FunctionResponse(TypedDict, total=False):
     name: str
-    """The name of the function that was called."""
+    """The name of the tool function that was executed."""
 
     response: object
-    """The JSON object containing the result of the function call."""
+    """The structured output/result from the tool function execution."""

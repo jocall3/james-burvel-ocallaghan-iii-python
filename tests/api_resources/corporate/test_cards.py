@@ -175,7 +175,7 @@ class TestCards:
         card = client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=10,
             offset=0,
             start_date=parse_date("2024-01-01"),
         )
@@ -433,7 +433,7 @@ class TestAsyncCards:
         card = await async_client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=10,
             offset=0,
             start_date=parse_date("2024-01-01"),
         )

@@ -139,7 +139,7 @@ class PitchResource(SyncAPIResource):
         self,
         pitch_id: str,
         *,
-        answers: Iterable[pitch_submit_feedback_params.Answer] | Omit = omit,
+        answers: Optional[Iterable[pitch_submit_feedback_params.Answer]] | Omit = omit,
         feedback: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -154,7 +154,9 @@ class PitchResource(SyncAPIResource):
         process.
 
         Args:
-          feedback: General feedback or additional information provided by the entrepreneur.
+          answers: Structured answers to specific questions posed by Quantum Weaver.
+
+          feedback: General feedback or additional narrative for Quantum Weaver.
 
           extra_headers: Send extra headers
 
@@ -297,7 +299,7 @@ class AsyncPitchResource(AsyncAPIResource):
         self,
         pitch_id: str,
         *,
-        answers: Iterable[pitch_submit_feedback_params.Answer] | Omit = omit,
+        answers: Optional[Iterable[pitch_submit_feedback_params.Answer]] | Omit = omit,
         feedback: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -312,7 +314,9 @@ class AsyncPitchResource(AsyncAPIResource):
         process.
 
         Args:
-          feedback: General feedback or additional information provided by the entrepreneur.
+          answers: Structured answers to specific questions posed by Quantum Weaver.
+
+          feedback: General feedback or additional narrative for Quantum Weaver.
 
           extra_headers: Send extra headers
 

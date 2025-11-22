@@ -18,16 +18,16 @@ class SustainabilityPurchaseCarbonOffsetsResponse(BaseModel):
     """The name of the carbon offset project supported."""
 
     purchase_date: datetime = FieldInfo(alias="purchaseDate")
-    """Date and time of the carbon offset purchase."""
+    """Date and time of the offset purchase."""
 
     purchase_id: str = FieldInfo(alias="purchaseId")
     """Unique identifier for the carbon offset purchase."""
 
     total_cost_usd: float = FieldInfo(alias="totalCostUSD")
-    """Total cost of the carbon offset purchase in USD."""
+    """The total cost of the carbon offset purchase in USD."""
 
     certificate_url: Optional[str] = FieldInfo(alias="certificateUrl", default=None)
-    """URL to the official carbon offset certificate."""
+    """URL to the carbon offset certificate."""
 
     transaction_id: Optional[str] = FieldInfo(alias="transactionId", default=None)
-    """The ID of the corresponding financial transaction for the purchase."""
+    """The ID of the associated financial transaction."""

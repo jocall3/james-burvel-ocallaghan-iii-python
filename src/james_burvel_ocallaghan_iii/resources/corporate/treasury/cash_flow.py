@@ -59,9 +59,10 @@ class CashFlowResource(SyncAPIResource):
         recommendations for optimal treasury management.
 
         Args:
-          forecast_horizon_days: Number of days into the future for the cash flow forecast.
+          forecast_horizon_days: The number of days into the future for the cash flow forecast.
 
-          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios.
+          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios in
+              addition to most likely.
 
           extra_headers: Send extra headers
 
@@ -128,9 +129,10 @@ class AsyncCashFlowResource(AsyncAPIResource):
         recommendations for optimal treasury management.
 
         Args:
-          forecast_horizon_days: Number of days into the future for the cash flow forecast.
+          forecast_horizon_days: The number of days into the future for the cash flow forecast.
 
-          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios.
+          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios in
+              addition to most likely.
 
           extra_headers: Send extra headers
 

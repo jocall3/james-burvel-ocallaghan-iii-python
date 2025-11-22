@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -50,12 +50,12 @@ class AuditsResource(SyncAPIResource):
         self,
         *,
         audit_scope: Literal[
-            "all_transactions", "corporate_cards", "international_payments", "user_onboarding", "specific_accounts"
+            "all_transactions", "corporate_cards", "specific_accounts", "international_payments", "user_onboarding"
         ],
         end_date: Union[str, date],
-        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX"]],
+        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "PSD2", "SOX", "CCPA"]],
         start_date: Union[str, date],
-        specific_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        additional_notes: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,14 +71,13 @@ class AuditsResource(SyncAPIResource):
         Args:
           audit_scope: The scope of the compliance audit.
 
-          end_date: End date for the audit period (inclusive).
+          end_date: The end date for the audit period (inclusive).
 
-          regulatory_frameworks: List of regulatory frameworks to audit against.
+          regulatory_frameworks: List of regulatory frameworks against which to audit.
 
-          start_date: Start date for the audit period (inclusive).
+          start_date: The start date for the audit period (inclusive).
 
-          specific_account_ids: Optional: List of specific account IDs to include if `auditScope` is
-              'specific_accounts'.
+          additional_notes: Any additional notes or specific areas of focus for the audit.
 
           extra_headers: Send extra headers
 
@@ -96,7 +95,7 @@ class AuditsResource(SyncAPIResource):
                     "end_date": end_date,
                     "regulatory_frameworks": regulatory_frameworks,
                     "start_date": start_date,
-                    "specific_account_ids": specific_account_ids,
+                    "additional_notes": additional_notes,
                 },
                 audit_request_params.AuditRequestParams,
             ),
@@ -164,12 +163,12 @@ class AsyncAuditsResource(AsyncAPIResource):
         self,
         *,
         audit_scope: Literal[
-            "all_transactions", "corporate_cards", "international_payments", "user_onboarding", "specific_accounts"
+            "all_transactions", "corporate_cards", "specific_accounts", "international_payments", "user_onboarding"
         ],
         end_date: Union[str, date],
-        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX"]],
+        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "PSD2", "SOX", "CCPA"]],
         start_date: Union[str, date],
-        specific_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        additional_notes: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,14 +184,13 @@ class AsyncAuditsResource(AsyncAPIResource):
         Args:
           audit_scope: The scope of the compliance audit.
 
-          end_date: End date for the audit period (inclusive).
+          end_date: The end date for the audit period (inclusive).
 
-          regulatory_frameworks: List of regulatory frameworks to audit against.
+          regulatory_frameworks: List of regulatory frameworks against which to audit.
 
-          start_date: Start date for the audit period (inclusive).
+          start_date: The start date for the audit period (inclusive).
 
-          specific_account_ids: Optional: List of specific account IDs to include if `auditScope` is
-              'specific_accounts'.
+          additional_notes: Any additional notes or specific areas of focus for the audit.
 
           extra_headers: Send extra headers
 
@@ -210,7 +208,7 @@ class AsyncAuditsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "regulatory_frameworks": regulatory_frameworks,
                     "start_date": start_date,
-                    "specific_account_ids": specific_account_ids,
+                    "additional_notes": additional_notes,
                 },
                 audit_request_params.AuditRequestParams,
             ),

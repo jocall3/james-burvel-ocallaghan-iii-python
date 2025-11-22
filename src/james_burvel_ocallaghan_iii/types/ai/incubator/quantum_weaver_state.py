@@ -12,13 +12,17 @@ __all__ = ["QuantumWeaverState", "Question"]
 
 
 class Question(BaseModel):
-    id: Optional[str] = None
+    id: str
+    """Unique identifier for the question."""
 
-    category: Optional[str] = None
+    category: Literal["technology", "market", "finance", "team", "operations", "legal"]
+    """The category the question relates to."""
 
-    is_required: Optional[bool] = FieldInfo(alias="isRequired", default=None)
+    is_required: bool = FieldInfo(alias="isRequired")
+    """Indicates if answering this question is mandatory to proceed."""
 
-    question: Optional[str] = None
+    question: str
+    """The full question asked by Quantum Weaver AI."""
 
 
 class QuantumWeaverState(BaseModel):
@@ -29,7 +33,6 @@ class QuantumWeaverState(BaseModel):
     """Unique identifier for the business pitch."""
 
     stage: Literal[
-        "submitted",
         "initial_review",
         "ai_analysis",
         "feedback_required",
@@ -39,24 +42,19 @@ class QuantumWeaverState(BaseModel):
         "rejected",
         "incubated_graduated",
     ]
-    """
-    Current stage of the business pitch within Quantum Weaver's incubation pipeline.
-    """
+    """The current stage of the business pitch in the incubation process."""
 
     status_message: str = FieldInfo(alias="statusMessage")
-    """A descriptive message about the current status of the pitch."""
+    """A human-readable message detailing the current status."""
 
     estimated_funding_offer: Optional[float] = FieldInfo(alias="estimatedFundingOffer", default=None)
-    """Estimated seed funding amount offered by Quantum Weaver (if applicable)."""
+    """If approved, the estimated seed funding amount offered (in USD)."""
 
     feedback_summary: Optional[str] = FieldInfo(alias="feedbackSummary", default=None)
-    """A summary of AI-generated feedback or key findings from the current stage."""
+    """A high-level summary of AI feedback if available."""
 
     next_steps: Optional[str] = FieldInfo(alias="nextSteps", default=None)
-    """Guidance on what the entrepreneur should do next."""
+    """Recommended next actions for the user."""
 
     questions: Optional[List[Question]] = None
-    """
-    A list of specific questions from Quantum Weaver requiring the entrepreneur's
-    input.
-    """
+    """Specific questions from the AI that require user input to proceed."""

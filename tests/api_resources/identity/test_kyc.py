@@ -69,9 +69,9 @@ class TestKYC:
             document_type="drivers_license",
             expiration_date=parse_date("2030-01-01"),
             issue_date=parse_date("2020-01-01"),
+            additional_notes="additionalNotes",
             address_proof_image="U3RhaW5sZXNzIHJvY2tz",
             document_back_image="U3RhaW5sZXNzIHJvY2tz",
-            live_selfie_image="U3RhaW5sZXNzIHJvY2tz",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 
@@ -168,9 +168,9 @@ class TestAsyncKYC:
             document_type="drivers_license",
             expiration_date=parse_date("2030-01-01"),
             issue_date=parse_date("2020-01-01"),
+            additional_notes="additionalNotes",
             address_proof_image="U3RhaW5sZXNzIHJvY2tz",
             document_back_image="U3RhaW5sZXNzIHJvY2tz",
-            live_selfie_image="U3RhaW5sZXNzIHJvY2tz",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 

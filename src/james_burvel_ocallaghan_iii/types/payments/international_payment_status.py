@@ -12,35 +12,38 @@ __all__ = ["InternationalPaymentStatus"]
 
 
 class InternationalPaymentStatus(BaseModel):
-    fees_applied: float = FieldInfo(alias="feesApplied")
-    """Total fees applied to the payment."""
-
     fx_rate_applied: float = FieldInfo(alias="fxRateApplied")
-    """The foreign exchange rate applied (target_currency / source_currency)."""
+    """The foreign exchange rate applied (targetCurrency per sourceCurrency)."""
 
     payment_id: str = FieldInfo(alias="paymentId")
     """Unique identifier for the international payment."""
 
     source_amount: float = FieldInfo(alias="sourceAmount")
-    """Amount sent from the source account."""
+    """The amount sent from the source account."""
 
     source_currency: str = FieldInfo(alias="sourceCurrency")
-    """Currency of the source amount."""
+    """The currency from which funds were sent."""
 
     status: Literal["in_progress", "held_for_review", "completed", "failed", "cancelled"]
-    """Current status of the international payment."""
+    """Current processing status of the international payment."""
 
-    target_amount: Optional[float] = FieldInfo(alias="targetAmount", default=None)
-    """Amount received by the beneficiary in target currency (may be estimated)."""
+    target_amount: float = FieldInfo(alias="targetAmount")
+    """The amount received by the beneficiary in the target currency."""
 
     target_currency: str = FieldInfo(alias="targetCurrency")
-    """Currency of the target amount."""
+    """The currency received by the beneficiary."""
 
     estimated_completion_time: Optional[datetime] = FieldInfo(alias="estimatedCompletionTime", default=None)
-    """Estimated time when the payment will be completed."""
+    """Estimated date and time for payment completion."""
+
+    fees_applied: Optional[float] = FieldInfo(alias="feesApplied", default=None)
+    """Any fees applied to the international payment."""
+
+    last_updated: Optional[datetime] = FieldInfo(alias="lastUpdated", default=None)
+    """Timestamp when the payment status was last updated."""
 
     message: Optional[str] = None
-    """Additional message regarding payment status (e.g., reason for hold)."""
+    """Additional messages, e.g., for held payments."""
 
     tracking_url: Optional[str] = FieldInfo(alias="trackingUrl", default=None)
     """URL to track the payment's progress."""
