@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
@@ -12,13 +13,16 @@ __all__ = ["WebhookUpdateParams"]
 
 class WebhookUpdateParams(TypedDict, total=False):
     callback_url: Annotated[str, PropertyInfo(alias="callbackUrl")]
-    """The new URL where webhook events should be sent."""
+    """New URL for the webhook endpoint."""
 
-    events: SequenceNotStr[str]
-    """The updated list of event types to subscribe to.
+    events: Optional[SequenceNotStr[str]]
+    """Updated list of event types to subscribe to."""
 
-    Sending an empty array might disable all events.
+    secret: Optional[str]
+    """Optional: A new secret string for signing webhook payloads.
+
+    Providing this will replace the existing secret.
     """
 
-    status: Literal["active", "paused", "suspended"]
-    """The new status for the webhook subscription (e.g., 'active', 'paused')."""
+    status: Literal["active", "paused"]
+    """New status for the subscription."""

@@ -14,19 +14,19 @@ __all__ = ["CorporatePerformSanctionScreeningParams"]
 
 class CorporatePerformSanctionScreeningParams(TypedDict, total=False):
     country: Required[str]
-    """ISO 3166-1 alpha-2 country code relevant to the individual/entity."""
+    """The primary country of residence or operation (ISO 3166-1 alpha-2)."""
 
     entity_type: Required[Annotated[Literal["individual", "organization"], PropertyInfo(alias="entityType")]]
-    """Type of entity being screened."""
+    """The type of entity being screened."""
 
     name: Required[str]
-    """The full name of the individual or entity to screen."""
+    """The full name of the individual or organization to screen."""
 
     address: Optional[AddressParam]
-    """Optional: Address details for enhanced screening accuracy."""
+    """Optional: Address details for improved screening."""
 
     date_of_birth: Annotated[Union[str, date, None], PropertyInfo(alias="dateOfBirth", format="iso8601")]
-    """Date of birth, if screening an individual."""
+    """Optional: Date of birth for individuals, for better match accuracy."""
 
-    identification_number: Annotated[Optional[str], PropertyInfo(alias="identificationNumber")]
-    """Optional: Any identification number (e.g., passport, EIN)."""
+    id_number: Annotated[Optional[str], PropertyInfo(alias="idNumber")]
+    """Optional: Government-issued ID number for individuals."""

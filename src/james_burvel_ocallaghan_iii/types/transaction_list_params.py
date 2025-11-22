@@ -19,7 +19,7 @@ class TransactionListParams(TypedDict, total=False):
     """Retrieve transactions up to this date (inclusive)."""
 
     limit: int
-    """Maximum number of items to return."""
+    """Maximum number of items to return in the response."""
 
     max_amount: Annotated[float, PropertyInfo(alias="maxAmount")]
     """Filter for transactions with an amount less than or equal to this value."""

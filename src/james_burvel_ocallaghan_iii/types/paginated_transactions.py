@@ -21,7 +21,7 @@ class PaginatedTransactions(BaseModel):
     """The starting index of the list for pagination."""
 
     total: int
-    """The total number of available items across all pages."""
+    """The total number of available items."""
 
     next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
-    """The offset to use for the next page of results, if available."""
+    """The offset to use for the next page of results. Null if no more pages."""

@@ -30,6 +30,7 @@ class TestRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
@@ -43,8 +44,9 @@ class TestRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
-            start_date=parse_date("2024-09-01"),
             linked_account_id="acc_chase_checking_4567",
+            start_date=parse_date("2024-09-01"),
+            status="active",
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
@@ -57,6 +59,7 @@ class TestRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         )
 
@@ -74,6 +77,7 @@ class TestRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         ) as response:
             assert not response.is_closed
@@ -127,6 +131,7 @@ class TestAsyncRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
@@ -140,8 +145,9 @@ class TestAsyncRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
-            start_date=parse_date("2024-09-01"),
             linked_account_id="acc_chase_checking_4567",
+            start_date=parse_date("2024-09-01"),
+            status="active",
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
@@ -154,6 +160,7 @@ class TestAsyncRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         )
 
@@ -171,6 +178,7 @@ class TestAsyncRecurring:
             currency="USD",
             description="New Gym Membership",
             frequency="monthly",
+            linked_account_id="acc_chase_checking_4567",
             start_date=parse_date("2024-09-01"),
         ) as response:
             assert not response.is_closed

@@ -12,40 +12,30 @@ __all__ = ["TransactionInitiateTransferParams"]
 
 class TransactionInitiateTransferParams(TypedDict, total=False):
     amount: Required[float]
-    """The amount of crypto asset to transfer."""
+    """The amount of cryptocurrency to transfer."""
 
     asset_symbol: Required[Annotated[str, PropertyInfo(alias="assetSymbol")]]
-    """The ticker symbol of the crypto asset (e.g., ETH, USDC)."""
+    """The symbol of the cryptocurrency to transfer (e.g., ETH, USDC)."""
 
     blockchain_network: Required[
         Annotated[
-            Literal[
-                "Ethereum",
-                "Solana",
-                "Polygon",
-                "BinanceSmartChain",
-                "Avalanche",
-                "Arbitrum",
-                "Optimism",
-                "Bitcoin",
-                "other",
-            ],
+            Literal["Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"],
             PropertyInfo(alias="blockchainNetwork"),
         ]
     ]
-    """The blockchain network on which to execute the transfer."""
+    """The blockchain network on which the transfer will occur."""
 
     recipient_address: Required[Annotated[str, PropertyInfo(alias="recipientAddress")]]
-    """The public blockchain address of the recipient."""
+    """The recipient's blockchain address."""
 
     source_wallet_id: Required[Annotated[str, PropertyInfo(alias="sourceWalletId")]]
-    """The ID of the connected wallet from which to send funds."""
+    """The ID of the connected wallet from which to transfer."""
 
-    gas_price_gwei: Annotated[Optional[int], PropertyInfo(alias="gasPriceGwei")]
+    gas_limit: Annotated[Optional[int], PropertyInfo(alias="gasLimit")]
+    """Optional: Maximum gas units to consume for the transaction."""
+
+    gas_price_gwei: Annotated[Optional[float], PropertyInfo(alias="gasPriceGwei")]
     """Optional: Desired gas price in Gwei for Ethereum-based transactions."""
 
     memo: Optional[str]
-    """
-    Optional: A short memo or note to include with the transaction (if supported by
-    network).
-    """
+    """Optional: A short memo or note for the transaction (supported by some chains)."""

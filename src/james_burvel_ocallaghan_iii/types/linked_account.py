@@ -22,25 +22,48 @@ class LinkedAccount(BaseModel):
     """The current balance of the account."""
 
     institution_name: str = FieldInfo(alias="institutionName")
-    """Name of the financial institution where the account is held."""
+    """Name of the financial institution holding the account."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp of when the account balance was last updated."""
-
-    mask: str
-    """Masked account number (e.g., last 4 digits) for display."""
+    """Timestamp when the account balance and details were last synced."""
 
     name: str
     """User-friendly name of the account."""
 
-    type: Literal["depository", "credit", "loan", "investment", "other"]
+    type: Literal["depository", "credit", "investment", "loan", "other"]
     """High-level type of the financial account."""
 
+    account_link_status: Optional[Literal["active", "inactive", "reconnect_required", "error"]] = FieldInfo(
+        alias="accountLinkStatus", default=None
+    )
+    """Current status of the connection to the external institution."""
+
+    account_number: Optional[str] = FieldInfo(alias="accountNumber", default=None)
+    """
+    Full account number (sensitive, typically only accessible with explicit
+    permissions).
+    """
+
     available_balance: Optional[float] = FieldInfo(alias="availableBalance", default=None)
-    """The available balance, considering pending transactions or holds."""
+    """
+    The available balance of the account (may differ from current due to pending
+    transactions).
+    """
 
     external_id: Optional[str] = FieldInfo(alias="externalId", default=None)
-    """Optional: Identifier from the external financial institution/aggregator."""
+    """
+    Optional: Identifier from the external financial institution (e.g., Plaid
+    account ID).
+    """
+
+    mask: Optional[str] = None
+    """Last 4 digits of the account number for display purposes (masked)."""
+
+    routing_number: Optional[str] = FieldInfo(alias="routingNumber", default=None)
+    """
+    Bank routing number (sensitive, typically only accessible with explicit
+    permissions).
+    """
 
     subtype: Optional[str] = None
     """Specific subtype of the account (e.g., checking, savings, IRA, credit card)."""

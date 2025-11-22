@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -13,47 +12,31 @@ __all__ = ["WalletConnectParams"]
 class WalletConnectParams(TypedDict, total=False):
     blockchain_network: Required[
         Annotated[
-            Literal[
-                "Ethereum",
-                "Solana",
-                "Polygon",
-                "BinanceSmartChain",
-                "Avalanche",
-                "Arbitrum",
-                "Optimism",
-                "Bitcoin",
-                "other",
-            ],
+            Literal["Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"],
             PropertyInfo(alias="blockchainNetwork"),
         ]
     ]
-    """The primary blockchain network for this wallet."""
+    """The blockchain network the wallet is on."""
 
     signed_message: Required[Annotated[str, PropertyInfo(alias="signedMessage")]]
     """
-    A cryptographic signature from the wallet, proving ownership or consent to
-    connect.
+    A cryptographic signature proving ownership of the wallet address (e.g., EIP-191
+    signature).
     """
 
     wallet_address: Required[Annotated[str, PropertyInfo(alias="walletAddress")]]
-    """The public address of the cryptocurrency wallet."""
+    """The public address of the wallet to connect."""
 
     wallet_provider: Required[
         Annotated[
-            Literal["MetaMask", "Phantom", "Ledger", "Trezor", "CoinbaseWallet", "WalletConnect", "other"],
+            Literal["MetaMask", "Phantom", "Ledger", "TrustWallet", "CoinbaseWallet", "Other"],
             PropertyInfo(alias="walletProvider"),
         ]
     ]
-    """The provider or type of the wallet being connected."""
+    """The provider/type of the wallet."""
 
-    message_to_sign: Annotated[Optional[str], PropertyInfo(alias="messageToSign")]
-    """Optional: The original message that was signed, if provided by the client."""
-
-    read_access: Annotated[bool, PropertyInfo(alias="readAccess")]
-    """Request for read access to wallet balances and NFTs."""
-
-    write_access: Annotated[bool, PropertyInfo(alias="writeAccess")]
+    grant_write_access: Annotated[bool, PropertyInfo(alias="grantWriteAccess")]
     """
-    Request for write access to initiate transactions (requires further security
-    layers).
+    If true, requests write access to initiate transactions (requires additional
+    user confirmation).
     """

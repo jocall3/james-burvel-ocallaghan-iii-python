@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -73,22 +72,12 @@ class WalletsResource(SyncAPIResource):
         self,
         *,
         blockchain_network: Literal[
-            "Ethereum",
-            "Solana",
-            "Polygon",
-            "BinanceSmartChain",
-            "Avalanche",
-            "Arbitrum",
-            "Optimism",
-            "Bitcoin",
-            "other",
+            "Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"
         ],
         signed_message: str,
         wallet_address: str,
-        wallet_provider: Literal["MetaMask", "Phantom", "Ledger", "Trezor", "CoinbaseWallet", "WalletConnect", "other"],
-        message_to_sign: Optional[str] | Omit = omit,
-        read_access: bool | Omit = omit,
-        write_access: bool | Omit = omit,
+        wallet_provider: Literal["MetaMask", "Phantom", "Ledger", "TrustWallet", "CoinbaseWallet", "Other"],
+        grant_write_access: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,21 +91,17 @@ class WalletsResource(SyncAPIResource):
         wallet provider.
 
         Args:
-          blockchain_network: The primary blockchain network for this wallet.
+          blockchain_network: The blockchain network the wallet is on.
 
-          signed_message: A cryptographic signature from the wallet, proving ownership or consent to
-              connect.
+          signed_message: A cryptographic signature proving ownership of the wallet address (e.g., EIP-191
+              signature).
 
-          wallet_address: The public address of the cryptocurrency wallet.
+          wallet_address: The public address of the wallet to connect.
 
-          wallet_provider: The provider or type of the wallet being connected.
+          wallet_provider: The provider/type of the wallet.
 
-          message_to_sign: Optional: The original message that was signed, if provided by the client.
-
-          read_access: Request for read access to wallet balances and NFTs.
-
-          write_access: Request for write access to initiate transactions (requires further security
-              layers).
+          grant_write_access: If true, requests write access to initiate transactions (requires additional
+              user confirmation).
 
           extra_headers: Send extra headers
 
@@ -134,9 +119,7 @@ class WalletsResource(SyncAPIResource):
                     "signed_message": signed_message,
                     "wallet_address": wallet_address,
                     "wallet_provider": wallet_provider,
-                    "message_to_sign": message_to_sign,
-                    "read_access": read_access,
-                    "write_access": write_access,
+                    "grant_write_access": grant_write_access,
                 },
                 wallet_connect_params.WalletConnectParams,
             ),
@@ -228,22 +211,12 @@ class AsyncWalletsResource(AsyncAPIResource):
         self,
         *,
         blockchain_network: Literal[
-            "Ethereum",
-            "Solana",
-            "Polygon",
-            "BinanceSmartChain",
-            "Avalanche",
-            "Arbitrum",
-            "Optimism",
-            "Bitcoin",
-            "other",
+            "Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"
         ],
         signed_message: str,
         wallet_address: str,
-        wallet_provider: Literal["MetaMask", "Phantom", "Ledger", "Trezor", "CoinbaseWallet", "WalletConnect", "other"],
-        message_to_sign: Optional[str] | Omit = omit,
-        read_access: bool | Omit = omit,
-        write_access: bool | Omit = omit,
+        wallet_provider: Literal["MetaMask", "Phantom", "Ledger", "TrustWallet", "CoinbaseWallet", "Other"],
+        grant_write_access: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -257,21 +230,17 @@ class AsyncWalletsResource(AsyncAPIResource):
         wallet provider.
 
         Args:
-          blockchain_network: The primary blockchain network for this wallet.
+          blockchain_network: The blockchain network the wallet is on.
 
-          signed_message: A cryptographic signature from the wallet, proving ownership or consent to
-              connect.
+          signed_message: A cryptographic signature proving ownership of the wallet address (e.g., EIP-191
+              signature).
 
-          wallet_address: The public address of the cryptocurrency wallet.
+          wallet_address: The public address of the wallet to connect.
 
-          wallet_provider: The provider or type of the wallet being connected.
+          wallet_provider: The provider/type of the wallet.
 
-          message_to_sign: Optional: The original message that was signed, if provided by the client.
-
-          read_access: Request for read access to wallet balances and NFTs.
-
-          write_access: Request for write access to initiate transactions (requires further security
-              layers).
+          grant_write_access: If true, requests write access to initiate transactions (requires additional
+              user confirmation).
 
           extra_headers: Send extra headers
 
@@ -289,9 +258,7 @@ class AsyncWalletsResource(AsyncAPIResource):
                     "signed_message": signed_message,
                     "wallet_address": wallet_address,
                     "wallet_provider": wallet_provider,
-                    "message_to_sign": message_to_sign,
-                    "read_access": read_access,
-                    "write_access": write_access,
+                    "grant_write_access": grant_write_access,
                 },
                 wallet_connect_params.WalletConnectParams,
             ),

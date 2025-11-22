@@ -48,6 +48,7 @@ class TestInternational:
                 "name": "Maria Schmidt",
                 "swift_bic": "DEUTDEFF",
                 "account_number": "accountNumber",
+                "routing_number": "routingNumber",
             },
             purpose="Vendor payment for Q2 services.",
             source_account_id="acc_chase_checking_4567",
@@ -55,7 +56,7 @@ class TestInternational:
             target_currency="EUR",
             fx_rate_lock=True,
             fx_rate_provider="proprietary_ai",
-            reference_id="referenceId",
+            reference_id="INV-2024-00123",
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
@@ -186,6 +187,7 @@ class TestAsyncInternational:
                 "name": "Maria Schmidt",
                 "swift_bic": "DEUTDEFF",
                 "account_number": "accountNumber",
+                "routing_number": "routingNumber",
             },
             purpose="Vendor payment for Q2 services.",
             source_account_id="acc_chase_checking_4567",
@@ -193,7 +195,7 @@ class TestAsyncInternational:
             target_currency="EUR",
             fx_rate_lock=True,
             fx_rate_provider="proprietary_ai",
-            reference_id="referenceId",
+            reference_id="INV-2024-00123",
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -12,15 +11,14 @@ __all__ = ["PortfolioUpdateParams"]
 
 class PortfolioUpdateParams(TypedDict, total=False):
     ai_rebalancing_frequency: Annotated[
-        Optional[Literal["never", "monthly", "quarterly", "semi_annually", "annually"]],
-        PropertyInfo(alias="aiRebalancingFrequency"),
+        Literal["never", "monthly", "quarterly", "annually"], PropertyInfo(alias="aiRebalancingFrequency")
     ]
-    """Updated frequency for AI-driven rebalancing recommendations."""
+    """Updated frequency for AI-driven rebalancing."""
 
     name: str
     """Updated name of the portfolio."""
 
     risk_tolerance: Annotated[
-        Literal["low", "medium", "aggressive", "very_aggressive"], PropertyInfo(alias="riskTolerance")
+        Literal["conservative", "balanced", "medium", "aggressive", "speculative"], PropertyInfo(alias="riskTolerance")
     ]
-    """Updated risk tolerance for the portfolio. May trigger rebalancing suggestions."""
+    """Updated risk tolerance for this portfolio."""

@@ -12,16 +12,16 @@ __all__ = ["AdvisorListToolsResponse", "AdvisorListToolsResponseItem"]
 
 class AdvisorListToolsResponseItem(BaseModel):
     description: str
-    """A description of what the AI tool does."""
+    """A description of what the tool does."""
 
     name: str
-    """The programmatic name of the AI tool."""
+    """The unique name of the AI tool."""
 
     parameters: object
-    """A JSON schema object defining the input parameters for the tool."""
+    """An OpenAPI schema object describing the input parameters for the tool."""
 
     access_scope: Optional[str] = FieldInfo(alias="accessScope", default=None)
-    """The OAuth2 scope required to execute this tool, if applicable."""
+    """The required OAuth2 scope to invoke this tool."""
 
 
 AdvisorListToolsResponse: TypeAlias = List[AdvisorListToolsResponseItem]

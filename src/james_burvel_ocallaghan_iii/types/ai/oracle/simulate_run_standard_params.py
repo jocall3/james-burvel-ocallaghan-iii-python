@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["SimulateRunStandardParams"]
@@ -10,10 +10,10 @@ __all__ = ["SimulateRunStandardParams"]
 
 class SimulateRunStandardParams(TypedDict, total=False):
     prompt: Required[str]
-    """Natural language description of the financial scenario to simulate."""
+    """A natural language description of the 'what-if' scenario to simulate."""
 
-    parameters: Optional[Dict[str, object]]
+    parameters: Optional[object]
     """
-    Optional: Structured parameters to guide the AI simulation (e.g., duration,
-    amount, riskTolerance).
+    Optional: Structured parameters to guide the simulation (e.g., duration,
+    amount).
     """

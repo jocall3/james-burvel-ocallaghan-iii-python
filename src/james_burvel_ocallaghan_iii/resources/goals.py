@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import goal_create_params, goal_update_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -50,15 +50,13 @@ class GoalsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
         target_amount: float,
         target_date: Union[str, date],
-        type: Literal[
-            "retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "investment_growth", "other"
-        ],
+        type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "custom"],
         generate_ai_plan: bool | Omit = omit,
         initial_contribution: float | Omit = omit,
-        linked_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        linked_account_id: Optional[str] | Omit = omit,
+        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,21 +68,21 @@ class GoalsResource(SyncAPIResource):
         Creates a new long-term financial goal, with optional AI plan generation.
 
         Args:
-          name: Name for the new financial goal.
+          name: Name of the new financial goal.
 
-          risk_tolerance: The risk tolerance for the investment strategy associated with this goal.
+          target_amount: The target amount to save or achieve.
 
-          target_amount: The target amount to save/invest for this goal.
-
-          target_date: The target date by which to achieve the goal.
+          target_date: The target date for the goal.
 
           type: Type of financial goal.
 
-          generate_ai_plan: If true, AI will automatically generate a strategic plan for this goal.
+          generate_ai_plan: If true, AI will generate a strategic plan to achieve the goal.
 
-          initial_contribution: Optional: Initial amount to contribute to this goal.
+          initial_contribution: Optional: An initial amount contributed to the goal.
 
-          linked_account_ids: Optional: List of accounts to associate with this goal for contributions.
+          linked_account_id: Optional: The ID of a primary account to link for contributions.
+
+          risk_tolerance: Risk tolerance for investments related to this goal.
 
           extra_headers: Send extra headers
 
@@ -99,13 +97,13 @@ class GoalsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
-                    "risk_tolerance": risk_tolerance,
                     "target_amount": target_amount,
                     "target_date": target_date,
                     "type": type,
                     "generate_ai_plan": generate_ai_plan,
                     "initial_contribution": initial_contribution,
-                    "linked_account_ids": linked_account_ids,
+                    "linked_account_id": linked_account_id,
+                    "risk_tolerance": risk_tolerance,
                 },
                 goal_create_params.GoalCreateParams,
             ),
@@ -153,10 +151,11 @@ class GoalsResource(SyncAPIResource):
         self,
         goal_id: str,
         *,
+        current_amount: float | Omit = omit,
         name: str | Omit = omit,
         regenerate_ai_plan: bool | Omit = omit,
-        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"] | Omit = omit,
-        status: Literal["on_track", "ahead_of_schedule", "behind_schedule", "achieved", "cancelled"] | Omit = omit,
+        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
+        status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused"] | Omit = omit,
         target_amount: float | Omit = omit,
         target_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -170,17 +169,19 @@ class GoalsResource(SyncAPIResource):
         Updates parameters for an existing financial goal.
 
         Args:
-          name: Updated name for the financial goal.
+          current_amount: Updated current amount accumulated towards the goal.
+
+          name: Updated name of the financial goal.
 
           regenerate_ai_plan: If true, the AI will regenerate the strategic plan based on updated parameters.
 
-          risk_tolerance: Updated risk tolerance for the investment strategy.
+          risk_tolerance: Updated risk tolerance for this goal.
 
           status: Updated status of the goal's progress.
 
-          target_amount: The updated target amount for this goal.
+          target_amount: Updated target amount for the goal.
 
-          target_date: The updated target date for achieving the goal.
+          target_date: Updated target date for the goal.
 
           extra_headers: Send extra headers
 
@@ -196,6 +197,7 @@ class GoalsResource(SyncAPIResource):
             f"/goals/{goal_id}",
             body=maybe_transform(
                 {
+                    "current_amount": current_amount,
                     "name": name,
                     "regenerate_ai_plan": regenerate_ai_plan,
                     "risk_tolerance": risk_tolerance,
@@ -292,15 +294,13 @@ class AsyncGoalsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"],
         target_amount: float,
         target_date: Union[str, date],
-        type: Literal[
-            "retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "investment_growth", "other"
-        ],
+        type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "custom"],
         generate_ai_plan: bool | Omit = omit,
         initial_contribution: float | Omit = omit,
-        linked_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        linked_account_id: Optional[str] | Omit = omit,
+        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -312,21 +312,21 @@ class AsyncGoalsResource(AsyncAPIResource):
         Creates a new long-term financial goal, with optional AI plan generation.
 
         Args:
-          name: Name for the new financial goal.
+          name: Name of the new financial goal.
 
-          risk_tolerance: The risk tolerance for the investment strategy associated with this goal.
+          target_amount: The target amount to save or achieve.
 
-          target_amount: The target amount to save/invest for this goal.
-
-          target_date: The target date by which to achieve the goal.
+          target_date: The target date for the goal.
 
           type: Type of financial goal.
 
-          generate_ai_plan: If true, AI will automatically generate a strategic plan for this goal.
+          generate_ai_plan: If true, AI will generate a strategic plan to achieve the goal.
 
-          initial_contribution: Optional: Initial amount to contribute to this goal.
+          initial_contribution: Optional: An initial amount contributed to the goal.
 
-          linked_account_ids: Optional: List of accounts to associate with this goal for contributions.
+          linked_account_id: Optional: The ID of a primary account to link for contributions.
+
+          risk_tolerance: Risk tolerance for investments related to this goal.
 
           extra_headers: Send extra headers
 
@@ -341,13 +341,13 @@ class AsyncGoalsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
-                    "risk_tolerance": risk_tolerance,
                     "target_amount": target_amount,
                     "target_date": target_date,
                     "type": type,
                     "generate_ai_plan": generate_ai_plan,
                     "initial_contribution": initial_contribution,
-                    "linked_account_ids": linked_account_ids,
+                    "linked_account_id": linked_account_id,
+                    "risk_tolerance": risk_tolerance,
                 },
                 goal_create_params.GoalCreateParams,
             ),
@@ -395,10 +395,11 @@ class AsyncGoalsResource(AsyncAPIResource):
         self,
         goal_id: str,
         *,
+        current_amount: float | Omit = omit,
         name: str | Omit = omit,
         regenerate_ai_plan: bool | Omit = omit,
-        risk_tolerance: Literal["low", "medium", "aggressive", "very_aggressive"] | Omit = omit,
-        status: Literal["on_track", "ahead_of_schedule", "behind_schedule", "achieved", "cancelled"] | Omit = omit,
+        risk_tolerance: Literal["conservative", "balanced", "medium", "aggressive", "speculative"] | Omit = omit,
+        status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused"] | Omit = omit,
         target_amount: float | Omit = omit,
         target_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -412,17 +413,19 @@ class AsyncGoalsResource(AsyncAPIResource):
         Updates parameters for an existing financial goal.
 
         Args:
-          name: Updated name for the financial goal.
+          current_amount: Updated current amount accumulated towards the goal.
+
+          name: Updated name of the financial goal.
 
           regenerate_ai_plan: If true, the AI will regenerate the strategic plan based on updated parameters.
 
-          risk_tolerance: Updated risk tolerance for the investment strategy.
+          risk_tolerance: Updated risk tolerance for this goal.
 
           status: Updated status of the goal's progress.
 
-          target_amount: The updated target amount for this goal.
+          target_amount: Updated target amount for the goal.
 
-          target_date: The updated target date for achieving the goal.
+          target_date: Updated target date for the goal.
 
           extra_headers: Send extra headers
 
@@ -438,6 +441,7 @@ class AsyncGoalsResource(AsyncAPIResource):
             f"/goals/{goal_id}",
             body=await async_maybe_transform(
                 {
+                    "current_amount": current_amount,
                     "name": name,
                     "regenerate_ai_plan": regenerate_ai_plan,
                     "risk_tolerance": risk_tolerance,

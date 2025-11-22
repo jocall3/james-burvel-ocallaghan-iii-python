@@ -30,7 +30,7 @@ class TestChat:
     @parametrize
     def test_method_retrieve_history_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         chat = client.ai.advisor.chat.retrieve_history(
-            limit=10,
+            limit=2,
             offset=0,
             session_id="session-quantum-xyz-789-alpha",
         )
@@ -62,7 +62,7 @@ class TestChat:
     @parametrize
     def test_method_send_message(self, client: JamesBurvelOcallaghanIii) -> None:
         chat = client.ai.advisor.chat.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         )
         assert_matches_type(ChatSendMessageResponse, chat, path=["response"])
 
@@ -70,7 +70,7 @@ class TestChat:
     @parametrize
     def test_method_send_message_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         chat = client.ai.advisor.chat.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
             function_response={
                 "name": "send_money",
                 "response": {
@@ -79,8 +79,9 @@ class TestChat:
                     "amountSent": 50,
                     "recipient": "Alex",
                 },
+                "call_id": "call_abc123",
             },
-            session_id="session-quantum-xyz-789-alpha",
+            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
         )
         assert_matches_type(ChatSendMessageResponse, chat, path=["response"])
 
@@ -88,7 +89,7 @@ class TestChat:
     @parametrize
     def test_raw_response_send_message(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.advisor.chat.with_raw_response.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         )
 
         assert response.is_closed is True
@@ -100,7 +101,7 @@ class TestChat:
     @parametrize
     def test_streaming_response_send_message(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.advisor.chat.with_streaming_response.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -126,7 +127,7 @@ class TestAsyncChat:
     @parametrize
     async def test_method_retrieve_history_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         chat = await async_client.ai.advisor.chat.retrieve_history(
-            limit=10,
+            limit=2,
             offset=0,
             session_id="session-quantum-xyz-789-alpha",
         )
@@ -158,7 +159,7 @@ class TestAsyncChat:
     @parametrize
     async def test_method_send_message(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         chat = await async_client.ai.advisor.chat.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         )
         assert_matches_type(ChatSendMessageResponse, chat, path=["response"])
 
@@ -166,7 +167,7 @@ class TestAsyncChat:
     @parametrize
     async def test_method_send_message_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         chat = await async_client.ai.advisor.chat.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
             function_response={
                 "name": "send_money",
                 "response": {
@@ -175,8 +176,9 @@ class TestAsyncChat:
                     "amountSent": 50,
                     "recipient": "Alex",
                 },
+                "call_id": "call_abc123",
             },
-            session_id="session-quantum-xyz-789-alpha",
+            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
         )
         assert_matches_type(ChatSendMessageResponse, chat, path=["response"])
 
@@ -184,7 +186,7 @@ class TestAsyncChat:
     @parametrize
     async def test_raw_response_send_message(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.advisor.chat.with_raw_response.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         )
 
         assert response.is_closed is True
@@ -196,7 +198,7 @@ class TestAsyncChat:
     @parametrize
     async def test_streaming_response_send_message(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.advisor.chat.with_streaming_response.send_message(
-            message="Can you analyze my recent spending patterns and suggest areas for saving, focusing on my dining expenses?",
+            session_id="session-quantum-xyz-789-alpha",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

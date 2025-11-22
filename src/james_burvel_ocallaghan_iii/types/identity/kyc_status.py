@@ -22,12 +22,12 @@ class KYCStatus(BaseModel):
     """The ID of the user whose KYC status is being retrieved."""
 
     rejection_reason: Optional[str] = FieldInfo(alias="rejectionReason", default=None)
-    """If status is 'rejected', provides the reason for rejection."""
+    """Optional: The reason for KYC rejection, if applicable."""
 
     required_actions: Optional[List[str]] = FieldInfo(alias="requiredActions", default=None)
-    """A list of actions required from the user to proceed with KYC."""
+    """List of actions the user needs to take to complete verification."""
 
     verified_tier: Optional[Literal["bronze", "silver", "gold", "platinum"]] = FieldInfo(
         alias="verifiedTier", default=None
     )
-    """The tier of verification achieved (e.g., for different spending limits)."""
+    """The service tier unlocked by successful KYC verification."""

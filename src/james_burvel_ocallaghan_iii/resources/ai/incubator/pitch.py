@@ -154,9 +154,9 @@ class PitchResource(SyncAPIResource):
         process.
 
         Args:
-          answers: Structured answers to specific questions posed by Quantum Weaver.
+          answers: Specific answers to previously asked questions.
 
-          feedback: General feedback or additional narrative for Quantum Weaver.
+          feedback: General feedback or additional information for Quantum Weaver.
 
           extra_headers: Send extra headers
 
@@ -314,9 +314,9 @@ class AsyncPitchResource(AsyncAPIResource):
         process.
 
         Args:
-          answers: Structured answers to specific questions posed by Quantum Weaver.
+          answers: Specific answers to previously asked questions.
 
-          feedback: General feedback or additional narrative for Quantum Weaver.
+          feedback: General feedback or additional information for Quantum Weaver.
 
           extra_headers: Send extra headers
 

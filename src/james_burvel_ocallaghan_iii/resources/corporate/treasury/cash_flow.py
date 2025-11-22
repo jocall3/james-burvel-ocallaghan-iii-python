@@ -61,8 +61,7 @@ class CashFlowResource(SyncAPIResource):
         Args:
           forecast_horizon_days: The number of days into the future for the cash flow forecast.
 
-          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios in
-              addition to most likely.
+          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios.
 
           extra_headers: Send extra headers
 
@@ -131,8 +130,7 @@ class AsyncCashFlowResource(AsyncAPIResource):
         Args:
           forecast_horizon_days: The number of days into the future for the cash flow forecast.
 
-          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios in
-              addition to most likely.
+          include_scenario_analysis: If true, the forecast will include best-case and worst-case scenarios.
 
           extra_headers: Send extra headers
 

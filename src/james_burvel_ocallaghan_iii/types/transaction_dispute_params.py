@@ -15,11 +15,10 @@ class TransactionDisputeParams(TypedDict, total=False):
     details: Required[str]
     """Detailed explanation of the dispute."""
 
-    reason: Required[Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"]]
+    reason: Required[
+        Literal["unauthorized", "duplicate", "incorrect_amount", "service_not_received", "damaged_goods", "other"]
+    ]
     """The primary reason for disputing the transaction."""
 
-    contact_preferred: Annotated[Literal["email", "phone", "in_app"], PropertyInfo(alias="contactPreferred")]
-    """Preferred method for our team to contact the user regarding the dispute."""
-
     supporting_documents: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="supportingDocuments")]
-    """URLs to supporting documents (e.g., screenshots, travel itineraries)."""
+    """Optional URLs to supporting documents (e.g., screenshots, photos)."""

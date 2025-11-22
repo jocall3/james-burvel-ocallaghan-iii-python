@@ -12,7 +12,10 @@ __all__ = ["TransactionCategorizeParams"]
 
 class TransactionCategorizeParams(TypedDict, total=False):
     category: Required[str]
-    """The new category for the transaction. Can be hierarchical."""
+    """The new category to assign to the transaction.
+
+    Supports hierarchical categories.
+    """
 
     apply_to_future: Annotated[bool, PropertyInfo(alias="applyToFuture")]
     """

@@ -16,10 +16,10 @@ class BudgetCreateParams(TypedDict, total=False):
     """The end date of the budget period."""
 
     name: Required[str]
-    """Name for the new budget."""
+    """Name of the new budget."""
 
-    period: Required[Literal["weekly", "monthly", "quarterly", "yearly", "custom"]]
-    """The frequency or period of the budget."""
+    period: Required[Literal["weekly", "monthly", "quarterly", "annually", "custom"]]
+    """The recurrence period of the budget."""
 
     start_date: Required[Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]]
     """The start date of the budget period."""
@@ -29,18 +29,23 @@ class BudgetCreateParams(TypedDict, total=False):
 
     ai_auto_populate: Annotated[bool, PropertyInfo(alias="aiAutoPopulate")]
     """
-    If true, AI will intelligently auto-populate remaining categories and amounts
-    based on historical spending.
+    If true, AI will automatically suggest and populate budget categories and
+    amounts based on historical spending.
     """
 
     alert_threshold: Annotated[Optional[int], PropertyInfo(alias="alertThreshold")]
-    """Percentage threshold for budget alerts."""
+    """Percentage of budget spent at which an alert should be triggered."""
 
-    categories: Iterable[Category]
-    """Initial breakdown of the budget by categories."""
+    categories: Optional[Iterable[Category]]
+    """Optional: Initial breakdown of the budget by categories.
+
+    If omitted and `aiAutoPopulate` is true, AI will generate.
+    """
 
 
 class Category(TypedDict, total=False):
     allocated: Required[float]
+    """Amount allocated to this category."""
 
     name: Required[str]
+    """Category name."""

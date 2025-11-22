@@ -66,7 +66,7 @@ class ProductsResource(SyncAPIResource):
         Args:
           category: Filter products by category.
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -227,7 +227,7 @@ class AsyncProductsResource(AsyncAPIResource):
         Args:
           category: Filter products by category.
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in the response.
 
           offset: Number of items to skip before starting to collect the result set.
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Union
 from datetime import date
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
@@ -13,25 +13,25 @@ __all__ = ["RecurringCreateParams"]
 
 class RecurringCreateParams(TypedDict, total=False):
     amount: Required[float]
-    """The expected amount of the recurring transaction."""
+    """The amount of each recurring transaction."""
 
     category: Required[str]
     """Category of the recurring transaction."""
 
     currency: Required[str]
-    """The currency of the transaction (ISO 4217 code)."""
+    """The currency of the recurring transaction."""
 
     description: Required[str]
-    """Description for the new recurring transaction."""
+    """Description of the new recurring transaction."""
 
-    frequency: Required[Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"]]
-    """How often the transaction is expected to occur."""
+    frequency: Required[Literal["daily", "weekly", "bi-weekly", "monthly", "quarterly", "annually"]]
+    """How often the transaction occurs."""
+
+    linked_account_id: Required[Annotated[str, PropertyInfo(alias="linkedAccountId")]]
+    """The ID of the account from which this recurring transaction typically occurs."""
 
     start_date: Required[Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]]
-    """The date the first recurring transaction is expected."""
+    """The date the recurring transaction is expected to start."""
 
-    linked_account_id: Annotated[Optional[str], PropertyInfo(alias="linkedAccountId")]
-    """
-    Optional: The account from which this recurring transaction will be paid or
-    received.
-    """
+    status: Literal["active", "paused"]
+    """Initial status of the recurring transaction."""

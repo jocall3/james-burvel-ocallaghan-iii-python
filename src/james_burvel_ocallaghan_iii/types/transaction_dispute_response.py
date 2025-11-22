@@ -18,11 +18,11 @@ class TransactionDisputeResponse(BaseModel):
     last_updated: datetime = FieldInfo(alias="lastUpdated")
     """Timestamp when the dispute status was last updated."""
 
-    status: Literal["pending", "under_review", "escalated", "resolved", "rejected"]
+    status: Literal["pending", "under_review", "accepted", "rejected", "resolved"]
     """Current status of the dispute."""
 
     next_steps: Optional[str] = FieldInfo(alias="nextSteps", default=None)
-    """Actionable next steps for the user or expected timeline."""
+    """Guidance on what will happen next or what action the user needs to take."""
 
-    resolution_details: Optional[str] = FieldInfo(alias="resolutionDetails", default=None)
-    """Details provided upon resolution or rejection of the dispute."""
+    rejection_reason: Optional[str] = FieldInfo(alias="rejectionReason", default=None)
+    """If the dispute was rejected, the reason for rejection."""

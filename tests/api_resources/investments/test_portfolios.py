@@ -137,7 +137,7 @@ class TestPortfolios:
         portfolio = client.investments.portfolios.update(
             portfolio_id="portfolio_equity_growth",
             ai_rebalancing_frequency="quarterly",
-            name="Updated Growth Portfolio",
+            name="Refined Growth Portfolio",
             risk_tolerance="medium",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
@@ -221,12 +221,6 @@ class TestPortfolios:
             target_risk_tolerance="medium",
             confirmation_required=True,
             dry_run=True,
-            target_asset_allocation=[
-                {
-                    "asset_class": "equities",
-                    "percentage": 60,
-                }
-            ],
         )
         assert_matches_type(PortfolioRebalanceResponse, portfolio, path=["response"])
 
@@ -389,7 +383,7 @@ class TestAsyncPortfolios:
         portfolio = await async_client.investments.portfolios.update(
             portfolio_id="portfolio_equity_growth",
             ai_rebalancing_frequency="quarterly",
-            name="Updated Growth Portfolio",
+            name="Refined Growth Portfolio",
             risk_tolerance="medium",
         )
         assert_matches_type(InvestmentPortfolio, portfolio, path=["response"])
@@ -473,12 +467,6 @@ class TestAsyncPortfolios:
             target_risk_tolerance="medium",
             confirmation_required=True,
             dry_run=True,
-            target_asset_allocation=[
-                {
-                    "asset_class": "equities",
-                    "percentage": 60,
-                }
-            ],
         )
         assert_matches_type(PortfolioRebalanceResponse, portfolio, path=["response"])
 

@@ -166,7 +166,7 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
         api_key = self.api_key
         if api_key is None:
             return {}
-        return {"Authorization": f"Bearer {api_key}"}
+        return {"X-API-Key": api_key}
 
     @property
     def _biometric_auth(self) -> dict[str, str]:
@@ -186,9 +186,9 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
+        if self.api_key and headers.get("X-API-Key"):
             return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
         if self.bearer_token and headers.get("Authorization"):
@@ -197,7 +197,7 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
             return
 
         raise TypeError(
-            '"Could not resolve authentication method. Expected either api_key or bearer_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted"'
+            '"Could not resolve authentication method. Expected either api_key or bearer_token to be set. Or for one of the `X-API-Key` or `Authorization` headers to be explicitly omitted"'
         )
 
     def copy(
@@ -397,7 +397,7 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
         api_key = self.api_key
         if api_key is None:
             return {}
-        return {"Authorization": f"Bearer {api_key}"}
+        return {"X-API-Key": api_key}
 
     @property
     def _biometric_auth(self) -> dict[str, str]:
@@ -417,9 +417,9 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
+        if self.api_key and headers.get("X-API-Key"):
             return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
         if self.bearer_token and headers.get("Authorization"):
@@ -428,7 +428,7 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
             return
 
         raise TypeError(
-            '"Could not resolve authentication method. Expected either api_key or bearer_token to be set. Or for one of the `Authorization` or `Authorization` headers to be explicitly omitted"'
+            '"Could not resolve authentication method. Expected either api_key or bearer_token to be set. Or for one of the `X-API-Key` or `Authorization` headers to be explicitly omitted"'
         )
 
     def copy(

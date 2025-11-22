@@ -44,7 +44,8 @@ class TestAccounts:
         account = client.accounts.link_new_institution(
             country_code="US",
             institution_name="Bank of America",
-            provider="plaid",
+            metadata={},
+            provider_type="plaid",
         )
         assert_matches_type(AccountLinkNewInstitutionResponse, account, path=["response"])
 
@@ -256,7 +257,8 @@ class TestAsyncAccounts:
         account = await async_client.accounts.link_new_institution(
             country_code="US",
             institution_name="Bank of America",
-            provider="plaid",
+            metadata={},
+            provider_type="plaid",
         )
         assert_matches_type(AccountLinkNewInstitutionResponse, account, path=["response"])
 

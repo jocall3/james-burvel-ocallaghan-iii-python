@@ -9,7 +9,7 @@ __all__ = ["IncubatorListPitchesParams"]
 
 class IncubatorListPitchesParams(TypedDict, total=False):
     limit: int
-    """Maximum number of items to return."""
+    """Maximum number of items to return in the response."""
 
     offset: int
     """Number of items to skip before starting to collect the result set."""

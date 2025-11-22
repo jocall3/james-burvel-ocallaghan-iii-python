@@ -13,32 +13,32 @@ __all__ = ["CryptoWalletConnection"]
 
 class CryptoWalletConnection(BaseModel):
     id: str
-    """Unique identifier for the wallet connection within ."""
+    """Unique identifier for this wallet connection."""
 
     blockchain_network: Literal[
-        "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Avalanche", "Arbitrum", "Optimism", "Bitcoin", "other"
+        "Ethereum", "Solana", "Polygon", "Binance Smart Chain", "Avalanche", "Arbitrum", "Optimism"
     ] = FieldInfo(alias="blockchainNetwork")
-    """The primary blockchain network associated with the wallet."""
+    """The blockchain network this wallet connection is primarily on."""
 
-    last_synced: Optional[datetime] = FieldInfo(alias="lastSynced", default=None)
-    """Timestamp of the last successful synchronization with the blockchain."""
+    last_synced: datetime = FieldInfo(alias="lastSynced")
+    """Timestamp of the last successful synchronization with the wallet."""
 
     read_access_granted: bool = FieldInfo(alias="readAccessGranted")
-    """Indicates if read access (balances, NFTs) has been granted."""
+    """Indicates if read-only access to wallet data (balances, NFTs) is granted."""
 
-    status: Literal["connected", "disconnected", "error", "pending_verification"]
-    """Current connection status of the wallet."""
+    status: Literal["connected", "disconnected", "reconnect_required", "revoked"]
+    """Current status of the wallet connection."""
 
     wallet_address: str = FieldInfo(alias="walletAddress")
-    """The public address of the cryptocurrency wallet."""
+    """The primary public address of the connected wallet."""
 
-    wallet_provider: Literal["MetaMask", "Phantom", "Ledger", "Trezor", "CoinbaseWallet", "WalletConnect", "other"] = (
-        FieldInfo(alias="walletProvider")
-    )
-    """The provider or type of the connected wallet."""
+    wallet_provider: str = FieldInfo(alias="walletProvider")
+    """Name of the wallet provider (e.g., MetaMask, Ledger, Phantom)."""
 
     write_access_granted: bool = FieldInfo(alias="writeAccessGranted")
-    """Indicates if write access (transactions) has been granted and is active."""
+    """Indicates if write access (e.g., to initiate transactions) is granted."""
 
-    alias: Optional[str] = None
-    """A user-defined alias for the wallet."""
+    connection_type: Optional[Literal["direct", "walletconnect", "oauth", "api_key"]] = FieldInfo(
+        alias="connectionType", default=None
+    )
+    """The technical method used for connecting the wallet."""

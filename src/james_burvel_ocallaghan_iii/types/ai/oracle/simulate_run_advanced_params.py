@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Union, Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -11,98 +11,115 @@ __all__ = [
     "SimulateRunAdvancedParams",
     "Scenario",
     "ScenarioEvent",
+    "ScenarioEventDetails",
+    "ScenarioEventDetailsJobLossDetails",
+    "ScenarioEventDetailsMarketDownturnDetails",
+    "ScenarioEventDetailsUnionMember2",
+    "ScenarioMarketConditions",
     "ScenarioSensitivityAnalysisParam",
-    "InitialState",
-    "SensitivityAnalysisParam",
 ]
 
 
 class SimulateRunAdvancedParams(TypedDict, total=False):
     prompt: Required[str]
-    """Natural language description of the complex simulation goal."""
+    """A high-level natural language prompt describing the complex simulation."""
 
     scenarios: Required[Iterable[Scenario]]
-    """A list of distinct hypothetical scenarios to run."""
+    """A list of one or more detailed scenarios to simulate."""
 
-    duration_years: Annotated[int, PropertyInfo(alias="durationYears")]
-    """Overall duration of the simulation in years."""
-
-    initial_state: Annotated[Optional[InitialState], PropertyInfo(alias="initialState")]
+    global_parameters: Annotated[Optional[object], PropertyInfo(alias="globalParameters")]
     """
-    Optional: Override current user financial data for the simulation's starting
-    point.
+    Optional: Parameters that apply to all scenarios unless overridden (e.g.,
+    overall economic growth rate).
     """
 
-    sensitivity_analysis_params: Annotated[
-        Optional[Iterable[SensitivityAnalysisParam]], PropertyInfo(alias="sensitivityAnalysisParams")
-    ]
-    """Parameters to vary for sensitivity analysis within scenarios."""
+
+class ScenarioEventDetailsJobLossDetails(TypedDict, total=False):
+    duration_months: Required[Annotated[int, PropertyInfo(alias="durationMonths")]]
+    """Expected duration of unemployment in months."""
+
+    severance_amount: Required[Annotated[float, PropertyInfo(alias="severanceAmount")]]
+    """Total severance package received."""
+
+    new_job_salary_multiplier: Annotated[float, PropertyInfo(alias="newJobSalaryMultiplier")]
+    """Multiplier for new job salary compared to old (e.g., 0.9 for 90%)."""
+
+    unemployment_benefits: Annotated[Optional[float], PropertyInfo(alias="unemploymentBenefits")]
+    """Monthly unemployment benefits."""
+
+
+class ScenarioEventDetailsMarketDownturnDetails(TypedDict, total=False):
+    impact_percentage: Required[Annotated[float, PropertyInfo(alias="impactPercentage")]]
+    """Percentage drop in investment portfolio value (e.g., 0.15 for 15% drop)."""
+
+    recovery_years: Required[Annotated[int, PropertyInfo(alias="recoveryYears")]]
+    """Number of years expected for market to recover."""
+
+
+class ScenarioEventDetailsUnionMember2(TypedDict, total=False):
+    amount: float
+    """Amount for the event."""
+
+    timing_months: Annotated[int, PropertyInfo(alias="timingMonths")]
+    """Timing of the event in months from start."""
+
+
+ScenarioEventDetails: TypeAlias = Union[
+    ScenarioEventDetailsJobLossDetails, ScenarioEventDetailsMarketDownturnDetails, ScenarioEventDetailsUnionMember2
+]
 
 
 class ScenarioEvent(TypedDict, total=False):
-    details: Required[Dict[str, object]]
-    """Specific parameters for the event type (e.g., durationMonths for job_loss)."""
-
     type: Required[
-        Literal[
-            "job_loss",
-            "market_downturn",
-            "market_boom",
-            "inheritance",
-            "major_expense",
-            "new_income_stream",
-            "interest_rate_change",
-        ]
+        Literal["job_loss", "market_downturn", "significant_expense", "windfall", "salary_increase", "new_investment"]
     ]
-    """Type of event occurring in the scenario."""
+    """Type of financial or life event."""
 
-    start_month: Annotated[Optional[int], PropertyInfo(alias="startMonth")]
-    """Optional: The month (relative to simulation start) when this event occurs."""
+    details: ScenarioEventDetails
+    """Specific details for the event type."""
+
+    year_in_simulation: Annotated[int, PropertyInfo(alias="yearInSimulation")]
+    """The year in the simulation when this event occurs."""
+
+
+class ScenarioMarketConditions(TypedDict, total=False):
+    average_annual_return: Annotated[float, PropertyInfo(alias="averageAnnualReturn")]
+    """Average annual market return."""
+
+    volatility: float
+    """Market volatility index."""
 
 
 class ScenarioSensitivityAnalysisParam(TypedDict, total=False):
-    max: float
+    max: Required[float]
+    """Maximum value for the parameter."""
 
-    min: float
+    min: Required[float]
+    """Minimum value for the parameter."""
 
-    param_name: Annotated[str, PropertyInfo(alias="paramName")]
+    param_name: Required[Annotated[str, PropertyInfo(alias="paramName")]]
+    """Name of the parameter to vary."""
 
-    step: float
+    step: Optional[float]
+    """Step increment for the parameter."""
 
 
 class Scenario(TypedDict, total=False):
-    events: Required[Iterable[ScenarioEvent]]
-    """
-    Key events that define this scenario (e.g., job loss, market crash,
-    inheritance).
-    """
+    duration_years: Required[Annotated[int, PropertyInfo(alias="durationYears")]]
+    """The total duration of the simulation for this scenario in years."""
 
     name: Required[str]
-    """A descriptive name for the scenario."""
+    """A descriptive name for the individual scenario."""
 
-    duration_years: Annotated[Optional[int], PropertyInfo(alias="durationYears")]
-    """
-    Optional: Duration of this specific scenario, overrides global duration if
-    present.
-    """
+    description: Optional[str]
+    """Detailed description of the scenario."""
+
+    events: Optional[Iterable[ScenarioEvent]]
+    """A sequence of financial or life events to include in the simulation."""
+
+    market_conditions: Annotated[Optional[ScenarioMarketConditions], PropertyInfo(alias="marketConditions")]
 
     sensitivity_analysis_params: Annotated[
         Optional[Iterable[ScenarioSensitivityAnalysisParam]], PropertyInfo(alias="sensitivityAnalysisParams")
     ]
-    """Optional: Scenario-specific parameters for sensitivity analysis."""
-
-
-class InitialState(TypedDict, total=False):
-    monthly_income_override: Annotated[Optional[float], PropertyInfo(alias="monthlyIncomeOverride")]
-
-    net_worth_override: Annotated[Optional[float], PropertyInfo(alias="netWorthOverride")]
-
-
-class SensitivityAnalysisParam(TypedDict, total=False):
-    max: float
-
-    min: float
-
-    param_name: Annotated[str, PropertyInfo(alias="paramName")]
-
-    step: float
+    """Parameters to vary for sensitivity analysis within this scenario."""
