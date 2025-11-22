@@ -443,7 +443,12 @@ Methods:
 Types:
 
 ```python
-from james_burvel_ocallaghan_iii.types.corporate.risk.fraud import FraudRule, RuleListResponse
+from james_burvel_ocallaghan_iii.types.corporate.risk.fraud import (
+    FraudRule,
+    FraudRuleAction,
+    FraudRuleCriteria,
+    RuleListResponse,
+)
 ```
 
 Methods:
@@ -647,9 +652,15 @@ Methods:
 Types:
 
 ```python
-from james_burvel_ocallaghan_iii.types.marketplace import ProductListResponse
+from james_burvel_ocallaghan_iii.types.marketplace import (
+    ProductListResponse,
+    ProductRedeemMarketplaceOfferResponse,
+    ProductSimulatePurchaseResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /marketplace/products">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">list</a>(\*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_list_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_list_response.py">ProductListResponse</a></code>
+- <code title="post /marketplace/offers/{offerId}/redeem">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">redeem_marketplace_offer</a>(offer_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_redeem_marketplace_offer_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_redeem_marketplace_offer_response.py">ProductRedeemMarketplaceOfferResponse</a></code>
+- <code title="post /marketplace/products/{productId}/impact-simulate">client.marketplace.products.<a href="./src/james_burvel_ocallaghan_iii/resources/marketplace/products.py">simulate_purchase</a>(product_id, \*\*<a href="src/james_burvel_ocallaghan_iii/types/marketplace/product_simulate_purchase_params.py">params</a>) -> <a href="./src/james_burvel_ocallaghan_iii/types/marketplace/product_simulate_purchase_response.py">ProductSimulatePurchaseResponse</a></code>

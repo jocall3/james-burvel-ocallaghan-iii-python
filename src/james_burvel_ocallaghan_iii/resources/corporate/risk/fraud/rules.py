@@ -17,9 +17,15 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.corporate.risk.fraud import rule_list_params, rule_create_params, rule_update_params
+from .....types.corporate.risk.fraud import (
+    rule_list_params,
+    rule_create_params,
+    rule_update_params,
+)
 from .....types.corporate.risk.fraud.fraud_rule import FraudRule
 from .....types.corporate.risk.fraud.rule_list_response import RuleListResponse
+from .....types.corporate.risk.fraud.fraud_rule_action_param import FraudRuleActionParam
+from .....types.corporate.risk.fraud.fraud_rule_criteria_param import FraudRuleCriteriaParam
 
 __all__ = ["RulesResource", "AsyncRulesResource"]
 
@@ -47,8 +53,8 @@ class RulesResource(SyncAPIResource):
     def create(
         self,
         *,
-        action: rule_create_params.Action,
-        criteria: rule_create_params.Criteria,
+        action: FraudRuleActionParam,
+        criteria: FraudRuleCriteriaParam,
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
@@ -109,8 +115,8 @@ class RulesResource(SyncAPIResource):
         self,
         rule_id: str,
         *,
-        action: rule_update_params.Action | Omit = omit,
-        criteria: rule_update_params.Criteria | Omit = omit,
+        action: FraudRuleActionParam | Omit = omit,
+        criteria: FraudRuleCriteriaParam | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
@@ -274,8 +280,8 @@ class AsyncRulesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        action: rule_create_params.Action,
-        criteria: rule_create_params.Criteria,
+        action: FraudRuleActionParam,
+        criteria: FraudRuleCriteriaParam,
         description: str,
         name: str,
         severity: Literal["Low", "Medium", "High", "Critical"],
@@ -336,8 +342,8 @@ class AsyncRulesResource(AsyncAPIResource):
         self,
         rule_id: str,
         *,
-        action: rule_update_params.Action | Omit = omit,
-        criteria: rule_update_params.Criteria | Omit = omit,
+        action: FraudRuleActionParam | Omit = omit,
+        criteria: FraudRuleCriteriaParam | Omit = omit,
         description: str | Omit = omit,
         name: str | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
