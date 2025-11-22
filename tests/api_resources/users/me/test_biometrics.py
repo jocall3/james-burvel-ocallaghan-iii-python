@@ -20,13 +20,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestBiometrics:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_deregister(self, client: JamesBurvelOcallaghanIii) -> None:
         biometric = client.users.me.biometrics.deregister()
         assert biometric is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_deregister(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.users.me.biometrics.with_raw_response.deregister()
@@ -36,7 +34,6 @@ class TestBiometrics:
         biometric = response.parse()
         assert biometric is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_deregister(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.users.me.biometrics.with_streaming_response.deregister() as response:
@@ -48,7 +45,6 @@ class TestBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_enroll(self, client: JamesBurvelOcallaghanIii) -> None:
         biometric = client.users.me.biometrics.enroll(
@@ -58,7 +54,6 @@ class TestBiometrics:
         )
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_enroll_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         biometric = client.users.me.biometrics.enroll(
@@ -69,7 +64,6 @@ class TestBiometrics:
         )
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_enroll(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.users.me.biometrics.with_raw_response.enroll(
@@ -83,7 +77,6 @@ class TestBiometrics:
         biometric = response.parse()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_enroll(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.users.me.biometrics.with_streaming_response.enroll(
@@ -99,13 +92,11 @@ class TestBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_status(self, client: JamesBurvelOcallaghanIii) -> None:
         biometric = client.users.me.biometrics.status()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_status(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.users.me.biometrics.with_raw_response.status()
@@ -115,7 +106,6 @@ class TestBiometrics:
         biometric = response.parse()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_status(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.users.me.biometrics.with_streaming_response.status() as response:
@@ -127,7 +117,6 @@ class TestBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_verify(self, client: JamesBurvelOcallaghanIii) -> None:
         biometric = client.users.me.biometrics.verify(
@@ -137,7 +126,6 @@ class TestBiometrics:
         )
         assert_matches_type(BiometricVerifyResponse, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_verify(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.users.me.biometrics.with_raw_response.verify(
@@ -151,7 +139,6 @@ class TestBiometrics:
         biometric = response.parse()
         assert_matches_type(BiometricVerifyResponse, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_verify(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.users.me.biometrics.with_streaming_response.verify(
@@ -173,13 +160,11 @@ class TestAsyncBiometrics:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_deregister(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         biometric = await async_client.users.me.biometrics.deregister()
         assert biometric is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_deregister(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.users.me.biometrics.with_raw_response.deregister()
@@ -189,7 +174,6 @@ class TestAsyncBiometrics:
         biometric = await response.parse()
         assert biometric is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_deregister(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.users.me.biometrics.with_streaming_response.deregister() as response:
@@ -201,7 +185,6 @@ class TestAsyncBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_enroll(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         biometric = await async_client.users.me.biometrics.enroll(
@@ -211,7 +194,6 @@ class TestAsyncBiometrics:
         )
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_enroll_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         biometric = await async_client.users.me.biometrics.enroll(
@@ -222,7 +204,6 @@ class TestAsyncBiometrics:
         )
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_enroll(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.users.me.biometrics.with_raw_response.enroll(
@@ -236,7 +217,6 @@ class TestAsyncBiometrics:
         biometric = await response.parse()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_enroll(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.users.me.biometrics.with_streaming_response.enroll(
@@ -252,13 +232,11 @@ class TestAsyncBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         biometric = await async_client.users.me.biometrics.status()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.users.me.biometrics.with_raw_response.status()
@@ -268,7 +246,6 @@ class TestAsyncBiometrics:
         biometric = await response.parse()
         assert_matches_type(BiometricStatus, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.users.me.biometrics.with_streaming_response.status() as response:
@@ -280,7 +257,6 @@ class TestAsyncBiometrics:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_verify(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         biometric = await async_client.users.me.biometrics.verify(
@@ -290,7 +266,6 @@ class TestAsyncBiometrics:
         )
         assert_matches_type(BiometricVerifyResponse, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_verify(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.users.me.biometrics.with_raw_response.verify(
@@ -304,7 +279,6 @@ class TestAsyncBiometrics:
         biometric = await response.parse()
         assert_matches_type(BiometricVerifyResponse, biometric, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_verify(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.users.me.biometrics.with_streaming_response.verify(

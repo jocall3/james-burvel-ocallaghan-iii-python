@@ -21,7 +21,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRecurring:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         recurring = client.transactions.recurring.create(
@@ -35,7 +34,6 @@ class TestRecurring:
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.recurring.with_raw_response.create(
@@ -53,7 +51,6 @@ class TestRecurring:
         recurring = response.parse()
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.recurring.with_streaming_response.create(
@@ -73,13 +70,11 @@ class TestRecurring:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         recurring = client.transactions.recurring.list()
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         recurring = client.transactions.recurring.list(
@@ -88,7 +83,6 @@ class TestRecurring:
         )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.recurring.with_raw_response.list()
@@ -98,7 +92,6 @@ class TestRecurring:
         recurring = response.parse()
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.recurring.with_streaming_response.list() as response:
@@ -116,7 +109,6 @@ class TestAsyncRecurring:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         recurring = await async_client.transactions.recurring.create(
@@ -130,7 +122,6 @@ class TestAsyncRecurring:
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.recurring.with_raw_response.create(
@@ -148,7 +139,6 @@ class TestAsyncRecurring:
         recurring = await response.parse()
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.recurring.with_streaming_response.create(
@@ -168,13 +158,11 @@ class TestAsyncRecurring:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         recurring = await async_client.transactions.recurring.list()
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         recurring = await async_client.transactions.recurring.list(
@@ -183,7 +171,6 @@ class TestAsyncRecurring:
         )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.recurring.with_raw_response.list()
@@ -193,7 +180,6 @@ class TestAsyncRecurring:
         recurring = await response.parse()
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.recurring.with_streaming_response.list() as response:

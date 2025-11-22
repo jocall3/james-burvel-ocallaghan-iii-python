@@ -17,7 +17,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInternational:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_initiate(self, client: JamesBurvelOcallaghanIii) -> None:
         international = client.payments.international.initiate(
@@ -34,7 +33,6 @@ class TestInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_initiate_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         international = client.payments.international.initiate(
@@ -58,7 +56,6 @@ class TestInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_initiate(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.payments.international.with_raw_response.initiate(
@@ -79,7 +76,6 @@ class TestInternational:
         international = response.parse()
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_initiate(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.payments.international.with_streaming_response.initiate(
@@ -102,7 +98,6 @@ class TestInternational:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         international = client.payments.international.retrieve_status(
@@ -110,7 +105,6 @@ class TestInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.payments.international.with_raw_response.retrieve_status(
@@ -122,7 +116,6 @@ class TestInternational:
         international = response.parse()
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.payments.international.with_streaming_response.retrieve_status(
@@ -136,7 +129,6 @@ class TestInternational:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_id` but received ''"):
@@ -150,7 +142,6 @@ class TestAsyncInternational:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_initiate(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         international = await async_client.payments.international.initiate(
@@ -167,7 +158,6 @@ class TestAsyncInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_initiate_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         international = await async_client.payments.international.initiate(
@@ -191,7 +181,6 @@ class TestAsyncInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_initiate(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.payments.international.with_raw_response.initiate(
@@ -212,7 +201,6 @@ class TestAsyncInternational:
         international = await response.parse()
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_initiate(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.payments.international.with_streaming_response.initiate(
@@ -235,7 +223,6 @@ class TestAsyncInternational:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         international = await async_client.payments.international.retrieve_status(
@@ -243,7 +230,6 @@ class TestAsyncInternational:
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.payments.international.with_raw_response.retrieve_status(
@@ -255,7 +241,6 @@ class TestAsyncInternational:
         international = await response.parse()
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.payments.international.with_streaming_response.retrieve_status(
@@ -269,7 +254,6 @@ class TestAsyncInternational:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_id` but received ''"):
