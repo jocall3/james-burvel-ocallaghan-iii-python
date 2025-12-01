@@ -417,7 +417,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
             except Exception:
                 err_msg = err_text or f"Error code: {response.status_code}"
 
-        return self._make_status_error(err_msg, body=body, response=response)
+        return self._make_status_error(err_msg, body=body, response=err.response)
 
     def _make_status_error(
         self,
@@ -627,7 +627,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
 
             return cast(ResponseT, construct_type(type_=cast_to, value=data))
         except pydantic.ValidationError as err:
-            raise APIResponseValidationError(response=response, body=data) from err
+            raise APIResponseValidationError(response=err.response, body=data) from err
 
     @property
     def qs(self) -> Querystring:
@@ -990,7 +990,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=None,
+                        response=err.response,
                     )
                     continue
 
@@ -1004,7 +1004,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=None,
+                        response=err.response,
                     )
                     continue
 
@@ -1049,7 +1049,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         return self._process_response(
             cast_to=cast_to,
             options=options,
-            response=response,
+            response=err.response,
             stream=stream,
             stream_cls=stream_cls,
             retries_taken=retries_taken,
@@ -1522,7 +1522,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=None,
+                        response=err.response,
                     )
                     continue
 
@@ -1536,7 +1536,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=None,
+                        response=err.response,
                     )
                     continue
 
@@ -1581,7 +1581,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         return await self._process_response(
             cast_to=cast_to,
             options=options,
-            response=response,
+            response=err.response,
             stream=stream,
             stream_cls=stream_cls,
             retries_taken=retries_taken,
