@@ -14,6 +14,20 @@ Full Changelog: [v1.0.0...v1.1.0](https://github.com/jocall3/james-burvel-ocalla
 
 * **internal:** version bump ([4ea0b8a](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/4ea0b8a4702c6c7ca2b3e270616231e86fb30318))
 
+## 1.1.0 (2025-12-01)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **api:** api update ([cbd45af](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/cbd45afecb437d0575a014b3e084a1b69ebb6b3f))
+* **api:** manual updates ([2df06ee](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/2df06ee78c1872cf4cbd8a98a6c2ebff3baf666b))
+
+
+### Chores
+
+* **internal:** version bump ([4ea0b8a](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/4ea0b8a4702c6c7ca2b3e270616231e86fb30318))
+
 ## 1.0.0 (2025-12-01)
 
 Full Changelog: [v0.0.1...v1.0.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v0.0.1...v1.0.0)
