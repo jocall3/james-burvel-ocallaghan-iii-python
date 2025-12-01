@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Iterable
 from typing_extensions import Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -13,13 +13,13 @@ __all__ = ["PitchSubmitFeedbackParams", "Answer"]
 class PitchSubmitFeedbackParams(TypedDict, total=False):
     answers: Iterable[Answer]
 
-    feedback: Optional[str]
+    feedback: object
     """General textual feedback or additional details for Quantum Weaver."""
 
 
 class Answer(TypedDict, total=False):
-    answer: Required[str]
+    answer: Required[object]
     """The answer to the specific question."""
 
-    question_id: Required[Annotated[str, PropertyInfo(alias="questionId")]]
+    question_id: Required[Annotated[object, PropertyInfo(alias="questionId")]]
     """The ID of the question being answered."""

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
 from typing_extensions import Literal
 
 import httpx
@@ -109,12 +107,12 @@ class CorporateResource(SyncAPIResource):
     def perform_sanction_screening(
         self,
         *,
-        country: str,
+        country: object,
         entity_type: Literal["individual", "organization"],
-        name: str,
-        address: Optional[AddressParam] | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        identification_number: Optional[str] | Omit = omit,
+        name: object,
+        address: AddressParam | Omit = omit,
+        date_of_birth: object | Omit = omit,
+        identification_number: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -133,8 +131,6 @@ class CorporateResource(SyncAPIResource):
           entity_type: The type of entity being screened.
 
           name: Full name of the individual or organization to screen.
-
-          address: Optional: Address details for enhanced screening.
 
           date_of_birth: Date of birth for individuals (YYYY-MM-DD).
 
@@ -212,12 +208,12 @@ class AsyncCorporateResource(AsyncAPIResource):
     async def perform_sanction_screening(
         self,
         *,
-        country: str,
+        country: object,
         entity_type: Literal["individual", "organization"],
-        name: str,
-        address: Optional[AddressParam] | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        identification_number: Optional[str] | Omit = omit,
+        name: object,
+        address: AddressParam | Omit = omit,
+        date_of_birth: object | Omit = omit,
+        identification_number: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -236,8 +232,6 @@ class AsyncCorporateResource(AsyncAPIResource):
           entity_type: The type of entity being screened.
 
           name: Full name of the individual or organization to screen.
-
-          address: Optional: Address details for enhanced screening.
 
           date_of_birth: Date of birth for individuals (YYYY-MM-DD).
 

@@ -11,34 +11,34 @@ __all__ = ["InvestmentAnalyzeImpactResponse", "BreakdownByEsgFactors", "LowestEs
 
 
 class BreakdownByEsgFactors(BaseModel):
-    environmental_score: Optional[float] = FieldInfo(alias="environmentalScore", default=None)
+    environmental_score: Optional[object] = FieldInfo(alias="environmentalScore", default=None)
 
-    governance_score: Optional[float] = FieldInfo(alias="governanceScore", default=None)
+    governance_score: Optional[object] = FieldInfo(alias="governanceScore", default=None)
 
-    social_score: Optional[float] = FieldInfo(alias="socialScore", default=None)
+    social_score: Optional[object] = FieldInfo(alias="socialScore", default=None)
 
 
 class LowestEsgHolding(BaseModel):
-    asset_name: Optional[str] = FieldInfo(alias="assetName", default=None)
+    asset_name: Optional[object] = FieldInfo(alias="assetName", default=None)
 
-    asset_symbol: Optional[str] = FieldInfo(alias="assetSymbol", default=None)
+    asset_symbol: Optional[object] = FieldInfo(alias="assetSymbol", default=None)
 
-    esg_score: Optional[float] = FieldInfo(alias="esgScore", default=None)
+    esg_score: Optional[object] = FieldInfo(alias="esgScore", default=None)
 
 
 class TopEsgHolding(BaseModel):
-    asset_name: Optional[str] = FieldInfo(alias="assetName", default=None)
+    asset_name: Optional[object] = FieldInfo(alias="assetName", default=None)
 
-    asset_symbol: Optional[str] = FieldInfo(alias="assetSymbol", default=None)
+    asset_symbol: Optional[object] = FieldInfo(alias="assetSymbol", default=None)
 
-    esg_score: Optional[float] = FieldInfo(alias="esgScore", default=None)
+    esg_score: Optional[object] = FieldInfo(alias="esgScore", default=None)
 
 
 class InvestmentAnalyzeImpactResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
     """AI-driven recommendations to improve the portfolio's ESG impact."""
 
-    benchmark_esg_score: float = FieldInfo(alias="benchmarkESGScore")
+    benchmark_esg_score: object = FieldInfo(alias="benchmarkESGScore")
     """Average ESG score of a relevant market benchmark for comparison."""
 
     breakdown_by_esg_factors: BreakdownByEsgFactors = FieldInfo(alias="breakdownByESGFactors")
@@ -47,10 +47,10 @@ class InvestmentAnalyzeImpactResponse(BaseModel):
     lowest_esg_holdings: List[LowestEsgHolding] = FieldInfo(alias="lowestESGHoldings")
     """Lowest holdings in the portfolio by ESG score."""
 
-    overall_esg_score: float = FieldInfo(alias="overallESGScore")
+    overall_esg_score: object = FieldInfo(alias="overallESGScore")
     """Overall ESG score of the entire portfolio (0-10)."""
 
-    portfolio_id: str = FieldInfo(alias="portfolioId")
+    portfolio_id: object = FieldInfo(alias="portfolioId")
     """ID of the investment portfolio analyzed."""
 
     top_esg_holdings: List[TopEsgHolding] = FieldInfo(alias="topESGHoldings")

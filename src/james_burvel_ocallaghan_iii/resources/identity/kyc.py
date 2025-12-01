@@ -2,23 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import (
-    Body,
-    Omit,
-    Query,
-    Headers,
-    NotGiven,
-    SequenceNotStr,
-    Base64FileInput,
-    omit,
-    not_given,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -80,14 +69,14 @@ class KYCResource(SyncAPIResource):
     def submit(
         self,
         *,
-        country_of_issue: str,
-        document_number: str,
+        country_of_issue: object,
+        document_number: object,
         document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement", "other"],
-        expiration_date: Union[str, date],
-        issue_date: Union[str, date],
-        additional_documents: Optional[SequenceNotStr[Union[str, Base64FileInput]]] | Omit = omit,
-        document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        document_front_image: Union[str, Base64FileInput, None] | Omit = omit,
+        expiration_date: object,
+        issue_date: object,
+        additional_documents: Optional[Iterable[object]] | Omit = omit,
+        document_back_image: object | Omit = omit,
+        document_front_image: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,14 +182,14 @@ class AsyncKYCResource(AsyncAPIResource):
     async def submit(
         self,
         *,
-        country_of_issue: str,
-        document_number: str,
+        country_of_issue: object,
+        document_number: object,
         document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement", "other"],
-        expiration_date: Union[str, date],
-        issue_date: Union[str, date],
-        additional_documents: Optional[SequenceNotStr[Union[str, Base64FileInput]]] | Omit = omit,
-        document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        document_front_image: Union[str, Base64FileInput, None] | Omit = omit,
+        expiration_date: object,
+        issue_date: object,
+        additional_documents: Optional[Iterable[object]] | Omit = omit,
+        document_back_image: object | Omit = omit,
+        document_front_image: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

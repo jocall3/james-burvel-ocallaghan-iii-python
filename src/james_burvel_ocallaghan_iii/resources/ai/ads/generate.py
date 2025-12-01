@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -48,19 +48,19 @@ class GenerateResource(SyncAPIResource):
     def advanced(
         self,
         *,
-        length_seconds: int,
-        prompt: str,
+        length_seconds: object,
+        prompt: object,
         style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
         aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
         background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
-        brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
+        brand_assets: Optional[Iterable[object]] | Omit = omit,
+        brand_colors: Optional[Iterable[object]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
-        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        keywords: Optional[Iterable[object]] | Omit = omit,
         voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_calm"]] | Omit = omit,
-        voiceover_text: Optional[str] | Omit = omit,
+        voiceover_text: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,12 +135,12 @@ class GenerateResource(SyncAPIResource):
     def standard(
         self,
         *,
-        length_seconds: int,
-        prompt: str,
+        length_seconds: object,
+        prompt: object,
         style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
         aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
-        brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
-        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        brand_colors: Optional[Iterable[object]] | Omit = omit,
+        keywords: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -217,19 +217,19 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def advanced(
         self,
         *,
-        length_seconds: int,
-        prompt: str,
+        length_seconds: object,
+        prompt: object,
         style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
         aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
         background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
-        brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
+        brand_assets: Optional[Iterable[object]] | Omit = omit,
+        brand_colors: Optional[Iterable[object]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
-        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        keywords: Optional[Iterable[object]] | Omit = omit,
         voiceover_style: Optional[Literal["male_professional", "female_friendly", "neutral_calm"]] | Omit = omit,
-        voiceover_text: Optional[str] | Omit = omit,
+        voiceover_text: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -304,12 +304,12 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def standard(
         self,
         *,
-        length_seconds: int,
-        prompt: str,
+        length_seconds: object,
+        prompt: object,
         style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
         aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
-        brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
-        keywords: Optional[SequenceNotStr[str]] | Omit = omit,
+        brand_colors: Optional[Iterable[object]] | Omit = omit,
+        keywords: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

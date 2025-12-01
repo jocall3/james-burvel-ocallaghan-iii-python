@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -48,8 +47,8 @@ class DevicesResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -95,7 +94,7 @@ class DevicesResource(SyncAPIResource):
 
     def deregister(
         self,
-        device_id: str,
+        device_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -118,8 +117,6 @@ class DevicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not device_id:
-            raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/users/me/devices/{device_id}",
@@ -133,11 +130,11 @@ class DevicesResource(SyncAPIResource):
         self,
         *,
         device_type: Literal["mobile", "desktop", "tablet", "smart_watch"],
-        model: str,
-        os: str,
-        biometric_signature: Optional[str] | Omit = omit,
-        device_name: Optional[str] | Omit = omit,
-        push_token: Optional[str] | Omit = omit,
+        model: object,
+        os: object,
+        biometric_signature: object | Omit = omit,
+        device_name: object | Omit = omit,
+        push_token: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -215,8 +212,8 @@ class AsyncDevicesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -262,7 +259,7 @@ class AsyncDevicesResource(AsyncAPIResource):
 
     async def deregister(
         self,
-        device_id: str,
+        device_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -285,8 +282,6 @@ class AsyncDevicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not device_id:
-            raise ValueError(f"Expected a non-empty value for `device_id` but received {device_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/users/me/devices/{device_id}",
@@ -300,11 +295,11 @@ class AsyncDevicesResource(AsyncAPIResource):
         self,
         *,
         device_type: Literal["mobile", "desktop", "tablet", "smart_watch"],
-        model: str,
-        os: str,
-        biometric_signature: Optional[str] | Omit = omit,
-        device_name: Optional[str] | Omit = omit,
-        push_token: Optional[str] | Omit = omit,
+        model: object,
+        os: object,
+        biometric_signature: object | Omit = omit,
+        device_name: object | Omit = omit,
+        push_token: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

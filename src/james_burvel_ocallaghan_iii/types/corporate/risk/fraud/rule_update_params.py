@@ -12,15 +12,15 @@ __all__ = ["RuleUpdateParams"]
 
 class RuleUpdateParams(TypedDict, total=False):
     action: FraudRuleActionParam
-    """Updated action to take when the rule is triggered."""
+    """Action to take when a fraud rule is triggered."""
 
     criteria: FraudRuleCriteriaParam
-    """Updated criteria for the rule."""
+    """Criteria that define when a fraud rule should trigger."""
 
-    description: str
+    description: object
     """Updated description of what the rule detects."""
 
-    name: str
+    name: object
     """Updated name of the fraud rule."""
 
     severity: Literal["Low", "Medium", "High", "Critical"]

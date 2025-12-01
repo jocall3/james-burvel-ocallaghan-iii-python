@@ -58,8 +58,8 @@ class IncubatorResource(SyncAPIResource):
     def list_pitches(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         status: Literal[
             "submitted",
             "initial_review",
@@ -145,8 +145,8 @@ class AsyncIncubatorResource(AsyncAPIResource):
     async def list_pitches(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         status: Literal[
             "submitted",
             "initial_review",

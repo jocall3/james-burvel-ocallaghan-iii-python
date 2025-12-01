@@ -8,5 +8,5 @@ __all__ = ["CardFreezeParams"]
 
 
 class CardFreezeParams(TypedDict, total=False):
-    freeze: Required[bool]
+    freeze: Required[object]
     """Set to `true` to freeze the card, `false` to unfreeze."""

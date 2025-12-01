@@ -8,5 +8,5 @@ __all__ = ["TransactionUpdateNotesParams"]
 
 
 class TransactionUpdateNotesParams(TypedDict, total=False):
-    notes: Required[str]
+    notes: Required[object]
     """The personal notes to add or update for the transaction."""

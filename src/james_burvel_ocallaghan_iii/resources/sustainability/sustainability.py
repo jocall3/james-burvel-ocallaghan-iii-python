@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from ...types import sustainability_purchase_carbon_offsets_params
@@ -59,9 +57,9 @@ class SustainabilityResource(SyncAPIResource):
     def purchase_carbon_offsets(
         self,
         *,
-        amount_kg_co2e: float,
-        offset_project: Optional[str],
-        payment_account_id: str,
+        amount_kg_co2e: object,
+        offset_project: object,
+        payment_account_id: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,9 +153,9 @@ class AsyncSustainabilityResource(AsyncAPIResource):
     async def purchase_carbon_offsets(
         self,
         *,
-        amount_kg_co2e: float,
-        offset_project: Optional[str],
-        payment_account_id: str,
+        amount_kg_co2e: object,
+        offset_project: object,
+        payment_account_id: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

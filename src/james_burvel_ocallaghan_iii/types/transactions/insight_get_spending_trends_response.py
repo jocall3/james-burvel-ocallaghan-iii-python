@@ -12,27 +12,27 @@ __all__ = ["InsightGetSpendingTrendsResponse", "TopCategoriesByChange"]
 
 
 class TopCategoriesByChange(BaseModel):
-    absolute_change: Optional[float] = FieldInfo(alias="absoluteChange", default=None)
+    absolute_change: Optional[object] = FieldInfo(alias="absoluteChange", default=None)
 
-    category: Optional[str] = None
+    category: Optional[object] = None
 
-    percentage_change: Optional[float] = FieldInfo(alias="percentageChange", default=None)
+    percentage_change: Optional[object] = FieldInfo(alias="percentageChange", default=None)
 
 
 class InsightGetSpendingTrendsResponse(BaseModel):
     ai_insights: List[AIInsight] = FieldInfo(alias="aiInsights")
     """AI-driven insights and recommendations related to spending."""
 
-    forecast_next_month: float = FieldInfo(alias="forecastNextMonth")
+    forecast_next_month: object = FieldInfo(alias="forecastNextMonth")
     """AI-projected total spending for the next month."""
 
     overall_trend: Literal["increasing", "decreasing", "stable"] = FieldInfo(alias="overallTrend")
     """Overall trend of spending (increasing, decreasing, stable)."""
 
-    percentage_change: float = FieldInfo(alias="percentageChange")
+    percentage_change: object = FieldInfo(alias="percentageChange")
     """Percentage change in spending over the period."""
 
-    period: str
+    period: object
     """The period over which the spending trend is analyzed."""
 
     top_categories_by_change: List[TopCategoriesByChange] = FieldInfo(alias="topCategoriesByChange")

@@ -8,10 +8,10 @@ __all__ = ["AdListGeneratedParams"]
 
 
 class AdListGeneratedParams(TypedDict, total=False):
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""
 
     status: Literal["queued", "generating", "done", "error"]

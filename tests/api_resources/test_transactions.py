@@ -14,7 +14,6 @@ from james_burvel_ocallaghan_iii.types import (
     PaginatedTransactions,
     TransactionDisputeResponse,
 )
-from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -54,13 +53,6 @@ class TestTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            client.transactions.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.list()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
@@ -69,13 +61,13 @@ class TestTransactions:
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.list(
             category="Groceries",
-            end_date=parse_date("2024-12-31"),
-            limit=1,
+            end_date="2024-12-31",
+            limit={},
             max_amount=100,
             min_amount=20,
-            offset=0,
+            offset={},
             search_query="Starbucks",
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
             type="expense",
         )
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
@@ -145,14 +137,6 @@ class TestTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_categorize(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            client.transactions.with_raw_response.categorize(
-                transaction_id="",
-                category="Home > Groceries",
-            )
-
-    @parametrize
     def test_method_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.dispute(
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
@@ -200,15 +184,6 @@ class TestTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            client.transactions.with_raw_response.dispute(
-                transaction_id="",
-                details="I did not authorize this purchase. My card may have been compromised and I was traveling internationally on this date.",
-                reason="unauthorized",
-            )
-
-    @parametrize
     def test_method_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.update_notes(
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
@@ -241,14 +216,6 @@ class TestTransactions:
             assert_matches_type(Transaction, transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            client.transactions.with_raw_response.update_notes(
-                transaction_id="",
-                notes="This was a special coffee for a client meeting.",
-            )
 
 
 class TestAsyncTransactions:
@@ -288,13 +255,6 @@ class TestAsyncTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            await async_client.transactions.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.list()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
@@ -303,13 +263,13 @@ class TestAsyncTransactions:
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.list(
             category="Groceries",
-            end_date=parse_date("2024-12-31"),
-            limit=1,
+            end_date="2024-12-31",
+            limit={},
             max_amount=100,
             min_amount=20,
-            offset=0,
+            offset={},
             search_query="Starbucks",
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
             type="expense",
         )
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
@@ -379,14 +339,6 @@ class TestAsyncTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_categorize(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            await async_client.transactions.with_raw_response.categorize(
-                transaction_id="",
-                category="Home > Groceries",
-            )
-
-    @parametrize
     async def test_method_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.dispute(
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
@@ -434,15 +386,6 @@ class TestAsyncTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            await async_client.transactions.with_raw_response.dispute(
-                transaction_id="",
-                details="I did not authorize this purchase. My card may have been compromised and I was traveling internationally on this date.",
-                reason="unauthorized",
-            )
-
-    @parametrize
     async def test_method_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.update_notes(
             transaction_id="txn_quantum-2024-07-21-A7B8C9",
@@ -475,11 +418,3 @@ class TestAsyncTransactions:
             assert_matches_type(Transaction, transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
-            await async_client.transactions.with_raw_response.update_notes(
-                transaction_id="",
-                notes="This was a special coffee for a client meeting.",
-            )

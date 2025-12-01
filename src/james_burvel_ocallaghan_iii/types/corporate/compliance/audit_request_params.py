@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-from datetime import date
+from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -20,7 +19,7 @@ class AuditRequestParams(TypedDict, total=False):
     ]
     """The scope of the audit (e.g., all transactions, specific accounts)."""
 
-    end_date: Required[Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]]
+    end_date: Required[Annotated[object, PropertyInfo(alias="endDate")]]
     """End date for the audit period (inclusive)."""
 
     regulatory_frameworks: Required[
@@ -31,8 +30,8 @@ class AuditRequestParams(TypedDict, total=False):
     ]
     """List of regulatory frameworks against which to audit."""
 
-    start_date: Required[Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]]
+    start_date: Required[Annotated[object, PropertyInfo(alias="startDate")]]
     """Start date for the audit period (inclusive)."""
 
-    additional_context: Annotated[Optional[str], PropertyInfo(alias="additionalContext")]
+    additional_context: Annotated[object, PropertyInfo(alias="additionalContext")]
     """Optional: Any additional context or specific areas of concern for the AI."""

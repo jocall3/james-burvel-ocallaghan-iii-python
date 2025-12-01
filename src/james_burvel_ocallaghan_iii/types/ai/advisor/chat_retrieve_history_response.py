@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -14,23 +13,23 @@ __all__ = ["ChatRetrieveHistoryResponse", "Data", "DataFunctionCall", "DataFunct
 class DataFunctionCall(BaseModel):
     args: Optional[object] = None
 
-    name: Optional[str] = None
+    name: Optional[object] = None
 
 
 class DataFunctionResponse(BaseModel):
-    name: Optional[str] = None
+    name: Optional[object] = None
 
     response: Optional[object] = None
 
 
 class Data(BaseModel):
-    content: str
+    content: object
     """The textual content of the message."""
 
     role: Literal["user", "assistant", "tool_call", "tool_response"]
     """Role of the speaker (user, assistant, or tool interaction)."""
 
-    timestamp: datetime
+    timestamp: object
     """Timestamp of the message."""
 
     function_call: Optional[DataFunctionCall] = FieldInfo(alias="functionCall", default=None)
@@ -41,16 +40,16 @@ class Data(BaseModel):
 
 
 class ChatRetrieveHistoryResponse(BaseModel):
-    limit: int
+    limit: object
     """The maximum number of items returned in the current page."""
 
-    offset: int
+    offset: object
     """The number of items skipped before the current page."""
 
-    total: int
+    total: object
     """The total number of items available across all pages."""
 
     data: Optional[List[Data]] = None
 
-    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    next_offset: Optional[object] = FieldInfo(alias="nextOffset", default=None)
     """The offset for the next page of results, if available. Null if no more pages."""

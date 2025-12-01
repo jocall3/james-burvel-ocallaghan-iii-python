@@ -54,13 +54,13 @@ class PortfoliosResource(SyncAPIResource):
     def create(
         self,
         *,
-        currency: str,
-        initial_investment: float,
-        name: str,
+        currency: object,
+        initial_investment: object,
+        name: object,
         risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
         type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
-        ai_auto_allocate: bool | Omit = omit,
-        linked_account_id: Optional[str] | Omit = omit,
+        ai_auto_allocate: object | Omit = omit,
+        linked_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -117,7 +117,7 @@ class PortfoliosResource(SyncAPIResource):
 
     def retrieve(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -139,8 +139,6 @@ class PortfoliosResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return self._get(
             f"/investments/portfolios/{portfolio_id}",
             options=make_request_options(
@@ -151,11 +149,11 @@ class PortfoliosResource(SyncAPIResource):
 
     def update(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "never"]]
         | Omit = omit,
-        name: str | Omit = omit,
+        name: object | Omit = omit,
         risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -183,8 +181,6 @@ class PortfoliosResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return self._put(
             f"/investments/portfolios/{portfolio_id}",
             body=maybe_transform(
@@ -204,8 +200,8 @@ class PortfoliosResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -249,11 +245,11 @@ class PortfoliosResource(SyncAPIResource):
 
     def rebalance(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         target_risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
-        confirmation_required: bool | Omit = omit,
-        dry_run: bool | Omit = omit,
+        confirmation_required: object | Omit = omit,
+        dry_run: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,8 +278,6 @@ class PortfoliosResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return self._post(
             f"/investments/portfolios/{portfolio_id}/rebalance",
             body=maybe_transform(
@@ -324,13 +318,13 @@ class AsyncPortfoliosResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        currency: str,
-        initial_investment: float,
-        name: str,
+        currency: object,
+        initial_investment: object,
+        name: object,
         risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
         type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"],
-        ai_auto_allocate: bool | Omit = omit,
-        linked_account_id: Optional[str] | Omit = omit,
+        ai_auto_allocate: object | Omit = omit,
+        linked_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -387,7 +381,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -409,8 +403,6 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return await self._get(
             f"/investments/portfolios/{portfolio_id}",
             options=make_request_options(
@@ -421,11 +413,11 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
     async def update(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "never"]]
         | Omit = omit,
-        name: str | Omit = omit,
+        name: object | Omit = omit,
         risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -453,8 +445,6 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return await self._put(
             f"/investments/portfolios/{portfolio_id}",
             body=await async_maybe_transform(
@@ -474,8 +464,8 @@ class AsyncPortfoliosResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -519,11 +509,11 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
     async def rebalance(
         self,
-        portfolio_id: str,
+        portfolio_id: object,
         *,
         target_risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"],
-        confirmation_required: bool | Omit = omit,
-        dry_run: bool | Omit = omit,
+        confirmation_required: object | Omit = omit,
+        dry_run: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -552,8 +542,6 @@ class AsyncPortfoliosResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not portfolio_id:
-            raise ValueError(f"Expected a non-empty value for `portfolio_id` but received {portfolio_id!r}")
         return await self._post(
             f"/investments/portfolios/{portfolio_id}/rebalance",
             body=await async_maybe_transform(

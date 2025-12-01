@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
 
 from ..address_param import AddressParam
@@ -13,13 +12,12 @@ __all__ = ["MeUpdateParams"]
 
 class MeUpdateParams(TypedDict, total=False):
     address: AddressParam
-    """Updated address details."""
 
-    name: str
+    name: object
     """Updated full name of the user."""
 
-    phone: Optional[str]
+    phone: object
     """Updated primary phone number of the user."""
 
     preferences: UserPreferencesParam
-    """Updated personalization preferences."""
+    """User's personalized preferences for the platform."""

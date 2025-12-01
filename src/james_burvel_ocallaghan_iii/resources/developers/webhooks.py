@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -48,9 +48,9 @@ class WebhooksResource(SyncAPIResource):
     def create(
         self,
         *,
-        callback_url: str,
-        events: SequenceNotStr[str],
-        secret: Optional[str] | Omit = omit,
+        callback_url: object,
+        events: Iterable[object],
+        secret: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -97,10 +97,10 @@ class WebhooksResource(SyncAPIResource):
 
     def update(
         self,
-        subscription_id: str,
+        subscription_id: object,
         *,
-        callback_url: str | Omit = omit,
-        events: SequenceNotStr[str] | Omit = omit,
+        callback_url: object | Omit = omit,
+        events: Iterable[object] | Omit = omit,
         status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -128,8 +128,6 @@ class WebhooksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not subscription_id:
-            raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         return self._put(
             f"/developers/webhooks/{subscription_id}",
             body=maybe_transform(
@@ -149,8 +147,8 @@ class WebhooksResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -196,7 +194,7 @@ class WebhooksResource(SyncAPIResource):
 
     def delete(
         self,
-        subscription_id: str,
+        subscription_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -218,8 +216,6 @@ class WebhooksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not subscription_id:
-            raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/developers/webhooks/{subscription_id}",
@@ -253,9 +249,9 @@ class AsyncWebhooksResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        callback_url: str,
-        events: SequenceNotStr[str],
-        secret: Optional[str] | Omit = omit,
+        callback_url: object,
+        events: Iterable[object],
+        secret: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -302,10 +298,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
     async def update(
         self,
-        subscription_id: str,
+        subscription_id: object,
         *,
-        callback_url: str | Omit = omit,
-        events: SequenceNotStr[str] | Omit = omit,
+        callback_url: object | Omit = omit,
+        events: Iterable[object] | Omit = omit,
         status: Literal["active", "paused", "suspended"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -333,8 +329,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not subscription_id:
-            raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         return await self._put(
             f"/developers/webhooks/{subscription_id}",
             body=await async_maybe_transform(
@@ -354,8 +348,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -401,7 +395,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
     async def delete(
         self,
-        subscription_id: str,
+        subscription_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -423,8 +417,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not subscription_id:
-            raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/developers/webhooks/{subscription_id}",

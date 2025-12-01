@@ -10,11 +10,13 @@ __all__ = ["GenerateAdvancedResponse"]
 
 
 class GenerateAdvancedResponse(BaseModel):
-    estimated_completion_time_seconds: Optional[int] = FieldInfo(alias="estimatedCompletionTimeSeconds", default=None)
+    estimated_completion_time_seconds: Optional[object] = FieldInfo(
+        alias="estimatedCompletionTimeSeconds", default=None
+    )
     """Estimated time until advanced video generation is complete.
 
     May be longer than standard generation.
     """
 
-    operation_id: Optional[str] = FieldInfo(alias="operationId", default=None)
+    operation_id: Optional[object] = FieldInfo(alias="operationId", default=None)
     """The unique identifier for the advanced video generation operation."""

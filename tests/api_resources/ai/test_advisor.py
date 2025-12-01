@@ -25,8 +25,8 @@ class TestAdvisor:
     @parametrize
     def test_method_list_tools_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         advisor = client.ai.advisor.list_tools(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(AdvisorListToolsResponse, advisor, path=["response"])
 
@@ -64,8 +64,8 @@ class TestAsyncAdvisor:
     @parametrize
     async def test_method_list_tools_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         advisor = await async_client.ai.advisor.list_tools(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(AdvisorListToolsResponse, advisor, path=["response"])
 

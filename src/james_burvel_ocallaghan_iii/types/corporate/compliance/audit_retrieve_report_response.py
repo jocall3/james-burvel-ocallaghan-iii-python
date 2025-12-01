@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import date, datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -13,9 +12,9 @@ __all__ = ["AuditRetrieveReportResponse", "Finding", "PeriodCovered"]
 
 
 class Finding(BaseModel):
-    description: Optional[str] = None
+    description: Optional[object] = None
 
-    related_entities: Optional[List[str]] = FieldInfo(alias="relatedEntities", default=None)
+    related_entities: Optional[List[object]] = FieldInfo(alias="relatedEntities", default=None)
     """IDs of entities related to this finding (e.g., transaction IDs)."""
 
     severity: Optional[Literal["Low", "Medium", "High", "Critical"]] = None
@@ -24,22 +23,22 @@ class Finding(BaseModel):
 
 
 class PeriodCovered(BaseModel):
-    end_date: Optional[date] = FieldInfo(alias="endDate", default=None)
+    end_date: Optional[object] = FieldInfo(alias="endDate", default=None)
 
-    start_date: Optional[date] = FieldInfo(alias="startDate", default=None)
+    start_date: Optional[object] = FieldInfo(alias="startDate", default=None)
 
 
 class AuditRetrieveReportResponse(BaseModel):
-    audit_date: datetime = FieldInfo(alias="auditDate")
+    audit_date: object = FieldInfo(alias="auditDate")
     """Timestamp when the audit report was generated."""
 
-    audit_id: str = FieldInfo(alias="auditId")
+    audit_id: object = FieldInfo(alias="auditId")
     """Unique identifier for the compliance audit."""
 
     findings: List[Finding]
     """Detailed findings, observations, and recommendations."""
 
-    overall_compliance_score: int = FieldInfo(alias="overallComplianceScore")
+    overall_compliance_score: object = FieldInfo(alias="overallComplianceScore")
     """Overall compliance score (0-100), higher is better."""
 
     period_covered: PeriodCovered = FieldInfo(alias="periodCovered")
@@ -51,5 +50,5 @@ class AuditRetrieveReportResponse(BaseModel):
     status: Literal["processing", "completed", "failed"]
     """Current status of the audit."""
 
-    summary: str
+    summary: object
     """A high-level summary of the audit findings."""

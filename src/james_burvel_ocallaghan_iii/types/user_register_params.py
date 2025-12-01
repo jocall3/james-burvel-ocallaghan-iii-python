@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -13,20 +11,19 @@ __all__ = ["UserRegisterParams"]
 
 
 class UserRegisterParams(TypedDict, total=False):
-    email: Required[str]
+    email: Required[object]
     """Email address for registration and login."""
 
-    name: Required[str]
+    name: Required[object]
     """Full name of the user."""
 
-    password: Required[str]
+    password: Required[object]
     """User's chosen password."""
 
     address: AddressParam
-    """Optional initial address details."""
 
-    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(alias="dateOfBirth", format="iso8601")]
+    date_of_birth: Annotated[object, PropertyInfo(alias="dateOfBirth")]
     """Optional date of birth (YYYY-MM-DD)."""
 
-    phone: Optional[str]
+    phone: object
     """Optional phone number for MFA or recovery."""

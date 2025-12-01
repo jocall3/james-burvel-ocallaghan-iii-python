@@ -2,20 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["GenerateAdvancedParams", "CallToAction"]
 
 
 class GenerateAdvancedParams(TypedDict, total=False):
-    length_seconds: Required[Annotated[int, PropertyInfo(alias="lengthSeconds")]]
+    length_seconds: Required[Annotated[object, PropertyInfo(alias="lengthSeconds")]]
     """Desired length of the video in seconds."""
 
-    prompt: Required[str]
+    prompt: Required[object]
     """The textual prompt to guide the AI video generation."""
 
     style: Required[Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"]]
@@ -37,16 +36,16 @@ class GenerateAdvancedParams(TypedDict, total=False):
     ]
     """Genre of background music."""
 
-    brand_assets: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="brandAssets")]
+    brand_assets: Annotated[Optional[Iterable[object]], PropertyInfo(alias="brandAssets")]
     """URLs to brand assets (e.g., logos, specific imagery) to be incorporated."""
 
-    brand_colors: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="brandColors")]
+    brand_colors: Annotated[Optional[Iterable[object]], PropertyInfo(alias="brandColors")]
     """Optional: Hex color codes to influence the video's aesthetic."""
 
     call_to_action: Annotated[Optional[CallToAction], PropertyInfo(alias="callToAction")]
     """Call-to-action text and URL to be displayed."""
 
-    keywords: Optional[SequenceNotStr[str]]
+    keywords: Optional[Iterable[object]]
     """Optional: Additional keywords to guide the AI's content generation."""
 
     voiceover_style: Annotated[
@@ -54,13 +53,13 @@ class GenerateAdvancedParams(TypedDict, total=False):
     ]
     """Style/tone for the AI voiceover."""
 
-    voiceover_text: Annotated[Optional[str], PropertyInfo(alias="voiceoverText")]
+    voiceover_text: Annotated[object, PropertyInfo(alias="voiceoverText")]
     """Optional: Text for an AI-generated voiceover."""
 
 
 class CallToAction(TypedDict, total=False):
-    display_time_seconds: Annotated[int, PropertyInfo(alias="displayTimeSeconds")]
+    display_time_seconds: Annotated[object, PropertyInfo(alias="displayTimeSeconds")]
 
-    text: str
+    text: object
 
-    url: str
+    url: object

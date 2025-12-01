@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
+from typing import Iterable, Optional
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -56,8 +55,8 @@ class CardsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,11 +104,11 @@ class CardsResource(SyncAPIResource):
         self,
         *,
         controls: CorporateCardControlsParam,
-        expiration_date: Union[str, date],
-        holder_name: str,
-        purpose: str,
-        associated_employee_id: Optional[str] | Omit = omit,
-        spending_policy_id: Optional[str] | Omit = omit,
+        expiration_date: object,
+        holder_name: object,
+        purpose: object,
+        associated_employee_id: object | Omit = omit,
+        spending_policy_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,7 +122,7 @@ class CardsResource(SyncAPIResource):
         and temporary projects.
 
         Args:
-          controls: Specific spending controls for this virtual card.
+          controls: Granular spending controls for a corporate card.
 
           expiration_date: Expiration date for the virtual card (YYYY-MM-DD).
 
@@ -164,9 +163,9 @@ class CardsResource(SyncAPIResource):
 
     def freeze(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        freeze: bool,
+        freeze: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,8 +189,6 @@ class CardsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return self._post(
             f"/corporate/cards/{card_id}/freeze",
             body=maybe_transform({"freeze": freeze}, card_freeze_params.CardFreezeParams),
@@ -203,12 +200,12 @@ class CardsResource(SyncAPIResource):
 
     def list_transactions(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        end_date: Union[str, date] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
+        start_date: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -237,8 +234,6 @@ class CardsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return self._get(
             f"/corporate/cards/{card_id}/transactions",
             options=make_request_options(
@@ -261,17 +256,17 @@ class CardsResource(SyncAPIResource):
 
     def update_controls(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        atm_withdrawals: bool | Omit = omit,
-        contactless_payments: bool | Omit = omit,
-        daily_limit: Optional[float] | Omit = omit,
-        international_transactions: bool | Omit = omit,
-        merchant_category_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
-        monthly_limit: Optional[float] | Omit = omit,
-        online_transactions: bool | Omit = omit,
-        single_transaction_limit: Optional[float] | Omit = omit,
-        vendor_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
+        atm_withdrawals: object | Omit = omit,
+        contactless_payments: object | Omit = omit,
+        daily_limit: object | Omit = omit,
+        international_transactions: object | Omit = omit,
+        merchant_category_restrictions: Optional[Iterable[object]] | Omit = omit,
+        monthly_limit: object | Omit = omit,
+        online_transactions: object | Omit = omit,
+        single_transaction_limit: object | Omit = omit,
+        vendor_restrictions: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -312,8 +307,6 @@ class CardsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return self._put(
             f"/corporate/cards/{card_id}/controls",
             body=maybe_transform(
@@ -360,8 +353,8 @@ class AsyncCardsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,11 +402,11 @@ class AsyncCardsResource(AsyncAPIResource):
         self,
         *,
         controls: CorporateCardControlsParam,
-        expiration_date: Union[str, date],
-        holder_name: str,
-        purpose: str,
-        associated_employee_id: Optional[str] | Omit = omit,
-        spending_policy_id: Optional[str] | Omit = omit,
+        expiration_date: object,
+        holder_name: object,
+        purpose: object,
+        associated_employee_id: object | Omit = omit,
+        spending_policy_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -427,7 +420,7 @@ class AsyncCardsResource(AsyncAPIResource):
         and temporary projects.
 
         Args:
-          controls: Specific spending controls for this virtual card.
+          controls: Granular spending controls for a corporate card.
 
           expiration_date: Expiration date for the virtual card (YYYY-MM-DD).
 
@@ -468,9 +461,9 @@ class AsyncCardsResource(AsyncAPIResource):
 
     async def freeze(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        freeze: bool,
+        freeze: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -494,8 +487,6 @@ class AsyncCardsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return await self._post(
             f"/corporate/cards/{card_id}/freeze",
             body=await async_maybe_transform({"freeze": freeze}, card_freeze_params.CardFreezeParams),
@@ -507,12 +498,12 @@ class AsyncCardsResource(AsyncAPIResource):
 
     async def list_transactions(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        end_date: Union[str, date] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
+        start_date: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -541,8 +532,6 @@ class AsyncCardsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return await self._get(
             f"/corporate/cards/{card_id}/transactions",
             options=make_request_options(
@@ -565,17 +554,17 @@ class AsyncCardsResource(AsyncAPIResource):
 
     async def update_controls(
         self,
-        card_id: str,
+        card_id: object,
         *,
-        atm_withdrawals: bool | Omit = omit,
-        contactless_payments: bool | Omit = omit,
-        daily_limit: Optional[float] | Omit = omit,
-        international_transactions: bool | Omit = omit,
-        merchant_category_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
-        monthly_limit: Optional[float] | Omit = omit,
-        online_transactions: bool | Omit = omit,
-        single_transaction_limit: Optional[float] | Omit = omit,
-        vendor_restrictions: Optional[SequenceNotStr[str]] | Omit = omit,
+        atm_withdrawals: object | Omit = omit,
+        contactless_payments: object | Omit = omit,
+        daily_limit: object | Omit = omit,
+        international_transactions: object | Omit = omit,
+        merchant_category_restrictions: Optional[Iterable[object]] | Omit = omit,
+        monthly_limit: object | Omit = omit,
+        online_transactions: object | Omit = omit,
+        single_transaction_limit: object | Omit = omit,
+        vendor_restrictions: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -616,8 +605,6 @@ class AsyncCardsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not card_id:
-            raise ValueError(f"Expected a non-empty value for `card_id` but received {card_id!r}")
         return await self._put(
             f"/corporate/cards/{card_id}/controls",
             body=await async_maybe_transform(

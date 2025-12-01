@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
-from datetime import date
 from typing_extensions import Literal
 
 import httpx
@@ -49,13 +47,13 @@ class RecurringResource(SyncAPIResource):
     def create(
         self,
         *,
-        amount: float,
-        category: str,
-        currency: str,
-        description: str,
+        amount: object,
+        category: object,
+        currency: object,
+        description: object,
         frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
-        linked_account_id: str,
-        start_date: Union[str, date],
+        linked_account_id: object,
+        start_date: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -112,8 +110,8 @@ class RecurringResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,13 +178,13 @@ class AsyncRecurringResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        amount: float,
-        category: str,
-        currency: str,
-        description: str,
+        amount: object,
+        category: object,
+        currency: object,
+        description: object,
         frequency: Literal["daily", "weekly", "bi_weekly", "monthly", "quarterly", "semi_annually", "annually"],
-        linked_account_id: str,
-        start_date: Union[str, date],
+        linked_account_id: object,
+        start_date: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -243,8 +241,8 @@ class AsyncRecurringResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

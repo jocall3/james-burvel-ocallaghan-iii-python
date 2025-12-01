@@ -10,13 +10,13 @@ __all__ = ["ChatRetrieveHistoryParams"]
 
 
 class ChatRetrieveHistoryParams(TypedDict, total=False):
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""
 
-    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
+    session_id: Annotated[object, PropertyInfo(alias="sessionId")]
     """Optional: Filter history by a specific session ID.
 
     If omitted, recent conversations will be returned.

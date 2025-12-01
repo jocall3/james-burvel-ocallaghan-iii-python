@@ -12,7 +12,6 @@ from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurv
 from james_burvel_ocallaghan_iii.types import (
     CorporatePerformSanctionScreeningResponse,
 )
-from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -42,8 +41,8 @@ class TestCorporate:
                 "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1970-01-01"),
-            identification_number="identificationNumber",
+            date_of_birth="1970-01-01",
+            identification_number={},
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 
@@ -105,8 +104,8 @@ class TestAsyncCorporate:
                 "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1970-01-01"),
-            identification_number="identificationNumber",
+            date_of_birth="1970-01-01",
+            identification_number={},
         )
         assert_matches_type(CorporatePerformSanctionScreeningResponse, corporate, path=["response"])
 

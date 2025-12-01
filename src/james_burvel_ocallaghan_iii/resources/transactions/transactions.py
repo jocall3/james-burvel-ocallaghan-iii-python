@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -14,7 +13,7 @@ from ...types import (
     transaction_categorize_params,
     transaction_update_notes_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .insights import (
     InsightsResource,
@@ -78,7 +77,7 @@ class TransactionsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -101,8 +100,6 @@ class TransactionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return self._get(
             f"/transactions/{transaction_id}",
             options=make_request_options(
@@ -114,14 +111,14 @@ class TransactionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        category: str | Omit = omit,
-        end_date: Union[str, date] | Omit = omit,
-        limit: int | Omit = omit,
-        max_amount: float | Omit = omit,
-        min_amount: float | Omit = omit,
-        offset: int | Omit = omit,
-        search_query: str | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        category: object | Omit = omit,
+        end_date: object | Omit = omit,
+        limit: object | Omit = omit,
+        max_amount: object | Omit = omit,
+        min_amount: object | Omit = omit,
+        offset: object | Omit = omit,
+        search_query: object | Omit = omit,
+        start_date: object | Omit = omit,
         type: Literal["income", "expense", "transfer", "investment", "refund", "bill_payment"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -189,11 +186,11 @@ class TransactionsResource(SyncAPIResource):
 
     def categorize(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        category: str,
-        apply_to_future: bool | Omit = omit,
-        notes: Optional[str] | Omit = omit,
+        category: object,
+        apply_to_future: object | Omit = omit,
+        notes: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,8 +218,6 @@ class TransactionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return self._put(
             f"/transactions/{transaction_id}/categorize",
             body=maybe_transform(
@@ -241,11 +236,11 @@ class TransactionsResource(SyncAPIResource):
 
     def dispute(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        details: str,
+        details: object,
         reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
-        supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
+        supporting_documents: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -272,8 +267,6 @@ class TransactionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return self._post(
             f"/transactions/{transaction_id}/dispute",
             body=maybe_transform(
@@ -292,9 +285,9 @@ class TransactionsResource(SyncAPIResource):
 
     def update_notes(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        notes: str,
+        notes: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -316,8 +309,6 @@ class TransactionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return self._put(
             f"/transactions/{transaction_id}/notes",
             body=maybe_transform({"notes": notes}, transaction_update_notes_params.TransactionUpdateNotesParams),
@@ -358,7 +349,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -381,8 +372,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return await self._get(
             f"/transactions/{transaction_id}",
             options=make_request_options(
@@ -394,14 +383,14 @@ class AsyncTransactionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        category: str | Omit = omit,
-        end_date: Union[str, date] | Omit = omit,
-        limit: int | Omit = omit,
-        max_amount: float | Omit = omit,
-        min_amount: float | Omit = omit,
-        offset: int | Omit = omit,
-        search_query: str | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        category: object | Omit = omit,
+        end_date: object | Omit = omit,
+        limit: object | Omit = omit,
+        max_amount: object | Omit = omit,
+        min_amount: object | Omit = omit,
+        offset: object | Omit = omit,
+        search_query: object | Omit = omit,
+        start_date: object | Omit = omit,
         type: Literal["income", "expense", "transfer", "investment", "refund", "bill_payment"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -469,11 +458,11 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
     async def categorize(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        category: str,
-        apply_to_future: bool | Omit = omit,
-        notes: Optional[str] | Omit = omit,
+        category: object,
+        apply_to_future: object | Omit = omit,
+        notes: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -501,8 +490,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return await self._put(
             f"/transactions/{transaction_id}/categorize",
             body=await async_maybe_transform(
@@ -521,11 +508,11 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
     async def dispute(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        details: str,
+        details: object,
         reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
-        supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
+        supporting_documents: Optional[Iterable[object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -552,8 +539,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return await self._post(
             f"/transactions/{transaction_id}/dispute",
             body=await async_maybe_transform(
@@ -572,9 +557,9 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
     async def update_notes(
         self,
-        transaction_id: str,
+        transaction_id: object,
         *,
-        notes: str,
+        notes: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -596,8 +581,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not transaction_id:
-            raise ValueError(f"Expected a non-empty value for `transaction_id` but received {transaction_id!r}")
         return await self._put(
             f"/transactions/{transaction_id}/notes",
             body=await async_maybe_transform(

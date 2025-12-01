@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,23 +11,23 @@ __all__ = ["APIKey"]
 
 
 class APIKey(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the API key."""
 
-    created_at: datetime = FieldInfo(alias="createdAt")
+    created_at: object = FieldInfo(alias="createdAt")
     """Timestamp when the API key was created."""
 
-    prefix: str
+    prefix: object
     """The non-secret prefix of the API key, used for identification."""
 
-    scopes: List[str]
+    scopes: List[object]
     """List of permissions granted to this API key."""
 
     status: Literal["active", "revoked", "expired"]
     """Current status of the API key."""
 
-    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
+    expires_at: Optional[object] = FieldInfo(alias="expiresAt", default=None)
     """Timestamp when the API key will expire, if set."""
 
-    last_used: Optional[datetime] = FieldInfo(alias="lastUsed", default=None)
+    last_used: Optional[object] = FieldInfo(alias="lastUsed", default=None)
     """Timestamp of the last time this API key was used."""

@@ -11,10 +11,10 @@ __all__ = ["OverdraftSettings"]
 
 
 class OverdraftSettings(BaseModel):
-    account_id: str = FieldInfo(alias="accountId")
+    account_id: object = FieldInfo(alias="accountId")
     """The account ID these overdraft settings apply to."""
 
-    enabled: bool
+    enabled: object
     """If true, overdraft protection is enabled."""
 
     fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] = FieldInfo(alias="feePreference")
@@ -23,11 +23,11 @@ class OverdraftSettings(BaseModel):
     be declined.
     """
 
-    linked_savings_account_id: Optional[str] = FieldInfo(alias="linkedSavingsAccountId", default=None)
+    linked_savings_account_id: Optional[object] = FieldInfo(alias="linkedSavingsAccountId", default=None)
     """The ID of the linked savings account, if `linkToSavings` is true."""
 
-    link_to_savings: Optional[bool] = FieldInfo(alias="linkToSavings", default=None)
+    link_to_savings: Optional[object] = FieldInfo(alias="linkToSavings", default=None)
     """If true, attempts to draw funds from a linked savings account."""
 
-    protection_limit: Optional[float] = FieldInfo(alias="protectionLimit", default=None)
+    protection_limit: Optional[object] = FieldInfo(alias="protectionLimit", default=None)
     """The maximum amount that can be covered by overdraft protection."""

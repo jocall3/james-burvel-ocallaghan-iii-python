@@ -57,9 +57,9 @@ class ProductsResource(SyncAPIResource):
             "loans", "insurance", "credit_cards", "investments", "budgeting_tools", "smart_home", "travel", "education"
         ]
         | Omit = omit,
-        limit: int | Omit = omit,
-        min_rating: float | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        min_rating: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -115,9 +115,9 @@ class ProductsResource(SyncAPIResource):
 
     def redeem_marketplace_offer(
         self,
-        offer_id: str,
+        offer_id: object,
         *,
-        payment_account_id: str | Omit = omit,
+        payment_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,8 +140,6 @@ class ProductsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not offer_id:
-            raise ValueError(f"Expected a non-empty value for `offer_id` but received {offer_id!r}")
         return self._post(
             f"/marketplace/offers/{offer_id}/redeem",
             body=maybe_transform(
@@ -156,7 +154,7 @@ class ProductsResource(SyncAPIResource):
 
     def simulate_purchase(
         self,
-        product_id: str,
+        product_id: object,
         *,
         simulation_parameters: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -183,8 +181,6 @@ class ProductsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not product_id:
-            raise ValueError(f"Expected a non-empty value for `product_id` but received {product_id!r}")
         return self._post(
             f"/marketplace/products/{product_id}/impact-simulate",
             body=maybe_transform(
@@ -226,9 +222,9 @@ class AsyncProductsResource(AsyncAPIResource):
             "loans", "insurance", "credit_cards", "investments", "budgeting_tools", "smart_home", "travel", "education"
         ]
         | Omit = omit,
-        limit: int | Omit = omit,
-        min_rating: float | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        min_rating: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -284,9 +280,9 @@ class AsyncProductsResource(AsyncAPIResource):
 
     async def redeem_marketplace_offer(
         self,
-        offer_id: str,
+        offer_id: object,
         *,
-        payment_account_id: str | Omit = omit,
+        payment_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -309,8 +305,6 @@ class AsyncProductsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not offer_id:
-            raise ValueError(f"Expected a non-empty value for `offer_id` but received {offer_id!r}")
         return await self._post(
             f"/marketplace/offers/{offer_id}/redeem",
             body=await async_maybe_transform(
@@ -325,7 +319,7 @@ class AsyncProductsResource(AsyncAPIResource):
 
     async def simulate_purchase(
         self,
-        product_id: str,
+        product_id: object,
         *,
         simulation_parameters: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -352,8 +346,6 @@ class AsyncProductsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not product_id:
-            raise ValueError(f"Expected a non-empty value for `product_id` but received {product_id!r}")
         return await self._post(
             f"/marketplace/products/{product_id}/impact-simulate",
             body=await async_maybe_transform(

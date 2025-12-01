@@ -18,7 +18,7 @@ class PreferenceUpdateParams(TypedDict, total=False):
     demand).
     """
 
-    data_sharing_consent: Annotated[bool, PropertyInfo(alias="dataSharingConsent")]
+    data_sharing_consent: Annotated[object, PropertyInfo(alias="dataSharingConsent")]
     """
     Consent status for sharing anonymized data for AI improvement and personalized
     offers.
@@ -27,10 +27,10 @@ class PreferenceUpdateParams(TypedDict, total=False):
     notification_channels: Annotated[NotificationChannels, PropertyInfo(alias="notificationChannels")]
     """Preferred channels for receiving notifications."""
 
-    preferred_language: Annotated[str, PropertyInfo(alias="preferredLanguage")]
+    preferred_language: Annotated[object, PropertyInfo(alias="preferredLanguage")]
     """Preferred language for the user interface."""
 
-    theme: str
+    theme: object
     """Preferred UI theme (e.g., Light-Default, Dark-Quantum)."""
 
     transaction_grouping: Annotated[
@@ -40,10 +40,10 @@ class PreferenceUpdateParams(TypedDict, total=False):
 
 
 class NotificationChannels(TypedDict, total=False):
-    email: bool
+    email: object
 
-    in_app: Annotated[bool, PropertyInfo(alias="inApp")]
+    in_app: Annotated[object, PropertyInfo(alias="inApp")]
 
-    push: bool
+    push: object
 
-    sms: bool
+    sms: object

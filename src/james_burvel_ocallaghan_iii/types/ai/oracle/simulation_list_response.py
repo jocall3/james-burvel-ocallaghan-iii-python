@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,36 +11,36 @@ __all__ = ["SimulationListResponse", "Data"]
 
 
 class Data(BaseModel):
-    creation_date: datetime = FieldInfo(alias="creationDate")
+    creation_date: object = FieldInfo(alias="creationDate")
     """Timestamp when the simulation was initiated."""
 
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp when the simulation status or results were last updated."""
 
-    simulation_id: str = FieldInfo(alias="simulationId")
+    simulation_id: object = FieldInfo(alias="simulationId")
     """Unique identifier for the simulation."""
 
     status: Literal["processing", "completed", "failed"]
     """Current status of the simulation."""
 
-    summary: str
+    summary: object
     """A brief summary of what the simulation evaluated."""
 
-    title: str
+    title: object
     """A user-friendly title for the simulation."""
 
 
 class SimulationListResponse(BaseModel):
-    limit: int
+    limit: object
     """The maximum number of items returned in the current page."""
 
-    offset: int
+    offset: object
     """The number of items skipped before the current page."""
 
-    total: int
+    total: object
     """The total number of items available across all pages."""
 
     data: Optional[List[Data]] = None
 
-    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    next_offset: Optional[object] = FieldInfo(alias="nextOffset", default=None)
     """The offset for the next page of results, if available. Null if no more pages."""

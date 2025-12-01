@@ -9,7 +9,6 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii._utils import parse_date
 from james_burvel_ocallaghan_iii.types.identity import KYCStatus
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -49,8 +48,8 @@ class TestKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 
@@ -60,11 +59,11 @@ class TestKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
-            additional_documents=["U3RhaW5sZXNzIHJvY2tz"],
-            document_back_image="U3RhaW5sZXNzIHJvY2tz",
-            document_front_image="U3RhaW5sZXNzIHJvY2tz",
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
+            additional_documents=[{}],
+            document_back_image="base64encoded_image_of_drivers_license_back",
+            document_front_image="base64encoded_image_of_drivers_license_front",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 
@@ -74,8 +73,8 @@ class TestKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         )
 
         assert response.is_closed is True
@@ -89,8 +88,8 @@ class TestKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,8 +136,8 @@ class TestAsyncKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 
@@ -148,11 +147,11 @@ class TestAsyncKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
-            additional_documents=["U3RhaW5sZXNzIHJvY2tz"],
-            document_back_image="U3RhaW5sZXNzIHJvY2tz",
-            document_front_image="U3RhaW5sZXNzIHJvY2tz",
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
+            additional_documents=[{}],
+            document_back_image="base64encoded_image_of_drivers_license_back",
+            document_front_image="base64encoded_image_of_drivers_license_front",
         )
         assert_matches_type(KYCStatus, kyc, path=["response"])
 
@@ -162,8 +161,8 @@ class TestAsyncKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         )
 
         assert response.is_closed is True
@@ -177,8 +176,8 @@ class TestAsyncKYC:
             country_of_issue="US",
             document_number="ABC12345",
             document_type="drivers_license",
-            expiration_date=parse_date("2030-01-01"),
-            issue_date=parse_date("2020-01-01"),
+            expiration_date="2030-01-01",
+            issue_date="2020-01-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

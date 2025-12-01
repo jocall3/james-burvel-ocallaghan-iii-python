@@ -25,8 +25,8 @@ class TestAds:
     @parametrize
     def test_method_list_generated_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         ad = client.ai.ads.list_generated(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
             status="done",
         )
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
@@ -82,13 +82,6 @@ class TestAds:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `operation_id` but received ''"):
-            client.ai.ads.with_raw_response.retrieve_status(
-                "",
-            )
-
 
 class TestAsyncAds:
     parametrize = pytest.mark.parametrize(
@@ -103,8 +96,8 @@ class TestAsyncAds:
     @parametrize
     async def test_method_list_generated_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         ad = await async_client.ai.ads.list_generated(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
             status="done",
         )
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
@@ -159,10 +152,3 @@ class TestAsyncAds:
             assert_matches_type(VideoOperationStatus, ad, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `operation_id` but received ''"):
-            await async_client.ai.ads.with_raw_response.retrieve_status(
-                "",
-            )

@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import datetime
 from typing import List, Optional
 from typing_extensions import Literal
 
@@ -20,33 +19,33 @@ __all__ = [
 
 
 class InflowForecastBySource(BaseModel):
-    amount: Optional[float] = None
+    amount: Optional[object] = None
 
-    source: Optional[str] = None
+    source: Optional[object] = None
 
 
 class InflowForecast(BaseModel):
     by_source: Optional[List[InflowForecastBySource]] = FieldInfo(alias="bySource", default=None)
 
-    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
+    total_projected: Optional[object] = FieldInfo(alias="totalProjected", default=None)
 
 
 class OutflowForecastByCategory(BaseModel):
-    amount: Optional[float] = None
+    amount: Optional[object] = None
 
-    category: Optional[str] = None
+    category: Optional[object] = None
 
 
 class OutflowForecast(BaseModel):
     by_category: Optional[List[OutflowForecastByCategory]] = FieldInfo(alias="byCategory", default=None)
 
-    total_projected: Optional[float] = FieldInfo(alias="totalProjected", default=None)
+    total_projected: Optional[object] = FieldInfo(alias="totalProjected", default=None)
 
 
 class ProjectedBalance(BaseModel):
-    date: Optional[datetime.date] = None
+    date: Optional[object] = None
 
-    projected_cash: Optional[float] = FieldInfo(alias="projectedCash", default=None)
+    projected_cash: Optional[object] = FieldInfo(alias="projectedCash", default=None)
 
     scenario: Optional[Literal["most_likely", "best_case", "worst_case"]] = None
 
@@ -55,16 +54,16 @@ class CashFlowForecastResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
     """AI-generated recommendations for treasury optimization."""
 
-    currency: str
+    currency: object
     """The currency of the forecast."""
 
-    forecast_id: str = FieldInfo(alias="forecastId")
+    forecast_id: object = FieldInfo(alias="forecastId")
     """Unique identifier for the cash flow forecast report."""
 
     inflow_forecast: InflowForecast = FieldInfo(alias="inflowForecast")
     """Forecast of cash inflows by source."""
 
-    liquidity_risk_score: int = FieldInfo(alias="liquidityRiskScore")
+    liquidity_risk_score: object = FieldInfo(alias="liquidityRiskScore")
     """AI-assessed risk score for liquidity (0-100, lower is better)."""
 
     outflow_forecast: OutflowForecast = FieldInfo(alias="outflowForecast")
@@ -75,7 +74,7 @@ class CashFlowForecastResponse(BaseModel):
     )
     """Overall assessment of the projected cash flow."""
 
-    period: str
+    period: object
     """The period covered by the forecast."""
 
     projected_balances: List[ProjectedBalance] = FieldInfo(alias="projectedBalances")
