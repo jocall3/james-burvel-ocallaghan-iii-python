@@ -1,4 +1,4 @@
-name: Build SDKs for Pull Requests
+name: "Build SDKs for Pull Requests"
 
 on:
   pull_request:
@@ -51,8 +51,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: Run merge codegen
         uses: stainless-api/codegen-action/merge@v1
