@@ -1720,3 +1720,752 @@ class TestAsyncJamesBurvelOcallaghanIii:
 
         assert exc_info.value.response.status_code == 302
         assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+import gc
+import os
+import sys
+import json
+import asyncio
+import inspect
+import tracemalloc
+from typing import Any, Union, cast
+from unittest import mock
+from typing_extensions import Literal
+
+import httpx
+import pytest
+from respx import MockRouter
+from pydantic import ValidationError
+
+from james_burvel_ocallaghan_iii import (
+    JamesBurvelOcallaghanIii,
+    APIResponseValidationError,
+    AsyncJamesBurvelOcallaghanIii,
+)
+from james_burvel_ocallaghan_iii._types import Omit
+from james_burvel_ocallaghan_iii._utils import asyncify
+from james_burvel_ocallaghan_iii._models import BaseModel, FinalRequestOptions
+from james_burvel_ocallaghan_iii._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from james_burvel_ocallaghan_iii._base_client import (
+    DEFAULT_TIMEOUT,
+    HTTPX_DEFAULT_TIMEOUT,
+    BaseClient,
+    OtherPlatform,
+    DefaultHttpxClient,
+    DefaultAsyncHttpxClient,
+    get_platform,
+    make_request_options,
+)
+
+from .utils import update_env
+
+base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
+
+
+def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
+    request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+    url = httpx.URL(request.url)
+    return dict(url.params)
+
+
+def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
+    return 0.1
+
+
+def _get_open_connections(client: JamesBurvelOcallaghanIii | AsyncJamesBurvelOcallaghanIii) -> int:
+    transport = client._client._transport
+    assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
+
+    pool = transport._pool
+    return len(pool._requests)
+
+
+class TestJamesBurvelOcallaghanIii:
+    def test_copy(self, client: JamesBurvelOcallaghanIii) -> None:
+        copied = client.copy()
+        assert id(copied) != id(client)
+
+    def test_copy_default_options(self, client: JamesBurvelOcallaghanIii) -> None:
+        # options that have a default are overridden correctly
+        copied = client.copy(max_retries=7)
+        assert copied.max_retries == 7
+        assert client.max_retries == 2
+
+        copied2 = copied.copy(max_retries=6)
+        assert copied2.max_retries == 6
+        assert copied.max_retries == 7
+
+        # timeout
+        assert isinstance(client.timeout, httpx.Timeout)
+        copied = client.copy(timeout=None)
+        assert copied.timeout is None
+        assert isinstance(client.timeout, httpx.Timeout)
+
+    def test_copy_default_headers(self) -> None:
+        client = JamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+        )
+        assert client.default_headers["X-Foo"] == "bar"
+
+        # does not override the already given value when not specified
+        copied = client.copy()
+        assert copied.default_headers["X-Foo"] == "bar"
+
+        # merges already given headers
+        copied = client.copy(default_headers={"X-Bar": "stainless"})
+        assert copied.default_headers["X-Foo"] == "bar"
+        assert copied.default_headers["X-Bar"] == "stainless"
+
+        # uses new values for any already given headers
+        copied = client.copy(default_headers={"X-Foo": "stainless"})
+        assert copied.default_headers["X-Foo"] == "stainless"
+
+        # set_default_headers
+
+        # completely overrides already set values
+        copied = client.copy(set_default_headers={})
+        assert copied.default_headers.get("X-Foo") is None
+
+        copied = client.copy(set_default_headers={"X-Bar": "Robert"})
+        assert copied.default_headers["X-Bar"] == "Robert"
+
+        with pytest.raises(
+            ValueError,
+            match="`default_headers` and `set_default_headers` arguments are mutually exclusive",
+        ):
+            client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
+        client.close()
+
+    def test_copy_default_query(self) -> None:
+        client = JamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"}
+        )
+        assert "foo" in _get_params(client)
+        assert _get_params(client)["foo"] == "bar"
+
+        # does not override the already given value when not specified
+        copied = client.copy()
+        assert "foo" in _get_params(copied)
+        assert _get_params(copied)["foo"] == "bar"
+
+        # merges already given params
+        copied = client.copy(default_query={"bar": "stainless"})
+        params = _get_params(copied)
+        assert "foo" in params
+        assert params["foo"] == "bar"
+        assert "bar" in params
+        assert params["bar"] == "stainless"
+
+        # uses new values for any already given headers
+        copied = client.copy(default_query={"foo": "stainless"})
+        assert "foo" in _get_params(copied)
+        assert _get_params(copied)["foo"] == "stainless"
+
+        # set_default_query
+        # completely overrides already set values
+        copied = client.copy(set_default_query={})
+        assert _get_params(copied) == {}
+
+        copied = client.copy(set_default_query={"bar": "Robert"})
+        assert _get_params(copied)["bar"] == "Robert"
+
+        with pytest.raises(
+            ValueError,
+            match="`default_query` and `set_default_query` arguments are mutually exclusive",
+        ):
+            client.copy(set_default_query={}, default_query={"foo": "Bar"})
+
+        client.close()
+
+
+    def test_copy_signature(self, client: JamesBurvelOcallaghanIii) -> None:
+        # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
+        init_signature = inspect.signature(
+            client.__init__,
+        )
+        copy_signature = inspect.signature(client.copy)
+        exclude_params = {"transport", "proxies", "_strict_response_validation"}
+
+        for name in init_signature.parameters.keys():
+            if name in exclude_params:
+                continue
+
+            copy_param = copy_signature.parameters.get(name)
+            assert copy_param is not None, f"copy() signature is missing the {name} param"
+
+    def test_request_timeout(self, client: JamesBurvelOcallaghanIii) -> None:
+        request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+        assert timeout == DEFAULT_TIMEOUT
+
+        request = client._build_request(FinalRequestOptions(method="get", url="/users/me", timeout=httpx.Timeout(100.0)))
+        timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+        assert timeout == httpx.Timeout(100.0)
+
+    def test_client_timeout_option(self) -> None:
+        client = JamesBurvelOcallaghanIii(base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0))
+
+        request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+        assert timeout == httpx.Timeout(0)
+
+        client.close()
+
+    def test_http_client_timeout_option(self) -> None:
+        # custom timeout given to the httpx client should be used
+        with httpx.Client(timeout=None) as http_client:
+            client = JamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+            assert timeout == httpx.Timeout(None)
+
+            client.close()
+
+        # no timeout given to the httpx client should not use the httpx default
+        with httpx.Client() as http_client:
+            client = JamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+            assert timeout == DEFAULT_TIMEOUT
+
+            client.close()
+
+        # explicitly passing the default timeout currently results in it being ignored
+        with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
+            client = JamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
+            assert timeout == DEFAULT_TIMEOUT  # our default
+
+            client.close()
+
+    async def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            async with httpx.AsyncClient() as http_client:
+                JamesBurvelOcallaghanIii(
+                    base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client)
+                )
+
+    def test_base_url_setter(self) -> None:
+        client = JamesBurvelOcallaghanIii(base_url="https://example.com/from_init", _strict_response_validation=True)
+        assert client.base_url == "https://example.com/from_init/"
+
+        client.base_url = "https://example.com/from_setter"  # type: ignore
+
+        assert client.base_url == "https://example.com/from_setter/"
+
+        client.close()
+
+    def test_base_url_env(self) -> None:
+        with update_env(JAMES_BURVEL_OCALLAGHAN_III_BASE_URL="http://localhost:5000/from/env"):
+            client = JamesBurvelOcallaghanIii(_strict_response_validation=True)
+            assert client.base_url == "http://localhost:5000/from/env/"
+
+    def test_client_context_manager(self) -> None:
+        test_client = JamesBurvelOcallaghanIii(base_url=base_url, _strict_response_validation=True)
+        with test_client as c2:
+            assert c2 is test_client
+            assert not c2.is_closed()
+            assert not test_client.is_closed()
+        assert test_client.is_closed()
+
+    def test_client_max_retries_validation(self) -> None:
+        with pytest.raises(TypeError, match=r"max_retries cannot be None"):
+            JamesBurvelOcallaghanIii(base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None))
+
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, client: JamesBurvelOcallaghanIii
+    ) -> None:
+        respx_mock.post("/users/register").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+
+        with pytest.raises(APITimeoutError):
+            client.users.with_streaming_response.register(
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+            ).__enter__()
+
+        assert _get_open_connections(client) == 0
+
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: JamesBurvelOcallaghanIii) -> None:
+        respx_mock.post("/users/register").mock(return_value=httpx.Response(500))
+
+        with pytest.raises(APIStatusError):
+            client.users.with_streaming_response.register(
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+            ).__enter__()
+        assert _get_open_connections(client) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
+    def test_retries_taken(
+        self,
+        client: JamesBurvelOcallaghanIii,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = client.users.with_raw_response.register(
+            email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+        )
+
+        assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_omit_retry_count_header(
+        self, client: JamesBurvelOcallaghanIii, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = client.users.with_raw_response.register(
+            email="alice.w@example.com",
+            name="Alice Wonderland",
+            password="SecureP@ssw0rd2024!",
+            extra_headers={"x-stainless-retry-count": Omit()},
+        )
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_overwrite_retry_count_header(
+        self, client: JamesBurvelOcallaghanIii, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = client.users.with_raw_response.register(
+            email="alice.w@example.com",
+            name="Alice Wonderland",
+            password="SecureP@ssw0rd2024!",
+            extra_headers={"x-stainless-retry-count": "42"},
+        )
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+
+class TestAsyncJamesBurvelOcallaghanIii:
+    def test_copy(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        copied = async_client.copy()
+        assert id(copied) != id(async_client)
+
+    def test_copy_default_options(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        # options that have a default are overridden correctly
+        copied = async_client.copy(max_retries=7)
+        assert copied.max_retries == 7
+        assert async_client.max_retries == 2
+
+        copied2 = copied.copy(max_retries=6)
+        assert copied2.max_retries == 6
+        assert copied.max_retries == 7
+
+        # timeout
+        assert isinstance(async_client.timeout, httpx.Timeout)
+        copied = async_client.copy(timeout=None)
+        assert copied.timeout is None
+        assert isinstance(async_client.timeout, httpx.Timeout)
+
+    async def test_copy_default_headers(self) -> None:
+        client = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+        )
+        assert client.default_headers["X-Foo"] == "bar"
+
+        # does not override the already given value when not specified
+        copied = client.copy()
+        assert copied.default_headers["X-Foo"] == "bar"
+
+        # merges already given headers
+        copied = client.copy(default_headers={"X-Bar": "stainless"})
+        assert copied.default_headers["X-Foo"] == "bar"
+        assert copied.default_headers["X-Bar"] == "stainless"
+
+        # uses new values for any already given headers
+        copied = client.copy(default_headers={"X-Foo": "stainless"})
+        assert copied.default_headers["X-Foo"] == "stainless"
+
+        # set_default_headers
+
+        # completely overrides already set values
+        copied = client.copy(set_default_headers={})
+        assert copied.default_headers.get("X-Foo") is None
+
+        copied = client.copy(set_default_headers={"X-Bar": "Robert"})
+        assert copied.default_headers["X-Bar"] == "Robert"
+
+        with pytest.raises(
+            ValueError,
+            match="`default_headers` and `set_default_headers` arguments are mutually exclusive",
+        ):
+            client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
+        await client.close()
+
+    async def test_copy_default_query(self) -> None:
+        client = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_query={"foo": "bar"}
+        )
+        assert "foo" in _get_params(client)
+        assert _get_params(client)["foo"] == "bar"
+
+        # does not override the already given value when not specified
+        copied = client.copy()
+        assert "foo" in _get_params(copied)
+        assert _get_params(copied)["foo"] == "bar"
+
+        # merges already given params
+        copied = client.copy(default_query={"bar": "stainless"})
+        params = _get_params(copied)
+        assert "foo" in params
+        assert params["foo"] == "bar"
+        assert "bar" in params
+        assert params["bar"] == "stainless"
+
+        # uses new values for any already given headers
+        copied = client.copy(default_query={"foo": "stainless"})
+        assert "foo" in _get_params(copied)
+        assert _get_params(copied)["foo"] == "stainless"
+
+        # set_default_query
+
+        # completely overrides already set values
+        copied = client.copy(set_default_query={})
+        assert "foo" not in _get_params(copied)
+
+        copied = client.copy(set_default_query={"bar": "Robert"})
+        assert "bar" in _get_params(copied)
+        assert _get_params(copied)["bar"] == "Robert"
+
+        with pytest.raises(
+            ValueError,
+            match="`default_query` and `set_default_query` arguments are mutually exclusive",
+        ):
+            client.copy(set_default_query={}, default_query={"foo": "Bar"})
+
+        await client.close()
+
+
+    def test_copy_signature(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
+        init_signature = inspect.signature(
+            async_client.__init__,
+        )
+        copy_signature = inspect.signature(async_client.copy)
+        exclude_params = {"transport", "proxies", "_strict_response_validation"}
+
+        for name in init_signature.parameters.keys():
+            if name in exclude_params:
+                continue
+
+            copy_param = copy_signature.parameters.get(name)
+            assert copy_param is not None, f"copy() signature is missing the {name} param"
+
+    async def test_request_timeout(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        request = async_client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        timeout = httpx.Timeout(**request.extensions["timeout"])
+        assert timeout == DEFAULT_TIMEOUT
+
+        request = async_client._build_request(
+            FinalRequestOptions(method="get", url="/users/me", timeout=httpx.Timeout(100.0))
+        )
+        timeout = httpx.Timeout(**request.extensions["timeout"])
+        assert timeout == httpx.Timeout(100.0)
+
+    async def test_client_timeout_option(self) -> None:
+        client = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, timeout=httpx.Timeout(0)
+        )
+
+        request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        timeout = httpx.Timeout(**request.extensions["timeout"])
+        assert timeout == httpx.Timeout(0)
+
+        await client.close()
+
+    async def test_http_client_timeout_option(self) -> None:
+        # custom timeout given to the httpx client should be used
+        async with httpx.AsyncClient(timeout=None) as http_client:
+            client = AsyncJamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])
+            assert timeout == httpx.Timeout(None)
+
+            await client.close()
+
+        # no timeout given to the httpx client should not use the httpx default
+        async with httpx.AsyncClient() as http_client:
+            client = AsyncJamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])
+            assert timeout == DEFAULT_TIMEOUT
+
+            await client.close()
+
+        # explicitly passing the default timeout currently results in it being ignored
+        async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
+            client = AsyncJamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, http_client=http_client
+            )
+
+            request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+            timeout = httpx.Timeout(**request.extensions["timeout"])
+            assert timeout == DEFAULT_TIMEOUT  # our default
+
+            await client.close()
+
+    def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            with httpx.Client() as http_client:
+                AsyncJamesBurvelOcallaghanIii(
+                    base_url=base_url, _strict_response_validation=True, http_client=cast(Any, http_client)
+                )
+
+    async def test_default_headers_option(self) -> None:
+        test_client = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+        )
+        request = test_client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        assert request.headers.get("x-foo") == "bar"
+        assert request.headers.get("x-stainless-lang") == "python"
+
+        test_client2 = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url,
+            _strict_response_validation=True,
+            default_headers={
+                "X-Foo": "stainless",
+                "X-Stainless-Lang": "my-overriding-header",
+            },
+        )
+        request = test_client2._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        assert request.headers.get("x-foo") == "stainless"
+        assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+        await test_client.close()
+        await test_client2.close()
+
+    async def test_default_query_option(self) -> None:
+        client = AsyncJamesBurvelOcallaghanIii(
+            base_url=base_url, _strict_response_validation=True, default_query={"query_param": "bar"}
+        )
+        request = client._build_request(FinalRequestOptions(method="get", url="/users/me"))
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"query_param": "bar"}
+
+        request = client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/users/me",
+                params={"foo": "baz", "query_param": "overridden"},
+            )
+        )
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"foo": "baz", "query_param": "overridden"}
+
+        await client.close()
+
+    async def test_copied_client_does_not_close_http(self) -> None:
+        test_client = AsyncJamesBurvelOcallaghanIii(base_url=base_url, _strict_response_validation=True)
+        assert not test_client.is_closed()
+
+        copied = test_client.copy()
+        assert copied is not test_client
+
+        del copied
+
+        await asyncio.sleep(0.2)
+        assert not test_client.is_closed()
+
+    async def test_client_context_manager(self) -> None:
+        test_client = AsyncJamesBurvelOcallaghanIii(base_url=base_url, _strict_response_validation=True)
+        async with test_client as c2:
+            assert c2 is test_client
+            assert not c2.is_closed()
+            assert not test_client.is_closed()
+        assert test_client.is_closed()
+
+    async def test_client_max_retries_validation(self) -> None:
+        with pytest.raises(TypeError, match=r"max_retries cannot be None"):
+            AsyncJamesBurvelOcallaghanIii(
+                base_url=base_url, _strict_response_validation=True, max_retries=cast(Any, None)
+            )
+
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncJamesBurvelOcallaghanIii
+    ) -> None:
+        respx_mock.post("/users/register").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+
+        with pytest.raises(APITimeoutError):
+            await async_client.users.with_streaming_response.register(
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+            ).__aenter__()
+
+        assert _get_open_connections(async_client) == 0
+
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncJamesBurvelOcallaghanIii
+    ) -> None:
+        respx_mock.post("/users/register").mock(return_value=httpx.Response(500))
+
+        with pytest.raises(APIStatusError):
+            await async_client.users.with_streaming_response.register(
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+            ).__aenter__()
+        assert _get_open_connections(async_client) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    @pytest.mark.parametrize("failure_mode", ["status", "exception"])
+    async def test_retries_taken(
+        self,
+        async_client: AsyncJamesBurvelOcallaghanIii,
+        failures_before_success: int,
+        failure_mode: Literal["status", "exception"],
+        respx_mock: MockRouter,
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                if failure_mode == "exception":
+                    raise RuntimeError("oops")
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = await client.users.with_raw_response.register(
+            email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
+        )
+
+        assert response.retries_taken == failures_before_success
+        assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    async def test_omit_retry_count_header(
+        self, async_client: AsyncJamesBurvelOcallaghanIii, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = await client.users.with_raw_response.register(
+            email="alice.w@example.com",
+            name="Alice Wonderland",
+            password="SecureP@ssw0rd2024!",
+            extra_headers={"x-stainless-retry-count": Omit()},
+        )
+
+        assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
+
+    @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
+    @mock.patch("james_burvel_ocallaghan_iii._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    async def test_overwrite_retry_count_header(
+        self, async_client: AsyncJamesBurvelOcallaghanIii, failures_before_success: int, respx_mock: MockRouter
+    ) -> None:
+        client = async_client.with_options(max_retries=4)
+
+        nb_retries = 0
+
+        def retry_handler(_request: httpx.Request) -> httpx.Response:
+            nonlocal nb_retries
+            if nb_retries < failures_before_success:
+                nb_retries += 1
+                return httpx.Response(500)
+            return httpx.Response(200)
+
+        respx_mock.post("/users/register").mock(side_effect=retry_handler)
+
+        response = await client.users.with_raw_response.register(
+            email="alice.w@example.com",
+            name="Alice Wonderland",
+            password="SecureP@ssw0rd2024!",
+            extra_headers={"x-stainless-retry-count": "42"},
+        )
+
+        assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    async def test_get_platform(self) -> None:
+        platform = await asyncify(get_platform)()
+        assert isinstance(platform, (str, OtherPlatform))
