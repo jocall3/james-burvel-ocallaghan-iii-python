@@ -19,6 +19,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.users.me import preference_update_params
 from ....types.users.me.user_preferences import UserPreferences
+from ....types.users.me.user_preferences_notification_channels_param import UserPreferencesNotificationChannelsParam
 
 __all__ = ["PreferencesResource", "AsyncPreferencesResource"]
 
@@ -71,7 +72,7 @@ class PreferencesResource(SyncAPIResource):
         *,
         ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
         data_sharing_consent: object | Omit = omit,
-        notification_channels: preference_update_params.NotificationChannels | Omit = omit,
+        notification_channels: UserPreferencesNotificationChannelsParam | Omit = omit,
         preferred_language: object | Omit = omit,
         theme: object | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,
@@ -178,7 +179,7 @@ class AsyncPreferencesResource(AsyncAPIResource):
         *,
         ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
         data_sharing_consent: object | Omit = omit,
-        notification_channels: preference_update_params.NotificationChannels | Omit = omit,
+        notification_channels: UserPreferencesNotificationChannelsParam | Omit = omit,
         preferred_language: object | Omit = omit,
         theme: object | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,

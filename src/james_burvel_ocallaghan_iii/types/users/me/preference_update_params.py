@@ -5,8 +5,9 @@ from __future__ import annotations
 from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .user_preferences_notification_channels_param import UserPreferencesNotificationChannelsParam
 
-__all__ = ["PreferenceUpdateParams", "NotificationChannels"]
+__all__ = ["PreferenceUpdateParams"]
 
 
 class PreferenceUpdateParams(TypedDict, total=False):
@@ -24,7 +25,9 @@ class PreferenceUpdateParams(TypedDict, total=False):
     offers.
     """
 
-    notification_channels: Annotated[NotificationChannels, PropertyInfo(alias="notificationChannels")]
+    notification_channels: Annotated[
+        UserPreferencesNotificationChannelsParam, PropertyInfo(alias="notificationChannels")
+    ]
     """Preferred channels for receiving notifications."""
 
     preferred_language: Annotated[object, PropertyInfo(alias="preferredLanguage")]
@@ -37,13 +40,3 @@ class PreferenceUpdateParams(TypedDict, total=False):
         Literal["category", "merchant", "date", "account"], PropertyInfo(alias="transactionGrouping")
     ]
     """Default grouping preference for transaction lists."""
-
-
-class NotificationChannels(TypedDict, total=False):
-    email: object
-
-    in_app: Annotated[object, PropertyInfo(alias="inApp")]
-
-    push: object
-
-    sms: object

@@ -39,7 +39,10 @@ Methods:
 Types:
 
 ```python
-from james_burvel_ocallaghan_iii.types.users.me import UserPreferences
+from james_burvel_ocallaghan_iii.types.users.me import (
+    UserPreferences,
+    UserPreferencesNotificationChannels,
+)
 ```
 
 Methods:

@@ -6,18 +6,9 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from .user_preferences_notification_channels import UserPreferencesNotificationChannels
 
-__all__ = ["UserPreferences", "NotificationChannels"]
-
-
-class NotificationChannels(BaseModel):
-    email: Optional[object] = None
-
-    in_app: Optional[object] = FieldInfo(alias="inApp", default=None)
-
-    push: Optional[object] = None
-
-    sms: Optional[object] = None
+__all__ = ["UserPreferences"]
 
 
 class UserPreferences(BaseModel):
@@ -35,7 +26,9 @@ class UserPreferences(BaseModel):
     offers.
     """
 
-    notification_channels: Optional[NotificationChannels] = FieldInfo(alias="notificationChannels", default=None)
+    notification_channels: Optional[UserPreferencesNotificationChannels] = FieldInfo(
+        alias="notificationChannels", default=None
+    )
     """Preferred channels for receiving notifications."""
 
     preferred_language: Optional[object] = FieldInfo(alias="preferredLanguage", default=None)
