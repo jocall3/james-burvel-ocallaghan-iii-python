@@ -19,19 +19,22 @@ class Category(BaseModel):
     name: str
     """Name of the budget category."""
 
-    progress_percentage: Optional[float] = FieldInfo(alias="progressPercentage", default=None)
-    """Percentage of allocated amount spent."""
-
-    remaining: Optional[float] = None
+    remaining: float
     """Remaining amount in this category."""
 
-    spent: Optional[float] = None
-    """Amount spent in this category."""
+    spent: float
+    """Amount spent in this category so far."""
 
 
 class Budget(BaseModel):
     id: str
     """Unique identifier for the budget."""
+
+    alert_threshold: int = FieldInfo(alias="alertThreshold")
+    """Percentage threshold at which an alert is triggered (e.g., 80% spent)."""
+
+    categories: List[Category]
+    """Breakdown of the budget by categories."""
 
     end_date: date = FieldInfo(alias="endDate")
     """End date of the budget period."""
@@ -40,30 +43,22 @@ class Budget(BaseModel):
     """Name of the budget."""
 
     period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"]
-    """Recurrence period of the budget."""
+    """The frequency or period of the budget."""
 
     remaining_amount: float = FieldInfo(alias="remainingAmount")
     """Remaining amount in the budget."""
 
     spent_amount: float = FieldInfo(alias="spentAmount")
-    """Amount spent so far in the current budget period."""
+    """Total amount spent against this budget so far."""
 
     start_date: date = FieldInfo(alias="startDate")
     """Start date of the budget period."""
 
-    status: Literal["active", "completed", "upcoming", "archived"]
+    status: Literal["active", "archived", "ended"]
     """Current status of the budget."""
 
     total_amount: float = FieldInfo(alias="totalAmount")
-    """Total allocated amount for the budget."""
+    """Total amount allocated for the entire budget."""
 
     ai_recommendations: Optional[List[AIInsight]] = FieldInfo(alias="aiRecommendations", default=None)
-    """AI-driven recommendations for budget optimization."""
-
-    alert_threshold: Optional[int] = FieldInfo(alias="alertThreshold", default=None)
-    """
-    Percentage threshold at which an alert is triggered (e.g., 80% of budget spent).
-    """
-
-    categories: Optional[List[Category]] = None
-    """Breakdown of the budget by categories."""
+    """AI-driven recommendations related to this budget."""

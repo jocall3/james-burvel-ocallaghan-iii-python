@@ -7,24 +7,20 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import account_link_new_institution_params, account_retrieve_account_statements_params
+from ...types import (
+    account_link_new_institution_params,
+    account_list_linked_accounts_params,
+    account_retrieve_account_statements_params,
+)
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
-    BinaryAPIResponse,
-    AsyncBinaryAPIResponse,
-    StreamedBinaryAPIResponse,
-    AsyncStreamedBinaryAPIResponse,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
-    to_custom_raw_response_wrapper,
     async_to_streamed_response_wrapper,
-    to_custom_streamed_response_wrapper,
-    async_to_custom_raw_response_wrapper,
-    async_to_custom_streamed_response_wrapper,
 )
 from .transactions import (
     TransactionsResource,
@@ -46,6 +42,7 @@ from .overdraft_settings import (
 from ...types.account_link_new_institution_response import AccountLinkNewInstitutionResponse
 from ...types.account_list_linked_accounts_response import AccountListLinkedAccountsResponse
 from ...types.account_retrieve_account_details_response import AccountRetrieveAccountDetailsResponse
+from ...types.account_retrieve_account_statements_response import AccountRetrieveAccountStatementsResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -65,7 +62,7 @@ class AccountsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AccountsResourceWithRawResponse(self)
 
@@ -74,7 +71,7 @@ class AccountsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AccountsResourceWithStreamingResponse(self)
 
@@ -83,7 +80,8 @@ class AccountsResource(SyncAPIResource):
         *,
         country_code: str,
         institution_name: str,
-        provider: Optional[str] | Omit = omit,
+        provider_identifier: Optional[str] | Omit = omit,
+        redirect_uri: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -97,12 +95,15 @@ class AccountsResource(SyncAPIResource):
         third-party tokenized flow.
 
         Args:
-          country_code: ISO 3166-1 alpha-2 country code of the institution.
+          country_code: Two-letter ISO country code of the institution.
 
-          institution_name: The name of the external financial institution to link.
+          institution_name: Name of the financial institution to link.
 
-          provider: Optional: Specify a financial data aggregation provider (e.g., 'Plaid',
-              'Finicity').
+          provider_identifier: Optional: Specific identifier for a third-party linking provider (e.g., 'plaid',
+              'finicity').
+
+          redirect_uri: Optional: URI to redirect the user after completing the external authentication
+              flow.
 
           extra_headers: Send extra headers
 
@@ -118,7 +119,8 @@ class AccountsResource(SyncAPIResource):
                 {
                     "country_code": country_code,
                     "institution_name": institution_name,
-                    "provider": provider,
+                    "provider_identifier": provider_identifier,
+                    "redirect_uri": redirect_uri,
                 },
                 account_link_new_institution_params.AccountLinkNewInstitutionParams,
             ),
@@ -131,6 +133,8 @@ class AccountsResource(SyncAPIResource):
     def list_linked_accounts(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,11 +146,34 @@ class AccountsResource(SyncAPIResource):
         Fetches a comprehensive, real-time list of all external financial accounts
         linked to the user's profile, including consolidated balances and institutional
         details.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/accounts/me",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    account_list_linked_accounts_params.AccountListLinkedAccountsParams,
+                ),
             ),
             cast_to=AccountListLinkedAccountsResponse,
         )
@@ -199,7 +226,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BinaryAPIResponse:
+    ) -> AccountRetrieveAccountStatementsResponse:
         """
         Fetches digital statements for a specific account, allowing filtering by date
         range and format.
@@ -209,7 +236,8 @@ class AccountsResource(SyncAPIResource):
 
           year: Year for the statement.
 
-          format: Desired format for the statement.
+          format: Desired format for the statement. Use 'application/json' Accept header for
+              download links.
 
           extra_headers: Send extra headers
 
@@ -221,7 +249,6 @@ class AccountsResource(SyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        extra_headers = {"Accept": "application/pdf", **(extra_headers or {})}
         return self._get(
             f"/accounts/{account_id}/statements",
             options=make_request_options(
@@ -238,7 +265,7 @@ class AccountsResource(SyncAPIResource):
                     account_retrieve_account_statements_params.AccountRetrieveAccountStatementsParams,
                 ),
             ),
-            cast_to=BinaryAPIResponse,
+            cast_to=AccountRetrieveAccountStatementsResponse,
         )
 
 
@@ -257,7 +284,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAccountsResourceWithRawResponse(self)
 
@@ -266,7 +293,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncAccountsResourceWithStreamingResponse(self)
 
@@ -275,7 +302,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         country_code: str,
         institution_name: str,
-        provider: Optional[str] | Omit = omit,
+        provider_identifier: Optional[str] | Omit = omit,
+        redirect_uri: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -289,12 +317,15 @@ class AsyncAccountsResource(AsyncAPIResource):
         third-party tokenized flow.
 
         Args:
-          country_code: ISO 3166-1 alpha-2 country code of the institution.
+          country_code: Two-letter ISO country code of the institution.
 
-          institution_name: The name of the external financial institution to link.
+          institution_name: Name of the financial institution to link.
 
-          provider: Optional: Specify a financial data aggregation provider (e.g., 'Plaid',
-              'Finicity').
+          provider_identifier: Optional: Specific identifier for a third-party linking provider (e.g., 'plaid',
+              'finicity').
+
+          redirect_uri: Optional: URI to redirect the user after completing the external authentication
+              flow.
 
           extra_headers: Send extra headers
 
@@ -310,7 +341,8 @@ class AsyncAccountsResource(AsyncAPIResource):
                 {
                     "country_code": country_code,
                     "institution_name": institution_name,
-                    "provider": provider,
+                    "provider_identifier": provider_identifier,
+                    "redirect_uri": redirect_uri,
                 },
                 account_link_new_institution_params.AccountLinkNewInstitutionParams,
             ),
@@ -323,6 +355,8 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def list_linked_accounts(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -334,11 +368,34 @@ class AsyncAccountsResource(AsyncAPIResource):
         Fetches a comprehensive, real-time list of all external financial accounts
         linked to the user's profile, including consolidated balances and institutional
         details.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/accounts/me",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    account_list_linked_accounts_params.AccountListLinkedAccountsParams,
+                ),
             ),
             cast_to=AccountListLinkedAccountsResponse,
         )
@@ -391,7 +448,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncBinaryAPIResponse:
+    ) -> AccountRetrieveAccountStatementsResponse:
         """
         Fetches digital statements for a specific account, allowing filtering by date
         range and format.
@@ -401,7 +458,8 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           year: Year for the statement.
 
-          format: Desired format for the statement.
+          format: Desired format for the statement. Use 'application/json' Accept header for
+              download links.
 
           extra_headers: Send extra headers
 
@@ -413,7 +471,6 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         if not account_id:
             raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
-        extra_headers = {"Accept": "application/pdf", **(extra_headers or {})}
         return await self._get(
             f"/accounts/{account_id}/statements",
             options=make_request_options(
@@ -430,7 +487,7 @@ class AsyncAccountsResource(AsyncAPIResource):
                     account_retrieve_account_statements_params.AccountRetrieveAccountStatementsParams,
                 ),
             ),
-            cast_to=AsyncBinaryAPIResponse,
+            cast_to=AccountRetrieveAccountStatementsResponse,
         )
 
 
@@ -447,9 +504,8 @@ class AccountsResourceWithRawResponse:
         self.retrieve_account_details = to_raw_response_wrapper(
             accounts.retrieve_account_details,
         )
-        self.retrieve_account_statements = to_custom_raw_response_wrapper(
+        self.retrieve_account_statements = to_raw_response_wrapper(
             accounts.retrieve_account_statements,
-            BinaryAPIResponse,
         )
 
     @cached_property
@@ -474,9 +530,8 @@ class AsyncAccountsResourceWithRawResponse:
         self.retrieve_account_details = async_to_raw_response_wrapper(
             accounts.retrieve_account_details,
         )
-        self.retrieve_account_statements = async_to_custom_raw_response_wrapper(
+        self.retrieve_account_statements = async_to_raw_response_wrapper(
             accounts.retrieve_account_statements,
-            AsyncBinaryAPIResponse,
         )
 
     @cached_property
@@ -501,9 +556,8 @@ class AccountsResourceWithStreamingResponse:
         self.retrieve_account_details = to_streamed_response_wrapper(
             accounts.retrieve_account_details,
         )
-        self.retrieve_account_statements = to_custom_streamed_response_wrapper(
+        self.retrieve_account_statements = to_streamed_response_wrapper(
             accounts.retrieve_account_statements,
-            StreamedBinaryAPIResponse,
         )
 
     @cached_property
@@ -528,9 +582,8 @@ class AsyncAccountsResourceWithStreamingResponse:
         self.retrieve_account_details = async_to_streamed_response_wrapper(
             accounts.retrieve_account_details,
         )
-        self.retrieve_account_statements = async_to_custom_streamed_response_wrapper(
+        self.retrieve_account_statements = async_to_streamed_response_wrapper(
             accounts.retrieve_account_statements,
-            AsyncStreamedBinaryAPIResponse,
         )
 
     @cached_property

@@ -12,13 +12,19 @@ __all__ = ["AccountLinkNewInstitutionParams"]
 
 class AccountLinkNewInstitutionParams(TypedDict, total=False):
     country_code: Required[Annotated[str, PropertyInfo(alias="countryCode")]]
-    """ISO 3166-1 alpha-2 country code of the institution."""
+    """Two-letter ISO country code of the institution."""
 
     institution_name: Required[Annotated[str, PropertyInfo(alias="institutionName")]]
-    """The name of the external financial institution to link."""
+    """Name of the financial institution to link."""
 
-    provider: Optional[str]
+    provider_identifier: Annotated[Optional[str], PropertyInfo(alias="providerIdentifier")]
     """
-    Optional: Specify a financial data aggregation provider (e.g., 'Plaid',
-    'Finicity').
+    Optional: Specific identifier for a third-party linking provider (e.g., 'plaid',
+    'finicity').
+    """
+
+    redirect_uri: Annotated[Optional[str], PropertyInfo(alias="redirectUri")]
+    """
+    Optional: URI to redirect the user after completing the external authentication
+    flow.
     """

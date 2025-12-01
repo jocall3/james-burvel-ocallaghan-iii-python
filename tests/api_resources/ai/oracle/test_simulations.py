@@ -20,19 +20,17 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSimulations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulations.with_raw_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -40,11 +38,10 @@ class TestSimulations:
         simulation = response.parse()
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.oracle.simulations.with_streaming_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -54,7 +51,6 @@ class TestSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
@@ -62,22 +58,19 @@ class TestSimulations:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.list()
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.list(
-            limit=50,
+            limit=1,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulations.with_raw_response.list()
@@ -87,7 +80,6 @@ class TestSimulations:
         simulation = response.parse()
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.oracle.simulations.with_streaming_response.list() as response:
@@ -99,19 +91,17 @@ class TestSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         simulation = client.ai.oracle.simulations.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert simulation is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.oracle.simulations.with_raw_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -119,11 +109,10 @@ class TestSimulations:
         simulation = response.parse()
         assert simulation is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.oracle.simulations.with_streaming_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -133,7 +122,6 @@ class TestSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
@@ -147,19 +135,17 @@ class TestAsyncSimulations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulations.with_raw_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -167,11 +153,10 @@ class TestAsyncSimulations:
         simulation = await response.parse()
         assert_matches_type(SimulationRetrieveResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.oracle.simulations.with_streaming_response.retrieve(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -181,7 +166,6 @@ class TestAsyncSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):
@@ -189,22 +173,19 @@ class TestAsyncSimulations:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.list()
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.list(
-            limit=50,
+            limit=1,
             offset=0,
         )
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulations.with_raw_response.list()
@@ -214,7 +195,6 @@ class TestAsyncSimulations:
         simulation = await response.parse()
         assert_matches_type(SimulationListResponse, simulation, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.oracle.simulations.with_streaming_response.list() as response:
@@ -226,19 +206,17 @@ class TestAsyncSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         simulation = await async_client.ai.oracle.simulations.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
         assert simulation is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.oracle.simulations.with_raw_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         )
 
         assert response.is_closed is True
@@ -246,11 +224,10 @@ class TestAsyncSimulations:
         simulation = await response.parse()
         assert simulation is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.oracle.simulations.with_streaming_response.delete(
-            "simulationId",
+            "sim_oracle-growth-2024-xyz",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -260,7 +237,6 @@ class TestAsyncSimulations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `simulation_id` but received ''"):

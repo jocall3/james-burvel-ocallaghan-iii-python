@@ -18,4 +18,4 @@ class UserLoginParams(TypedDict, total=False):
     """User's password."""
 
     mfa_code: Annotated[Optional[str], PropertyInfo(alias="mfaCode")]
-    """Multi-factor authentication code, if required."""
+    """Optional: Multi-factor authentication code, if required."""

@@ -13,30 +13,33 @@ __all__ = ["CorporateCardControlsParam"]
 
 class CorporateCardControlsParam(TypedDict, total=False):
     atm_withdrawals: Annotated[bool, PropertyInfo(alias="atmWithdrawals")]
-    """Allow ATM withdrawals."""
+    """If true, ATM cash withdrawals are allowed."""
 
     contactless_payments: Annotated[bool, PropertyInfo(alias="contactlessPayments")]
-    """Allow contactless payments."""
+    """If true, contactless payments are allowed."""
 
     daily_limit: Annotated[Optional[float], PropertyInfo(alias="dailyLimit")]
-    """Maximum spending limit per day."""
+    """Maximum spending limit per day (null for no limit)."""
 
     international_transactions: Annotated[bool, PropertyInfo(alias="internationalTransactions")]
-    """Allow international transactions."""
+    """If true, international transactions are allowed."""
 
     merchant_category_restrictions: Annotated[
         Optional[SequenceNotStr[str]], PropertyInfo(alias="merchantCategoryRestrictions")
     ]
-    """List of allowed or disallowed merchant categories."""
+    """List of allowed merchant categories.
+
+    If empty, all are allowed unless explicitly denied.
+    """
 
     monthly_limit: Annotated[Optional[float], PropertyInfo(alias="monthlyLimit")]
-    """Maximum spending limit per month."""
+    """Maximum spending limit per month (null for no limit)."""
 
     online_transactions: Annotated[bool, PropertyInfo(alias="onlineTransactions")]
-    """Allow online transactions."""
+    """If true, online transactions are allowed."""
 
     single_transaction_limit: Annotated[Optional[float], PropertyInfo(alias="singleTransactionLimit")]
-    """Maximum amount for a single transaction."""
+    """Maximum amount for a single transaction (null for no limit)."""
 
     vendor_restrictions: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="vendorRestrictions")]
-    """List of specific allowed or disallowed vendors/merchants."""
+    """List of allowed vendors/merchants by name."""

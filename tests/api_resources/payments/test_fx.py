@@ -20,7 +20,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestFx:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_convert(self, client: JamesBurvelOcallaghanIii) -> None:
         fx = client.payments.fx.convert(
@@ -31,7 +30,6 @@ class TestFx:
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_convert_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         fx = client.payments.fx.convert(
@@ -40,12 +38,10 @@ class TestFx:
             source_currency="USD",
             target_currency="EUR",
             fx_rate_lock=True,
-            fx_rate_provider="proprietary_ai",
             target_account_id="acc_euro_savings_9876",
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_convert(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.payments.fx.with_raw_response.convert(
@@ -60,7 +56,6 @@ class TestFx:
         fx = response.parse()
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_convert(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.payments.fx.with_streaming_response.convert(
@@ -77,7 +72,6 @@ class TestFx:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_rates(self, client: JamesBurvelOcallaghanIii) -> None:
         fx = client.payments.fx.retrieve_rates(
@@ -86,7 +80,6 @@ class TestFx:
         )
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_rates_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         fx = client.payments.fx.retrieve_rates(
@@ -96,7 +89,6 @@ class TestFx:
         )
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_rates(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.payments.fx.with_raw_response.retrieve_rates(
@@ -109,7 +101,6 @@ class TestFx:
         fx = response.parse()
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_rates(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.payments.fx.with_streaming_response.retrieve_rates(
@@ -130,7 +121,6 @@ class TestAsyncFx:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_convert(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         fx = await async_client.payments.fx.convert(
@@ -141,7 +131,6 @@ class TestAsyncFx:
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_convert_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         fx = await async_client.payments.fx.convert(
@@ -150,12 +139,10 @@ class TestAsyncFx:
             source_currency="USD",
             target_currency="EUR",
             fx_rate_lock=True,
-            fx_rate_provider="proprietary_ai",
             target_account_id="acc_euro_savings_9876",
         )
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_convert(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.payments.fx.with_raw_response.convert(
@@ -170,7 +157,6 @@ class TestAsyncFx:
         fx = await response.parse()
         assert_matches_type(FxConvertResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_convert(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.payments.fx.with_streaming_response.convert(
@@ -187,7 +173,6 @@ class TestAsyncFx:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_rates(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         fx = await async_client.payments.fx.retrieve_rates(
@@ -196,7 +181,6 @@ class TestAsyncFx:
         )
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_rates_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         fx = await async_client.payments.fx.retrieve_rates(
@@ -206,7 +190,6 @@ class TestAsyncFx:
         )
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_rates(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.payments.fx.with_raw_response.retrieve_rates(
@@ -219,7 +202,6 @@ class TestAsyncFx:
         fx = await response.parse()
         assert_matches_type(FxRetrieveRatesResponse, fx, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_rates(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.payments.fx.with_streaming_response.retrieve_rates(

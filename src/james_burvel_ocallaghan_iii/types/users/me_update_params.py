@@ -2,23 +2,24 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import TypedDict
 
-from ..._utils import PropertyInfo
 from ..address_param import AddressParam
+from .me.user_preferences_param import UserPreferencesParam
 
 __all__ = ["MeUpdateParams"]
 
 
 class MeUpdateParams(TypedDict, total=False):
     address: AddressParam
-    """Updated residential address of the user."""
-
-    ai_persona: Annotated[str, PropertyInfo(alias="aiPersona")]
-    """User's self-selected or AI-adjusted financial persona."""
+    """Updated address details."""
 
     name: str
     """Updated full name of the user."""
 
-    phone: str
-    """Updated phone number of the user."""
+    phone: Optional[str]
+    """Updated primary phone number of the user."""
+
+    preferences: UserPreferencesParam
+    """Updated personalization preferences."""

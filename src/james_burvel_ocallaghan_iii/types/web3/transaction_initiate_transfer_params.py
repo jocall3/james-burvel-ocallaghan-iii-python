@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -15,27 +15,19 @@ class TransactionInitiateTransferParams(TypedDict, total=False):
     """The amount of cryptocurrency to transfer."""
 
     asset_symbol: Required[Annotated[str, PropertyInfo(alias="assetSymbol")]]
-    """The ticker symbol of the asset to transfer (e.g., ETH, BTC, USDC)."""
+    """Symbol of the crypto asset to transfer (e.g., ETH, USDC)."""
 
-    blockchain_network: Required[
-        Annotated[
-            Literal["Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"],
-            PropertyInfo(alias="blockchainNetwork"),
-        ]
-    ]
-    """The blockchain network on which the transaction will occur."""
+    blockchain_network: Required[Annotated[str, PropertyInfo(alias="blockchainNetwork")]]
+    """The blockchain network for the transfer."""
 
     recipient_address: Required[Annotated[str, PropertyInfo(alias="recipientAddress")]]
-    """The recipient's cryptocurrency address."""
+    """The recipient's blockchain address."""
 
     source_wallet_id: Required[Annotated[str, PropertyInfo(alias="sourceWalletId")]]
-    """The ID of the connected wallet from which to transfer."""
+    """ID of the connected wallet from which to send funds."""
 
-    gas_price_gwei: Annotated[Optional[float], PropertyInfo(alias="gasPriceGwei")]
+    gas_price_gwei: Annotated[Optional[int], PropertyInfo(alias="gasPriceGwei")]
     """Optional: Gas price in Gwei for Ethereum-based transactions."""
 
     memo: Optional[str]
-    """
-    Optional: A memo or note for the transaction (supported by some
-    networks/assets).
-    """
+    """Optional: A short memo or note for the transaction."""

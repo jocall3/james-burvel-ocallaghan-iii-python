@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 from ..._models import BaseModel
 from ..transactions.ai_insight import AIInsight
 
-__all__ = ["ProductSimulatePurchaseResponse", "KeyImpact"]
+__all__ = ["ProductSimulatePurchaseResponse", "KeyImpact", "ProjectedAmortizationSchedule"]
 
 
 class KeyImpact(BaseModel):
@@ -19,20 +19,37 @@ class KeyImpact(BaseModel):
     value: Optional[str] = None
 
 
-class ProductSimulatePurchaseResponse(BaseModel):
-    ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven recommendations based on the simulation results."""
+class ProjectedAmortizationSchedule(BaseModel):
+    interest: Optional[float] = None
 
+    month: Optional[int] = None
+
+    payment: Optional[float] = None
+
+    principal: Optional[float] = None
+
+    remaining_balance: Optional[float] = FieldInfo(alias="remainingBalance", default=None)
+
+
+class ProductSimulatePurchaseResponse(BaseModel):
     key_impacts: List[KeyImpact] = FieldInfo(alias="keyImpacts")
-    """Key financial metrics and their projected impact."""
+    """
+    Key financial impacts identified by the AI (e.g., on cash flow, debt-to-income).
+    """
+
+    narrative_summary: str = FieldInfo(alias="narrativeSummary")
+    """A natural language summary of the simulation's results for this product."""
 
     product_id: str = FieldInfo(alias="productId")
-    """The ID of the product for which the simulation was run."""
+    """The ID of the marketplace product being simulated."""
 
-    purchase_option: Literal["full_payment", "financed_12_months", "financed_24_months"] = FieldInfo(
-        alias="purchaseOption"
+    simulation_id: str = FieldInfo(alias="simulationId")
+    """Unique identifier for the simulation performed."""
+
+    ai_recommendations: Optional[List[AIInsight]] = FieldInfo(alias="aiRecommendations", default=None)
+    """Actionable recommendations or advice related to the product and its impact."""
+
+    projected_amortization_schedule: Optional[List[ProjectedAmortizationSchedule]] = FieldInfo(
+        alias="projectedAmortizationSchedule", default=None
     )
-    """The purchase option that was simulated."""
-
-    simulation_summary: str = FieldInfo(alias="simulationSummary")
-    """A natural language summary of the simulation results."""
+    """Projected amortization schedule for loan products."""

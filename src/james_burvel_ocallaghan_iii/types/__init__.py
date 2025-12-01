@@ -9,7 +9,9 @@ from .transaction import Transaction as Transaction
 from .address_param import AddressParam as AddressParam
 from .financial_goal import FinancialGoal as FinancialGoal
 from .linked_account import LinkedAccount as LinkedAccount
+from .goal_list_params import GoalListParams as GoalListParams
 from .user_login_params import UserLoginParams as UserLoginParams
+from .budget_list_params import BudgetListParams as BudgetListParams
 from .goal_create_params import GoalCreateParams as GoalCreateParams
 from .goal_list_response import GoalListResponse as GoalListResponse
 from .goal_update_params import GoalUpdateParams as GoalUpdateParams
@@ -20,12 +22,14 @@ from .budget_update_params import BudgetUpdateParams as BudgetUpdateParams
 from .user_register_params import UserRegisterParams as UserRegisterParams
 from .paginated_transactions import PaginatedTransactions as PaginatedTransactions
 from .transaction_list_params import TransactionListParams as TransactionListParams
+from .web3_retrieve_nfts_params import Web3RetrieveNFTsParams as Web3RetrieveNFTsParams
 from .transaction_dispute_params import TransactionDisputeParams as TransactionDisputeParams
 from .web3_retrieve_nfts_response import Web3RetrieveNFTsResponse as Web3RetrieveNFTsResponse
 from .transaction_dispute_response import TransactionDisputeResponse as TransactionDisputeResponse
 from .transaction_categorize_params import TransactionCategorizeParams as TransactionCategorizeParams
 from .transaction_update_notes_params import TransactionUpdateNotesParams as TransactionUpdateNotesParams
 from .account_link_new_institution_params import AccountLinkNewInstitutionParams as AccountLinkNewInstitutionParams
+from .account_list_linked_accounts_params import AccountListLinkedAccountsParams as AccountListLinkedAccountsParams
 from .account_link_new_institution_response import (
     AccountLinkNewInstitutionResponse as AccountLinkNewInstitutionResponse,
 )
@@ -40,6 +44,9 @@ from .account_retrieve_account_statements_params import (
 )
 from .corporate_perform_sanction_screening_params import (
     CorporatePerformSanctionScreeningParams as CorporatePerformSanctionScreeningParams,
+)
+from .account_retrieve_account_statements_response import (
+    AccountRetrieveAccountStatementsResponse as AccountRetrieveAccountStatementsResponse,
 )
 from .corporate_perform_sanction_screening_response import (
     CorporatePerformSanctionScreeningResponse as CorporatePerformSanctionScreeningResponse,

@@ -14,12 +14,12 @@ class PitchSubmitFeedbackParams(TypedDict, total=False):
     answers: Iterable[Answer]
 
     feedback: Optional[str]
-    """General feedback or additional information provided by the entrepreneur."""
+    """General textual feedback or additional details for Quantum Weaver."""
 
 
 class Answer(TypedDict, total=False):
     answer: Required[str]
-    """The entrepreneur's answer to the question."""
+    """The answer to the specific question."""
 
     question_id: Required[Annotated[str, PropertyInfo(alias="questionId")]]
     """The ID of the question being answered."""

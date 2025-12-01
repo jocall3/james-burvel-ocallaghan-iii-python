@@ -13,7 +13,7 @@ __all__ = ["LinkedAccount"]
 
 class LinkedAccount(BaseModel):
     id: str
-    """Internal unique identifier for the linked account."""
+    """Unique identifier for the linked account within ."""
 
     currency: str
     """ISO 4217 currency code of the account."""
@@ -22,25 +22,22 @@ class LinkedAccount(BaseModel):
     """Current balance of the account."""
 
     institution_name: str = FieldInfo(alias="institutionName")
-    """Name of the financial institution."""
+    """Name of the financial institution where the account is held."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp when the account balance was last synced/updated."""
+    """Timestamp when the account balance was last synced."""
 
     name: str
-    """User-friendly name of the account."""
+    """Display name of the account."""
 
-    type: Literal["depository", "credit", "loan", "investment", "mortgage", "other"]
-    """High-level type of the account."""
+    type: Literal["depository", "credit", "loan", "investment", "other"]
+    """General type of the account."""
 
     available_balance: Optional[float] = FieldInfo(alias="availableBalance", default=None)
-    """Available balance (may differ from current due to pending transactions)."""
+    """Available balance (after pending transactions) of the account."""
 
     external_id: Optional[str] = FieldInfo(alias="externalId", default=None)
-    """Identifier from the external financial institution or aggregator."""
-
-    is_primary: Optional[bool] = FieldInfo(alias="isPrimary", default=None)
-    """Indicates if this is the user's primary account for general operations."""
+    """Optional: Identifier from the external data provider (e.g., Plaid)."""
 
     mask: Optional[str] = None
     """Masked account number (e.g., last 4 digits)."""

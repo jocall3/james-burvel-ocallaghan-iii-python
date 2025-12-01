@@ -63,7 +63,7 @@ class TransactionsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return TransactionsResourceWithRawResponse(self)
 
@@ -72,7 +72,7 @@ class TransactionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return TransactionsResourceWithStreamingResponse(self)
 
@@ -140,7 +140,7 @@ class TransactionsResource(SyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in a single page.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -206,10 +206,10 @@ class TransactionsResource(SyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction (can be hierarchical).
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI should learn and apply this categorization to similar future
-              transactions.
+          apply_to_future: If true, the AI will learn from this correction and try to apply it to similar
+              future transactions.
 
           notes: Optional notes to add to the transaction.
 
@@ -244,7 +244,7 @@ class TransactionsResource(SyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
+        reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -260,9 +260,9 @@ class TransactionsResource(SyncAPIResource):
         Args:
           details: Detailed explanation of the dispute.
 
-          reason: Primary reason for the dispute.
+          reason: The primary reason for disputing the transaction.
 
-          supporting_documents: URLs to supporting documents (e.g., receipts, travel tickets).
+          supporting_documents: URLs to supporting documents (e.g., receipts, communication).
 
           extra_headers: Send extra headers
 
@@ -343,7 +343,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTransactionsResourceWithRawResponse(self)
 
@@ -352,7 +352,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncTransactionsResourceWithStreamingResponse(self)
 
@@ -420,7 +420,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           end_date: Retrieve transactions up to this date (inclusive).
 
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in a single page.
 
           max_amount: Filter for transactions with an amount less than or equal to this value.
 
@@ -486,10 +486,10 @@ class AsyncTransactionsResource(AsyncAPIResource):
         improving future AI accuracy and personal financial reporting.
 
         Args:
-          category: The new category for the transaction (can be hierarchical).
+          category: The new category for the transaction. Can be hierarchical.
 
-          apply_to_future: If true, the AI should learn and apply this categorization to similar future
-              transactions.
+          apply_to_future: If true, the AI will learn from this correction and try to apply it to similar
+              future transactions.
 
           notes: Optional notes to add to the transaction.
 
@@ -524,7 +524,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         transaction_id: str,
         *,
         details: str,
-        reason: Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"],
+        reason: Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"],
         supporting_documents: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -540,9 +540,9 @@ class AsyncTransactionsResource(AsyncAPIResource):
         Args:
           details: Detailed explanation of the dispute.
 
-          reason: Primary reason for the dispute.
+          reason: The primary reason for disputing the transaction.
 
-          supporting_documents: URLs to supporting documents (e.g., receipts, travel tickets).
+          supporting_documents: URLs to supporting documents (e.g., receipts, communication).
 
           extra_headers: Send extra headers
 

@@ -12,18 +12,21 @@ __all__ = ["OverdraftSettingUpdateSettingsParams"]
 
 class OverdraftSettingUpdateSettingsParams(TypedDict, total=False):
     enabled: bool
-    """Set to `true` to enable, `false` to disable overdraft protection."""
+    """Enable or disable overdraft protection."""
 
     fee_preference: Annotated[
-        Literal["always_pay", "decline_if_over_limit", "ask_me"], PropertyInfo(alias="feePreference")
+        Literal["always_pay", "decline_if_over_limit", "ask_me_first"], PropertyInfo(alias="feePreference")
     ]
-    """New user preference for how overdrafts should be handled."""
+    """New preference for how overdraft fees are handled."""
 
     linked_savings_account_id: Annotated[Optional[str], PropertyInfo(alias="linkedSavingsAccountId")]
-    """The ID of the savings account to link. Set to `null` if unlinking."""
+    """New ID of the linked savings account, if `linkToSavings` is true.
 
-    link_to_savings: Annotated[bool, PropertyInfo(alias="linkToSavings")]
-    """Set to `true` to link to savings, `false` to unlink."""
+    Set to null to unlink.
+    """
+
+    link_to_savings: Annotated[Optional[bool], PropertyInfo(alias="linkToSavings")]
+    """Enable or disable linking to a savings account for overdraft coverage."""
 
     protection_limit: Annotated[Optional[float], PropertyInfo(alias="protectionLimit")]
-    """The new maximum overdraft amount. Set to `null` if disabling protection."""
+    """New maximum amount for overdraft protection. Set to null to remove limit."""

@@ -20,7 +20,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestWebhooks:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.create(
@@ -29,7 +28,6 @@ class TestWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.create(
@@ -39,7 +37,6 @@ class TestWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.developers.webhooks.with_raw_response.create(
@@ -52,7 +49,6 @@ class TestWebhooks:
         webhook = response.parse()
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.developers.webhooks.with_streaming_response.create(
@@ -67,7 +63,6 @@ class TestWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.update(
@@ -75,19 +70,16 @@ class TestWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.update(
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
-            events=["transaction.updated"],
-            secret="my_new_webhook_secret_456",
+            events=["transaction.created", "user.login_failed"],
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.developers.webhooks.with_raw_response.update(
@@ -99,7 +91,6 @@ class TestWebhooks:
         webhook = response.parse()
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.developers.webhooks.with_streaming_response.update(
@@ -113,7 +104,6 @@ class TestWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `subscription_id` but received ''"):
@@ -121,13 +111,19 @@ class TestWebhooks:
                 subscription_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.list()
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        webhook = client.developers.webhooks.list(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(WebhookListResponse, webhook, path=["response"])
+
     @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.developers.webhooks.with_raw_response.list()
@@ -137,7 +133,6 @@ class TestWebhooks:
         webhook = response.parse()
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.developers.webhooks.with_streaming_response.list() as response:
@@ -149,7 +144,6 @@ class TestWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         webhook = client.developers.webhooks.delete(
@@ -157,7 +151,6 @@ class TestWebhooks:
         )
         assert webhook is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.developers.webhooks.with_raw_response.delete(
@@ -169,7 +162,6 @@ class TestWebhooks:
         webhook = response.parse()
         assert webhook is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.developers.webhooks.with_streaming_response.delete(
@@ -183,7 +175,6 @@ class TestWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `subscription_id` but received ''"):
@@ -197,7 +188,6 @@ class TestAsyncWebhooks:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.create(
@@ -206,7 +196,6 @@ class TestAsyncWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.create(
@@ -216,7 +205,6 @@ class TestAsyncWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.developers.webhooks.with_raw_response.create(
@@ -229,7 +217,6 @@ class TestAsyncWebhooks:
         webhook = await response.parse()
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.developers.webhooks.with_streaming_response.create(
@@ -244,7 +231,6 @@ class TestAsyncWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.update(
@@ -252,19 +238,16 @@ class TestAsyncWebhooks:
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.update(
             subscription_id="whsub_devtool_finance_events",
             callback_url="https://my-new-app.com/webhooks/demobank-events",
-            events=["transaction.updated"],
-            secret="my_new_webhook_secret_456",
+            events=["transaction.created", "user.login_failed"],
             status="paused",
         )
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.developers.webhooks.with_raw_response.update(
@@ -276,7 +259,6 @@ class TestAsyncWebhooks:
         webhook = await response.parse()
         assert_matches_type(WebhookSubscription, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.developers.webhooks.with_streaming_response.update(
@@ -290,7 +272,6 @@ class TestAsyncWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `subscription_id` but received ''"):
@@ -298,13 +279,19 @@ class TestAsyncWebhooks:
                 subscription_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.list()
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        webhook = await async_client.developers.webhooks.list(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(WebhookListResponse, webhook, path=["response"])
+
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.developers.webhooks.with_raw_response.list()
@@ -314,7 +301,6 @@ class TestAsyncWebhooks:
         webhook = await response.parse()
         assert_matches_type(WebhookListResponse, webhook, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.developers.webhooks.with_streaming_response.list() as response:
@@ -326,7 +312,6 @@ class TestAsyncWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         webhook = await async_client.developers.webhooks.delete(
@@ -334,7 +319,6 @@ class TestAsyncWebhooks:
         )
         assert webhook is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.developers.webhooks.with_raw_response.delete(
@@ -346,7 +330,6 @@ class TestAsyncWebhooks:
         webhook = await response.parse()
         assert webhook is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.developers.webhooks.with_streaming_response.delete(
@@ -360,7 +343,6 @@ class TestAsyncWebhooks:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `subscription_id` but received ''"):

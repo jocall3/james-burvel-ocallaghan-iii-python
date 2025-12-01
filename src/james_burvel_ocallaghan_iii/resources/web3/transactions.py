@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -31,7 +30,7 @@ class TransactionsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return TransactionsResourceWithRawResponse(self)
 
@@ -40,7 +39,7 @@ class TransactionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return TransactionsResourceWithStreamingResponse(self)
 
@@ -49,12 +48,10 @@ class TransactionsResource(SyncAPIResource):
         *,
         amount: float,
         asset_symbol: str,
-        blockchain_network: Literal[
-            "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"
-        ],
+        blockchain_network: str,
         recipient_address: str,
         source_wallet_id: str,
-        gas_price_gwei: Optional[float] | Omit = omit,
+        gas_price_gwei: Optional[int] | Omit = omit,
         memo: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -71,18 +68,17 @@ class TransactionsResource(SyncAPIResource):
         Args:
           amount: The amount of cryptocurrency to transfer.
 
-          asset_symbol: The ticker symbol of the asset to transfer (e.g., ETH, BTC, USDC).
+          asset_symbol: Symbol of the crypto asset to transfer (e.g., ETH, USDC).
 
-          blockchain_network: The blockchain network on which the transaction will occur.
+          blockchain_network: The blockchain network for the transfer.
 
-          recipient_address: The recipient's cryptocurrency address.
+          recipient_address: The recipient's blockchain address.
 
-          source_wallet_id: The ID of the connected wallet from which to transfer.
+          source_wallet_id: ID of the connected wallet from which to send funds.
 
           gas_price_gwei: Optional: Gas price in Gwei for Ethereum-based transactions.
 
-          memo: Optional: A memo or note for the transaction (supported by some
-              networks/assets).
+          memo: Optional: A short memo or note for the transaction.
 
           extra_headers: Send extra headers
 
@@ -120,7 +116,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTransactionsResourceWithRawResponse(self)
 
@@ -129,7 +125,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncTransactionsResourceWithStreamingResponse(self)
 
@@ -138,12 +134,10 @@ class AsyncTransactionsResource(AsyncAPIResource):
         *,
         amount: float,
         asset_symbol: str,
-        blockchain_network: Literal[
-            "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"
-        ],
+        blockchain_network: str,
         recipient_address: str,
         source_wallet_id: str,
-        gas_price_gwei: Optional[float] | Omit = omit,
+        gas_price_gwei: Optional[int] | Omit = omit,
         memo: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -160,18 +154,17 @@ class AsyncTransactionsResource(AsyncAPIResource):
         Args:
           amount: The amount of cryptocurrency to transfer.
 
-          asset_symbol: The ticker symbol of the asset to transfer (e.g., ETH, BTC, USDC).
+          asset_symbol: Symbol of the crypto asset to transfer (e.g., ETH, USDC).
 
-          blockchain_network: The blockchain network on which the transaction will occur.
+          blockchain_network: The blockchain network for the transfer.
 
-          recipient_address: The recipient's cryptocurrency address.
+          recipient_address: The recipient's blockchain address.
 
-          source_wallet_id: The ID of the connected wallet from which to transfer.
+          source_wallet_id: ID of the connected wallet from which to send funds.
 
           gas_price_gwei: Optional: Gas price in Gwei for Ethereum-based transactions.
 
-          memo: Optional: A memo or note for the transaction (supported by some
-              networks/assets).
+          memo: Optional: A short memo or note for the transaction.
 
           extra_headers: Send extra headers
 

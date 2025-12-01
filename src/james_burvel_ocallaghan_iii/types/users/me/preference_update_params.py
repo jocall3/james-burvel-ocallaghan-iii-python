@@ -10,20 +10,28 @@ __all__ = ["PreferenceUpdateParams", "NotificationChannels"]
 
 
 class PreferenceUpdateParams(TypedDict, total=False):
-    ai_interaction_mode: Annotated[Literal["passive", "balanced", "proactive"], PropertyInfo(alias="aiInteractionMode")]
-    """How actively the AI should provide advice and suggestions."""
+    ai_interaction_mode: Annotated[
+        Literal["proactive", "balanced", "on_demand"], PropertyInfo(alias="aiInteractionMode")
+    ]
+    """
+    How the user prefers to interact with AI (proactive advice, balanced, or only on
+    demand).
+    """
 
     data_sharing_consent: Annotated[bool, PropertyInfo(alias="dataSharingConsent")]
-    """Consent for sharing anonymized data for AI improvements."""
+    """
+    Consent status for sharing anonymized data for AI improvement and personalized
+    offers.
+    """
 
     notification_channels: Annotated[NotificationChannels, PropertyInfo(alias="notificationChannels")]
-    """Enabled notification channels."""
+    """Preferred channels for receiving notifications."""
 
     preferred_language: Annotated[str, PropertyInfo(alias="preferredLanguage")]
-    """User's preferred language for the interface."""
+    """Preferred language for the user interface."""
 
-    theme: Literal["Light-Default", "Dark-Quantum", "Eco-Green", "Minimalist"]
-    """User's selected UI theme."""
+    theme: str
+    """Preferred UI theme (e.g., Light-Default, Dark-Quantum)."""
 
     transaction_grouping: Annotated[
         Literal["category", "merchant", "date", "account"], PropertyInfo(alias="transactionGrouping")
@@ -33,13 +41,9 @@ class PreferenceUpdateParams(TypedDict, total=False):
 
 class NotificationChannels(TypedDict, total=False):
     email: bool
-    """Receive notifications via email."""
 
     in_app: Annotated[bool, PropertyInfo(alias="inApp")]
-    """Receive notifications within the application."""
 
     push: bool
-    """Receive push notifications to connected devices."""
 
     sms: bool
-    """Receive notifications via SMS."""

@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -33,7 +33,7 @@ class AuditsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AuditsResourceWithRawResponse(self)
 
@@ -42,20 +42,18 @@ class AuditsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AuditsResourceWithStreamingResponse(self)
 
     def request(
         self,
         *,
-        audit_scope: Literal[
-            "all_transactions", "corporate_cards", "international_payments", "user_onboarding", "specific_accounts"
-        ],
+        audit_scope: Literal["all_transactions", "specific_accounts", "specific_cards", "all_users"],
         end_date: Union[str, date],
-        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX"]],
+        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX", "OFAC"]],
         start_date: Union[str, date],
-        specific_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        additional_context: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -69,16 +67,15 @@ class AuditsResource(SyncAPIResource):
         internal policies, and flagging potential risks.
 
         Args:
-          audit_scope: The scope of the compliance audit.
+          audit_scope: The scope of the audit (e.g., all transactions, specific accounts).
 
           end_date: End date for the audit period (inclusive).
 
-          regulatory_frameworks: List of regulatory frameworks to audit against.
+          regulatory_frameworks: List of regulatory frameworks against which to audit.
 
           start_date: Start date for the audit period (inclusive).
 
-          specific_account_ids: Optional: List of specific account IDs to include if `auditScope` is
-              'specific_accounts'.
+          additional_context: Optional: Any additional context or specific areas of concern for the AI.
 
           extra_headers: Send extra headers
 
@@ -96,7 +93,7 @@ class AuditsResource(SyncAPIResource):
                     "end_date": end_date,
                     "regulatory_frameworks": regulatory_frameworks,
                     "start_date": start_date,
-                    "specific_account_ids": specific_account_ids,
+                    "additional_context": additional_context,
                 },
                 audit_request_params.AuditRequestParams,
             ),
@@ -147,7 +144,7 @@ class AsyncAuditsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAuditsResourceWithRawResponse(self)
 
@@ -156,20 +153,18 @@ class AsyncAuditsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncAuditsResourceWithStreamingResponse(self)
 
     async def request(
         self,
         *,
-        audit_scope: Literal[
-            "all_transactions", "corporate_cards", "international_payments", "user_onboarding", "specific_accounts"
-        ],
+        audit_scope: Literal["all_transactions", "specific_accounts", "specific_cards", "all_users"],
         end_date: Union[str, date],
-        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX"]],
+        regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX", "OFAC"]],
         start_date: Union[str, date],
-        specific_account_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        additional_context: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -183,16 +178,15 @@ class AsyncAuditsResource(AsyncAPIResource):
         internal policies, and flagging potential risks.
 
         Args:
-          audit_scope: The scope of the compliance audit.
+          audit_scope: The scope of the audit (e.g., all transactions, specific accounts).
 
           end_date: End date for the audit period (inclusive).
 
-          regulatory_frameworks: List of regulatory frameworks to audit against.
+          regulatory_frameworks: List of regulatory frameworks against which to audit.
 
           start_date: Start date for the audit period (inclusive).
 
-          specific_account_ids: Optional: List of specific account IDs to include if `auditScope` is
-              'specific_accounts'.
+          additional_context: Optional: Any additional context or specific areas of concern for the AI.
 
           extra_headers: Send extra headers
 
@@ -210,7 +204,7 @@ class AsyncAuditsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "regulatory_frameworks": regulatory_frameworks,
                     "start_date": start_date,
-                    "specific_account_ids": specific_account_ids,
+                    "additional_context": additional_context,
                 },
                 audit_request_params.AuditRequestParams,
             ),

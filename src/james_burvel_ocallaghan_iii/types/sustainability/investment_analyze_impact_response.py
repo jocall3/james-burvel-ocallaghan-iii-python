@@ -36,25 +36,22 @@ class TopEsgHolding(BaseModel):
 
 class InvestmentAnalyzeImpactResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven recommendations to improve the ESG profile of the portfolio."""
+    """AI-driven recommendations to improve the portfolio's ESG impact."""
 
     benchmark_esg_score: float = FieldInfo(alias="benchmarkESGScore")
-    """Average ESG score for a comparable market benchmark."""
+    """Average ESG score of a relevant market benchmark for comparison."""
 
     breakdown_by_esg_factors: BreakdownByEsgFactors = FieldInfo(alias="breakdownByESGFactors")
-    """
-    Breakdown of the portfolio's ESG score into environmental, social, and
-    governance components.
-    """
+    """Breakdown of the portfolio's ESG score by individual factors."""
 
     lowest_esg_holdings: List[LowestEsgHolding] = FieldInfo(alias="lowestESGHoldings")
-    """List of lowest-scoring holdings by their individual ESG score."""
+    """Lowest holdings in the portfolio by ESG score."""
 
     overall_esg_score: float = FieldInfo(alias="overallESGScore")
-    """Overall aggregated ESG score for the entire portfolio."""
+    """Overall ESG score of the entire portfolio (0-10)."""
 
     portfolio_id: str = FieldInfo(alias="portfolioId")
-    """The ID of the investment portfolio analyzed."""
+    """ID of the investment portfolio analyzed."""
 
     top_esg_holdings: List[TopEsgHolding] = FieldInfo(alias="topESGHoldings")
-    """List of top holdings by their individual ESG score."""
+    """Top holdings in the portfolio by ESG score."""

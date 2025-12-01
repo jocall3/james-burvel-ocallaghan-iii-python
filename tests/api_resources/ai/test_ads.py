@@ -17,23 +17,20 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAds:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_generated(self, client: JamesBurvelOcallaghanIii) -> None:
         ad = client.ai.ads.list_generated()
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_generated_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         ad = client.ai.ads.list_generated(
-            limit=50,
+            limit=1,
             offset=0,
             status="done",
         )
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list_generated(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.with_raw_response.list_generated()
@@ -43,7 +40,6 @@ class TestAds:
         ad = response.parse()
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list_generated(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.with_streaming_response.list_generated() as response:
@@ -55,7 +51,6 @@ class TestAds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         ad = client.ai.ads.retrieve_status(
@@ -63,7 +58,6 @@ class TestAds:
         )
         assert_matches_type(VideoOperationStatus, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.ai.ads.with_raw_response.retrieve_status(
@@ -75,7 +69,6 @@ class TestAds:
         ad = response.parse()
         assert_matches_type(VideoOperationStatus, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.ai.ads.with_streaming_response.retrieve_status(
@@ -89,7 +82,6 @@ class TestAds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `operation_id` but received ''"):
@@ -103,23 +95,20 @@ class TestAsyncAds:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_generated(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         ad = await async_client.ai.ads.list_generated()
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_generated_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         ad = await async_client.ai.ads.list_generated(
-            limit=50,
+            limit=1,
             offset=0,
             status="done",
         )
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list_generated(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.with_raw_response.list_generated()
@@ -129,7 +118,6 @@ class TestAsyncAds:
         ad = await response.parse()
         assert_matches_type(AdListGeneratedResponse, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list_generated(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.with_streaming_response.list_generated() as response:
@@ -141,7 +129,6 @@ class TestAsyncAds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         ad = await async_client.ai.ads.retrieve_status(
@@ -149,7 +136,6 @@ class TestAsyncAds:
         )
         assert_matches_type(VideoOperationStatus, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.ai.ads.with_raw_response.retrieve_status(
@@ -161,7 +147,6 @@ class TestAsyncAds:
         ad = await response.parse()
         assert_matches_type(VideoOperationStatus, ad, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.ai.ads.with_streaming_response.retrieve_status(
@@ -175,7 +160,6 @@ class TestAsyncAds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `operation_id` but received ''"):

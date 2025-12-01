@@ -20,25 +20,22 @@ class Holding(BaseModel):
     """Current market price per unit."""
 
     market_value: float = FieldInfo(alias="marketValue")
-    """Total market value of this holding."""
+    """Total market value of the holding."""
 
     name: str
-    """Full name of the asset."""
+    """Full name of the investment asset."""
 
     percentage_of_portfolio: float = FieldInfo(alias="percentageOfPortfolio")
-    """Percentage this holding represents of the total portfolio value."""
+    """Percentage of the total portfolio value this holding represents."""
 
     quantity: float
     """Number of units held."""
 
     symbol: str
-    """Ticker symbol of the asset."""
+    """Stock ticker or asset symbol."""
 
     esg_score: Optional[float] = FieldInfo(alias="esgScore", default=None)
-    """ESG (Environmental, Social, Governance) score for the asset."""
-
-    gain_loss: Optional[float] = FieldInfo(alias="gainLoss", default=None)
-    """Total gain or loss for this holding."""
+    """Overall ESG (Environmental, Social, Governance) score of the asset (0-10)."""
 
 
 class InvestmentPortfolio(BaseModel):
@@ -46,41 +43,38 @@ class InvestmentPortfolio(BaseModel):
     """Unique identifier for the investment portfolio."""
 
     currency: str
-    """Base currency of the portfolio."""
+    """ISO 4217 currency code of the portfolio."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp when the portfolio data was last synced/updated."""
+    """Timestamp when the portfolio data was last updated."""
 
     name: str
-    """User-friendly name of the portfolio."""
+    """Name of the portfolio."""
 
-    risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] = FieldInfo(
+    risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] = FieldInfo(
         alias="riskTolerance"
     )
-    """User's stated or AI-derived risk tolerance for this portfolio."""
+    """User's stated or AI-assessed risk tolerance for this portfolio."""
+
+    today_gain_loss: float = FieldInfo(alias="todayGainLoss")
+    """Daily gain or loss on the portfolio."""
 
     total_value: float = FieldInfo(alias="totalValue")
     """Current total market value of the portfolio."""
 
-    type: Literal["equities", "bonds", "diversified", "crypto", "reit", "commodities", "other"]
-    """Primary asset type or strategy of the portfolio."""
+    type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"]
+    """General type or strategy of the portfolio."""
+
+    unrealized_gain_loss: float = FieldInfo(alias="unrealizedGainLoss")
+    """Total unrealized gain or loss on the portfolio."""
 
     ai_performance_insights: Optional[List[AIInsight]] = FieldInfo(alias="aiPerformanceInsights", default=None)
     """AI-driven insights into portfolio performance and market outlook."""
 
-    ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "manual"]] = (
+    ai_rebalancing_frequency: Optional[Literal["monthly", "quarterly", "semi_annually", "annually", "never"]] = (
         FieldInfo(alias="aiRebalancingFrequency", default=None)
     )
-    """
-    Frequency at which the AI is configured to suggest or perform rebalancing for
-    this portfolio.
-    """
+    """Frequency at which AI-driven rebalancing is set to occur."""
 
     holdings: Optional[List[Holding]] = None
-    """Detailed breakdown of assets held within the portfolio."""
-
-    today_gain_loss: Optional[float] = FieldInfo(alias="todayGainLoss", default=None)
-    """Today's gain or loss for the portfolio."""
-
-    unrealized_gain_loss: Optional[float] = FieldInfo(alias="unrealizedGainLoss", default=None)
-    """Total unrealized gain or loss for the portfolio."""
+    """List of individual assets held in the portfolio."""

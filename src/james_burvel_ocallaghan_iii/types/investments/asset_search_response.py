@@ -1,24 +1,24 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AssetSearchResponse", "AssetSearchResponseItem"]
+__all__ = ["AssetSearchResponse", "Data"]
 
 
-class AssetSearchResponseItem(BaseModel):
+class Data(BaseModel):
     asset_name: str = FieldInfo(alias="assetName")
-    """Full name of the asset."""
+    """Full name of the investment asset."""
 
     asset_symbol: str = FieldInfo(alias="assetSymbol")
-    """Ticker symbol or identifier of the asset."""
+    """Symbol of the investment asset."""
 
-    asset_type: Literal["stock", "etf", "mutual_fund", "bond", "crypto"] = FieldInfo(alias="assetType")
-    """Type of investment asset."""
+    asset_type: Literal["stock", "etf", "mutual_fund", "bond"] = FieldInfo(alias="assetType")
+    """Type of the investment asset."""
 
     currency: str
     """Currency of the asset's price."""
@@ -27,7 +27,7 @@ class AssetSearchResponseItem(BaseModel):
     """Current market price of the asset."""
 
     overall_esg_score: float = FieldInfo(alias="overallESGScore")
-    """Overall Environmental, Social, and Governance (ESG) score."""
+    """Overall ESG score (0-10), higher is better."""
 
     ai_esg_insight: Optional[str] = FieldInfo(alias="aiESGInsight", default=None)
     """AI-generated insight summarizing the ESG profile."""
@@ -36,10 +36,10 @@ class AssetSearchResponseItem(BaseModel):
     """Environmental component of the ESG score."""
 
     esg_controversies: Optional[List[str]] = FieldInfo(alias="esgControversies", default=None)
-    """List of known ESG-related controversies or negative events."""
+    """List of any significant ESG-related controversies associated with the asset."""
 
     esg_rating_provider: Optional[str] = FieldInfo(alias="esgRatingProvider", default=None)
-    """Provider of the ESG rating data."""
+    """Provider of the ESG rating (e.g., MSCI, Sustainalytics)."""
 
     governance_score: Optional[float] = FieldInfo(alias="governanceScore", default=None)
     """Governance component of the ESG score."""
@@ -48,4 +48,17 @@ class AssetSearchResponseItem(BaseModel):
     """Social component of the ESG score."""
 
 
-AssetSearchResponse: TypeAlias = List[AssetSearchResponseItem]
+class AssetSearchResponse(BaseModel):
+    limit: int
+    """The maximum number of items returned in the current page."""
+
+    offset: int
+    """The number of items skipped before the current page."""
+
+    total: int
+    """The total number of items available across all pages."""
+
+    data: Optional[List[Data]] = None
+
+    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    """The offset for the next page of results, if available. Null if no more pages."""

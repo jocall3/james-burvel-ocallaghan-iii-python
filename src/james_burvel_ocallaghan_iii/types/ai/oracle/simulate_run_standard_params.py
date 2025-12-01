@@ -10,10 +10,10 @@ __all__ = ["SimulateRunStandardParams"]
 
 class SimulateRunStandardParams(TypedDict, total=False):
     prompt: Required[str]
-    """Natural language description of the financial scenario to simulate."""
+    """A natural language prompt describing the 'what-if' scenario."""
 
     parameters: Optional[object]
     """
-    Structured parameters to guide the simulation, complementing the natural
-    language prompt.
+    Optional structured parameters to guide the simulation (e.g., duration, amount,
+    risk tolerance).
     """

@@ -2,37 +2,29 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["RuleCreateParams", "Action"]
+from .fraud_rule_action_param import FraudRuleActionParam
+from .fraud_rule_criteria_param import FraudRuleCriteriaParam
+
+__all__ = ["RuleCreateParams"]
 
 
 class RuleCreateParams(TypedDict, total=False):
-    action: Required[Action]
+    action: Required[FraudRuleActionParam]
+    """Action to take when a fraud rule is triggered."""
 
-    criteria: Required[object]
-    """The dynamic object defining the conditions that trigger the rule."""
+    criteria: Required[FraudRuleCriteriaParam]
+    """Criteria that define when a fraud rule should trigger."""
 
     description: Required[str]
-    """Detailed description of what the rule should detect."""
+    """Detailed description of what the rule detects."""
 
     name: Required[str]
-    """A descriptive name for the new rule."""
+    """Name of the new fraud rule."""
 
     severity: Required[Literal["Low", "Medium", "High", "Critical"]]
-    """Severity level for anomalies detected by this rule."""
+    """Severity level when this rule is triggered."""
 
     status: Required[Literal["active", "inactive", "draft"]]
     """Initial status of the rule."""
-
-    priority: Optional[int]
-    """Optional: Priority level for rule evaluation."""
-
-
-class Action(TypedDict, total=False):
-    details: Required[str]
-    """Further details about the action."""
-
-    type: Required[Literal["flag", "alert", "block", "auto_review", "mfa_challenge"]]
-    """The automated action to take when the rule is triggered."""

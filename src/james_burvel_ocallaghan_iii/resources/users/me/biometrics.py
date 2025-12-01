@@ -32,7 +32,7 @@ class BiometricsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return BiometricsResourceWithRawResponse(self)
 
@@ -41,7 +41,7 @@ class BiometricsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return BiometricsResourceWithStreamingResponse(self)
 
@@ -88,13 +88,13 @@ class BiometricsResource(SyncAPIResource):
         features. Requires a biometric signature for initial proof.
 
         Args:
-          biometric_signature: Base64 encoded biometric template or proof for enrollment.
+          biometric_signature: Base64 encoded representation of the biometric template or proof.
 
-          biometric_type: Type of biometric data to enroll.
+          biometric_type: The type of biometric data being enrolled.
 
-          device_id: The ID of the device on which the biometric data is being enrolled.
+          device_id: The ID of the device on which the biometric is being enrolled.
 
-          device_name: Optional: A friendly name for the device enrolling biometrics.
+          device_name: Optional: A friendly name for the device, if not already linked.
 
           extra_headers: Send extra headers
 
@@ -161,11 +161,11 @@ class BiometricsResource(SyncAPIResource):
         access protected resources, using a one-time biometric signature.
 
         Args:
-          biometric_signature: One-time, base64 encoded biometric proof for verification.
+          biometric_signature: Base64 encoded representation of the one-time biometric proof for verification.
 
-          biometric_type: Type of biometric data for verification.
+          biometric_type: The type of biometric data being verified.
 
-          device_id: The ID of the device from which the biometric verification attempt is made.
+          device_id: The ID of the device initiating the biometric verification.
 
           extra_headers: Send extra headers
 
@@ -199,7 +199,7 @@ class AsyncBiometricsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncBiometricsResourceWithRawResponse(self)
 
@@ -208,7 +208,7 @@ class AsyncBiometricsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncBiometricsResourceWithStreamingResponse(self)
 
@@ -255,13 +255,13 @@ class AsyncBiometricsResource(AsyncAPIResource):
         features. Requires a biometric signature for initial proof.
 
         Args:
-          biometric_signature: Base64 encoded biometric template or proof for enrollment.
+          biometric_signature: Base64 encoded representation of the biometric template or proof.
 
-          biometric_type: Type of biometric data to enroll.
+          biometric_type: The type of biometric data being enrolled.
 
-          device_id: The ID of the device on which the biometric data is being enrolled.
+          device_id: The ID of the device on which the biometric is being enrolled.
 
-          device_name: Optional: A friendly name for the device enrolling biometrics.
+          device_name: Optional: A friendly name for the device, if not already linked.
 
           extra_headers: Send extra headers
 
@@ -328,11 +328,11 @@ class AsyncBiometricsResource(AsyncAPIResource):
         access protected resources, using a one-time biometric signature.
 
         Args:
-          biometric_signature: One-time, base64 encoded biometric proof for verification.
+          biometric_signature: Base64 encoded representation of the one-time biometric proof for verification.
 
-          biometric_type: Type of biometric data for verification.
+          biometric_type: The type of biometric data being verified.
 
-          device_id: The ID of the device from which the biometric verification attempt is made.
+          device_id: The ID of the device initiating the biometric verification.
 
           extra_headers: Send extra headers
 

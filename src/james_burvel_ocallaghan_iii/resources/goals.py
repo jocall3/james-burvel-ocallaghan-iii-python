@@ -8,8 +8,8 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import goal_create_params, goal_update_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..types import goal_list_params, goal_create_params, goal_update_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -33,7 +33,7 @@ class GoalsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return GoalsResourceWithRawResponse(self)
 
@@ -42,7 +42,7 @@ class GoalsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return GoalsResourceWithStreamingResponse(self)
 
@@ -52,13 +52,11 @@ class GoalsResource(SyncAPIResource):
         name: str,
         target_amount: float,
         target_date: Union[str, date],
-        type: Literal[
-            "retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "wealth_creation", "other"
-        ],
+        type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"],
+        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
         generate_ai_plan: bool | Omit = omit,
         initial_contribution: float | Omit = omit,
-        linked_account_id: Optional[str] | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
+        risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,21 +68,21 @@ class GoalsResource(SyncAPIResource):
         Creates a new long-term financial goal, with optional AI plan generation.
 
         Args:
-          name: Name for the new financial goal.
+          name: Name of the new financial goal.
 
-          target_amount: The target amount for the goal.
+          target_amount: The target monetary amount for the goal.
 
-          target_date: Target completion date for the goal.
+          target_date: The target completion date for the goal.
 
           type: Type of financial goal.
 
-          generate_ai_plan: If true, AI will automatically generate a strategic plan for this goal.
+          contributing_accounts: Optional: List of account IDs initially contributing to this goal.
+
+          generate_ai_plan: If true, AI will automatically generate a strategic plan for the goal.
 
           initial_contribution: Optional: Initial amount to contribute to the goal.
 
-          linked_account_id: Optional: The account ID from which the initial contribution should be made.
-
-          risk_tolerance: Risk tolerance for the investments associated with this goal.
+          risk_tolerance: Desired risk tolerance for investments related to this goal.
 
           extra_headers: Send extra headers
 
@@ -102,9 +100,9 @@ class GoalsResource(SyncAPIResource):
                     "target_amount": target_amount,
                     "target_date": target_date,
                     "type": type,
+                    "contributing_accounts": contributing_accounts,
                     "generate_ai_plan": generate_ai_plan,
                     "initial_contribution": initial_contribution,
-                    "linked_account_id": linked_account_id,
                     "risk_tolerance": risk_tolerance,
                 },
                 goal_create_params.GoalCreateParams,
@@ -127,8 +125,8 @@ class GoalsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialGoal:
         """
-        Retrieves detailed information for a specific financial goal, including its AI
-        strategic plan and progress tracking.
+        Retrieves detailed information for a specific financial goal, including current
+        progress, AI strategic plan, and related insights.
 
         Args:
           extra_headers: Send extra headers
@@ -153,10 +151,12 @@ class GoalsResource(SyncAPIResource):
         self,
         goal_id: str,
         *,
+        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
+        generate_ai_plan: bool | Omit = omit,
         name: str | Omit = omit,
-        regenerate_ai_plan: bool | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
-        status: Literal["on_track", "ahead_of_schedule", "behind_schedule", "completed", "cancelled"] | Omit = omit,
+        risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
+        status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
+        | Omit = omit,
         target_amount: float | Omit = omit,
         target_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -167,20 +167,23 @@ class GoalsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialGoal:
         """
-        Updates parameters for an existing financial goal.
+        Updates the parameters of an existing financial goal, such as target amount,
+        date, or contributing accounts. This may trigger an AI plan recalculation.
 
         Args:
+          contributing_accounts: Updated list of account IDs contributing to this goal.
+
+          generate_ai_plan: If true, AI will recalculate and update the strategic plan for the goal.
+
           name: Updated name of the financial goal.
 
-          regenerate_ai_plan: If true, the AI will regenerate the strategic plan based on updated parameters.
-
-          risk_tolerance: Updated risk tolerance for the investments associated with this goal.
+          risk_tolerance: Updated risk tolerance for investments related to this goal.
 
           status: Updated status of the goal's progress.
 
-          target_amount: Updated target amount for the goal.
+          target_amount: The updated target monetary amount for the goal.
 
-          target_date: Updated target completion date for the goal.
+          target_date: The updated target completion date for the goal.
 
           extra_headers: Send extra headers
 
@@ -196,8 +199,9 @@ class GoalsResource(SyncAPIResource):
             f"/goals/{goal_id}",
             body=maybe_transform(
                 {
+                    "contributing_accounts": contributing_accounts,
+                    "generate_ai_plan": generate_ai_plan,
                     "name": name,
-                    "regenerate_ai_plan": regenerate_ai_plan,
                     "risk_tolerance": risk_tolerance,
                     "status": status,
                     "target_amount": target_amount,
@@ -214,6 +218,8 @@ class GoalsResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -224,11 +230,34 @@ class GoalsResource(SyncAPIResource):
         """
         Retrieves a list of all financial goals defined by the user, including their
         progress and associated AI plans.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/goals",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    goal_list_params.GoalListParams,
+                ),
             ),
             cast_to=GoalListResponse,
         )
@@ -245,7 +274,7 @@ class GoalsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes a specific financial goal.
+        Deletes a specific financial goal from the user's profile.
 
         Args:
           extra_headers: Send extra headers
@@ -275,7 +304,7 @@ class AsyncGoalsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncGoalsResourceWithRawResponse(self)
 
@@ -284,7 +313,7 @@ class AsyncGoalsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncGoalsResourceWithStreamingResponse(self)
 
@@ -294,13 +323,11 @@ class AsyncGoalsResource(AsyncAPIResource):
         name: str,
         target_amount: float,
         target_date: Union[str, date],
-        type: Literal[
-            "retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "wealth_creation", "other"
-        ],
+        type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"],
+        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
         generate_ai_plan: bool | Omit = omit,
         initial_contribution: float | Omit = omit,
-        linked_account_id: Optional[str] | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
+        risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -312,21 +339,21 @@ class AsyncGoalsResource(AsyncAPIResource):
         Creates a new long-term financial goal, with optional AI plan generation.
 
         Args:
-          name: Name for the new financial goal.
+          name: Name of the new financial goal.
 
-          target_amount: The target amount for the goal.
+          target_amount: The target monetary amount for the goal.
 
-          target_date: Target completion date for the goal.
+          target_date: The target completion date for the goal.
 
           type: Type of financial goal.
 
-          generate_ai_plan: If true, AI will automatically generate a strategic plan for this goal.
+          contributing_accounts: Optional: List of account IDs initially contributing to this goal.
+
+          generate_ai_plan: If true, AI will automatically generate a strategic plan for the goal.
 
           initial_contribution: Optional: Initial amount to contribute to the goal.
 
-          linked_account_id: Optional: The account ID from which the initial contribution should be made.
-
-          risk_tolerance: Risk tolerance for the investments associated with this goal.
+          risk_tolerance: Desired risk tolerance for investments related to this goal.
 
           extra_headers: Send extra headers
 
@@ -344,9 +371,9 @@ class AsyncGoalsResource(AsyncAPIResource):
                     "target_amount": target_amount,
                     "target_date": target_date,
                     "type": type,
+                    "contributing_accounts": contributing_accounts,
                     "generate_ai_plan": generate_ai_plan,
                     "initial_contribution": initial_contribution,
-                    "linked_account_id": linked_account_id,
                     "risk_tolerance": risk_tolerance,
                 },
                 goal_create_params.GoalCreateParams,
@@ -369,8 +396,8 @@ class AsyncGoalsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialGoal:
         """
-        Retrieves detailed information for a specific financial goal, including its AI
-        strategic plan and progress tracking.
+        Retrieves detailed information for a specific financial goal, including current
+        progress, AI strategic plan, and related insights.
 
         Args:
           extra_headers: Send extra headers
@@ -395,10 +422,12 @@ class AsyncGoalsResource(AsyncAPIResource):
         self,
         goal_id: str,
         *,
+        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
+        generate_ai_plan: bool | Omit = omit,
         name: str | Omit = omit,
-        regenerate_ai_plan: bool | Omit = omit,
-        risk_tolerance: Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"] | Omit = omit,
-        status: Literal["on_track", "ahead_of_schedule", "behind_schedule", "completed", "cancelled"] | Omit = omit,
+        risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
+        status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
+        | Omit = omit,
         target_amount: float | Omit = omit,
         target_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -409,20 +438,23 @@ class AsyncGoalsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FinancialGoal:
         """
-        Updates parameters for an existing financial goal.
+        Updates the parameters of an existing financial goal, such as target amount,
+        date, or contributing accounts. This may trigger an AI plan recalculation.
 
         Args:
+          contributing_accounts: Updated list of account IDs contributing to this goal.
+
+          generate_ai_plan: If true, AI will recalculate and update the strategic plan for the goal.
+
           name: Updated name of the financial goal.
 
-          regenerate_ai_plan: If true, the AI will regenerate the strategic plan based on updated parameters.
-
-          risk_tolerance: Updated risk tolerance for the investments associated with this goal.
+          risk_tolerance: Updated risk tolerance for investments related to this goal.
 
           status: Updated status of the goal's progress.
 
-          target_amount: Updated target amount for the goal.
+          target_amount: The updated target monetary amount for the goal.
 
-          target_date: Updated target completion date for the goal.
+          target_date: The updated target completion date for the goal.
 
           extra_headers: Send extra headers
 
@@ -438,8 +470,9 @@ class AsyncGoalsResource(AsyncAPIResource):
             f"/goals/{goal_id}",
             body=await async_maybe_transform(
                 {
+                    "contributing_accounts": contributing_accounts,
+                    "generate_ai_plan": generate_ai_plan,
                     "name": name,
-                    "regenerate_ai_plan": regenerate_ai_plan,
                     "risk_tolerance": risk_tolerance,
                     "status": status,
                     "target_amount": target_amount,
@@ -456,6 +489,8 @@ class AsyncGoalsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -466,11 +501,34 @@ class AsyncGoalsResource(AsyncAPIResource):
         """
         Retrieves a list of all financial goals defined by the user, including their
         progress and associated AI plans.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/goals",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    goal_list_params.GoalListParams,
+                ),
             ),
             cast_to=GoalListResponse,
         )
@@ -487,7 +545,7 @@ class AsyncGoalsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes a specific financial goal.
+        Deletes a specific financial goal from the user's profile.
 
         Args:
           extra_headers: Send extra headers

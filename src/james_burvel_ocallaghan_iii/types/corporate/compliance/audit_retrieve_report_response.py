@@ -15,13 +15,12 @@ __all__ = ["AuditRetrieveReportResponse", "Finding", "PeriodCovered"]
 class Finding(BaseModel):
     description: Optional[str] = None
 
-    regulatory_breach: Optional[str] = FieldInfo(alias="regulatoryBreach", default=None)
-
     related_entities: Optional[List[str]] = FieldInfo(alias="relatedEntities", default=None)
+    """IDs of entities related to this finding (e.g., transaction IDs)."""
 
     severity: Optional[Literal["Low", "Medium", "High", "Critical"]] = None
 
-    type: Optional[Literal["violation", "observation", "recommendation"]] = None
+    type: Optional[Literal["finding", "observation", "recommendation"]] = None
 
 
 class PeriodCovered(BaseModel):
@@ -32,19 +31,19 @@ class PeriodCovered(BaseModel):
 
 class AuditRetrieveReportResponse(BaseModel):
     audit_date: datetime = FieldInfo(alias="auditDate")
-    """Date and time when the audit report was generated."""
+    """Timestamp when the audit report was generated."""
 
     audit_id: str = FieldInfo(alias="auditId")
-    """Unique identifier for the audit report."""
+    """Unique identifier for the compliance audit."""
 
     findings: List[Finding]
-    """Detailed findings, including violations, observations, and recommendations."""
+    """Detailed findings, observations, and recommendations."""
 
     overall_compliance_score: int = FieldInfo(alias="overallComplianceScore")
-    """Overall compliance score (0-100), indicating adherence to regulations."""
+    """Overall compliance score (0-100), higher is better."""
 
     period_covered: PeriodCovered = FieldInfo(alias="periodCovered")
-    """The time period covered by the audit."""
+    """The period covered by this audit report."""
 
     recommended_actions: List[AIInsight] = FieldInfo(alias="recommendedActions")
     """AI-generated actionable recommendations to improve compliance."""
@@ -53,4 +52,4 @@ class AuditRetrieveReportResponse(BaseModel):
     """Current status of the audit."""
 
     summary: str
-    """A summary of the audit findings."""
+    """A high-level summary of the audit findings."""

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -13,20 +13,25 @@ __all__ = ["LoanApplicationStatus", "AIUnderwritingResult"]
 
 
 class AIUnderwritingResult(BaseModel):
-    ai_confidence: Optional[float] = FieldInfo(alias="aiConfidence", default=None)
+    ai_confidence: float = FieldInfo(alias="aiConfidence")
+    """AI's confidence in its underwriting decision (0-1)."""
 
-    decision: Optional[Literal["approved", "declined", "referred"]] = None
+    decision: Literal["approved", "declined", "referred_to_human"]
+    """The AI's underwriting decision."""
+
+    reason: str
+    """Reasoning for the AI's decision."""
 
     max_approved_amount: Optional[float] = FieldInfo(alias="maxApprovedAmount", default=None)
-
-    reason: Optional[str] = None
+    """The maximum amount the AI is willing to approve."""
 
     recommended_interest_rate: Optional[float] = FieldInfo(alias="recommendedInterestRate", default=None)
+    """The interest rate recommended by the AI."""
 
 
 class LoanApplicationStatus(BaseModel):
     application_date: datetime = FieldInfo(alias="applicationDate")
-    """Date and time the application was submitted."""
+    """Timestamp when the application was submitted."""
 
     application_id: str = FieldInfo(alias="applicationId")
     """Unique identifier for the loan application."""
@@ -34,20 +39,19 @@ class LoanApplicationStatus(BaseModel):
     loan_amount_requested: float = FieldInfo(alias="loanAmountRequested")
     """The amount originally requested in the application."""
 
-    loan_purpose: str = FieldInfo(alias="loanPurpose")
-    """The stated purpose of the loan."""
+    loan_purpose: Literal[
+        "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
+    ] = FieldInfo(alias="loanPurpose")
+    """The purpose of the loan."""
 
     next_steps: str = FieldInfo(alias="nextSteps")
-    """Guidance on what the user should do next."""
+    """Guidance on the next actions for the user."""
 
-    status: Literal["pending", "underwriting", "approved", "declined", "withdrawn", "funded"]
+    status: Literal["submitted", "underwriting", "approved", "declined", "pending_acceptance", "funded", "cancelled"]
     """Current status of the loan application."""
 
     ai_underwriting_result: Optional[AIUnderwritingResult] = FieldInfo(alias="aiUnderwritingResult", default=None)
-    """Outcome and details from the AI underwriting process."""
-
-    decline_reason_details: Optional[List[str]] = FieldInfo(alias="declineReasonDetails", default=None)
-    """Specific reasons for loan decline, adhering to regulatory requirements."""
+    """The outcome of the AI underwriting process."""
 
     offer_details: Optional[LoanOffer] = FieldInfo(alias="offerDetails", default=None)
-    """Details of the loan offer if the application is approved."""
+    """Details of the loan offer, if approved."""

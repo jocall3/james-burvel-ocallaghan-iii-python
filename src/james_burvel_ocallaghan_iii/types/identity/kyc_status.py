@@ -15,21 +15,21 @@ class KYCStatus(BaseModel):
     last_submission_date: Optional[datetime] = FieldInfo(alias="lastSubmissionDate", default=None)
     """Timestamp of the last KYC document submission."""
 
-    overall_status: Literal["not_started", "in_review", "verified", "rejected", "requires_action"] = FieldInfo(
+    overall_status: Literal["not_submitted", "in_review", "verified", "rejected", "requires_more_info"] = FieldInfo(
         alias="overallStatus"
     )
     """Overall status of the KYC verification process."""
 
+    required_actions: List[str] = FieldInfo(alias="requiredActions")
+    """List of actions required from the user if status is 'requires_more_info'."""
+
     user_id: str = FieldInfo(alias="userId")
-    """Unique identifier for the user."""
+    """The ID of the user whose KYC status is being retrieved."""
 
     rejection_reason: Optional[str] = FieldInfo(alias="rejectionReason", default=None)
-    """Reason for rejection if the status is 'rejected'."""
-
-    required_actions: Optional[List[str]] = FieldInfo(alias="requiredActions", default=None)
-    """List of actions required from the user to proceed with verification."""
+    """Reason for rejection if status is 'rejected'."""
 
     verified_tier: Optional[Literal["bronze", "silver", "gold", "platinum"]] = FieldInfo(
         alias="verifiedTier", default=None
     )
-    """The tier of verification achieved, granting access to different service levels."""
+    """The KYC verification tier achieved (e.g., for different service levels)."""

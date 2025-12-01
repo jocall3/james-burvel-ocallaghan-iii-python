@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -14,6 +15,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.accounts import transaction_list_pending_transactions_params
 from ...types.accounts.transaction_list_pending_transactions_response import TransactionListPendingTransactionsResponse
 
 __all__ = ["TransactionsResource", "AsyncTransactionsResource"]
@@ -26,7 +28,7 @@ class TransactionsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return TransactionsResourceWithRawResponse(self)
 
@@ -35,7 +37,7 @@ class TransactionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return TransactionsResourceWithStreamingResponse(self)
 
@@ -43,6 +45,8 @@ class TransactionsResource(SyncAPIResource):
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -55,6 +59,10 @@ class TransactionsResource(SyncAPIResource):
         specific financial account.
 
         Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -68,7 +76,17 @@ class TransactionsResource(SyncAPIResource):
         return self._get(
             f"/accounts/{account_id}/transactions/pending",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    transaction_list_pending_transactions_params.TransactionListPendingTransactionsParams,
+                ),
             ),
             cast_to=TransactionListPendingTransactionsResponse,
         )
@@ -81,7 +99,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTransactionsResourceWithRawResponse(self)
 
@@ -90,7 +108,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncTransactionsResourceWithStreamingResponse(self)
 
@@ -98,6 +116,8 @@ class AsyncTransactionsResource(AsyncAPIResource):
         self,
         account_id: str,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -110,6 +130,10 @@ class AsyncTransactionsResource(AsyncAPIResource):
         specific financial account.
 
         Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -123,7 +147,17 @@ class AsyncTransactionsResource(AsyncAPIResource):
         return await self._get(
             f"/accounts/{account_id}/transactions/pending",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    transaction_list_pending_transactions_params.TransactionListPendingTransactionsParams,
+                ),
             ),
             cast_to=TransactionListPendingTransactionsResponse,
         )

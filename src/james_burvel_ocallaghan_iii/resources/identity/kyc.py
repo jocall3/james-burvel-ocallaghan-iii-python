@@ -2,13 +2,23 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import date
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
+from ..._types import (
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NotGiven,
+    SequenceNotStr,
+    Base64FileInput,
+    omit,
+    not_given,
+)
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -32,7 +42,7 @@ class KYCResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return KYCResourceWithRawResponse(self)
 
@@ -41,7 +51,7 @@ class KYCResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return KYCResourceWithStreamingResponse(self)
 
@@ -71,14 +81,13 @@ class KYCResource(SyncAPIResource):
         self,
         *,
         country_of_issue: str,
-        document_front_image: Union[str, Base64FileInput],
         document_number: str,
-        document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement"],
+        document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement", "other"],
         expiration_date: Union[str, date],
         issue_date: Union[str, date],
-        address_proof_image: Union[str, Base64FileInput, None] | Omit = omit,
+        additional_documents: Optional[SequenceNotStr[Union[str, Base64FileInput]]] | Omit = omit,
         document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        live_selfie_image: Union[str, Base64FileInput, None] | Omit = omit,
+        document_front_image: Union[str, Base64FileInput, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -92,23 +101,22 @@ class KYCResource(SyncAPIResource):
         crucial for higher service tiers and regulatory adherence.
 
         Args:
-          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2 code).
+          country_of_issue: The two-letter ISO country code where the document was issued.
 
-          document_front_image: Base64 encoded image of the front side of the document.
+          document_number: The identification number on the document.
 
-          document_number: The official document number.
+          document_type: The type of KYC document being submitted.
 
-          document_type: Type of KYC document being submitted.
+          expiration_date: The expiration date of the document (YYYY-MM-DD).
 
-          expiration_date: Date the document expires.
+          issue_date: The issue date of the document (YYYY-MM-DD).
 
-          issue_date: Date the document was issued.
+          additional_documents: Array of additional documents (e.g., utility bills) as base64 encoded images.
 
-          address_proof_image: Base64 encoded image of an address proof (e.g., utility bill).
+          document_back_image: Base64 encoded image of the back of the document (if applicable).
 
-          document_back_image: Base64 encoded image of the back side of the document (if applicable).
-
-          live_selfie_image: Base64 encoded image of a live selfie for liveness detection.
+          document_front_image: Base64 encoded image of the front of the document. Use 'application/json' with
+              base64 string, or 'multipart/form-data' for direct file upload.
 
           extra_headers: Send extra headers
 
@@ -123,14 +131,13 @@ class KYCResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "country_of_issue": country_of_issue,
-                    "document_front_image": document_front_image,
                     "document_number": document_number,
                     "document_type": document_type,
                     "expiration_date": expiration_date,
                     "issue_date": issue_date,
-                    "address_proof_image": address_proof_image,
+                    "additional_documents": additional_documents,
                     "document_back_image": document_back_image,
-                    "live_selfie_image": live_selfie_image,
+                    "document_front_image": document_front_image,
                 },
                 kyc_submit_params.KYCSubmitParams,
             ),
@@ -148,7 +155,7 @@ class AsyncKYCResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncKYCResourceWithRawResponse(self)
 
@@ -157,7 +164,7 @@ class AsyncKYCResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncKYCResourceWithStreamingResponse(self)
 
@@ -187,14 +194,13 @@ class AsyncKYCResource(AsyncAPIResource):
         self,
         *,
         country_of_issue: str,
-        document_front_image: Union[str, Base64FileInput],
         document_number: str,
-        document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement"],
+        document_type: Literal["drivers_license", "passport", "national_id", "utility_bill", "bank_statement", "other"],
         expiration_date: Union[str, date],
         issue_date: Union[str, date],
-        address_proof_image: Union[str, Base64FileInput, None] | Omit = omit,
+        additional_documents: Optional[SequenceNotStr[Union[str, Base64FileInput]]] | Omit = omit,
         document_back_image: Union[str, Base64FileInput, None] | Omit = omit,
-        live_selfie_image: Union[str, Base64FileInput, None] | Omit = omit,
+        document_front_image: Union[str, Base64FileInput, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -208,23 +214,22 @@ class AsyncKYCResource(AsyncAPIResource):
         crucial for higher service tiers and regulatory adherence.
 
         Args:
-          country_of_issue: The country that issued the document (ISO 3166-1 alpha-2 code).
+          country_of_issue: The two-letter ISO country code where the document was issued.
 
-          document_front_image: Base64 encoded image of the front side of the document.
+          document_number: The identification number on the document.
 
-          document_number: The official document number.
+          document_type: The type of KYC document being submitted.
 
-          document_type: Type of KYC document being submitted.
+          expiration_date: The expiration date of the document (YYYY-MM-DD).
 
-          expiration_date: Date the document expires.
+          issue_date: The issue date of the document (YYYY-MM-DD).
 
-          issue_date: Date the document was issued.
+          additional_documents: Array of additional documents (e.g., utility bills) as base64 encoded images.
 
-          address_proof_image: Base64 encoded image of an address proof (e.g., utility bill).
+          document_back_image: Base64 encoded image of the back of the document (if applicable).
 
-          document_back_image: Base64 encoded image of the back side of the document (if applicable).
-
-          live_selfie_image: Base64 encoded image of a live selfie for liveness detection.
+          document_front_image: Base64 encoded image of the front of the document. Use 'application/json' with
+              base64 string, or 'multipart/form-data' for direct file upload.
 
           extra_headers: Send extra headers
 
@@ -239,14 +244,13 @@ class AsyncKYCResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "country_of_issue": country_of_issue,
-                    "document_front_image": document_front_image,
                     "document_number": document_number,
                     "document_type": document_type,
                     "expiration_date": expiration_date,
                     "issue_date": issue_date,
-                    "address_proof_image": address_proof_image,
+                    "additional_documents": additional_documents,
                     "document_back_image": document_back_image,
-                    "live_selfie_image": live_selfie_image,
+                    "document_front_image": document_front_image,
                 },
                 kyc_submit_params.KYCSubmitParams,
             ),

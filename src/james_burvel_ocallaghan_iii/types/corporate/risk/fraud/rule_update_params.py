@@ -2,38 +2,29 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
-from typing_extensions import Literal, TypeAlias, TypedDict
+from typing_extensions import Literal, TypedDict
 
-__all__ = ["RuleUpdateParams", "Action"]
+from .fraud_rule_action_param import FraudRuleActionParam
+from .fraud_rule_criteria_param import FraudRuleCriteriaParam
+
+__all__ = ["RuleUpdateParams"]
 
 
 class RuleUpdateParams(TypedDict, total=False):
-    action: Action
+    action: FraudRuleActionParam
+    """Updated action to take when the rule is triggered."""
 
-    criteria: Dict[str, object]
-    """The updated dynamic object defining the conditions."""
+    criteria: FraudRuleCriteriaParam
+    """Updated criteria for the rule."""
 
     description: str
-    """Updated description of the rule."""
+    """Updated description of what the rule detects."""
 
     name: str
-    """Updated name for the fraud rule."""
-
-    priority: Optional[int]
-    """Updated priority level for rule evaluation."""
+    """Updated name of the fraud rule."""
 
     severity: Literal["Low", "Medium", "High", "Critical"]
     """Updated severity level."""
 
     status: Literal["active", "inactive", "draft"]
     """Updated status of the rule."""
-
-
-class ActionTyped(TypedDict, total=False):
-    details: str
-
-    type: Literal["flag", "alert", "block", "auto_review", "mfa_challenge"]
-
-
-Action: TypeAlias = Union[ActionTyped, Dict[str, object]]

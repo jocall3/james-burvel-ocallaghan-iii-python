@@ -32,7 +32,7 @@ class GenerateResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return GenerateResourceWithRawResponse(self)
 
@@ -41,20 +41,20 @@ class GenerateResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return GenerateResourceWithStreamingResponse(self)
 
     def advanced(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Realistic", "Cinematic", "Animated", "Abstract", "Minimalist"],
-        audience_target: Optional[Literal["general", "young_adults", "corporate", "small_business", "investors"]]
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
+        audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
+        background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        background_music: Optional[Literal["upbeat", "calm", "dramatic", "none"]] | Omit = omit,
         brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
@@ -75,29 +75,29 @@ class GenerateResource(SyncAPIResource):
         productions.
 
         Args:
-          aspect_ratio: Desired aspect ratio of the video (e.g., for YouTube, Instagram Reels).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: Textual description for the AI to generate the video content.
+          prompt: The textual prompt to guide the AI video generation.
 
-          style: Artistic style preference for the video.
+          style: Artistic style of the video.
 
-          audience_target: Target audience to optimize messaging and visuals.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          background_music: Desired background music style.
+          audience_target: Target audience for the ad, influencing tone and visuals.
+
+          background_music_genre: Genre of background music.
 
           brand_assets: URLs to brand assets (e.g., logos, specific imagery) to be incorporated.
 
-          brand_colors: Optional list of brand hex colors to influence the video's aesthetic.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
 
-          call_to_action: Details for an integrated call-to-action button or text overlay.
+          call_to_action: Call-to-action text and URL to be displayed.
 
-          keywords: Additional keywords to guide AI content generation.
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
-          voiceover_style: Style of the AI-generated voiceover.
+          voiceover_style: Style/tone for the AI voiceover.
 
-          voiceover_text: Specific text for a generated voiceover.
+          voiceover_text: Optional: Text for an AI-generated voiceover.
 
           extra_headers: Send extra headers
 
@@ -111,12 +111,12 @@ class GenerateResource(SyncAPIResource):
             "/ai/ads/generate/advanced",
             body=maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "audience_target": audience_target,
-                    "background_music": background_music,
+                    "background_music_genre": background_music_genre,
                     "brand_assets": brand_assets,
                     "brand_colors": brand_colors,
                     "call_to_action": call_to_action,
@@ -135,10 +135,10 @@ class GenerateResource(SyncAPIResource):
     def standard(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Realistic", "Cinematic", "Animated", "Abstract", "Minimalist"],
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         keywords: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -154,17 +154,17 @@ class GenerateResource(SyncAPIResource):
         content creation.
 
         Args:
-          aspect_ratio: Desired aspect ratio of the video (e.g., for YouTube, Instagram Reels).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: Textual description for the AI to generate the video content.
+          prompt: The textual prompt to guide the AI video generation.
 
-          style: Artistic style preference for the video.
+          style: Artistic style of the video.
 
-          brand_colors: Optional list of brand hex colors to influence the video's aesthetic.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          keywords: Additional keywords to guide AI content generation.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
+
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
           extra_headers: Send extra headers
 
@@ -178,10 +178,10 @@ class GenerateResource(SyncAPIResource):
             "/ai/ads/generate",
             body=maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "brand_colors": brand_colors,
                     "keywords": keywords,
                 },
@@ -201,7 +201,7 @@ class AsyncGenerateResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncGenerateResourceWithRawResponse(self)
 
@@ -210,20 +210,20 @@ class AsyncGenerateResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncGenerateResourceWithStreamingResponse(self)
 
     async def advanced(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Realistic", "Cinematic", "Animated", "Abstract", "Minimalist"],
-        audience_target: Optional[Literal["general", "young_adults", "corporate", "small_business", "investors"]]
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
+        audience_target: Optional[Literal["general", "corporate", "investor", "youth"]] | Omit = omit,
+        background_music_genre: Optional[Literal["corporate", "uplifting", "ambient", "cinematic", "none"]]
         | Omit = omit,
-        background_music: Optional[Literal["upbeat", "calm", "dramatic", "none"]] | Omit = omit,
         brand_assets: Optional[SequenceNotStr[str]] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         call_to_action: Optional[generate_advanced_params.CallToAction] | Omit = omit,
@@ -244,29 +244,29 @@ class AsyncGenerateResource(AsyncAPIResource):
         productions.
 
         Args:
-          aspect_ratio: Desired aspect ratio of the video (e.g., for YouTube, Instagram Reels).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: Textual description for the AI to generate the video content.
+          prompt: The textual prompt to guide the AI video generation.
 
-          style: Artistic style preference for the video.
+          style: Artistic style of the video.
 
-          audience_target: Target audience to optimize messaging and visuals.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          background_music: Desired background music style.
+          audience_target: Target audience for the ad, influencing tone and visuals.
+
+          background_music_genre: Genre of background music.
 
           brand_assets: URLs to brand assets (e.g., logos, specific imagery) to be incorporated.
 
-          brand_colors: Optional list of brand hex colors to influence the video's aesthetic.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
 
-          call_to_action: Details for an integrated call-to-action button or text overlay.
+          call_to_action: Call-to-action text and URL to be displayed.
 
-          keywords: Additional keywords to guide AI content generation.
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
-          voiceover_style: Style of the AI-generated voiceover.
+          voiceover_style: Style/tone for the AI voiceover.
 
-          voiceover_text: Specific text for a generated voiceover.
+          voiceover_text: Optional: Text for an AI-generated voiceover.
 
           extra_headers: Send extra headers
 
@@ -280,12 +280,12 @@ class AsyncGenerateResource(AsyncAPIResource):
             "/ai/ads/generate/advanced",
             body=await async_maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "audience_target": audience_target,
-                    "background_music": background_music,
+                    "background_music_genre": background_music_genre,
                     "brand_assets": brand_assets,
                     "brand_colors": brand_colors,
                     "call_to_action": call_to_action,
@@ -304,10 +304,10 @@ class AsyncGenerateResource(AsyncAPIResource):
     async def standard(
         self,
         *,
-        aspect_ratio: Literal["16:9", "9:16", "1:1"],
         length_seconds: int,
         prompt: str,
-        style: Literal["Realistic", "Cinematic", "Animated", "Abstract", "Minimalist"],
+        style: Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"],
+        aspect_ratio: Literal["16:9", "9:16", "1:1"] | Omit = omit,
         brand_colors: Optional[SequenceNotStr[str]] | Omit = omit,
         keywords: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -323,17 +323,17 @@ class AsyncGenerateResource(AsyncAPIResource):
         content creation.
 
         Args:
-          aspect_ratio: Desired aspect ratio of the video (e.g., for YouTube, Instagram Reels).
-
           length_seconds: Desired length of the video in seconds.
 
-          prompt: Textual description for the AI to generate the video content.
+          prompt: The textual prompt to guide the AI video generation.
 
-          style: Artistic style preference for the video.
+          style: Artistic style of the video.
 
-          brand_colors: Optional list of brand hex colors to influence the video's aesthetic.
+          aspect_ratio: Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
 
-          keywords: Additional keywords to guide AI content generation.
+          brand_colors: Optional: Hex color codes to influence the video's aesthetic.
+
+          keywords: Optional: Additional keywords to guide the AI's content generation.
 
           extra_headers: Send extra headers
 
@@ -347,10 +347,10 @@ class AsyncGenerateResource(AsyncAPIResource):
             "/ai/ads/generate",
             body=await async_maybe_transform(
                 {
-                    "aspect_ratio": aspect_ratio,
                     "length_seconds": length_seconds,
                     "prompt": prompt,
                     "style": style,
+                    "aspect_ratio": aspect_ratio,
                     "brand_colors": brand_colors,
                     "keywords": keywords,
                 },

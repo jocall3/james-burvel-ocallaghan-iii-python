@@ -11,16 +11,16 @@ __all__ = ["PaginatedTransactions"]
 
 
 class PaginatedTransactions(BaseModel):
+    limit: int
+    """The maximum number of items returned in the current page."""
+
+    offset: int
+    """The number of items skipped before the current page."""
+
+    total: int
+    """The total number of items available across all pages."""
+
     data: Optional[List[Transaction]] = None
 
-    limit: Optional[int] = None
-    """The maximum number of items returned per page."""
-
     next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
-    """The offset to use for the next page of results. Null if no more pages."""
-
-    offset: Optional[int] = None
-    """The starting index of the list for pagination."""
-
-    total: Optional[int] = None
-    """The total number of available items."""
+    """The offset for the next page of results, if available. Null if no more pages."""

@@ -93,7 +93,7 @@ class CorporateResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return CorporateResourceWithRawResponse(self)
 
@@ -102,7 +102,7 @@ class CorporateResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return CorporateResourceWithStreamingResponse(self)
 
@@ -114,6 +114,7 @@ class CorporateResource(SyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -126,15 +127,19 @@ class CorporateResource(SyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: Country of residence or operation (ISO 3166-1 alpha-2 code).
+          country: Two-letter ISO country code related to the entity (e.g., country of residence,
+              registration).
 
           entity_type: The type of entity being screened.
 
           name: Full name of the individual or organization to screen.
 
-          address: Full address for enhanced screening.
+          address: Optional: Address details for enhanced screening.
 
-          date_of_birth: Date of birth for individual screening (YYYY-MM-DD).
+          date_of_birth: Date of birth for individuals (YYYY-MM-DD).
+
+          identification_number: Optional: Any government-issued identification number (e.g., passport, national
+              ID).
 
           extra_headers: Send extra headers
 
@@ -153,6 +158,7 @@ class CorporateResource(SyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),
@@ -190,7 +196,7 @@ class AsyncCorporateResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncCorporateResourceWithRawResponse(self)
 
@@ -199,7 +205,7 @@ class AsyncCorporateResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncCorporateResourceWithStreamingResponse(self)
 
@@ -211,6 +217,7 @@ class AsyncCorporateResource(AsyncAPIResource):
         name: str,
         address: Optional[AddressParam] | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        identification_number: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,15 +230,19 @@ class AsyncCorporateResource(AsyncAPIResource):
         sanction lists and watchlists.
 
         Args:
-          country: Country of residence or operation (ISO 3166-1 alpha-2 code).
+          country: Two-letter ISO country code related to the entity (e.g., country of residence,
+              registration).
 
           entity_type: The type of entity being screened.
 
           name: Full name of the individual or organization to screen.
 
-          address: Full address for enhanced screening.
+          address: Optional: Address details for enhanced screening.
 
-          date_of_birth: Date of birth for individual screening (YYYY-MM-DD).
+          date_of_birth: Date of birth for individuals (YYYY-MM-DD).
+
+          identification_number: Optional: Any government-issued identification number (e.g., passport, national
+              ID).
 
           extra_headers: Send extra headers
 
@@ -250,6 +261,7 @@ class AsyncCorporateResource(AsyncAPIResource):
                     "name": name,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "identification_number": identification_number,
                 },
                 corporate_perform_sanction_screening_params.CorporatePerformSanctionScreeningParams,
             ),

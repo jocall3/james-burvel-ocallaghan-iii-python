@@ -17,13 +17,19 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestWeb3:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_nfts(self, client: JamesBurvelOcallaghanIii) -> None:
         web3 = client.web3.retrieve_nfts()
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_nfts_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
+        web3 = client.web3.retrieve_nfts(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
+
     @parametrize
     def test_raw_response_retrieve_nfts(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.web3.with_raw_response.retrieve_nfts()
@@ -33,7 +39,6 @@ class TestWeb3:
         web3 = response.parse()
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_nfts(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.web3.with_streaming_response.retrieve_nfts() as response:
@@ -51,13 +56,19 @@ class TestAsyncWeb3:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_nfts(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         web3 = await async_client.web3.retrieve_nfts()
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_nfts_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
+        web3 = await async_client.web3.retrieve_nfts(
+            limit=1,
+            offset=0,
+        )
+        assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
+
     @parametrize
     async def test_raw_response_retrieve_nfts(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.web3.with_raw_response.retrieve_nfts()
@@ -67,7 +78,6 @@ class TestAsyncWeb3:
         web3 = await response.parse()
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_nfts(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.web3.with_streaming_response.retrieve_nfts() as response:

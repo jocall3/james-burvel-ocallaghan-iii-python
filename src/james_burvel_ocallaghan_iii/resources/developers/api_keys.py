@@ -17,7 +17,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.developers import api_key_create_params
+from ...types.developers import api_key_list_params, api_key_create_params
 from ...types.developers.api_key import APIKey
 from ...types.developers.api_key_list_response import APIKeyListResponse
 
@@ -31,7 +31,7 @@ class APIKeysResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return APIKeysResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class APIKeysResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return APIKeysResourceWithStreamingResponse(self)
 
@@ -62,11 +62,12 @@ class APIKeysResource(SyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A friendly name for the new API key.
+          name: A descriptive name for the API key.
 
-          scopes: List of OAuth2 scopes that this API key should have access to.
+          scopes: List of permissions to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If null, it does not expire.
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, it will not
+              expire.
 
           extra_headers: Send extra headers
 
@@ -95,6 +96,8 @@ class APIKeysResource(SyncAPIResource):
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,11 +105,36 @@ class APIKeysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIKeyListResponse:
-        """Retrieves a list of API keys issued to the authenticated developer application."""
+        """
+        Retrieves a list of API keys issued to the authenticated developer application.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/developers/api-keys",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    api_key_list_params.APIKeyListParams,
+                ),
             ),
             cast_to=APIKeyListResponse,
         )
@@ -153,7 +181,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAPIKeysResourceWithRawResponse(self)
 
@@ -162,7 +190,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncAPIKeysResourceWithStreamingResponse(self)
 
@@ -184,11 +212,12 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         an optional expiration.
 
         Args:
-          name: A friendly name for the new API key.
+          name: A descriptive name for the API key.
 
-          scopes: List of OAuth2 scopes that this API key should have access to.
+          scopes: List of permissions to grant to this API key.
 
-          expires_in_days: Optional: Number of days until the API key expires. If null, it does not expire.
+          expires_in_days: Optional: Number of days until the API key expires. If omitted, it will not
+              expire.
 
           extra_headers: Send extra headers
 
@@ -217,6 +246,8 @@ class AsyncAPIKeysResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -224,11 +255,36 @@ class AsyncAPIKeysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIKeyListResponse:
-        """Retrieves a list of API keys issued to the authenticated developer application."""
+        """
+        Retrieves a list of API keys issued to the authenticated developer application.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/developers/api-keys",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    api_key_list_params.APIKeyListParams,
+                ),
             ),
             cast_to=APIKeyListResponse,
         )

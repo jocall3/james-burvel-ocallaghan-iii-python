@@ -22,7 +22,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTransactions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.retrieve(
@@ -30,7 +29,6 @@ class TestTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.with_raw_response.retrieve(
@@ -42,7 +40,6 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.with_streaming_response.retrieve(
@@ -56,7 +53,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -64,19 +60,17 @@ class TestTransactions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.list()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=1,
             max_amount=100,
             min_amount=20,
             offset=0,
@@ -86,7 +80,6 @@ class TestTransactions:
         )
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.with_raw_response.list()
@@ -96,7 +89,6 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.with_streaming_response.list() as response:
@@ -108,7 +100,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_categorize(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.categorize(
@@ -117,7 +108,6 @@ class TestTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_categorize_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.categorize(
@@ -128,7 +118,6 @@ class TestTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_categorize(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.with_raw_response.categorize(
@@ -141,7 +130,6 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_categorize(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.with_streaming_response.categorize(
@@ -156,7 +144,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_categorize(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -165,7 +152,6 @@ class TestTransactions:
                 category="Home > Groceries",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.dispute(
@@ -175,7 +161,6 @@ class TestTransactions:
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_dispute_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.dispute(
@@ -186,7 +171,6 @@ class TestTransactions:
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.with_raw_response.dispute(
@@ -200,7 +184,6 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.with_streaming_response.dispute(
@@ -216,7 +199,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_dispute(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -226,7 +208,6 @@ class TestTransactions:
                 reason="unauthorized",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.transactions.update_notes(
@@ -235,7 +216,6 @@ class TestTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.transactions.with_raw_response.update_notes(
@@ -248,7 +228,6 @@ class TestTransactions:
         transaction = response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.transactions.with_streaming_response.update_notes(
@@ -263,7 +242,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update_notes(self, client: JamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -278,7 +256,6 @@ class TestAsyncTransactions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.retrieve(
@@ -286,7 +263,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.with_raw_response.retrieve(
@@ -298,7 +274,6 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.with_streaming_response.retrieve(
@@ -312,7 +287,6 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -320,19 +294,17 @@ class TestAsyncTransactions:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.list()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.list(
             category="Groceries",
             end_date=parse_date("2024-12-31"),
-            limit=50,
+            limit=1,
             max_amount=100,
             min_amount=20,
             offset=0,
@@ -342,7 +314,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.with_raw_response.list()
@@ -352,7 +323,6 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(PaginatedTransactions, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.with_streaming_response.list() as response:
@@ -364,7 +334,6 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_categorize(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.categorize(
@@ -373,7 +342,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_categorize_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.categorize(
@@ -384,7 +352,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_categorize(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.with_raw_response.categorize(
@@ -397,7 +364,6 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_categorize(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.with_streaming_response.categorize(
@@ -412,7 +378,6 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_categorize(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -421,7 +386,6 @@ class TestAsyncTransactions:
                 category="Home > Groceries",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.dispute(
@@ -431,7 +395,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_dispute_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.dispute(
@@ -442,7 +405,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.with_raw_response.dispute(
@@ -456,7 +418,6 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(TransactionDisputeResponse, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.with_streaming_response.dispute(
@@ -472,7 +433,6 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_dispute(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):
@@ -482,7 +442,6 @@ class TestAsyncTransactions:
                 reason="unauthorized",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         transaction = await async_client.transactions.update_notes(
@@ -491,7 +450,6 @@ class TestAsyncTransactions:
         )
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.transactions.with_raw_response.update_notes(
@@ -504,7 +462,6 @@ class TestAsyncTransactions:
         transaction = await response.parse()
         assert_matches_type(Transaction, transaction, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.transactions.with_streaming_response.update_notes(
@@ -519,7 +476,6 @@ class TestAsyncTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update_notes(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `transaction_id` but received ''"):

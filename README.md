@@ -16,12 +16,9 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/james-burvel-ocallaghan-iii-python.git
+# install from PyPI
+pip install james_burvel_ocallaghan_iii
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install james_burvel_ocallaghan_iii`
 
 ## Usage
 
@@ -36,7 +33,6 @@ user = client.users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 print(user.id)
 ```
@@ -62,7 +58,6 @@ async def main() -> None:
         email="alice.w@example.com",
         name="Alice Wonderland",
         password="SecureP@ssw0rd2024!",
-        phone="+1-555-987-6543",
     )
     print(user.id)
 
@@ -79,8 +74,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'james_burvel_ocallaghan_iii[aiohttp] @ git+ssh://git@github.com/stainless-sdks/james-burvel-ocallaghan-iii-python.git'
+# install from PyPI
+pip install james_burvel_ocallaghan_iii[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -99,7 +94,6 @@ async def main() -> None:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
         )
         print(user.id)
 
@@ -129,7 +123,6 @@ user = client.users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
     address={},
 )
 print(user.address)
@@ -155,7 +148,6 @@ try:
         email="alice.w@example.com",
         name="Alice Wonderland",
         password="SecureP@ssw0rd2024!",
-        phone="+1-555-987-6543",
     )
 except james_burvel_ocallaghan_iii.APIConnectionError as e:
     print("The server could not be reached")
@@ -203,7 +195,6 @@ client.with_options(max_retries=5).users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 ```
 
@@ -231,7 +222,6 @@ client.with_options(timeout=5.0).users.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 ```
 
@@ -277,7 +267,6 @@ response = client.users.with_raw_response.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -285,9 +274,9 @@ user = response.parse()  # get the object that `users.register()` would have ret
 print(user.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/james-burvel-ocallaghan-iii-python/tree/main/src/james_burvel_ocallaghan_iii/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/tree/main/src/james_burvel_ocallaghan_iii/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/james-burvel-ocallaghan-iii-python/tree/main/src/james_burvel_ocallaghan_iii/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/tree/main/src/james_burvel_ocallaghan_iii/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -300,7 +289,6 @@ with client.users.with_streaming_response.register(
     email="alice.w@example.com",
     name="Alice Wonderland",
     password="SecureP@ssw0rd2024!",
-    phone="+1-555-987-6543",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -396,7 +384,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 

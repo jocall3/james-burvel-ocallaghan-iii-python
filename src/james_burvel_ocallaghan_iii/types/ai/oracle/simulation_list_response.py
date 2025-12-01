@@ -13,7 +13,7 @@ __all__ = ["SimulationListResponse", "Data"]
 
 class Data(BaseModel):
     creation_date: datetime = FieldInfo(alias="creationDate")
-    """Timestamp when the simulation was created."""
+    """Timestamp when the simulation was initiated."""
 
     last_updated: datetime = FieldInfo(alias="lastUpdated")
     """Timestamp when the simulation status or results were last updated."""
@@ -25,20 +25,23 @@ class Data(BaseModel):
     """Current status of the simulation."""
 
     summary: str
-    """A brief summary of the simulation's purpose or key finding."""
+    """A brief summary of what the simulation evaluated."""
 
     title: str
-    """User-friendly title of the simulation."""
+    """A user-friendly title for the simulation."""
 
 
 class SimulationListResponse(BaseModel):
+    limit: int
+    """The maximum number of items returned in the current page."""
+
+    offset: int
+    """The number of items skipped before the current page."""
+
+    total: int
+    """The total number of items available across all pages."""
+
     data: Optional[List[Data]] = None
 
-    limit: Optional[int] = None
-    """The maximum number of items returned per page."""
-
-    offset: Optional[int] = None
-    """The starting index of the list for pagination."""
-
-    total: Optional[int] = None
-    """The total number of available items."""
+    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    """The offset for the next page of results, if available. Null if no more pages."""

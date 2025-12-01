@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -11,20 +10,22 @@ __all__ = ["PortfolioRebalanceParams"]
 
 
 class PortfolioRebalanceParams(TypedDict, total=False):
+    target_risk_tolerance: Required[
+        Annotated[
+            Literal["conservative", "moderate", "aggressive", "very_aggressive"],
+            PropertyInfo(alias="targetRiskTolerance"),
+        ]
+    ]
+    """The desired risk tolerance for rebalancing the portfolio."""
+
     confirmation_required: Annotated[bool, PropertyInfo(alias="confirmationRequired")]
     """
-    If true, user confirmation is required before executing trades (even if dryRun
-    is false).
+    If true, user confirmation is required before executing actual trades after a
+    dry run.
     """
 
     dry_run: Annotated[bool, PropertyInfo(alias="dryRun")]
-    """If true, the AI will only propose trades without executing them."""
+    """If true, only simulate the rebalance without executing trades.
 
-    target_risk_tolerance: Annotated[
-        Optional[Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"]],
-        PropertyInfo(alias="targetRiskTolerance"),
-    ]
-    """Optional: The desired risk tolerance for the rebalancing.
-
-    If not provided, uses portfolio's current risk tolerance.
+    Returns proposed trades.
     """

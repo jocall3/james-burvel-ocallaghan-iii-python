@@ -14,28 +14,29 @@ class CryptoWalletConnection(BaseModel):
     id: str
     """Unique identifier for this wallet connection."""
 
-    blockchain_network: Literal[
-        "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"
-    ] = FieldInfo(alias="blockchainNetwork")
-    """The primary blockchain network this wallet is connected to."""
+    blockchain_network: str = FieldInfo(alias="blockchainNetwork")
+    """
+    The blockchain network this wallet is primarily connected to (e.g., Ethereum,
+    Solana, Polygon).
+    """
 
     last_synced: datetime = FieldInfo(alias="lastSynced")
-    """Timestamp of the last successful synchronization of wallet data."""
+    """Timestamp when the wallet's data was last synchronized."""
 
     read_access_granted: bool = FieldInfo(alias="readAccessGranted")
-    """Indicates if has permission to read balances and transaction history."""
+    """Indicates if read access (balances, NFTs) is granted."""
 
-    status: Literal["connected", "disconnected", "verification_pending", "error"]
+    status: Literal["connected", "disconnected", "pending_verification", "error"]
     """Current status of the wallet connection."""
 
     wallet_address: str = FieldInfo(alias="walletAddress")
-    """The public address of the connected cryptocurrency wallet."""
+    """Public address of the connected cryptocurrency wallet."""
 
     wallet_provider: str = FieldInfo(alias="walletProvider")
-    """The name of the wallet provider (e.g., MetaMask, Ledger, Phantom)."""
+    """Name of the wallet provider (e.g., MetaMask, Ledger, Phantom)."""
 
     write_access_granted: bool = FieldInfo(alias="writeAccessGranted")
-    """
-    Indicates if has permission to initiate transactions requiring user
-    confirmation.
+    """Indicates if write access (transactions) is granted.
+
+    Requires higher permission/security.
     """

@@ -31,7 +31,7 @@ class OverdraftSettingsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return OverdraftSettingsResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class OverdraftSettingsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return OverdraftSettingsResourceWithStreamingResponse(self)
 
@@ -82,9 +82,9 @@ class OverdraftSettingsResource(SyncAPIResource):
         account_id: str,
         *,
         enabled: bool | Omit = omit,
-        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me"] | Omit = omit,
+        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: bool | Omit = omit,
+        link_to_savings: Optional[bool] | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,15 +98,16 @@ class OverdraftSettingsResource(SyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Set to `true` to enable, `false` to disable overdraft protection.
+          enabled: Enable or disable overdraft protection.
 
-          fee_preference: New user preference for how overdrafts should be handled.
+          fee_preference: New preference for how overdraft fees are handled.
 
-          linked_savings_account_id: The ID of the savings account to link. Set to `null` if unlinking.
+          linked_savings_account_id: New ID of the linked savings account, if `linkToSavings` is true. Set to null to
+              unlink.
 
-          link_to_savings: Set to `true` to link to savings, `false` to unlink.
+          link_to_savings: Enable or disable linking to a savings account for overdraft coverage.
 
-          protection_limit: The new maximum overdraft amount. Set to `null` if disabling protection.
+          protection_limit: New maximum amount for overdraft protection. Set to null to remove limit.
 
           extra_headers: Send extra headers
 
@@ -144,7 +145,7 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncOverdraftSettingsResourceWithRawResponse(self)
 
@@ -153,7 +154,7 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncOverdraftSettingsResourceWithStreamingResponse(self)
 
@@ -195,9 +196,9 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         account_id: str,
         *,
         enabled: bool | Omit = omit,
-        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me"] | Omit = omit,
+        fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
         linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: bool | Omit = omit,
+        link_to_savings: Optional[bool] | Omit = omit,
         protection_limit: Optional[float] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -211,15 +212,16 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
         disabling protection and configuring preferences.
 
         Args:
-          enabled: Set to `true` to enable, `false` to disable overdraft protection.
+          enabled: Enable or disable overdraft protection.
 
-          fee_preference: New user preference for how overdrafts should be handled.
+          fee_preference: New preference for how overdraft fees are handled.
 
-          linked_savings_account_id: The ID of the savings account to link. Set to `null` if unlinking.
+          linked_savings_account_id: New ID of the linked savings account, if `linkToSavings` is true. Set to null to
+              unlink.
 
-          link_to_savings: Set to `true` to link to savings, `false` to unlink.
+          link_to_savings: Enable or disable linking to a savings account for overdraft coverage.
 
-          protection_limit: The new maximum overdraft amount. Set to `null` if disabling protection.
+          protection_limit: New maximum amount for overdraft protection. Set to null to remove limit.
 
           extra_headers: Send extra headers
 

@@ -31,7 +31,7 @@ class ApplicationsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return ApplicationsResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class ApplicationsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return ApplicationsResourceWithStreamingResponse(self)
 
@@ -83,12 +83,11 @@ class ApplicationsResource(SyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "debt_consolidation", "home_improvement", "medical_expenses", "education", "business_startup", "other"
+            "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
         co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
-        collateral_details: Optional[application_submit_params.CollateralDetails] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -106,13 +105,11 @@ class ApplicationsResource(SyncAPIResource):
 
           loan_purpose: The purpose of the loan.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the underwriting process.
+          additional_notes: Optional notes or details for the application.
 
-          co_applicant: Optional details for a co-applicant.
-
-          collateral_details: Optional details about collateral for secured loans.
+          co_applicant: Optional: Details of a co-applicant for the loan.
 
           extra_headers: Send extra headers
 
@@ -131,7 +128,6 @@ class ApplicationsResource(SyncAPIResource):
                     "repayment_term_months": repayment_term_months,
                     "additional_notes": additional_notes,
                     "co_applicant": co_applicant,
-                    "collateral_details": collateral_details,
                 },
                 application_submit_params.ApplicationSubmitParams,
             ),
@@ -149,7 +145,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncApplicationsResourceWithRawResponse(self)
 
@@ -158,7 +154,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncApplicationsResourceWithStreamingResponse(self)
 
@@ -201,12 +197,11 @@ class AsyncApplicationsResource(AsyncAPIResource):
         *,
         loan_amount: float,
         loan_purpose: Literal[
-            "debt_consolidation", "home_improvement", "medical_expenses", "education", "business_startup", "other"
+            "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
         repayment_term_months: int,
         additional_notes: Optional[str] | Omit = omit,
         co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
-        collateral_details: Optional[application_submit_params.CollateralDetails] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -224,13 +219,11 @@ class AsyncApplicationsResource(AsyncAPIResource):
 
           loan_purpose: The purpose of the loan.
 
-          repayment_term_months: Desired repayment term in months.
+          repayment_term_months: The desired repayment term in months.
 
-          additional_notes: Any additional information for the underwriting process.
+          additional_notes: Optional notes or details for the application.
 
-          co_applicant: Optional details for a co-applicant.
-
-          collateral_details: Optional details about collateral for secured loans.
+          co_applicant: Optional: Details of a co-applicant for the loan.
 
           extra_headers: Send extra headers
 
@@ -249,7 +242,6 @@ class AsyncApplicationsResource(AsyncAPIResource):
                     "repayment_term_months": repayment_term_months,
                     "additional_notes": additional_notes,
                     "co_applicant": co_applicant,
-                    "collateral_details": collateral_details,
                 },
                 application_submit_params.ApplicationSubmitParams,
             ),

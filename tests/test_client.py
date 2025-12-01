@@ -722,10 +722,7 @@ class TestJamesBurvelOcallaghanIii:
 
         with pytest.raises(APITimeoutError):
             client.users.with_streaming_response.register(
-                email="alice.w@example.com",
-                name="Alice Wonderland",
-                password="SecureP@ssw0rd2024!",
-                phone="+1-555-987-6543",
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
             ).__enter__()
 
         assert _get_open_connections(client) == 0
@@ -737,10 +734,7 @@ class TestJamesBurvelOcallaghanIii:
 
         with pytest.raises(APIStatusError):
             client.users.with_streaming_response.register(
-                email="alice.w@example.com",
-                name="Alice Wonderland",
-                password="SecureP@ssw0rd2024!",
-                phone="+1-555-987-6543",
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
             ).__enter__()
         assert _get_open_connections(client) == 0
 
@@ -771,10 +765,7 @@ class TestJamesBurvelOcallaghanIii:
         respx_mock.post("/users/register").mock(side_effect=retry_handler)
 
         response = client.users.with_raw_response.register(
-            email="alice.w@example.com",
-            name="Alice Wonderland",
-            password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
+            email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
         )
 
         assert response.retries_taken == failures_before_success
@@ -803,7 +794,6 @@ class TestJamesBurvelOcallaghanIii:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -832,7 +822,6 @@ class TestJamesBurvelOcallaghanIii:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1570,10 +1559,7 @@ class TestAsyncJamesBurvelOcallaghanIii:
 
         with pytest.raises(APITimeoutError):
             await async_client.users.with_streaming_response.register(
-                email="alice.w@example.com",
-                name="Alice Wonderland",
-                password="SecureP@ssw0rd2024!",
-                phone="+1-555-987-6543",
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
             ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
@@ -1587,10 +1573,7 @@ class TestAsyncJamesBurvelOcallaghanIii:
 
         with pytest.raises(APIStatusError):
             await async_client.users.with_streaming_response.register(
-                email="alice.w@example.com",
-                name="Alice Wonderland",
-                password="SecureP@ssw0rd2024!",
-                phone="+1-555-987-6543",
+                email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
             ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
@@ -1621,10 +1604,7 @@ class TestAsyncJamesBurvelOcallaghanIii:
         respx_mock.post("/users/register").mock(side_effect=retry_handler)
 
         response = await client.users.with_raw_response.register(
-            email="alice.w@example.com",
-            name="Alice Wonderland",
-            password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
+            email="alice.w@example.com", name="Alice Wonderland", password="SecureP@ssw0rd2024!"
         )
 
         assert response.retries_taken == failures_before_success
@@ -1653,7 +1633,6 @@ class TestAsyncJamesBurvelOcallaghanIii:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1682,7 +1661,6 @@ class TestAsyncJamesBurvelOcallaghanIii:
             email="alice.w@example.com",
             name="Alice Wonderland",
             password="SecureP@ssw0rd2024!",
-            phone="+1-555-987-6543",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 

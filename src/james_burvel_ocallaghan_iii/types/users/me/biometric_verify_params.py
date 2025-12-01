@@ -11,14 +11,14 @@ __all__ = ["BiometricVerifyParams"]
 
 class BiometricVerifyParams(TypedDict, total=False):
     biometric_signature: Required[Annotated[str, PropertyInfo(alias="biometricSignature")]]
-    """One-time, base64 encoded biometric proof for verification."""
+    """Base64 encoded representation of the one-time biometric proof for verification."""
 
     biometric_type: Required[
         Annotated[
             Literal["fingerprint", "facial_recognition", "voice_recognition"], PropertyInfo(alias="biometricType")
         ]
     ]
-    """Type of biometric data for verification."""
+    """The type of biometric data being verified."""
 
     device_id: Required[Annotated[str, PropertyInfo(alias="deviceId")]]
-    """The ID of the device from which the biometric verification attempt is made."""
+    """The ID of the device initiating the biometric verification."""

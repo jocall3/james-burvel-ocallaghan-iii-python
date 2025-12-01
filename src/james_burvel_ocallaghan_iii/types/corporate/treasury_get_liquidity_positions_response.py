@@ -49,19 +49,19 @@ class TreasuryGetLiquidityPositionsResponse(BaseModel):
     """Breakdown of liquid assets by account type."""
 
     ai_liquidity_assessment: AILiquidityAssessment = FieldInfo(alias="aiLiquidityAssessment")
-    """AI's overall assessment of current liquidity."""
+    """AI's overall assessment of liquidity."""
 
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven recommendations for liquidity management."""
+    """AI-generated recommendations for liquidity management."""
 
     currency_breakdown: List[CurrencyBreakdown] = FieldInfo(alias="currencyBreakdown")
     """Breakdown of liquid assets by currency."""
+
+    short_term_investments: ShortTermInvestments = FieldInfo(alias="shortTermInvestments")
+    """Details on short-term investments contributing to liquidity."""
 
     snapshot_time: datetime = FieldInfo(alias="snapshotTime")
     """Timestamp of the liquidity snapshot."""
 
     total_liquid_assets: float = FieldInfo(alias="totalLiquidAssets")
-    """Total value of all liquid assets (cash, short-term investments)."""
-
-    short_term_investments: Optional[ShortTermInvestments] = FieldInfo(alias="shortTermInvestments", default=None)
-    """Summary of short-term investment holdings."""
+    """Total value of all liquid assets across the organization."""

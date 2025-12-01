@@ -13,10 +13,13 @@ __all__ = ["WebhookCreateParams"]
 
 class WebhookCreateParams(TypedDict, total=False):
     callback_url: Required[Annotated[str, PropertyInfo(alias="callbackUrl")]]
-    """The URL to which webhook events should be sent."""
+    """The URL to which webhook events will be sent."""
 
     events: Required[SequenceNotStr[str]]
     """List of event types to subscribe to."""
 
     secret: Optional[str]
-    """Optional: A secret string used to sign webhook payloads, verifying origin."""
+    """Optional: A custom shared secret for verifying webhook payloads.
+
+    If omitted, one will be generated.
+    """

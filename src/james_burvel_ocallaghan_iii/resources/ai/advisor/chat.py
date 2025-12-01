@@ -31,7 +31,7 @@ class ChatResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return ChatResourceWithRawResponse(self)
 
@@ -40,7 +40,7 @@ class ChatResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return ChatResourceWithStreamingResponse(self)
 
@@ -62,7 +62,7 @@ class ChatResource(SyncAPIResource):
         session or user.
 
         Args:
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -99,8 +99,8 @@ class ChatResource(SyncAPIResource):
     def send_message(
         self,
         *,
-        message: str,
         function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
+        message: str | Omit = omit,
         session_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -117,12 +117,13 @@ class ChatResource(SyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          message: The user's natural language input to the AI Advisor.
-
           function_response: Optional: The output from a tool function that the AI previously requested to be
-              executed by the client.
+              executed.
 
-          session_id: Optional: The ID of an ongoing conversation session to maintain context.
+          message: The user's textual input to the AI Advisor.
+
+          session_id: Optional: Session ID to continue a conversation. If omitted, a new session is
+              started.
 
           extra_headers: Send extra headers
 
@@ -136,8 +137,8 @@ class ChatResource(SyncAPIResource):
             "/ai/advisor/chat",
             body=maybe_transform(
                 {
-                    "message": message,
                     "function_response": function_response,
+                    "message": message,
                     "session_id": session_id,
                 },
                 chat_send_message_params.ChatSendMessageParams,
@@ -156,7 +157,7 @@ class AsyncChatResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncChatResourceWithRawResponse(self)
 
@@ -165,7 +166,7 @@ class AsyncChatResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncChatResourceWithStreamingResponse(self)
 
@@ -187,7 +188,7 @@ class AsyncChatResource(AsyncAPIResource):
         session or user.
 
         Args:
-          limit: Maximum number of items to return.
+          limit: Maximum number of items to return in a single page.
 
           offset: Number of items to skip before starting to collect the result set.
 
@@ -224,8 +225,8 @@ class AsyncChatResource(AsyncAPIResource):
     async def send_message(
         self,
         *,
-        message: str,
         function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
+        message: str | Omit = omit,
         session_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -242,12 +243,13 @@ class AsyncChatResource(AsyncAPIResource):
         offer hyper-personalized guidance.
 
         Args:
-          message: The user's natural language input to the AI Advisor.
-
           function_response: Optional: The output from a tool function that the AI previously requested to be
-              executed by the client.
+              executed.
 
-          session_id: Optional: The ID of an ongoing conversation session to maintain context.
+          message: The user's textual input to the AI Advisor.
+
+          session_id: Optional: Session ID to continue a conversation. If omitted, a new session is
+              started.
 
           extra_headers: Send extra headers
 
@@ -261,8 +263,8 @@ class AsyncChatResource(AsyncAPIResource):
             "/ai/advisor/chat",
             body=await async_maybe_transform(
                 {
-                    "message": message,
                     "function_response": function_response,
+                    "message": message,
                     "session_id": session_id,
                 },
                 chat_send_message_params.ChatSendMessageParams,

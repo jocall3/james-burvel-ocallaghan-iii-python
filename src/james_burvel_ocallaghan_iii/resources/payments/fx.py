@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -32,7 +31,7 @@ class FxResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return FxResourceWithRawResponse(self)
 
@@ -41,7 +40,7 @@ class FxResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return FxResourceWithStreamingResponse(self)
 
@@ -53,7 +52,6 @@ class FxResource(SyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Literal["proprietary_ai", "external_partner", "market_rate"] | Omit = omit,
         target_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -67,21 +65,18 @@ class FxResource(SyncAPIResource):
         balance or into a specified account.
 
         Args:
-          source_account_id: The ID of the account from which to deduct the source amount.
+          source_account_id: The ID of the account from which funds will be converted.
 
           source_amount: The amount to convert from the source currency.
 
-          source_currency: The currency to convert from.
+          source_currency: The ISO 4217 currency code of the source funds.
 
-          target_currency: The currency to convert to.
+          target_currency: The ISO 4217 currency code for the target currency.
 
-          fx_rate_lock: If true, attempts to lock the quoted FX rate for the conversion.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate for a short period.
 
-          fx_rate_provider: The desired provider for the foreign exchange rate.
-
-          target_account_id: Optional: The ID of the account to credit with the converted target amount. If
-              omitted, converted funds remain as a floating balance or are deposited into a
-              primary account.
+          target_account_id: Optional: The ID of the account to deposit the converted funds. If null, funds
+              are held in a wallet/balance.
 
           extra_headers: Send extra headers
 
@@ -100,7 +95,6 @@ class FxResource(SyncAPIResource):
                     "source_currency": source_currency,
                     "target_currency": target_currency,
                     "fx_rate_lock": fx_rate_lock,
-                    "fx_rate_provider": fx_rate_provider,
                     "target_account_id": target_account_id,
                 },
                 fx_convert_params.FxConvertParams,
@@ -171,7 +165,7 @@ class AsyncFxResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncFxResourceWithRawResponse(self)
 
@@ -180,7 +174,7 @@ class AsyncFxResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncFxResourceWithStreamingResponse(self)
 
@@ -192,7 +186,6 @@ class AsyncFxResource(AsyncAPIResource):
         source_currency: str,
         target_currency: str,
         fx_rate_lock: bool | Omit = omit,
-        fx_rate_provider: Literal["proprietary_ai", "external_partner", "market_rate"] | Omit = omit,
         target_account_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -206,21 +199,18 @@ class AsyncFxResource(AsyncAPIResource):
         balance or into a specified account.
 
         Args:
-          source_account_id: The ID of the account from which to deduct the source amount.
+          source_account_id: The ID of the account from which funds will be converted.
 
           source_amount: The amount to convert from the source currency.
 
-          source_currency: The currency to convert from.
+          source_currency: The ISO 4217 currency code of the source funds.
 
-          target_currency: The currency to convert to.
+          target_currency: The ISO 4217 currency code for the target currency.
 
-          fx_rate_lock: If true, attempts to lock the quoted FX rate for the conversion.
+          fx_rate_lock: If true, attempts to lock the quoted FX rate for a short period.
 
-          fx_rate_provider: The desired provider for the foreign exchange rate.
-
-          target_account_id: Optional: The ID of the account to credit with the converted target amount. If
-              omitted, converted funds remain as a floating balance or are deposited into a
-              primary account.
+          target_account_id: Optional: The ID of the account to deposit the converted funds. If null, funds
+              are held in a wallet/balance.
 
           extra_headers: Send extra headers
 
@@ -239,7 +229,6 @@ class AsyncFxResource(AsyncAPIResource):
                     "source_currency": source_currency,
                     "target_currency": target_currency,
                     "fx_rate_lock": fx_rate_lock,
-                    "fx_rate_provider": fx_rate_provider,
                     "target_account_id": target_account_id,
                 },
                 fx_convert_params.FxConvertParams,

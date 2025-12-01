@@ -28,7 +28,7 @@ class AssetsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AssetsResourceWithRawResponse(self)
 
@@ -37,7 +37,7 @@ class AssetsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AssetsResourceWithStreamingResponse(self)
 
@@ -45,7 +45,9 @@ class AssetsResource(SyncAPIResource):
         self,
         *,
         query: str,
+        limit: int | Omit = omit,
         min_esg_score: float | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,7 +62,11 @@ class AssetsResource(SyncAPIResource):
         Args:
           query: Search query for asset name or symbol.
 
+          limit: Maximum number of items to return in a single page.
+
           min_esg_score: Minimum desired ESG score (0-10).
+
+          offset: Number of items to skip before starting to collect the result set.
 
           extra_headers: Send extra headers
 
@@ -80,7 +86,9 @@ class AssetsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "query": query,
+                        "limit": limit,
                         "min_esg_score": min_esg_score,
+                        "offset": offset,
                     },
                     asset_search_params.AssetSearchParams,
                 ),
@@ -96,7 +104,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncAssetsResourceWithRawResponse(self)
 
@@ -105,7 +113,7 @@ class AsyncAssetsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncAssetsResourceWithStreamingResponse(self)
 
@@ -113,7 +121,9 @@ class AsyncAssetsResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        limit: int | Omit = omit,
         min_esg_score: float | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -128,7 +138,11 @@ class AsyncAssetsResource(AsyncAPIResource):
         Args:
           query: Search query for asset name or symbol.
 
+          limit: Maximum number of items to return in a single page.
+
           min_esg_score: Minimum desired ESG score (0-10).
+
+          offset: Number of items to skip before starting to collect the result set.
 
           extra_headers: Send extra headers
 
@@ -148,7 +162,9 @@ class AsyncAssetsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "query": query,
+                        "limit": limit,
                         "min_esg_score": min_esg_score,
+                        "offset": offset,
                     },
                     asset_search_params.AssetSearchParams,
                 ),

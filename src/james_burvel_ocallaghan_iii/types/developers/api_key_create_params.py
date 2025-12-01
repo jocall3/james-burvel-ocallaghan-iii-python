@@ -13,13 +13,13 @@ __all__ = ["APIKeyCreateParams"]
 
 class APIKeyCreateParams(TypedDict, total=False):
     name: Required[str]
-    """A friendly name for the new API key."""
+    """A descriptive name for the API key."""
 
     scopes: Required[SequenceNotStr[str]]
-    """List of OAuth2 scopes that this API key should have access to."""
+    """List of permissions to grant to this API key."""
 
     expires_in_days: Annotated[Optional[int], PropertyInfo(alias="expiresInDays")]
     """Optional: Number of days until the API key expires.
 
-    If null, it does not expire.
+    If omitted, it will not expire.
     """

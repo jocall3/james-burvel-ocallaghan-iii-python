@@ -57,7 +57,7 @@ class UsersResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return UsersResourceWithRawResponse(self)
 
@@ -66,7 +66,7 @@ class UsersResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return UsersResourceWithStreamingResponse(self)
 
@@ -93,7 +93,7 @@ class UsersResource(SyncAPIResource):
 
           password: User's password.
 
-          mfa_code: Multi-factor authentication code, if required.
+          mfa_code: Optional: Multi-factor authentication code, if required.
 
           extra_headers: Send extra headers
 
@@ -125,9 +125,9 @@ class UsersResource(SyncAPIResource):
         email: str,
         name: str,
         password: str,
-        phone: str,
         address: AddressParam | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        phone: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -141,17 +141,17 @@ class UsersResource(SyncAPIResource):
         basic user details.
 
         Args:
-          email: Unique email address for the user.
+          email: Email address for registration and login.
 
           name: Full name of the user.
 
-          password: Secure password for the user account.
+          password: User's chosen password.
 
-          phone: Phone number for SMS verification and communication.
+          address: Optional initial address details.
 
-          address: User's residential address (optional for initial registration).
+          date_of_birth: Optional date of birth (YYYY-MM-DD).
 
-          date_of_birth: User's date of birth (optional for initial registration).
+          phone: Optional phone number for MFA or recovery.
 
           extra_headers: Send extra headers
 
@@ -168,9 +168,9 @@ class UsersResource(SyncAPIResource):
                     "email": email,
                     "name": name,
                     "password": password,
-                    "phone": phone,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "phone": phone,
                 },
                 user_register_params.UserRegisterParams,
             ),
@@ -196,7 +196,7 @@ class AsyncUsersResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncUsersResourceWithRawResponse(self)
 
@@ -205,7 +205,7 @@ class AsyncUsersResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncUsersResourceWithStreamingResponse(self)
 
@@ -232,7 +232,7 @@ class AsyncUsersResource(AsyncAPIResource):
 
           password: User's password.
 
-          mfa_code: Multi-factor authentication code, if required.
+          mfa_code: Optional: Multi-factor authentication code, if required.
 
           extra_headers: Send extra headers
 
@@ -264,9 +264,9 @@ class AsyncUsersResource(AsyncAPIResource):
         email: str,
         name: str,
         password: str,
-        phone: str,
         address: AddressParam | Omit = omit,
         date_of_birth: Union[str, date, None] | Omit = omit,
+        phone: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -280,17 +280,17 @@ class AsyncUsersResource(AsyncAPIResource):
         basic user details.
 
         Args:
-          email: Unique email address for the user.
+          email: Email address for registration and login.
 
           name: Full name of the user.
 
-          password: Secure password for the user account.
+          password: User's chosen password.
 
-          phone: Phone number for SMS verification and communication.
+          address: Optional initial address details.
 
-          address: User's residential address (optional for initial registration).
+          date_of_birth: Optional date of birth (YYYY-MM-DD).
 
-          date_of_birth: User's date of birth (optional for initial registration).
+          phone: Optional phone number for MFA or recovery.
 
           extra_headers: Send extra headers
 
@@ -307,9 +307,9 @@ class AsyncUsersResource(AsyncAPIResource):
                     "email": email,
                     "name": name,
                     "password": password,
-                    "phone": phone,
                     "address": address,
                     "date_of_birth": date_of_birth,
+                    "phone": phone,
                 },
                 user_register_params.UserRegisterParams,
             ),

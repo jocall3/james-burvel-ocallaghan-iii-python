@@ -12,30 +12,29 @@ __all__ = ["PortfolioCreateParams"]
 
 class PortfolioCreateParams(TypedDict, total=False):
     currency: Required[str]
-    """Base currency of the portfolio."""
+    """ISO 4217 currency code of the portfolio."""
 
     initial_investment: Required[Annotated[float, PropertyInfo(alias="initialInvestment")]]
-    """Initial amount to invest in the portfolio."""
+    """Initial amount to invest into the portfolio."""
 
     name: Required[str]
     """Name for the new investment portfolio."""
 
     risk_tolerance: Required[
         Annotated[
-            Literal["conservative", "moderate", "balanced", "aggressive", "very_aggressive"],
-            PropertyInfo(alias="riskTolerance"),
+            Literal["conservative", "moderate", "aggressive", "very_aggressive"], PropertyInfo(alias="riskTolerance")
         ]
     ]
-    """User's risk tolerance for this portfolio."""
+    """Desired risk tolerance for this portfolio."""
 
-    type: Required[Literal["equities", "bonds", "diversified", "crypto", "reit", "commodities", "other"]]
-    """Primary asset type or strategy of the portfolio."""
+    type: Required[Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"]]
+    """General type or strategy of the portfolio."""
 
     ai_auto_allocate: Annotated[bool, PropertyInfo(alias="aiAutoAllocate")]
     """
-    If true, AI will automatically suggest and execute initial asset allocation
-    based on risk tolerance.
+    If true, AI will automatically allocate initial investment based on risk
+    tolerance.
     """
 
     linked_account_id: Annotated[Optional[str], PropertyInfo(alias="linkedAccountId")]
-    """Optional: The account from which initial funds should be drawn."""
+    """Optional: ID of a linked account to fund the initial investment."""

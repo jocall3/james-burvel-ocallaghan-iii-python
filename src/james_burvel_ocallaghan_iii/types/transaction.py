@@ -14,32 +14,32 @@ __all__ = ["Transaction", "Location", "MerchantDetails"]
 
 class Location(BaseModel):
     city: Optional[str] = None
-    """City name of the transaction location."""
-
-    country: Optional[str] = None
-    """Country of the transaction location."""
+    """City where the transaction occurred."""
 
     latitude: Optional[float] = None
-    """Latitude coordinate."""
+    """Latitude coordinate of the transaction."""
 
     longitude: Optional[float] = None
-    """Longitude coordinate."""
+    """Longitude coordinate of the transaction."""
 
     state: Optional[str] = None
-    """State or province of the transaction location."""
+    """State where the transaction occurred."""
+
+    zip: Optional[str] = None
+    """Zip code where the transaction occurred."""
 
 
 class MerchantDetails(BaseModel):
     address: Optional[Address] = None
-    """Merchant's physical address."""
+    """Physical address of the merchant."""
 
     logo_url: Optional[str] = FieldInfo(alias="logoUrl", default=None)
     """URL to the merchant's logo."""
 
     name: Optional[str] = None
-    """Name of the merchant."""
+    """Official name of the merchant."""
 
-    phone_number: Optional[str] = FieldInfo(alias="phoneNumber", default=None)
+    phone: Optional[str] = None
     """Merchant's phone number."""
 
     website: Optional[str] = None
@@ -51,22 +51,22 @@ class Transaction(BaseModel):
     """Unique identifier for the transaction."""
 
     account_id: str = FieldInfo(alias="accountId")
-    """The ID of the account this transaction belongs to."""
+    """ID of the account from which the transaction occurred."""
 
     amount: float
-    """The transaction amount."""
+    """Amount of the transaction."""
 
     category: str
     """
-    AI-assigned or user-defined category of the transaction (e.g., Groceries, Rent,
-    Salary).
+    AI-assigned or user-defined category of the transaction (e.g., 'Groceries',
+    'Utilities').
     """
 
     currency: str
     """ISO 4217 currency code of the transaction."""
 
     date: datetime.date
-    """The date the transaction occurred (transaction date)."""
+    """Date the transaction occurred (local date)."""
 
     description: str
     """Detailed description of the transaction."""
@@ -75,32 +75,32 @@ class Transaction(BaseModel):
     """Type of the transaction."""
 
     ai_category_confidence: Optional[float] = FieldInfo(alias="aiCategoryConfidence", default=None)
-    """AI's confidence score (0-1) for its category assignment."""
+    """AI confidence score for the assigned category (0-1)."""
 
     carbon_footprint: Optional[float] = FieldInfo(alias="carbonFootprint", default=None)
-    """Estimated carbon footprint (in Kg CO2e) associated with the transaction."""
+    """Estimated carbon footprint in kg CO2e for this transaction, derived by AI."""
 
-    dispute_status: Optional[
-        Literal["none", "pending", "under_review", "resolved_in_favor_user", "resolved_in_favor_merchant", "rejected"]
-    ] = FieldInfo(alias="disputeStatus", default=None)
-    """Current status of any dispute related to this transaction."""
+    dispute_status: Optional[Literal["none", "pending", "under_review", "resolved", "rejected"]] = FieldInfo(
+        alias="disputeStatus", default=None
+    )
+    """Current dispute status of the transaction."""
 
     location: Optional[Location] = None
-    """Geolocation details of the transaction, if available."""
+    """Geographic location details for a transaction."""
 
     merchant_details: Optional[MerchantDetails] = FieldInfo(alias="merchantDetails", default=None)
-    """Detailed information about the merchant."""
+    """Detailed information about a merchant associated with a transaction."""
 
     notes: Optional[str] = None
     """Personal notes added by the user to the transaction."""
 
-    payment_channel: Optional[Literal["in_store", "online", "atm", "transfer", "bill_payment", "subscription"]] = (
+    payment_channel: Optional[Literal["in_store", "online", "mobile", "ATM", "bill_payment", "transfer", "other"]] = (
         FieldInfo(alias="paymentChannel", default=None)
     )
     """Channel through which the payment was made."""
 
     posted_date: Optional[datetime.date] = FieldInfo(alias="postedDate", default=None)
-    """The date the transaction was posted to the account (cleared date)."""
+    """Date the transaction was posted to the account (local date)."""
 
     receipt_url: Optional[str] = FieldInfo(alias="receiptUrl", default=None)
     """URL to a digital receipt for the transaction."""

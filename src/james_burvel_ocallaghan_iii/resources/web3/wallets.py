@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -16,7 +14,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.web3 import wallet_connect_params
+from ...types.web3 import wallet_list_params, wallet_connect_params, wallet_retrieve_balances_params
 from ..._base_client import make_request_options
 from ...types.web3.wallet_list_response import WalletListResponse
 from ...types.web3.crypto_wallet_connection import CryptoWalletConnection
@@ -32,7 +30,7 @@ class WalletsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return WalletsResourceWithRawResponse(self)
 
@@ -41,13 +39,15 @@ class WalletsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return WalletsResourceWithStreamingResponse(self)
 
     def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,11 +59,34 @@ class WalletsResource(SyncAPIResource):
         Retrieves a list of all securely linked cryptocurrency wallets (e.g., MetaMask,
         Ledger integration), showing their addresses, associated networks, and
         verification status.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
             "/web3/wallets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    wallet_list_params.WalletListParams,
+                ),
             ),
             cast_to=WalletListResponse,
         )
@@ -71,13 +94,11 @@ class WalletsResource(SyncAPIResource):
     def connect(
         self,
         *,
-        blockchain_network: Literal[
-            "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"
-        ],
+        blockchain_network: str,
         signed_message: str,
         wallet_address: str,
         wallet_provider: str,
-        grant_write_access: bool | Omit = omit,
+        request_write_access: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -91,16 +112,16 @@ class WalletsResource(SyncAPIResource):
         wallet provider.
 
         Args:
-          blockchain_network: The primary blockchain network of the wallet.
+          blockchain_network: The blockchain network for this wallet (e.g., Ethereum, Solana).
 
-          signed_message: A message signed by the wallet to prove ownership (e.g., EIP-191).
+          signed_message: A message cryptographically signed by the wallet owner to prove
+              ownership/intent.
 
           wallet_address: The public address of the cryptocurrency wallet.
 
-          wallet_provider: The name of the wallet provider.
+          wallet_provider: The name of the wallet provider (e.g., MetaMask, Phantom).
 
-          grant_write_access: Set to true if write access (transaction initiation) is desired (requires
-              further permissions).
+          request_write_access: If true, requests write access to initiate transactions from this wallet.
 
           extra_headers: Send extra headers
 
@@ -118,7 +139,7 @@ class WalletsResource(SyncAPIResource):
                     "signed_message": signed_message,
                     "wallet_address": wallet_address,
                     "wallet_provider": wallet_provider,
-                    "grant_write_access": grant_write_access,
+                    "request_write_access": request_write_access,
                 },
                 wallet_connect_params.WalletConnectParams,
             ),
@@ -132,6 +153,8 @@ class WalletsResource(SyncAPIResource):
         self,
         wallet_id: str,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -144,6 +167,10 @@ class WalletsResource(SyncAPIResource):
         connected wallet.
 
         Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -157,7 +184,17 @@ class WalletsResource(SyncAPIResource):
         return self._get(
             f"/web3/wallets/{wallet_id}/balances",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    wallet_retrieve_balances_params.WalletRetrieveBalancesParams,
+                ),
             ),
             cast_to=WalletRetrieveBalancesResponse,
         )
@@ -170,7 +207,7 @@ class AsyncWalletsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncWalletsResourceWithRawResponse(self)
 
@@ -179,13 +216,15 @@ class AsyncWalletsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncWalletsResourceWithStreamingResponse(self)
 
     async def list(
         self,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -197,11 +236,34 @@ class AsyncWalletsResource(AsyncAPIResource):
         Retrieves a list of all securely linked cryptocurrency wallets (e.g., MetaMask,
         Ledger integration), showing their addresses, associated networks, and
         verification status.
+
+        Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
             "/web3/wallets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    wallet_list_params.WalletListParams,
+                ),
             ),
             cast_to=WalletListResponse,
         )
@@ -209,13 +271,11 @@ class AsyncWalletsResource(AsyncAPIResource):
     async def connect(
         self,
         *,
-        blockchain_network: Literal[
-            "Ethereum", "Solana", "Polygon", "BinanceSmartChain", "Arbitrum", "Optimism", "other"
-        ],
+        blockchain_network: str,
         signed_message: str,
         wallet_address: str,
         wallet_provider: str,
-        grant_write_access: bool | Omit = omit,
+        request_write_access: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -229,16 +289,16 @@ class AsyncWalletsResource(AsyncAPIResource):
         wallet provider.
 
         Args:
-          blockchain_network: The primary blockchain network of the wallet.
+          blockchain_network: The blockchain network for this wallet (e.g., Ethereum, Solana).
 
-          signed_message: A message signed by the wallet to prove ownership (e.g., EIP-191).
+          signed_message: A message cryptographically signed by the wallet owner to prove
+              ownership/intent.
 
           wallet_address: The public address of the cryptocurrency wallet.
 
-          wallet_provider: The name of the wallet provider.
+          wallet_provider: The name of the wallet provider (e.g., MetaMask, Phantom).
 
-          grant_write_access: Set to true if write access (transaction initiation) is desired (requires
-              further permissions).
+          request_write_access: If true, requests write access to initiate transactions from this wallet.
 
           extra_headers: Send extra headers
 
@@ -256,7 +316,7 @@ class AsyncWalletsResource(AsyncAPIResource):
                     "signed_message": signed_message,
                     "wallet_address": wallet_address,
                     "wallet_provider": wallet_provider,
-                    "grant_write_access": grant_write_access,
+                    "request_write_access": request_write_access,
                 },
                 wallet_connect_params.WalletConnectParams,
             ),
@@ -270,6 +330,8 @@ class AsyncWalletsResource(AsyncAPIResource):
         self,
         wallet_id: str,
         *,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,6 +344,10 @@ class AsyncWalletsResource(AsyncAPIResource):
         connected wallet.
 
         Args:
+          limit: Maximum number of items to return in a single page.
+
+          offset: Number of items to skip before starting to collect the result set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -295,7 +361,17 @@ class AsyncWalletsResource(AsyncAPIResource):
         return await self._get(
             f"/web3/wallets/{wallet_id}/balances",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "limit": limit,
+                        "offset": offset,
+                    },
+                    wallet_retrieve_balances_params.WalletRetrieveBalancesParams,
+                ),
             ),
             cast_to=WalletRetrieveBalancesResponse,
         )

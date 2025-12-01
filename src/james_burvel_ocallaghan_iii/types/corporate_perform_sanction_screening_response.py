@@ -12,21 +12,28 @@ __all__ = ["CorporatePerformSanctionScreeningResponse", "MatchDetail"]
 
 
 class MatchDetail(BaseModel):
-    additional_info: Optional[object] = FieldInfo(alias="additionalInfo", default=None)
-    """Additional data from the sanctions list entry."""
-
     list_name: Optional[str] = FieldInfo(alias="listName", default=None)
+    """Name of the sanction list where a match was found."""
 
     matched_name: Optional[str] = FieldInfo(alias="matchedName", default=None)
+    """The name on the sanction list that matched."""
+
+    public_url: Optional[str] = FieldInfo(alias="publicUrl", default=None)
+    """Optional: URL to public record of the sanction list entry."""
 
     reason: Optional[str] = None
+    """Reason for the match (e.g., exact name, alias, partial match)."""
 
     score: Optional[float] = None
+    """Match confidence score (0-1)."""
 
 
 class CorporatePerformSanctionScreeningResponse(BaseModel):
+    match_details: List[MatchDetail] = FieldInfo(alias="matchDetails")
+    """Details of any potential or exact matches found."""
+
     match_found: bool = FieldInfo(alias="matchFound")
-    """True if any potential matches were found, false otherwise."""
+    """True if any potential matches were found on sanction lists."""
 
     screening_id: str = FieldInfo(alias="screeningId")
     """Unique identifier for this screening operation."""
@@ -35,10 +42,7 @@ class CorporatePerformSanctionScreeningResponse(BaseModel):
     """Timestamp when the screening was performed."""
 
     status: Literal["clear", "potential_match", "confirmed_match", "error"]
-    """Overall status of the sanction screening."""
+    """Overall status of the screening result."""
 
-    ai_risk_score: Optional[int] = FieldInfo(alias="aiRiskScore", default=None)
-    """AI-calculated risk score (0-100) based on screening results."""
-
-    match_details: Optional[List[MatchDetail]] = FieldInfo(alias="matchDetails", default=None)
-    """Details of any potential matches found during screening."""
+    message: Optional[str] = None
+    """An optional message providing more context on the status."""

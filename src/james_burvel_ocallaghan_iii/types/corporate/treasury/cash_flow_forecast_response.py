@@ -53,30 +53,30 @@ class ProjectedBalance(BaseModel):
 
 class CashFlowForecastResponse(BaseModel):
     ai_recommendations: List[AIInsight] = FieldInfo(alias="aiRecommendations")
-    """AI-driven actionable recommendations for treasury optimization."""
+    """AI-generated recommendations for treasury optimization."""
 
     currency: str
-    """The primary currency of the forecast."""
+    """The currency of the forecast."""
 
     forecast_id: str = FieldInfo(alias="forecastId")
-    """Unique identifier for the cash flow forecast."""
+    """Unique identifier for the cash flow forecast report."""
 
     inflow_forecast: InflowForecast = FieldInfo(alias="inflowForecast")
-    """Forecasted cash inflows categorized by source."""
+    """Forecast of cash inflows by source."""
 
     liquidity_risk_score: int = FieldInfo(alias="liquidityRiskScore")
-    """AI-calculated score (0-100) indicating the risk of liquidity shortfalls."""
+    """AI-assessed risk score for liquidity (0-100, lower is better)."""
 
     outflow_forecast: OutflowForecast = FieldInfo(alias="outflowForecast")
-    """Forecasted cash outflows categorized by spending category."""
+    """Forecast of cash outflows by category."""
 
-    overall_status: Literal["positive_outlook", "neutral", "negative_outlook", "critical_risk"] = FieldInfo(
+    overall_status: Literal["positive_outlook", "negative_outlook", "stable", "uncertain"] = FieldInfo(
         alias="overallStatus"
     )
-    """Overall assessment of the corporate cash flow outlook."""
+    """Overall assessment of the projected cash flow."""
 
     period: str
-    """The forecast period (e.g., 'Next 30 Days', 'Q3 2024')."""
+    """The period covered by the forecast."""
 
     projected_balances: List[ProjectedBalance] = FieldInfo(alias="projectedBalances")
     """Projected cash balances at key dates, potentially across different scenarios."""

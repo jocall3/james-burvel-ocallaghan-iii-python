@@ -23,7 +23,10 @@ class Question(BaseModel):
 
 class QuantumWeaverState(BaseModel):
     last_updated: datetime = FieldInfo(alias="lastUpdated")
-    """Timestamp when the pitch status was last updated."""
+    """Timestamp of the last status update."""
+
+    next_steps: str = FieldInfo(alias="nextSteps")
+    """Guidance on the next actions for the user."""
 
     pitch_id: str = FieldInfo(alias="pitchId")
     """Unique identifier for the business pitch."""
@@ -39,24 +42,16 @@ class QuantumWeaverState(BaseModel):
         "rejected",
         "incubated_graduated",
     ]
-    """
-    Current stage of the business pitch within Quantum Weaver's incubation pipeline.
-    """
+    """Current stage of the business pitch in the incubation process."""
 
     status_message: str = FieldInfo(alias="statusMessage")
-    """A descriptive message about the current status of the pitch."""
+    """A human-readable status message."""
 
     estimated_funding_offer: Optional[float] = FieldInfo(alias="estimatedFundingOffer", default=None)
-    """Estimated seed funding amount offered by Quantum Weaver (if applicable)."""
+    """AI's estimated funding offer, if the pitch progresses."""
 
     feedback_summary: Optional[str] = FieldInfo(alias="feedbackSummary", default=None)
-    """A summary of AI-generated feedback or key findings from the current stage."""
-
-    next_steps: Optional[str] = FieldInfo(alias="nextSteps", default=None)
-    """Guidance on what the entrepreneur should do next."""
+    """A summary of AI-generated feedback, if applicable."""
 
     questions: Optional[List[Question]] = None
-    """
-    A list of specific questions from Quantum Weaver requiring the entrepreneur's
-    input.
-    """
+    """List of questions from Quantum Weaver requiring the user's input."""

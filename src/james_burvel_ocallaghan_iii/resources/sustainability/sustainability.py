@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ...types import sustainability_purchase_carbon_offsets_params
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Query, Headers, NotGiven, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -43,7 +43,7 @@ class SustainabilityResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return SustainabilityResourceWithRawResponse(self)
 
@@ -52,7 +52,7 @@ class SustainabilityResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return SustainabilityResourceWithStreamingResponse(self)
 
@@ -62,7 +62,6 @@ class SustainabilityResource(SyncAPIResource):
         amount_kg_co2e: float,
         offset_project: Optional[str],
         payment_account_id: str,
-        recurring: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -75,14 +74,11 @@ class SustainabilityResource(SyncAPIResource):
         footprint, supporting environmental initiatives.
 
         Args:
-          amount_kg_co2e: The amount of carbon (in Kg CO2e) to offset.
+          amount_kg_co2e: The amount of carbon dioxide equivalent to offset in kilograms.
 
-          offset_project: Optional: Name or ID of a preferred carbon offset project. If null, AI will
-              select an optimal project.
+          offset_project: Optional: The specific carbon offset project to support.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          recurring: If true, sets up a recurring carbon offset purchase.
+          payment_account_id: The ID of the user's account to use for payment.
 
           extra_headers: Send extra headers
 
@@ -99,7 +95,6 @@ class SustainabilityResource(SyncAPIResource):
                     "amount_kg_co2e": amount_kg_co2e,
                     "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "recurring": recurring,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),
@@ -144,7 +139,7 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSustainabilityResourceWithRawResponse(self)
 
@@ -153,7 +148,7 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/james-burvel-ocallaghan-iii-python#with_streaming_response
+        For more information, see https://www.github.com/jocall3/james-burvel-ocallaghan-iii-python#with_streaming_response
         """
         return AsyncSustainabilityResourceWithStreamingResponse(self)
 
@@ -163,7 +158,6 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         amount_kg_co2e: float,
         offset_project: Optional[str],
         payment_account_id: str,
-        recurring: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,14 +170,11 @@ class AsyncSustainabilityResource(AsyncAPIResource):
         footprint, supporting environmental initiatives.
 
         Args:
-          amount_kg_co2e: The amount of carbon (in Kg CO2e) to offset.
+          amount_kg_co2e: The amount of carbon dioxide equivalent to offset in kilograms.
 
-          offset_project: Optional: Name or ID of a preferred carbon offset project. If null, AI will
-              select an optimal project.
+          offset_project: Optional: The specific carbon offset project to support.
 
-          payment_account_id: The ID of the user's account to debit for the purchase.
-
-          recurring: If true, sets up a recurring carbon offset purchase.
+          payment_account_id: The ID of the user's account to use for payment.
 
           extra_headers: Send extra headers
 
@@ -200,7 +191,6 @@ class AsyncSustainabilityResource(AsyncAPIResource):
                     "amount_kg_co2e": amount_kg_co2e,
                     "offset_project": offset_project,
                     "payment_account_id": payment_account_id,
-                    "recurring": recurring,
                 },
                 sustainability_purchase_carbon_offsets_params.SustainabilityPurchaseCarbonOffsetsParams,
             ),

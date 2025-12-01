@@ -20,28 +20,31 @@ class CorporateCard(BaseModel):
     """Masked card number for display purposes."""
 
     card_type: Literal["physical", "virtual"] = FieldInfo(alias="cardType")
-    """Type of the corporate card."""
+    """Type of the card (physical or virtual)."""
 
     controls: CorporateCardControls
-    """Granular spending controls applied to this card."""
+    """Granular spending controls for a corporate card."""
 
     created_date: datetime = FieldInfo(alias="createdDate")
-    """Date when the card was created/issued."""
+    """Timestamp when the card was created."""
+
+    currency: str
+    """Currency of the card's limits and transactions."""
 
     expiration_date: date = FieldInfo(alias="expirationDate")
-    """Expiration date of the card."""
+    """Expiration date of the card (YYYY-MM-DD)."""
 
     frozen: bool
-    """True if the card is currently frozen, preventing transactions."""
+    """If true, the card is temporarily frozen and cannot be used."""
 
     holder_name: str = FieldInfo(alias="holderName")
-    """Name of the cardholder or purpose."""
+    """Name of the card holder."""
 
-    status: Literal["Active", "Suspended", "Cancelled", "Expired"]
+    status: Literal["Active", "Suspended", "Deactivated", "Pending Activation"]
     """Current status of the card."""
 
     associated_employee_id: Optional[str] = FieldInfo(alias="associatedEmployeeId", default=None)
-    """Employee ID associated with the card (if applicable)."""
+    """Optional: ID of the employee associated with this card."""
 
     spending_policy_id: Optional[str] = FieldInfo(alias="spendingPolicyId", default=None)
-    """ID of the corporate spending policy this card adheres to (if any)."""
+    """Optional: ID of the overarching spending policy applied to this card."""

@@ -22,27 +22,27 @@ class AccountRetrieveAccountDetailsResponseBalanceHistory(BaseModel):
 
 
 class AccountRetrieveAccountDetailsResponseProjectedCashFlow(BaseModel):
-    confidence_score: Optional[float] = FieldInfo(alias="confidenceScore", default=None)
-    """AI's confidence score (0-100) for the accuracy of the projection."""
+    confidence_score: Optional[int] = FieldInfo(alias="confidenceScore", default=None)
+    """AI confidence score for the cash flow projection (0-100)."""
 
     days30: Optional[float] = None
-    """Projected net cash flow for the next 30 days."""
+    """Projected cash flow for the next 30 days."""
 
     days90: Optional[float] = None
-    """Projected net cash flow for the next 90 days."""
+    """Projected cash flow for the next 90 days."""
 
 
 class AccountRetrieveAccountDetailsResponse(LinkedAccount):
     account_holder: Optional[str] = FieldInfo(alias="accountHolder", default=None)
-    """Name of the account holder."""
+    """Name of the primary holder for this account."""
 
     balance_history: Optional[List[AccountRetrieveAccountDetailsResponseBalanceHistory]] = FieldInfo(
         alias="balanceHistory", default=None
     )
-    """Historical daily balances for the account (e.g., last 30 days)."""
+    """Historical daily balance data."""
 
     interest_rate: Optional[float] = FieldInfo(alias="interestRate", default=None)
-    """Annual interest rate for the account (if applicable)."""
+    """Annual interest rate (if applicable)."""
 
     opened_date: Optional[datetime.date] = FieldInfo(alias="openedDate", default=None)
     """Date the account was opened."""
@@ -50,7 +50,6 @@ class AccountRetrieveAccountDetailsResponse(LinkedAccount):
     projected_cash_flow: Optional[AccountRetrieveAccountDetailsResponseProjectedCashFlow] = FieldInfo(
         alias="projectedCashFlow", default=None
     )
-    """AI-driven projection of future cash flow for the account."""
 
     transactions_count: Optional[int] = FieldInfo(alias="transactionsCount", default=None)
-    """Total number of transactions in the account (last 12 months)."""
+    """Total number of transactions in this account."""

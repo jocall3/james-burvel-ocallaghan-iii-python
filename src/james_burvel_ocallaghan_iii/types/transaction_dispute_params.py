@@ -15,8 +15,8 @@ class TransactionDisputeParams(TypedDict, total=False):
     details: Required[str]
     """Detailed explanation of the dispute."""
 
-    reason: Required[Literal["unauthorized", "duplicate", "wrong_amount", "not_received", "other"]]
-    """Primary reason for the dispute."""
+    reason: Required[Literal["unauthorized", "duplicate_charge", "incorrect_amount", "product_service_issue", "other"]]
+    """The primary reason for disputing the transaction."""
 
     supporting_documents: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="supportingDocuments")]
-    """URLs to supporting documents (e.g., receipts, travel tickets)."""
+    """URLs to supporting documents (e.g., receipts, communication)."""

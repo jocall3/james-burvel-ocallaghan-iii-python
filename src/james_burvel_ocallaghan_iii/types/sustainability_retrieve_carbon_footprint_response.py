@@ -33,10 +33,10 @@ class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
     """AI-driven insights and recommendations for reducing carbon footprint."""
 
     breakdown_by_category: List[BreakdownByCategory] = FieldInfo(alias="breakdownByCategory")
-    """Breakdown of the carbon footprint by spending category."""
+    """Breakdown of carbon footprint by spending categories."""
 
     period: str
-    """The reporting period for the carbon footprint."""
+    """The period covered by the report."""
 
     report_id: str = FieldInfo(alias="reportId")
     """Unique identifier for the carbon footprint report."""
@@ -47,4 +47,4 @@ class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
     offset_recommendations: Optional[List[OffsetRecommendation]] = FieldInfo(
         alias="offsetRecommendations", default=None
     )
-    """Recommendations for carbon offset projects."""
+    """Recommendations for purchasing carbon offsets."""
