@@ -311,14 +311,20 @@ http verbs. Options on the client will be respected (such as retries) when makin
 
 ```py
 import httpx
+from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii
 
-response = client.post(
-    "/foo",
-    cast_to=httpx.Response,
-    body={"my_param": True},
-)
+client = JamesBurvelOcallaghanIii()
 
-print(response.headers.get("x-foo"))
+# Example: Register a new user
+try:
+    user = client.users.register(
+        name="Alice Wonderland",
+        email="alice.w@example.com",
+        password="SecureP@ssw0rd2024!",
+    )
+    print(f"Successfully registered user: {user.name}")
+except Exception as e:
+    print(f"An error occurred: {e}")
 ```
 
 #### Undocumented request params
