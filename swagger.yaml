@@ -14117,71 +14117,106 @@
         }
       }
     },
-    "securitySchemes" : {
-      "oAuth2Auth" : {
-        "type" : "oauth2",
-        "description" : "OAuth 2.0 flow for user authorization.",
-        "flows" : {
-          "authorizationCode" : {
-            "authorizationUrl" : "https://auth.demobank.com/oauth/authorize",
-            "tokenUrl" : "https://auth.demobank.com/oauth/token",
-            "scopes" : {
-              "read:profile" : "Read user's personal profile and preferences.",
-              "write:profile" : "Update user's personal profile and preferences.",
-              "read:accounts" : "Read all linked financial accounts and balances.",
-              "write:accounts" : "Manage and update linked financial accounts.",
-              "read:transactions" : "Read transaction history and details.",
-              "write:transactions" : "Categorize, tag, and dispute transactions.",
-              "write:payments" : "Initiate and manage payments (e.g., transfers, bill pay).",
-              "interact:ai_advisor" : "Interact with the Quantum AI Advisor for insights and actions.",
-              "interact:ai_oracle" : "Run predictive simulations with the Quantum Oracle.",
-              "read:weaver" : "Read business pitch status and AI feedback from Quantum Weaver.",
-              "write:weaver" : "Submit and update business pitches to Quantum Weaver.",
-              "read:ad_studio" : "Read status and retrieve assets from AI Ad Studio (Veo 2.0).",
-              "write:ad_studio" : "Generate new video ads with AI Ad Studio (Veo 2.0).",
-              "read:corporate_cards" : "Read corporate enterprise card details and transactions.",
-              "write:corporate_cards" : "Manage corporate enterprise cards (e.g., limits, freeze, issue virtual).",
-              "read:corporate_payments" : "Read corporate payment orders and treasury activities.",
-              "write:corporate_payments" : "Initiate and manage corporate global payments.",
-              "read:compliance" : "Read compliance cases, risk alerts, and audit reports for corporate clients.",
-              "write:compliance" : "Update compliance cases, fraud rules, and initiate audits for corporate clients.",
-              "read:rewards" : "Read user loyalty points, tiers, and gamification status.",
-              "write:rewards" : "Manage loyalty program elements (e.g., redeem points).",
-              "read:analytics" : "Read AI-driven analytics and predictive intelligence reports.",
-              "write:analytics" : "Configure analytics dashboards and custom reports.",
-              "read:web3" : "Read linked crypto wallets, asset balances, and NFT collections.",
-              "write:web3" : "Connect/disconnect crypto wallets, initiate blockchain transactions.",
-              "read:sustainability" : "Read carbon footprint reports and ESG investment impact.",
-              "write:sustainability" : "Purchase carbon offsets, configure ESG preferences.",
-              "read:lending" : "Read loan application status and pre-approved offers.",
-              "write:lending" : "Submit loan applications, accept loan offers.",
-              "read:developer_tools" : "Read API key and webhook subscription details.",
-              "write:developer_tools" : "Manage API keys and webhook subscriptions.",
-              "read:identity" : "Read digital identity status and verifiable credentials.",
-              "write:identity" : "Submit KYC documents, manage verifiable credentials.",
-              "read:corporate_treasury" : "Read corporate cash flow forecasts and liquidity positions.",
-              "write:corporate_treasury" : "Configure treasury optimization strategies.",
-              "read:fx_rates" : "Read real-time and predictive foreign exchange rates.",
-              "read:investments" : "Read investment portfolios, holdings, and performance.",
-              "write:investments" : "Manage investment portfolios, initiate rebalancing.",
-              "read:personalization" : "Read user personalization and experience design settings.",
-              "write:personalization" : "Update user personalization settings."
-            }
+    "securitySchemes": {
+    "oAuth2Auth": {
+      "type": "oauth2",
+      "description": "OAuth 2.0 flow for user authorization.",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+          "tokenUrl": "https://oauth2.googleapis.com/token",
+          "scopes": {
+            "read:profile": "Read user's personal profile and preferences.",
+            "write:profile": "Update user's personal profile and preferences.",
+            "read:accounts": "Read all linked financial accounts and balances.",
+            "write:accounts": "Manage and update linked financial accounts.",
+            "read:transactions": "Read transaction history and details.",
+            "write:transactions": "Categorize, tag, and dispute transactions.",
+            "write:payments": "Initiate and manage payments (e.g., transfers, bill pay).",
+            "interact:ai_advisor": "Interact with the Quantum AI Advisor for insights and actions.",
+            "interact:ai_oracle": "Run predictive simulations with the Quantum Oracle.",
+            "read:weaver": "Read business pitch status and AI feedback from Quantum Weaver.",
+            "write:weaver": "Submit and update business pitches to Quantum Weaver.",
+            "read:ad_studio": "Read status and retrieve assets from AI Ad Studio (Veo 2.0).",
+            "write:ad_studio": "Generate new video ads with AI Ad Studio (Veo 2.0).",
+            "read:corporate_cards": "Read corporate enterprise card details and transactions.",
+            "write:corporate_cards": "Manage corporate enterprise cards (e.g., limits, freeze, issue virtual).",
+            "read:corporate_payments": "Read corporate payment orders and treasury activities.",
+            "write:corporate_payments": "Initiate and manage corporate global payments.",
+            "read:compliance": "Read compliance cases, risk alerts, and audit reports for corporate clients.",
+            "write:compliance": "Update compliance cases, fraud rules, and initiate audits for corporate clients.",
+            "read:rewards": "Read user loyalty points, tiers, and gamification status.",
+            "write:rewards": "Manage loyalty program elements (e.g., redeem points).",
+            "read:analytics": "Read AI-driven analytics and predictive intelligence reports.",
+            "write:analytics": "Configure analytics dashboards and custom reports.",
+            "read:web3": "Read linked crypto wallets, asset balances, and NFT collections.",
+            "write:web3": "Connect/disconnect crypto wallets, initiate blockchain transactions.",
+            "read:sustainability": "Read carbon footprint reports and ESG investment impact.",
+            "write:sustainability": "Purchase carbon offsets, configure ESG preferences.",
+            "read:lending": "Read loan application status and pre-approved offers.",
+            "write:lending": "Submit loan applications, accept loan offers.",
+            "read:developer_tools": "Read API key and webhook subscription details.",
+            "write:developer_tools": "Manage API keys and webhook subscriptions.",
+            "read:identity": "Read digital identity status and verifiable credentials.",
+            "write:identity": "Submit KYC documents, manage verifiable credentials.",
+            "read:corporate_treasury": "Read corporate cash flow forecasts and liquidity positions.",
+            "write:corporate_treasury": "Configure treasury optimization strategies.",
+            "read:fx_rates": "Read real-time and predictive foreign exchange rates.",
+            "read:investments": "Read investment portfolios, holdings, and performance.",
+            "write:investments": "Manage investment portfolios, initiate rebalancing.",
+            "read:personalization": "Read user personalization and experience design settings.",
+            "write:personalization": "Update user personalization settings."
+          },
+
+          "x-google-oauth-client-id": "555179712981-36hlicm802genhfo9iq1ufnp1n8cikt9.apps.googleusercontent.com",
+
+          "x-google-oauth2": {
+            "client_id": "555179712981-36hlicm802genhfo9iq1ufnp1n8cikt9.apps.googleusercontent.com",
+            "project_id": "citiba-root-prod-svc-l0jy",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "redirect_uris": [
+              "https://citibankdemobusinessinc.us.auth0.com/login/callbackflowName=GeneralOAuthFlow",
+              "https://aistudio.google.com/",
+              "https://citibankdemobusiness.dev/wp-login.php?redirect_to=https%3A%2F%2Fcitibankdemobusiness.dev%2Fwp-admin%2F&reauth=1",
+              "http://localhost:5173",
+              "https://accounts.google.com/gsi/transform",
+              "https://admin08077-aidev.static.hf.space",
+              "https://admin08077-aidevm.static.hf.space",
+              "https://admin08077-mvp.static.hf.space",
+              "https://jocall3.github.io",
+              "https://admin08077-githubgemini.static.hf.space"
+            ],
+            "javascript_origins": [
+              "https://citibankdemobusiness.dev",
+              "https://Google.com",
+              "https://huggingface.co",
+              "https://admin08077-aidev.static.hf.space",
+              "https://accounts.google.com",
+              "http://localhost:8000",
+              "https://admin08077-aidevm.static.hf.space",
+              "https://admin08077-mvp.static.hf.space",
+              "https://jocall3.github.io",
+              "https://admin08077-githubgemini.static.hf.space"
+            ]
           }
         }
-      },
-      "apiKeyAuth" : {
-        "type" : "apiKey",
-        "description" : "API Key for server-to-server authentication or public access where OAuth is not applicable. Must be passed in the `X-API-Key` header.",
-        "name" : "X-API-Key",
-        "in" : "header"
-      },
-      "biometricAuth" : {
-        "type" : "http",
-        "description" : "Biometric authentication token for sensitive operations, usually short-lived and tied to a specific device and biometric scan.",
-        "scheme" : "bearer",
-        "bearerFormat" : "JWT"
       }
+    },
+
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "description": "API Key for server-to-server authentication or public access where OAuth is not applicable. Must be passed in the `X-API-Key` header.",
+      "name": "X-API-Key",
+      "in": "header"
+    },
+
+    "biometricAuth": {
+      "type": "http",
+      "description": "Biometric authentication token for sensitive operations.",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
     }
   }
 }
