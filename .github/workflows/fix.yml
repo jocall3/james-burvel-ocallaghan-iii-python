@@ -1,0 +1,165 @@
+# .github/workflows/python-autofix.yml
+
+name: AI-Powered Python Test Fixer
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  fix-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit changes
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKFLOW_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # Use the Python version your project requires
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install Dependencies
+        run: poetry install
+
+      - name: Iterative AI-Powered Fixing Loop
+        id: healing_loop
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Required for Poetry to manage the virtual environment correctly
+          POETRY_VIRTUALENVS_IN_PROJECT: "true"
+        run: |
+          set +e # Do not exit script on test failure
+          SUCCESS="false"
+          for i in {1..5}; do
+            echo "--- Starting Healing Attempt #$i ---"
+            
+            # Run pytest and capture all output to error.log
+            poetry run pytest > error.log 2>&1
+            TEST_STATUS=$?
+            
+            # If tests pass, we're done
+            if [ $TEST_STATUS -eq 0 ]; then
+              echo "✅ All tests passed! No errors found."
+              SUCCESS="true"
+              break
+            fi
+
+            echo "🔎 Test failures detected. Engaging AI to fix the first error."
+            
+            # This is our powerful inline script that will call Gemini
+            node -e '
+              const fs = require("fs");
+              const path = require("path");
+              const { execSync } = require("child_process");
+
+              async function fixPythonError() {
+                const errorLog = fs.readFileSync("error.log", "utf8");
+                if (!errorLog) { console.log("Error log is empty."); return; }
+                
+                // Regex designed to find a pytest teardown error and the associated test file path.
+                const errorBlockRegex = /_{2,}\sERROR at teardown of ([\w\.]+)\s_{2,}([\s\S]+?)={5,}/;
+                const match = errorLog.match(errorBlockRegex);
+
+                if (!match) {
+                    console.log("Could not parse a specific teardown error for the AI. Aborting.");
+                    process.exit(1); // Exit with failure to stop the loop
+                }
+                
+                const testFunctionPath = match[1]; // e.g., "TestJamesBurvelOcallaghanIii.test_raw_response"
+                const fullErrorMessage = match[2];
+
+                // Heuristic to find the file: Convert Python path to file path
+                // This assumes a standard project structure. It splits on "." and tries to find a file.
+                // e.g., "tests.test_client" -> "tests/test_client.py"
+                const filePathGuess = testFunctionPath.split(".")[0].replace(/\./g, "/") + ".py";
+                
+                // Assuming tests are in a 'tests/' directory or similar. Find will locate it.
+                let targetFile;
+                try {
+                  targetFile = execSync(`find . -path "*/${filePathGuess}"`).toString().trim();
+                } catch (e) {
+                   console.error(`Could not find a file matching pattern: */${filePathGuess}. Aborting.`);
+                   process.exit(1);
+                }
+                
+                if (!targetFile || !fs.existsSync(targetFile)) {
+                  console.error(`Could not locate the test file for ${testFunctionPath}. Aborting.`);
+                  process.exit(1);
+                }
+
+                console.log(`[AI] Identified failing test function: ${testFunctionPath}`);
+                console.log(`[AI] Inferred target file: ${targetFile}`);
+
+                const fileContent = fs.readFileSync(targetFile, "utf8");
+                
+                const prompt = `You are an expert Python developer tasked with fixing a failing test.
+- Analyze the Pytest error message, which is an "AssertionError: RESPX: some routes were not called!". This means a mocked HTTP route was defined but the test did not make the corresponding HTTP call.
+- The most likely fix is to find the test function \`${testFunctionPath.split('.').pop()}\` within the provided file content and add the missing client call (e.g., \`client.get("/foo")\`).
+- Provide ONLY the corrected, full code for the file. Your response must be the raw Python code, without any explanations, markdown fences, or extra text.
+
+## PYTEST ERROR MESSAGE:
+---
+${fullErrorMessage.trim()}
+---
+
+## FULL PYTHON TEST FILE CONTENT (${targetFile}):
+---
+${fileContent}
+---`;
+                
+                const payload = JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] });
+                const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+                if (!GEMINI_API_KEY) throw new Error("GEMINI_API_KEY secret is not set.");
+                
+                try {
+                  console.log("[AI] Sending request to Gemini...");
+                  const url = \`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}\`;
+                  const result = execSync(\`curl -s -X POST -H "Content-Type: application/json" -d '${payload.replace(/'/g, "'\\''")}' "\${url}"\`);
+                  const response = JSON.parse(result.toString());
+                  const correctedCode = response.candidates[0].content.parts[0].text;
+                  
+                  fs.writeFileSync(targetFile, correctedCode.trim(), "utf8");
+                  console.log("[AI-FIX] Gemini solution has been applied to the file.");
+                } catch (e) {
+                  console.error("[AI] CRITICAL: Gemini API call or file write failed.", e.message);
+                  process.exit(1);
+                }
+              }
+              fixPythonError();
+            ';
+
+            # Commit the fixes
+            if [[ -n $(git status --porcelain) ]]; then
+                echo "-> Committing fixes for attempt #${i}..."
+                git config --global user.name "AI Dev Bot"
+                git config --global user.email "bot@github.com"
+                git add -A
+                git commit -m "chore(bot): Apply automated test fix #${i}"
+                git push
+            else
+                echo "-> No file changes were made by the AI. The error may be persistent."
+            fi
+          done
+
+          # Set the final output based on the loop's success
+          echo "result=$SUCCESS" >> $GITHUB_OUTPUT
+      
+      - name: Final Test Run & Status
+        run: |
+          if [ "${{ steps.healing_loop.outputs.result }}" == "true" ]; then
+            echo "🎉 All tests passed successfully after AI intervention!"
+            exit 0
+          else
+            echo "❌ AI WORKFLOW FAILED: Could not fix all tests after 5 attempts."
+            exit 1
+          fi
