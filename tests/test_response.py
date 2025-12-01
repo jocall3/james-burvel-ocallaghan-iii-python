@@ -63,7 +63,7 @@ def test_response_parse_mismatched_basemodel(client: JamesBurvelOcallaghanIii) -
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     with pytest.raises(
@@ -81,7 +81,7 @@ async def test_async_response_parse_mismatched_basemodel(async_client: AsyncJame
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     with pytest.raises(
@@ -98,7 +98,7 @@ def test_response_parse_custom_stream(client: JamesBurvelOcallaghanIii) -> None:
         stream=True,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     stream = response.parse(to=Stream[int])
@@ -113,7 +113,7 @@ async def test_async_response_parse_custom_stream(async_client: AsyncJamesBurvel
         stream=True,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     stream = await response.parse(to=Stream[int])
@@ -132,7 +132,7 @@ def test_response_parse_custom_model(client: JamesBurvelOcallaghanIii) -> None:
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = response.parse(to=CustomModel)
@@ -148,7 +148,7 @@ async def test_async_response_parse_custom_model(async_client: AsyncJamesBurvelO
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = await response.parse(to=CustomModel)
@@ -163,7 +163,7 @@ def test_response_parse_annotated_type(client: JamesBurvelOcallaghanIii) -> None
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = response.parse(
@@ -173,6 +173,7 @@ def test_response_parse_annotated_type(client: JamesBurvelOcallaghanIii) -> None
     assert obj.bar == 2
 
 
+@pytest.mark.asyncio
 async def test_async_response_parse_annotated_type(async_client: AsyncJamesBurvelOcallaghanIii) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
@@ -180,7 +181,7 @@ async def test_async_response_parse_annotated_type(async_client: AsyncJamesBurve
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = await response.parse(
@@ -208,7 +209,7 @@ def test_response_parse_bool(client: JamesBurvelOcallaghanIii, content: str, exp
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     result = response.parse(to=bool)
@@ -226,14 +227,15 @@ def test_response_parse_bool(client: JamesBurvelOcallaghanIii, content: str, exp
         ("FalSe", False),
     ],
 )
-async def test_async_response_parse_bool(client: AsyncJamesBurvelOcallaghanIii, content: str, expected: bool) -> None:
+@pytest.mark.asyncio
+async def test_async_response_parse_bool(async_client: AsyncJamesBurvelOcallaghanIii, content: str, expected: bool) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=content),
-        client=client,
+        client=async_client,
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     result = await response.parse(to=bool)
@@ -252,7 +254,7 @@ def test_response_parse_expect_model_union_non_json_content(client: JamesBurvelO
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = response.parse(to=cast(Any, Union[CustomModel, OtherModel]))
@@ -271,7 +273,7 @@ async def test_async_response_parse_expect_model_union_non_json_content(
         stream=False,
         stream_cls=None,
         cast_to=str,
-        options=FinalRequestOptions.construct(method="get", url="/foo"),
+        options=FinalRequestOptions.construct(method="get", url="/users/me"),
     )
 
     obj = await response.parse(to=cast(Any, Union[CustomModel, OtherModel]))
