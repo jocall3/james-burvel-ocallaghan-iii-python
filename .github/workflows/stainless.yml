@@ -15,7 +15,7 @@ concurrency:
 env:
   STAINLESS_ORG: citibank-demo-business-inc
   STAINLESS_PROJECT: james-burvel-ocallaghan-iii
-  OAS_PATH: https://github.com/jocall3/james-burvel-ocallaghan-iii-typescript/blob/swaggerhub/node-output/swagger.json
+  OAS_PATH: https://raw.githubusercontent.com/jocall3/james-burvel-ocallaghan-iii-typescript/refs/heads/swaggerhub/node-output/swagger.yaml
 
 jobs:
   preview:
