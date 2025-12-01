@@ -1,4 +1,4 @@
-name: Build SDKs for pull request
+name: Build SDKs for Pull Requests
 
 on:
   pull_request:
@@ -15,48 +15,48 @@ concurrency:
 env:
   STAINLESS_ORG: citibank-demo-business-inc
   STAINLESS_PROJECT: james-burvel-ocallaghan-iii
-  OAS_PATH: https://raw.githubusercontent.com/jocall3/james-burvel-ocallaghan-iii-typescript/refs/heads/swaggerhub/node-output/swagger.yaml
+  OAS_PATH: https://raw.githubusercontent.com/jocall3/james-burvel-ocallaghan-iii-python/refs/heads/main/swagger.yaml
 
 jobs:
+
   preview:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
       id-token: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Run preview builds
-        uses: stainless-api/upload-openapi-spec-action/preview@v1
+      - name: Run preview codegen
+        uses: stainless-api/codegen-action/preview@v1
         with:
           org: ${{ env.STAINLESS_ORG }}
           project: ${{ env.STAINLESS_PROJECT }}
-          oas_path: ${{ env.OAS_PATH }}
+          openapi-url: ${{ env.OAS_PATH }}
 
   merge:
     if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
       id-token: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Run merge build
-        uses: stainless-api/upload-openapi-spec-action/merge@v1
+      - name: Run merge codegen
+        uses: stainless-api/codegen-action/merge@v1
         with:
           org: ${{ env.STAINLESS_ORG }}
           project: ${{ env.STAINLESS_PROJECT }}
-          oas_path: ${{ env.OAS_PATH }}
-
-Your org name is citibank-demo-business-inc, and your project name is james-burvel-ocallaghan-iii.
-          
+          openapi-url: ${{ env.OAS_PATH }}
