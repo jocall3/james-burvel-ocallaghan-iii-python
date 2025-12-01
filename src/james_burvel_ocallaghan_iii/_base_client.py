@@ -1031,7 +1031,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=err.response, # ### FIX ###
+                        response=err.response,
                     )
                     continue
 
@@ -1563,7 +1563,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
                         retries_taken=retries_taken,
                         max_retries=max_retries,
                         options=input_options,
-                        response=err.response, # ### FIX ###
+                        response=err.response,
                     )
                     continue
 
