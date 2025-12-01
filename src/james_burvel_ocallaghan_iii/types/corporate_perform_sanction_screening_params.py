@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -13,7 +11,7 @@ __all__ = ["CorporatePerformSanctionScreeningParams"]
 
 
 class CorporatePerformSanctionScreeningParams(TypedDict, total=False):
-    country: Required[str]
+    country: Required[object]
     """
     Two-letter ISO country code related to the entity (e.g., country of residence,
     registration).
@@ -22,16 +20,15 @@ class CorporatePerformSanctionScreeningParams(TypedDict, total=False):
     entity_type: Required[Annotated[Literal["individual", "organization"], PropertyInfo(alias="entityType")]]
     """The type of entity being screened."""
 
-    name: Required[str]
+    name: Required[object]
     """Full name of the individual or organization to screen."""
 
-    address: Optional[AddressParam]
-    """Optional: Address details for enhanced screening."""
+    address: AddressParam
 
-    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(alias="dateOfBirth", format="iso8601")]
+    date_of_birth: Annotated[object, PropertyInfo(alias="dateOfBirth")]
     """Date of birth for individuals (YYYY-MM-DD)."""
 
-    identification_number: Annotated[Optional[str], PropertyInfo(alias="identificationNumber")]
+    identification_number: Annotated[object, PropertyInfo(alias="identificationNumber")]
     """
     Optional: Any government-issued identification number (e.g., passport, national
     ID).

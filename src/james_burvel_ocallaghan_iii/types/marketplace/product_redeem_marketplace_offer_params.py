@@ -10,5 +10,5 @@ __all__ = ["ProductRedeemMarketplaceOfferParams"]
 
 
 class ProductRedeemMarketplaceOfferParams(TypedDict, total=False):
-    payment_account_id: Annotated[str, PropertyInfo(alias="paymentAccountId")]
+    payment_account_id: Annotated[object, PropertyInfo(alias="paymentAccountId")]
     """Optional: The ID of the account to use for any associated payment or credit."""

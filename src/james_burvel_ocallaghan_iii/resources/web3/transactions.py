@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -46,13 +44,13 @@ class TransactionsResource(SyncAPIResource):
     def initiate_transfer(
         self,
         *,
-        amount: float,
-        asset_symbol: str,
-        blockchain_network: str,
-        recipient_address: str,
-        source_wallet_id: str,
-        gas_price_gwei: Optional[int] | Omit = omit,
-        memo: Optional[str] | Omit = omit,
+        amount: object,
+        asset_symbol: object,
+        blockchain_network: object,
+        recipient_address: object,
+        source_wallet_id: object,
+        gas_price_gwei: object | Omit = omit,
+        memo: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,13 +130,13 @@ class AsyncTransactionsResource(AsyncAPIResource):
     async def initiate_transfer(
         self,
         *,
-        amount: float,
-        asset_symbol: str,
-        blockchain_network: str,
-        recipient_address: str,
-        source_wallet_id: str,
-        gas_price_gwei: Optional[int] | Omit = omit,
-        memo: Optional[str] | Omit = omit,
+        amount: object,
+        asset_symbol: object,
+        blockchain_network: object,
+        recipient_address: object,
+        source_wallet_id: object,
+        gas_price_gwei: object | Omit = omit,
+        memo: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

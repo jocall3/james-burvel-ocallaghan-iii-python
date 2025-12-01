@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -47,15 +46,15 @@ class InternationalResource(SyncAPIResource):
     def initiate(
         self,
         *,
-        amount: float,
+        amount: object,
         beneficiary: international_initiate_params.Beneficiary,
-        purpose: str,
-        source_account_id: str,
-        source_currency: str,
-        target_currency: str,
-        fx_rate_lock: bool | Omit = omit,
+        purpose: object,
+        source_account_id: object,
+        source_currency: object,
+        target_currency: object,
+        fx_rate_lock: object | Omit = omit,
         fx_rate_provider: Literal["proprietary_ai", "market_rate"] | Omit = omit,
-        reference: Optional[str] | Omit = omit,
+        reference: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -119,7 +118,7 @@ class InternationalResource(SyncAPIResource):
 
     def retrieve_status(
         self,
-        payment_id: str,
+        payment_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -141,8 +140,6 @@ class InternationalResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not payment_id:
-            raise ValueError(f"Expected a non-empty value for `payment_id` but received {payment_id!r}")
         return self._get(
             f"/payments/international/{payment_id}/status",
             options=make_request_options(
@@ -175,15 +172,15 @@ class AsyncInternationalResource(AsyncAPIResource):
     async def initiate(
         self,
         *,
-        amount: float,
+        amount: object,
         beneficiary: international_initiate_params.Beneficiary,
-        purpose: str,
-        source_account_id: str,
-        source_currency: str,
-        target_currency: str,
-        fx_rate_lock: bool | Omit = omit,
+        purpose: object,
+        source_account_id: object,
+        source_currency: object,
+        target_currency: object,
+        fx_rate_lock: object | Omit = omit,
         fx_rate_provider: Literal["proprietary_ai", "market_rate"] | Omit = omit,
-        reference: Optional[str] | Omit = omit,
+        reference: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -247,7 +244,7 @@ class AsyncInternationalResource(AsyncAPIResource):
 
     async def retrieve_status(
         self,
-        payment_id: str,
+        payment_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -269,8 +266,6 @@ class AsyncInternationalResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not payment_id:
-            raise ValueError(f"Expected a non-empty value for `payment_id` but received {payment_id!r}")
         return await self._get(
             f"/payments/international/{payment_id}/status",
             options=make_request_options(

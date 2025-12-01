@@ -9,7 +9,6 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii._utils import parse_date
 from james_burvel_ocallaghan_iii.types.corporate.compliance import (
     AuditRequestResponse,
     AuditRetrieveReportResponse,
@@ -25,9 +24,9 @@ class TestAudits:
     def test_method_request(self, client: JamesBurvelOcallaghanIii) -> None:
         audit = client.corporate.compliance.audits.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 
@@ -35,10 +34,10 @@ class TestAudits:
     def test_method_request_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         audit = client.corporate.compliance.audits.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
-            additional_context="additionalContext",
+            start_date="2024-01-01",
+            additional_context={},
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 
@@ -46,9 +45,9 @@ class TestAudits:
     def test_raw_response_request(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.corporate.compliance.audits.with_raw_response.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         )
 
         assert response.is_closed is True
@@ -60,9 +59,9 @@ class TestAudits:
     def test_streaming_response_request(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.corporate.compliance.audits.with_streaming_response.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -103,13 +102,6 @@ class TestAudits:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_retrieve_report(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `audit_id` but received ''"):
-            client.corporate.compliance.audits.with_raw_response.retrieve_report(
-                "",
-            )
-
 
 class TestAsyncAudits:
     parametrize = pytest.mark.parametrize(
@@ -120,9 +112,9 @@ class TestAsyncAudits:
     async def test_method_request(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         audit = await async_client.corporate.compliance.audits.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 
@@ -130,10 +122,10 @@ class TestAsyncAudits:
     async def test_method_request_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         audit = await async_client.corporate.compliance.audits.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
-            additional_context="additionalContext",
+            start_date="2024-01-01",
+            additional_context={},
         )
         assert_matches_type(AuditRequestResponse, audit, path=["response"])
 
@@ -141,9 +133,9 @@ class TestAsyncAudits:
     async def test_raw_response_request(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.corporate.compliance.audits.with_raw_response.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         )
 
         assert response.is_closed is True
@@ -155,9 +147,9 @@ class TestAsyncAudits:
     async def test_streaming_response_request(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.corporate.compliance.audits.with_streaming_response.request(
             audit_scope="all_transactions",
-            end_date=parse_date("2024-06-30"),
+            end_date="2024-06-30",
             regulatory_frameworks=["AML", "PCI-DSS"],
-            start_date=parse_date("2024-01-01"),
+            start_date="2024-01-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -197,10 +189,3 @@ class TestAsyncAudits:
             assert_matches_type(AuditRetrieveReportResponse, audit, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve_report(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `audit_id` but received ''"):
-            await async_client.corporate.compliance.audits.with_raw_response.retrieve_report(
-                "",
-            )

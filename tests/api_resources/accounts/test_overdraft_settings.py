@@ -49,13 +49,6 @@ class TestOverdraftSettings:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve_settings(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.accounts.overdraft_settings.with_raw_response.retrieve_settings(
-                "",
-            )
-
-    @parametrize
     def test_method_update_settings(self, client: JamesBurvelOcallaghanIii) -> None:
         overdraft_setting = client.accounts.overdraft_settings.update_settings(
             account_id="acc_chase_checking_4567",
@@ -98,13 +91,6 @@ class TestOverdraftSettings:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_update_settings(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.accounts.overdraft_settings.with_raw_response.update_settings(
-                account_id="",
-            )
-
 
 class TestAsyncOverdraftSettings:
     parametrize = pytest.mark.parametrize(
@@ -141,13 +127,6 @@ class TestAsyncOverdraftSettings:
             assert_matches_type(OverdraftSettings, overdraft_setting, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve_settings(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.accounts.overdraft_settings.with_raw_response.retrieve_settings(
-                "",
-            )
 
     @parametrize
     async def test_method_update_settings(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
@@ -191,10 +170,3 @@ class TestAsyncOverdraftSettings:
             assert_matches_type(OverdraftSettings, overdraft_setting, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_update_settings(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.accounts.overdraft_settings.with_raw_response.update_settings(
-                account_id="",
-            )

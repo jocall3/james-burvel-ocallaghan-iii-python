@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -21,47 +21,47 @@ __all__ = [
 
 
 class PitchRetrieveDetailsResponseAICoachingPlanStepResource(BaseModel):
-    name: Optional[str] = None
+    name: Optional[object] = None
 
-    url: Optional[str] = None
+    url: Optional[object] = None
 
 
 class PitchRetrieveDetailsResponseAICoachingPlanStep(BaseModel):
-    description: Optional[str] = None
+    description: Optional[object] = None
 
     resources: Optional[List[PitchRetrieveDetailsResponseAICoachingPlanStepResource]] = None
 
     status: Optional[Literal["pending", "in_progress", "completed"]] = None
 
-    timeline: Optional[str] = None
+    timeline: Optional[object] = None
 
-    title: Optional[str] = None
+    title: Optional[object] = None
 
 
 class PitchRetrieveDetailsResponseAICoachingPlan(BaseModel):
     steps: Optional[List[PitchRetrieveDetailsResponseAICoachingPlanStep]] = None
 
-    summary: Optional[str] = None
+    summary: Optional[object] = None
 
-    title: Optional[str] = None
+    title: Optional[object] = None
 
 
 class PitchRetrieveDetailsResponseAIFinancialModelSensitivityAnalysis(BaseModel):
-    projected_irr: Optional[float] = FieldInfo(alias="projectedIRR", default=None)
+    projected_irr: Optional[object] = FieldInfo(alias="projectedIRR", default=None)
 
-    scenario: Optional[str] = None
+    scenario: Optional[object] = None
 
-    terminal_value: Optional[float] = FieldInfo(alias="terminalValue", default=None)
+    terminal_value: Optional[object] = FieldInfo(alias="terminalValue", default=None)
 
 
 class PitchRetrieveDetailsResponseAIFinancialModel(BaseModel):
-    breakeven_point: Optional[str] = FieldInfo(alias="breakevenPoint", default=None)
+    breakeven_point: Optional[object] = FieldInfo(alias="breakevenPoint", default=None)
 
-    capital_requirements: Optional[float] = FieldInfo(alias="capitalRequirements", default=None)
+    capital_requirements: Optional[object] = FieldInfo(alias="capitalRequirements", default=None)
 
-    cost_structure_analysis: Optional[Dict[str, str]] = FieldInfo(alias="costStructureAnalysis", default=None)
+    cost_structure_analysis: Optional[object] = FieldInfo(alias="costStructureAnalysis", default=None)
 
-    revenue_breakdown: Optional[Dict[str, str]] = FieldInfo(alias="revenueBreakdown", default=None)
+    revenue_breakdown: Optional[object] = FieldInfo(alias="revenueBreakdown", default=None)
 
     sensitivity_analysis: Optional[List[PitchRetrieveDetailsResponseAIFinancialModelSensitivityAnalysis]] = FieldInfo(
         alias="sensitivityAnalysis", default=None
@@ -69,21 +69,21 @@ class PitchRetrieveDetailsResponseAIFinancialModel(BaseModel):
 
 
 class PitchRetrieveDetailsResponseAIMarketAnalysis(BaseModel):
-    competitive_advantages: Optional[List[str]] = FieldInfo(alias="competitiveAdvantages", default=None)
+    competitive_advantages: Optional[List[object]] = FieldInfo(alias="competitiveAdvantages", default=None)
 
-    growth_opportunities: Optional[str] = FieldInfo(alias="growthOpportunities", default=None)
+    growth_opportunities: Optional[object] = FieldInfo(alias="growthOpportunities", default=None)
 
-    risk_factors: Optional[str] = FieldInfo(alias="riskFactors", default=None)
+    risk_factors: Optional[object] = FieldInfo(alias="riskFactors", default=None)
 
-    target_market_size: Optional[str] = FieldInfo(alias="targetMarketSize", default=None)
+    target_market_size: Optional[object] = FieldInfo(alias="targetMarketSize", default=None)
 
 
 class PitchRetrieveDetailsResponseAIRiskAssessment(BaseModel):
-    market_risk: Optional[str] = FieldInfo(alias="marketRisk", default=None)
+    market_risk: Optional[object] = FieldInfo(alias="marketRisk", default=None)
 
-    team_risk: Optional[str] = FieldInfo(alias="teamRisk", default=None)
+    team_risk: Optional[object] = FieldInfo(alias="teamRisk", default=None)
 
-    technical_risk: Optional[str] = FieldInfo(alias="technicalRisk", default=None)
+    technical_risk: Optional[object] = FieldInfo(alias="technicalRisk", default=None)
 
 
 class PitchRetrieveDetailsResponse(QuantumWeaverState):
@@ -107,7 +107,7 @@ class PitchRetrieveDetailsResponse(QuantumWeaverState):
     )
     """AI's assessment of risks associated with the venture."""
 
-    investor_match_score: Optional[float] = FieldInfo(alias="investorMatchScore", default=None)
+    investor_match_score: Optional[object] = FieldInfo(alias="investorMatchScore", default=None)
     """
     AI's score for how well the pitch matches potential investors in the network
     (0-1).

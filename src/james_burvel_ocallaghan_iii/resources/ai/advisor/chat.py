@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -47,9 +45,9 @@ class ChatResource(SyncAPIResource):
     def retrieve_history(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        session_id: str | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
+        session_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,9 +97,9 @@ class ChatResource(SyncAPIResource):
     def send_message(
         self,
         *,
-        function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
-        message: str | Omit = omit,
-        session_id: Optional[str] | Omit = omit,
+        function_response: chat_send_message_params.FunctionResponse | Omit = omit,
+        message: object | Omit = omit,
+        session_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,9 +171,9 @@ class AsyncChatResource(AsyncAPIResource):
     async def retrieve_history(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
-        session_id: str | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
+        session_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -225,9 +223,9 @@ class AsyncChatResource(AsyncAPIResource):
     async def send_message(
         self,
         *,
-        function_response: Optional[chat_send_message_params.FunctionResponse] | Omit = omit,
-        message: str | Omit = omit,
-        session_id: Optional[str] | Omit = omit,
+        function_response: chat_send_message_params.FunctionResponse | Omit = omit,
+        message: object | Omit = omit,
+        session_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

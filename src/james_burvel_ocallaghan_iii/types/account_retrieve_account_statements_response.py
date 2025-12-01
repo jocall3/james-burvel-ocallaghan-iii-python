@@ -10,22 +10,22 @@ __all__ = ["AccountRetrieveAccountStatementsResponse", "DownloadURLs"]
 
 
 class DownloadURLs(BaseModel):
-    csv: Optional[str] = None
+    csv: Optional[object] = None
     """Signed URL to download the statement in CSV format."""
 
-    pdf: Optional[str] = None
+    pdf: Optional[object] = None
     """Signed URL to download the statement in PDF format."""
 
 
 class AccountRetrieveAccountStatementsResponse(BaseModel):
-    account_id: str = FieldInfo(alias="accountId")
+    account_id: object = FieldInfo(alias="accountId")
     """The account ID the statement belongs to."""
 
     download_urls: DownloadURLs = FieldInfo(alias="downloadUrls")
     """Map of available download URLs for different formats."""
 
-    period: str
+    period: object
     """The period covered by the statement."""
 
-    statement_id: str = FieldInfo(alias="statementId")
+    statement_id: object = FieldInfo(alias="statementId")
     """Unique identifier for the statement."""

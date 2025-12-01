@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Iterable
 
 import httpx
 
@@ -46,7 +46,7 @@ class PitchResource(SyncAPIResource):
 
     def retrieve_details(
         self,
-        pitch_id: str,
+        pitch_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -69,8 +69,6 @@ class PitchResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pitch_id:
-            raise ValueError(f"Expected a non-empty value for `pitch_id` but received {pitch_id!r}")
         return self._get(
             f"/ai/incubator/pitch/{pitch_id}/details",
             options=make_request_options(
@@ -82,10 +80,10 @@ class PitchResource(SyncAPIResource):
     def submit(
         self,
         *,
-        business_plan: str,
+        business_plan: object,
         financial_projections: pitch_submit_params.FinancialProjections,
         founding_team: Iterable[pitch_submit_params.FoundingTeam],
-        market_opportunity: str,
+        market_opportunity: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -137,10 +135,10 @@ class PitchResource(SyncAPIResource):
 
     def submit_feedback(
         self,
-        pitch_id: str,
+        pitch_id: object,
         *,
         answers: Iterable[pitch_submit_feedback_params.Answer] | Omit = omit,
-        feedback: Optional[str] | Omit = omit,
+        feedback: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -164,8 +162,6 @@ class PitchResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pitch_id:
-            raise ValueError(f"Expected a non-empty value for `pitch_id` but received {pitch_id!r}")
         return self._put(
             f"/ai/incubator/pitch/{pitch_id}/feedback",
             body=maybe_transform(
@@ -204,7 +200,7 @@ class AsyncPitchResource(AsyncAPIResource):
 
     async def retrieve_details(
         self,
-        pitch_id: str,
+        pitch_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -227,8 +223,6 @@ class AsyncPitchResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pitch_id:
-            raise ValueError(f"Expected a non-empty value for `pitch_id` but received {pitch_id!r}")
         return await self._get(
             f"/ai/incubator/pitch/{pitch_id}/details",
             options=make_request_options(
@@ -240,10 +234,10 @@ class AsyncPitchResource(AsyncAPIResource):
     async def submit(
         self,
         *,
-        business_plan: str,
+        business_plan: object,
         financial_projections: pitch_submit_params.FinancialProjections,
         founding_team: Iterable[pitch_submit_params.FoundingTeam],
-        market_opportunity: str,
+        market_opportunity: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -295,10 +289,10 @@ class AsyncPitchResource(AsyncAPIResource):
 
     async def submit_feedback(
         self,
-        pitch_id: str,
+        pitch_id: object,
         *,
         answers: Iterable[pitch_submit_feedback_params.Answer] | Omit = omit,
-        feedback: Optional[str] | Omit = omit,
+        feedback: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -322,8 +316,6 @@ class AsyncPitchResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not pitch_id:
-            raise ValueError(f"Expected a non-empty value for `pitch_id` but received {pitch_id!r}")
         return await self._put(
             f"/ai/incubator/pitch/{pitch_id}/feedback",
             body=await async_maybe_transform(

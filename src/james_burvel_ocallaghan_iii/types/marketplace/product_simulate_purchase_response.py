@@ -12,23 +12,23 @@ __all__ = ["ProductSimulatePurchaseResponse", "KeyImpact", "ProjectedAmortizatio
 
 
 class KeyImpact(BaseModel):
-    metric: Optional[str] = None
+    metric: Optional[object] = None
 
     severity: Optional[Literal["low", "medium", "high"]] = None
 
-    value: Optional[str] = None
+    value: Optional[object] = None
 
 
 class ProjectedAmortizationSchedule(BaseModel):
-    interest: Optional[float] = None
+    interest: Optional[object] = None
 
-    month: Optional[int] = None
+    month: Optional[object] = None
 
-    payment: Optional[float] = None
+    payment: Optional[object] = None
 
-    principal: Optional[float] = None
+    principal: Optional[object] = None
 
-    remaining_balance: Optional[float] = FieldInfo(alias="remainingBalance", default=None)
+    remaining_balance: Optional[object] = FieldInfo(alias="remainingBalance", default=None)
 
 
 class ProductSimulatePurchaseResponse(BaseModel):
@@ -37,13 +37,13 @@ class ProductSimulatePurchaseResponse(BaseModel):
     Key financial impacts identified by the AI (e.g., on cash flow, debt-to-income).
     """
 
-    narrative_summary: str = FieldInfo(alias="narrativeSummary")
+    narrative_summary: object = FieldInfo(alias="narrativeSummary")
     """A natural language summary of the simulation's results for this product."""
 
-    product_id: str = FieldInfo(alias="productId")
+    product_id: object = FieldInfo(alias="productId")
     """The ID of the marketplace product being simulated."""
 
-    simulation_id: str = FieldInfo(alias="simulationId")
+    simulation_id: object = FieldInfo(alias="simulationId")
     """Unique identifier for the simulation performed."""
 
     ai_recommendations: Optional[List[AIInsight]] = FieldInfo(alias="aiRecommendations", default=None)

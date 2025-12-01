@@ -11,7 +11,7 @@ __all__ = ["PitchSubmitParams", "FinancialProjections", "FoundingTeam"]
 
 
 class PitchSubmitParams(TypedDict, total=False):
-    business_plan: Required[Annotated[str, PropertyInfo(alias="businessPlan")]]
+    business_plan: Required[Annotated[object, PropertyInfo(alias="businessPlan")]]
     """
     The user's detailed narrative business plan (e.g., executive summary, vision,
     strategy).
@@ -23,7 +23,7 @@ class PitchSubmitParams(TypedDict, total=False):
     founding_team: Required[Annotated[Iterable[FoundingTeam], PropertyInfo(alias="foundingTeam")]]
     """Key profiles and expertise of the founding team members."""
 
-    market_opportunity: Required[Annotated[str, PropertyInfo(alias="marketOpportunity")]]
+    market_opportunity: Required[Annotated[object, PropertyInfo(alias="marketOpportunity")]]
     """
     Detailed analysis of the target market, problem statement, and proposed
     solution's unique value proposition.
@@ -31,27 +31,27 @@ class PitchSubmitParams(TypedDict, total=False):
 
 
 class FinancialProjections(TypedDict, total=False):
-    profitability_estimate: Annotated[str, PropertyInfo(alias="profitabilityEstimate")]
+    profitability_estimate: Annotated[object, PropertyInfo(alias="profitabilityEstimate")]
     """Estimated time to profitability."""
 
-    projection_years: Annotated[int, PropertyInfo(alias="projectionYears")]
+    projection_years: Annotated[object, PropertyInfo(alias="projectionYears")]
     """Number of years for financial projections."""
 
-    revenue_forecast: Annotated[Iterable[float], PropertyInfo(alias="revenueForecast")]
+    revenue_forecast: Annotated[Iterable[object], PropertyInfo(alias="revenueForecast")]
 
-    seed_round_amount: Annotated[float, PropertyInfo(alias="seedRoundAmount")]
+    seed_round_amount: Annotated[object, PropertyInfo(alias="seedRoundAmount")]
     """Requested seed funding in USD."""
 
-    valuation_pre_money: Annotated[float, PropertyInfo(alias="valuationPreMoney")]
+    valuation_pre_money: Annotated[object, PropertyInfo(alias="valuationPreMoney")]
     """Pre-money valuation in USD."""
 
 
 class FoundingTeam(TypedDict, total=False):
-    experience: str
+    experience: object
     """Relevant experience."""
 
-    name: str
+    name: object
     """Name of the team member."""
 
-    role: str
+    role: object
     """Role of the team member."""

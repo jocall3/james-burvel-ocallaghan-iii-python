@@ -8,4 +8,4 @@ __all__ = ["PasswordResetConfirmResponse"]
 
 
 class PasswordResetConfirmResponse(BaseModel):
-    message: Optional[str] = None
+    message: Optional[object] = None

@@ -9,7 +9,6 @@ import pytest
 
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
-from james_burvel_ocallaghan_iii._utils import parse_date
 from james_burvel_ocallaghan_iii.types.transactions import (
     RecurringTransaction,
     RecurringListResponse,
@@ -30,7 +29,7 @@ class TestRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
@@ -43,7 +42,7 @@ class TestRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         )
 
         assert response.is_closed is True
@@ -60,7 +59,7 @@ class TestRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,8 +77,8 @@ class TestRecurring:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         recurring = client.transactions.recurring.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 
@@ -118,7 +117,7 @@ class TestAsyncRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         )
         assert_matches_type(RecurringTransaction, recurring, path=["response"])
 
@@ -131,7 +130,7 @@ class TestAsyncRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         )
 
         assert response.is_closed is True
@@ -148,7 +147,7 @@ class TestAsyncRecurring:
             description="New Gym Membership",
             frequency="monthly",
             linked_account_id="acc_chase_checking_4567",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -166,8 +165,8 @@ class TestAsyncRecurring:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         recurring = await async_client.transactions.recurring.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(RecurringListResponse, recurring, path=["response"])
 

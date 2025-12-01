@@ -10,20 +10,20 @@ __all__ = ["WalletConnectParams"]
 
 
 class WalletConnectParams(TypedDict, total=False):
-    blockchain_network: Required[Annotated[str, PropertyInfo(alias="blockchainNetwork")]]
+    blockchain_network: Required[Annotated[object, PropertyInfo(alias="blockchainNetwork")]]
     """The blockchain network for this wallet (e.g., Ethereum, Solana)."""
 
-    signed_message: Required[Annotated[str, PropertyInfo(alias="signedMessage")]]
+    signed_message: Required[Annotated[object, PropertyInfo(alias="signedMessage")]]
     """
     A message cryptographically signed by the wallet owner to prove
     ownership/intent.
     """
 
-    wallet_address: Required[Annotated[str, PropertyInfo(alias="walletAddress")]]
+    wallet_address: Required[Annotated[object, PropertyInfo(alias="walletAddress")]]
     """The public address of the cryptocurrency wallet."""
 
-    wallet_provider: Required[Annotated[str, PropertyInfo(alias="walletProvider")]]
+    wallet_provider: Required[Annotated[object, PropertyInfo(alias="walletProvider")]]
     """The name of the wallet provider (e.g., MetaMask, Phantom)."""
 
-    request_write_access: Annotated[bool, PropertyInfo(alias="requestWriteAccess")]
+    request_write_access: Annotated[object, PropertyInfo(alias="requestWriteAccess")]
     """If true, requests write access to initiate transactions from this wallet."""

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -11,11 +10,11 @@ __all__ = ["UserLoginParams"]
 
 
 class UserLoginParams(TypedDict, total=False):
-    email: Required[str]
+    email: Required[object]
     """User's email address."""
 
-    password: Required[str]
+    password: Required[object]
     """User's password."""
 
-    mfa_code: Annotated[Optional[str], PropertyInfo(alias="mfaCode")]
+    mfa_code: Annotated[object, PropertyInfo(alias="mfaCode")]
     """Optional: Multi-factor authentication code, if required."""

@@ -25,8 +25,8 @@ class TestWeb3:
     @parametrize
     def test_method_retrieve_nfts_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         web3 = client.web3.retrieve_nfts(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 
@@ -64,8 +64,8 @@ class TestAsyncWeb3:
     @parametrize
     async def test_method_retrieve_nfts_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         web3 = await async_client.web3.retrieve_nfts(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(Web3RetrieveNFTsResponse, web3, path=["response"])
 

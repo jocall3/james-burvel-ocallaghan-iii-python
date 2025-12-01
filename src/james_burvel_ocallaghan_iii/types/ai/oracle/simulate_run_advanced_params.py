@@ -18,15 +18,15 @@ __all__ = [
 
 
 class SimulateRunAdvancedParams(TypedDict, total=False):
-    prompt: Required[str]
+    prompt: Required[object]
     """A natural language prompt describing the complex, multi-variable scenario."""
 
     scenarios: Required[Iterable[Scenario]]
 
-    global_economic_factors: Annotated[Optional[GlobalEconomicFactors], PropertyInfo(alias="globalEconomicFactors")]
+    global_economic_factors: Annotated[GlobalEconomicFactors, PropertyInfo(alias="globalEconomicFactors")]
     """Optional: Global economic conditions to apply to all scenarios."""
 
-    personal_assumptions: Annotated[Optional[PersonalAssumptions], PropertyInfo(alias="personalAssumptions")]
+    personal_assumptions: Annotated[PersonalAssumptions, PropertyInfo(alias="personalAssumptions")]
     """Optional: Personal financial assumptions to override defaults."""
 
 
@@ -38,30 +38,30 @@ class ScenarioEvent(TypedDict, total=False):
 
 
 class ScenarioSensitivityAnalysisParam(TypedDict, total=False):
-    max: float
+    max: object
     """Maximum value for the parameter."""
 
-    min: float
+    min: object
     """Minimum value for the parameter."""
 
-    param_name: Annotated[str, PropertyInfo(alias="paramName")]
+    param_name: Annotated[object, PropertyInfo(alias="paramName")]
     """
     The name of the parameter to vary for sensitivity analysis (e.g.,
     'interestRate', 'inflationRate', 'marketRecoveryRate').
     """
 
-    step: float
+    step: object
     """Step increment for varying the parameter."""
 
 
 class Scenario(TypedDict, total=False):
-    duration_years: Required[Annotated[int, PropertyInfo(alias="durationYears")]]
+    duration_years: Required[Annotated[object, PropertyInfo(alias="durationYears")]]
     """The duration in years over which this scenario is simulated."""
 
     events: Required[Iterable[ScenarioEvent]]
     """A list of discrete or continuous events that define this scenario."""
 
-    name: Required[str]
+    name: Required[object]
     """A descriptive name for this specific scenario."""
 
     sensitivity_analysis_params: Annotated[
@@ -71,12 +71,12 @@ class Scenario(TypedDict, total=False):
 
 
 class GlobalEconomicFactors(TypedDict, total=False):
-    inflation_rate: Annotated[float, PropertyInfo(alias="inflationRate")]
+    inflation_rate: Annotated[object, PropertyInfo(alias="inflationRate")]
 
-    interest_rate_baseline: Annotated[float, PropertyInfo(alias="interestRateBaseline")]
+    interest_rate_baseline: Annotated[object, PropertyInfo(alias="interestRateBaseline")]
 
 
 class PersonalAssumptions(TypedDict, total=False):
-    annual_savings_rate: Annotated[float, PropertyInfo(alias="annualSavingsRate")]
+    annual_savings_rate: Annotated[object, PropertyInfo(alias="annualSavingsRate")]
 
     risk_tolerance: Annotated[Literal["conservative", "moderate", "aggressive"], PropertyInfo(alias="riskTolerance")]

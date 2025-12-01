@@ -25,8 +25,8 @@ class TestOffers:
     @parametrize
     def test_method_list_pre_approved_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         offer = client.lending.offers.list_pre_approved(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(OfferListPreApprovedResponse, offer, path=["response"])
 
@@ -64,8 +64,8 @@ class TestAsyncOffers:
     @parametrize
     async def test_method_list_pre_approved_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         offer = await async_client.lending.offers.list_pre_approved(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(OfferListPreApprovedResponse, offer, path=["response"])
 

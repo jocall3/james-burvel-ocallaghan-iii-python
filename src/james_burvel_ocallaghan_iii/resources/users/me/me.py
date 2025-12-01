@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from .devices import (
@@ -108,8 +106,8 @@ class MeResource(SyncAPIResource):
         self,
         *,
         address: AddressParam | Omit = omit,
-        name: str | Omit = omit,
-        phone: Optional[str] | Omit = omit,
+        name: object | Omit = omit,
+        phone: object | Omit = omit,
         preferences: UserPreferencesParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -123,13 +121,11 @@ class MeResource(SyncAPIResource):
         information.
 
         Args:
-          address: Updated address details.
-
           name: Updated full name of the user.
 
           phone: Updated primary phone number of the user.
 
-          preferences: Updated personalization preferences.
+          preferences: User's personalized preferences for the platform.
 
           extra_headers: Send extra headers
 
@@ -216,8 +212,8 @@ class AsyncMeResource(AsyncAPIResource):
         self,
         *,
         address: AddressParam | Omit = omit,
-        name: str | Omit = omit,
-        phone: Optional[str] | Omit = omit,
+        name: object | Omit = omit,
+        phone: object | Omit = omit,
         preferences: UserPreferencesParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -231,13 +227,11 @@ class AsyncMeResource(AsyncAPIResource):
         information.
 
         Args:
-          address: Updated address details.
-
           name: Updated full name of the user.
 
           phone: Updated primary phone number of the user.
 
-          preferences: Updated personalization preferences.
+          preferences: User's personalized preferences for the platform.
 
           extra_headers: Send extra headers
 

@@ -28,8 +28,8 @@ class TestDevices:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         device = client.users.me.devices.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(DeviceListResponse, device, path=["response"])
 
@@ -83,13 +83,6 @@ class TestDevices:
             assert device is None
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_deregister(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):
-            client.users.me.devices.with_raw_response.deregister(
-                "",
-            )
 
     @parametrize
     def test_method_register(self, client: JamesBurvelOcallaghanIii) -> None:
@@ -154,8 +147,8 @@ class TestAsyncDevices:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         device = await async_client.users.me.devices.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(DeviceListResponse, device, path=["response"])
 
@@ -209,13 +202,6 @@ class TestAsyncDevices:
             assert device is None
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_deregister(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `device_id` but received ''"):
-            await async_client.users.me.devices.with_raw_response.deregister(
-                "",
-            )
 
     @parametrize
     async def test_method_register(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:

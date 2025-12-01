@@ -8,12 +8,12 @@ __all__ = ["AddressParam"]
 
 
 class AddressParam(TypedDict, total=False):
-    city: str
+    city: object
 
-    country: str
+    country: object
 
-    state: str
+    state: object
 
-    street: str
+    street: object
 
-    zip: str
+    zip: object

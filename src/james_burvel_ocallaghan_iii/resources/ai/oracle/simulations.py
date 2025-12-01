@@ -46,7 +46,7 @@ class SimulationsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        simulation_id: str,
+        simulation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -68,8 +68,6 @@ class SimulationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not simulation_id:
-            raise ValueError(f"Expected a non-empty value for `simulation_id` but received {simulation_id!r}")
         return cast(
             SimulationRetrieveResponse,
             self._get(
@@ -86,8 +84,8 @@ class SimulationsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,7 +130,7 @@ class SimulationsResource(SyncAPIResource):
 
     def delete(
         self,
-        simulation_id: str,
+        simulation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -153,8 +151,6 @@ class SimulationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not simulation_id:
-            raise ValueError(f"Expected a non-empty value for `simulation_id` but received {simulation_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/ai/oracle/simulations/{simulation_id}",
@@ -187,7 +183,7 @@ class AsyncSimulationsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        simulation_id: str,
+        simulation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -209,8 +205,6 @@ class AsyncSimulationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not simulation_id:
-            raise ValueError(f"Expected a non-empty value for `simulation_id` but received {simulation_id!r}")
         return cast(
             SimulationRetrieveResponse,
             await self._get(
@@ -227,8 +221,8 @@ class AsyncSimulationsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -273,7 +267,7 @@ class AsyncSimulationsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        simulation_id: str,
+        simulation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -294,8 +288,6 @@ class AsyncSimulationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not simulation_id:
-            raise ValueError(f"Expected a non-empty value for `simulation_id` but received {simulation_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/ai/oracle/simulations/{simulation_id}",

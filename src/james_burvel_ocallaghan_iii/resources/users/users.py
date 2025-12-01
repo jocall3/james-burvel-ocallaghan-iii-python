@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
-
 import httpx
 
 from .me.me import (
@@ -73,9 +70,9 @@ class UsersResource(SyncAPIResource):
     def login(
         self,
         *,
-        email: str,
-        password: str,
-        mfa_code: Optional[str] | Omit = omit,
+        email: object,
+        password: object,
+        mfa_code: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -122,12 +119,12 @@ class UsersResource(SyncAPIResource):
     def register(
         self,
         *,
-        email: str,
-        name: str,
-        password: str,
+        email: object,
+        name: object,
+        password: object,
         address: AddressParam | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        phone: Optional[str] | Omit = omit,
+        date_of_birth: object | Omit = omit,
+        phone: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -146,8 +143,6 @@ class UsersResource(SyncAPIResource):
           name: Full name of the user.
 
           password: User's chosen password.
-
-          address: Optional initial address details.
 
           date_of_birth: Optional date of birth (YYYY-MM-DD).
 
@@ -212,9 +207,9 @@ class AsyncUsersResource(AsyncAPIResource):
     async def login(
         self,
         *,
-        email: str,
-        password: str,
-        mfa_code: Optional[str] | Omit = omit,
+        email: object,
+        password: object,
+        mfa_code: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -261,12 +256,12 @@ class AsyncUsersResource(AsyncAPIResource):
     async def register(
         self,
         *,
-        email: str,
-        name: str,
-        password: str,
+        email: object,
+        name: object,
+        password: object,
         address: AddressParam | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        phone: Optional[str] | Omit = omit,
+        date_of_birth: object | Omit = omit,
+        phone: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -285,8 +280,6 @@ class AsyncUsersResource(AsyncAPIResource):
           name: Full name of the user.
 
           password: User's chosen password.
-
-          address: Optional initial address details.
 
           date_of_birth: Optional date of birth (YYYY-MM-DD).
 

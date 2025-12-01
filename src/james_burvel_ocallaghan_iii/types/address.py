@@ -8,12 +8,12 @@ __all__ = ["Address"]
 
 
 class Address(BaseModel):
-    city: Optional[str] = None
+    city: Optional[object] = None
 
-    country: Optional[str] = None
+    country: Optional[object] = None
 
-    state: Optional[str] = None
+    state: Optional[object] = None
 
-    street: Optional[str] = None
+    street: Optional[object] = None
 
-    zip: Optional[str] = None
+    zip: Optional[object] = None

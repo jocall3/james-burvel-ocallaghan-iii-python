@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
+from typing import Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import goal_list_params, goal_create_params, goal_update_params
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,13 +48,13 @@ class GoalsResource(SyncAPIResource):
     def create(
         self,
         *,
-        name: str,
-        target_amount: float,
-        target_date: Union[str, date],
+        name: object,
+        target_amount: object,
+        target_date: object,
         type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"],
-        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
-        generate_ai_plan: bool | Omit = omit,
-        initial_contribution: float | Omit = omit,
+        contributing_accounts: Optional[Iterable[object]] | Omit = omit,
+        generate_ai_plan: object | Omit = omit,
+        initial_contribution: object | Omit = omit,
         risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -115,7 +114,7 @@ class GoalsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,8 +136,6 @@ class GoalsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         return self._get(
             f"/goals/{goal_id}",
             options=make_request_options(
@@ -149,16 +146,16 @@ class GoalsResource(SyncAPIResource):
 
     def update(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
-        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
-        generate_ai_plan: bool | Omit = omit,
-        name: str | Omit = omit,
+        contributing_accounts: Optional[Iterable[object]] | Omit = omit,
+        generate_ai_plan: object | Omit = omit,
+        name: object | Omit = omit,
         risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
         | Omit = omit,
-        target_amount: float | Omit = omit,
-        target_date: Union[str, date] | Omit = omit,
+        target_amount: object | Omit = omit,
+        target_date: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,8 +190,6 @@ class GoalsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         return self._put(
             f"/goals/{goal_id}",
             body=maybe_transform(
@@ -218,8 +213,8 @@ class GoalsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -264,7 +259,7 @@ class GoalsResource(SyncAPIResource):
 
     def delete(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -285,8 +280,6 @@ class GoalsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/goals/{goal_id}",
@@ -320,13 +313,13 @@ class AsyncGoalsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        name: str,
-        target_amount: float,
-        target_date: Union[str, date],
+        name: object,
+        target_amount: object,
+        target_date: object,
         type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"],
-        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
-        generate_ai_plan: bool | Omit = omit,
-        initial_contribution: float | Omit = omit,
+        contributing_accounts: Optional[Iterable[object]] | Omit = omit,
+        generate_ai_plan: object | Omit = omit,
+        initial_contribution: object | Omit = omit,
         risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -386,7 +379,7 @@ class AsyncGoalsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -408,8 +401,6 @@ class AsyncGoalsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         return await self._get(
             f"/goals/{goal_id}",
             options=make_request_options(
@@ -420,16 +411,16 @@ class AsyncGoalsResource(AsyncAPIResource):
 
     async def update(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
-        contributing_accounts: Optional[SequenceNotStr[str]] | Omit = omit,
-        generate_ai_plan: bool | Omit = omit,
-        name: str | Omit = omit,
+        contributing_accounts: Optional[Iterable[object]] | Omit = omit,
+        generate_ai_plan: object | Omit = omit,
+        name: object | Omit = omit,
         risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] | Omit = omit,
         status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
         | Omit = omit,
-        target_amount: float | Omit = omit,
-        target_date: Union[str, date] | Omit = omit,
+        target_amount: object | Omit = omit,
+        target_date: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -464,8 +455,6 @@ class AsyncGoalsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         return await self._put(
             f"/goals/{goal_id}",
             body=await async_maybe_transform(
@@ -489,8 +478,8 @@ class AsyncGoalsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -535,7 +524,7 @@ class AsyncGoalsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        goal_id: str,
+        goal_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -556,8 +545,6 @@ class AsyncGoalsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not goal_id:
-            raise ValueError(f"Expected a non-empty value for `goal_id` but received {goal_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/goals/{goal_id}",

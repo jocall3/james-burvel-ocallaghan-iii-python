@@ -18,13 +18,13 @@ class PortfolioRebalanceParams(TypedDict, total=False):
     ]
     """The desired risk tolerance for rebalancing the portfolio."""
 
-    confirmation_required: Annotated[bool, PropertyInfo(alias="confirmationRequired")]
+    confirmation_required: Annotated[object, PropertyInfo(alias="confirmationRequired")]
     """
     If true, user confirmation is required before executing actual trades after a
     dry run.
     """
 
-    dry_run: Annotated[bool, PropertyInfo(alias="dryRun")]
+    dry_run: Annotated[object, PropertyInfo(alias="dryRun")]
     """If true, only simulate the rebalance without executing trades.
 
     Returns proposed trades.

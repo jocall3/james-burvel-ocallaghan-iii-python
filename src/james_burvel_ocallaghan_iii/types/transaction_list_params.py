@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
-from datetime import date
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -12,28 +10,28 @@ __all__ = ["TransactionListParams"]
 
 
 class TransactionListParams(TypedDict, total=False):
-    category: str
+    category: object
     """Filter transactions by their AI-assigned or user-defined category."""
 
-    end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
+    end_date: Annotated[object, PropertyInfo(alias="endDate")]
     """Retrieve transactions up to this date (inclusive)."""
 
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    max_amount: Annotated[float, PropertyInfo(alias="maxAmount")]
+    max_amount: Annotated[object, PropertyInfo(alias="maxAmount")]
     """Filter for transactions with an amount less than or equal to this value."""
 
-    min_amount: Annotated[float, PropertyInfo(alias="minAmount")]
+    min_amount: Annotated[object, PropertyInfo(alias="minAmount")]
     """Filter for transactions with an amount greater than or equal to this value."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""
 
-    search_query: Annotated[str, PropertyInfo(alias="searchQuery")]
+    search_query: Annotated[object, PropertyInfo(alias="searchQuery")]
     """Free-text search across transaction descriptions, merchants, and notes."""
 
-    start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
+    start_date: Annotated[object, PropertyInfo(alias="startDate")]
     """Retrieve transactions from this date (inclusive)."""
 
     type: Literal["income", "expense", "transfer", "investment", "refund", "bill_payment"]

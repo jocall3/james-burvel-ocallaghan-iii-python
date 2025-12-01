@@ -8,5 +8,5 @@ __all__ = ["PasswordResetInitiateParams"]
 
 
 class PasswordResetInitiateParams(TypedDict, total=False):
-    identifier: Required[str]
+    identifier: Required[object]
     """User's email or phone number for verification."""

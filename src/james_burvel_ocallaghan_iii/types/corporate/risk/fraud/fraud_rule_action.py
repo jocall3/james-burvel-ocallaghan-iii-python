@@ -11,11 +11,11 @@ __all__ = ["FraudRuleAction"]
 
 
 class FraudRuleAction(BaseModel):
-    details: str
+    details: object
     """Details or instructions for the action."""
 
     type: Literal["block", "alert", "auto_review", "manual_review", "request_mfa"]
     """Type of action to perform."""
 
-    target_team: Optional[str] = FieldInfo(alias="targetTeam", default=None)
+    target_team: Optional[object] = FieldInfo(alias="targetTeam", default=None)
     """The team or department to notify for alerts/reviews."""

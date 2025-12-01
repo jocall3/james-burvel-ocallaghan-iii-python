@@ -43,10 +43,10 @@ class TransactionsResource(SyncAPIResource):
 
     def list_pending_transactions(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,8 +71,6 @@ class TransactionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
             f"/accounts/{account_id}/transactions/pending",
             options=make_request_options(
@@ -114,10 +112,10 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
     async def list_pending_transactions(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,8 +140,6 @@ class AsyncTransactionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
             f"/accounts/{account_id}/transactions/pending",
             options=make_request_options(

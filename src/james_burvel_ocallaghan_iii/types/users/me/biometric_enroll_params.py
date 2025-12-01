@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -11,7 +10,7 @@ __all__ = ["BiometricEnrollParams"]
 
 
 class BiometricEnrollParams(TypedDict, total=False):
-    biometric_signature: Required[Annotated[str, PropertyInfo(alias="biometricSignature")]]
+    biometric_signature: Required[Annotated[object, PropertyInfo(alias="biometricSignature")]]
     """Base64 encoded representation of the biometric template or proof."""
 
     biometric_type: Required[
@@ -21,8 +20,8 @@ class BiometricEnrollParams(TypedDict, total=False):
     ]
     """The type of biometric data being enrolled."""
 
-    device_id: Required[Annotated[str, PropertyInfo(alias="deviceId")]]
+    device_id: Required[Annotated[object, PropertyInfo(alias="deviceId")]]
     """The ID of the device on which the biometric is being enrolled."""
 
-    device_name: Annotated[Optional[str], PropertyInfo(alias="deviceName")]
+    device_name: Annotated[object, PropertyInfo(alias="deviceName")]
     """Optional: A friendly name for the device, if not already linked."""

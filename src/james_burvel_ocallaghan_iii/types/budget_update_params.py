@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
-from datetime import date
+from typing import Iterable
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -12,7 +11,7 @@ __all__ = ["BudgetUpdateParams", "Category"]
 
 
 class BudgetUpdateParams(TypedDict, total=False):
-    alert_threshold: Annotated[int, PropertyInfo(alias="alertThreshold")]
+    alert_threshold: Annotated[object, PropertyInfo(alias="alertThreshold")]
     """Updated percentage threshold for alerts."""
 
     categories: Iterable[Category]
@@ -21,23 +20,23 @@ class BudgetUpdateParams(TypedDict, total=False):
     Existing categories will be updated, new ones added.
     """
 
-    end_date: Annotated[Union[str, date], PropertyInfo(alias="endDate", format="iso8601")]
+    end_date: Annotated[object, PropertyInfo(alias="endDate")]
     """Updated end date of the budget period."""
 
-    name: str
+    name: object
     """Updated name of the budget."""
 
-    start_date: Annotated[Union[str, date], PropertyInfo(alias="startDate", format="iso8601")]
+    start_date: Annotated[object, PropertyInfo(alias="startDate")]
     """Updated start date of the budget period."""
 
     status: Literal["active", "archived", "ended"]
     """Updated status of the budget."""
 
-    total_amount: Annotated[float, PropertyInfo(alias="totalAmount")]
+    total_amount: Annotated[object, PropertyInfo(alias="totalAmount")]
     """Updated total amount for the entire budget."""
 
 
 class Category(TypedDict, total=False):
-    allocated: float
+    allocated: object
 
-    name: str
+    name: object

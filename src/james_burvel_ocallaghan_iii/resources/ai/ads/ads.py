@@ -59,8 +59,8 @@ class AdsResource(SyncAPIResource):
     def list_generated(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         status: Literal["queued", "generating", "done", "error"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -109,7 +109,7 @@ class AdsResource(SyncAPIResource):
 
     def retrieve_status(
         self,
-        operation_id: str,
+        operation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -133,8 +133,6 @@ class AdsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not operation_id:
-            raise ValueError(f"Expected a non-empty value for `operation_id` but received {operation_id!r}")
         return self._get(
             f"/ai/ads/operations/{operation_id}",
             options=make_request_options(
@@ -171,8 +169,8 @@ class AsyncAdsResource(AsyncAPIResource):
     async def list_generated(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         status: Literal["queued", "generating", "done", "error"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -221,7 +219,7 @@ class AsyncAdsResource(AsyncAPIResource):
 
     async def retrieve_status(
         self,
-        operation_id: str,
+        operation_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -245,8 +243,6 @@ class AsyncAdsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not operation_id:
-            raise ValueError(f"Expected a non-empty value for `operation_id` but received {operation_id!r}")
         return await self._get(
             f"/ai/ads/operations/{operation_id}",
             options=make_request_options(

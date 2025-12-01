@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,19 +11,19 @@ __all__ = ["Device"]
 
 
 class Device(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the device."""
 
-    ip_address: str = FieldInfo(alias="ipAddress")
+    ip_address: object = FieldInfo(alias="ipAddress")
     """Last known IP address of the device."""
 
-    last_active: datetime = FieldInfo(alias="lastActive")
+    last_active: object = FieldInfo(alias="lastActive")
     """Timestamp of the last activity from this device."""
 
-    model: str
+    model: object
     """Model of the device."""
 
-    os: str
+    os: object
     """Operating system of the device."""
 
     trust_level: Literal["trusted", "pending_verification", "untrusted", "blocked"] = FieldInfo(alias="trustLevel")
@@ -33,8 +32,8 @@ class Device(BaseModel):
     type: Literal["mobile", "desktop", "tablet", "smart_watch"]
     """Type of the device."""
 
-    device_name: Optional[str] = FieldInfo(alias="deviceName", default=None)
+    device_name: Optional[object] = FieldInfo(alias="deviceName", default=None)
     """User-assigned name for the device."""
 
-    push_token: Optional[str] = FieldInfo(alias="pushToken", default=None)
+    push_token: Optional[object] = FieldInfo(alias="pushToken", default=None)
     """Push notification token for the device."""

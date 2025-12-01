@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -11,13 +10,13 @@ __all__ = ["PortfolioCreateParams"]
 
 
 class PortfolioCreateParams(TypedDict, total=False):
-    currency: Required[str]
+    currency: Required[object]
     """ISO 4217 currency code of the portfolio."""
 
-    initial_investment: Required[Annotated[float, PropertyInfo(alias="initialInvestment")]]
+    initial_investment: Required[Annotated[object, PropertyInfo(alias="initialInvestment")]]
     """Initial amount to invest into the portfolio."""
 
-    name: Required[str]
+    name: Required[object]
     """Name for the new investment portfolio."""
 
     risk_tolerance: Required[
@@ -30,11 +29,11 @@ class PortfolioCreateParams(TypedDict, total=False):
     type: Required[Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"]]
     """General type or strategy of the portfolio."""
 
-    ai_auto_allocate: Annotated[bool, PropertyInfo(alias="aiAutoAllocate")]
+    ai_auto_allocate: Annotated[object, PropertyInfo(alias="aiAutoAllocate")]
     """
     If true, AI will automatically allocate initial investment based on risk
     tolerance.
     """
 
-    linked_account_id: Annotated[Optional[str], PropertyInfo(alias="linkedAccountId")]
+    linked_account_id: Annotated[object, PropertyInfo(alias="linkedAccountId")]
     """Optional: ID of a linked account to fund the initial investment."""

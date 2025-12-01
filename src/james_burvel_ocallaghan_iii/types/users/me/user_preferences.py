@@ -11,13 +11,13 @@ __all__ = ["UserPreferences", "NotificationChannels"]
 
 
 class NotificationChannels(BaseModel):
-    email: Optional[bool] = None
+    email: Optional[object] = None
 
-    in_app: Optional[bool] = FieldInfo(alias="inApp", default=None)
+    in_app: Optional[object] = FieldInfo(alias="inApp", default=None)
 
-    push: Optional[bool] = None
+    push: Optional[object] = None
 
-    sms: Optional[bool] = None
+    sms: Optional[object] = None
 
 
 class UserPreferences(BaseModel):
@@ -29,7 +29,7 @@ class UserPreferences(BaseModel):
     demand).
     """
 
-    data_sharing_consent: Optional[bool] = FieldInfo(alias="dataSharingConsent", default=None)
+    data_sharing_consent: Optional[object] = FieldInfo(alias="dataSharingConsent", default=None)
     """
     Consent status for sharing anonymized data for AI improvement and personalized
     offers.
@@ -38,10 +38,10 @@ class UserPreferences(BaseModel):
     notification_channels: Optional[NotificationChannels] = FieldInfo(alias="notificationChannels", default=None)
     """Preferred channels for receiving notifications."""
 
-    preferred_language: Optional[str] = FieldInfo(alias="preferredLanguage", default=None)
+    preferred_language: Optional[object] = FieldInfo(alias="preferredLanguage", default=None)
     """Preferred language for the user interface."""
 
-    theme: Optional[str] = None
+    theme: Optional[object] = None
     """Preferred UI theme (e.g., Light-Default, Dark-Quantum)."""
 
     transaction_grouping: Optional[Literal["category", "merchant", "date", "account"]] = FieldInfo(

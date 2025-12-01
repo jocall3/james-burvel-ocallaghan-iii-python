@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import date, datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -13,44 +12,44 @@ __all__ = ["FinancialGoal", "AIStrategicPlan", "AIStrategicPlanStep"]
 
 
 class AIStrategicPlanStep(BaseModel):
-    description: Optional[str] = None
+    description: Optional[object] = None
 
     status: Optional[Literal["pending", "in_progress", "completed"]] = None
 
-    title: Optional[str] = None
+    title: Optional[object] = None
 
 
 class AIStrategicPlan(BaseModel):
-    plan_id: Optional[str] = FieldInfo(alias="planId", default=None)
+    plan_id: Optional[object] = FieldInfo(alias="planId", default=None)
 
     steps: Optional[List[AIStrategicPlanStep]] = None
 
-    summary: Optional[str] = None
+    summary: Optional[object] = None
 
 
 class FinancialGoal(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the financial goal."""
 
-    current_amount: float = FieldInfo(alias="currentAmount")
+    current_amount: object = FieldInfo(alias="currentAmount")
     """The current amount saved or invested towards the goal."""
 
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp when the goal's status or progress was last updated."""
 
-    name: str
+    name: object
     """Name of the financial goal."""
 
-    progress_percentage: float = FieldInfo(alias="progressPercentage")
+    progress_percentage: object = FieldInfo(alias="progressPercentage")
     """Percentage completion of the goal."""
 
     status: Literal["on_track", "behind_schedule", "ahead_of_schedule", "completed", "paused", "cancelled"]
     """Current status of the goal's progress."""
 
-    target_amount: float = FieldInfo(alias="targetAmount")
+    target_amount: object = FieldInfo(alias="targetAmount")
     """The target monetary amount for the goal."""
 
-    target_date: date = FieldInfo(alias="targetDate")
+    target_date: object = FieldInfo(alias="targetDate")
     """The target completion date for the goal."""
 
     type: Literal["retirement", "home_purchase", "education", "large_purchase", "debt_reduction", "other"]
@@ -62,7 +61,7 @@ class FinancialGoal(BaseModel):
     ai_strategic_plan: Optional[AIStrategicPlan] = FieldInfo(alias="aiStrategicPlan", default=None)
     """AI-generated strategic plan for achieving the goal."""
 
-    contributing_accounts: Optional[List[str]] = FieldInfo(alias="contributingAccounts", default=None)
+    contributing_accounts: Optional[List[object]] = FieldInfo(alias="contributingAccounts", default=None)
     """List of account IDs contributing to this goal."""
 
     risk_tolerance: Optional[Literal["conservative", "moderate", "aggressive"]] = FieldInfo(

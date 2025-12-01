@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
-from datetime import date
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -49,13 +48,13 @@ class BudgetsResource(SyncAPIResource):
     def create(
         self,
         *,
-        end_date: Union[str, date],
-        name: str,
+        end_date: object,
+        name: object,
         period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
-        start_date: Union[str, date],
-        total_amount: float,
-        ai_auto_populate: bool | Omit = omit,
-        alert_threshold: int | Omit = omit,
+        start_date: object,
+        total_amount: object,
+        ai_auto_populate: object | Omit = omit,
+        alert_threshold: object | Omit = omit,
         categories: Iterable[budget_create_params.Category] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -117,7 +116,7 @@ class BudgetsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -139,8 +138,6 @@ class BudgetsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         return self._get(
             f"/budgets/{budget_id}",
             options=make_request_options(
@@ -151,15 +148,15 @@ class BudgetsResource(SyncAPIResource):
 
     def update(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
-        alert_threshold: int | Omit = omit,
+        alert_threshold: object | Omit = omit,
         categories: Iterable[budget_update_params.Category] | Omit = omit,
-        end_date: Union[str, date] | Omit = omit,
-        name: str | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
+        name: object | Omit = omit,
+        start_date: object | Omit = omit,
         status: Literal["active", "archived", "ended"] | Omit = omit,
-        total_amount: float | Omit = omit,
+        total_amount: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -195,8 +192,6 @@ class BudgetsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         return self._put(
             f"/budgets/{budget_id}",
             body=maybe_transform(
@@ -220,8 +215,8 @@ class BudgetsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -266,7 +261,7 @@ class BudgetsResource(SyncAPIResource):
 
     def delete(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -287,8 +282,6 @@ class BudgetsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/budgets/{budget_id}",
@@ -322,13 +315,13 @@ class AsyncBudgetsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        end_date: Union[str, date],
-        name: str,
+        end_date: object,
+        name: object,
         period: Literal["weekly", "bi_weekly", "monthly", "quarterly", "annually", "custom"],
-        start_date: Union[str, date],
-        total_amount: float,
-        ai_auto_populate: bool | Omit = omit,
-        alert_threshold: int | Omit = omit,
+        start_date: object,
+        total_amount: object,
+        ai_auto_populate: object | Omit = omit,
+        alert_threshold: object | Omit = omit,
         categories: Iterable[budget_create_params.Category] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -390,7 +383,7 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -412,8 +405,6 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         return await self._get(
             f"/budgets/{budget_id}",
             options=make_request_options(
@@ -424,15 +415,15 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
     async def update(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
-        alert_threshold: int | Omit = omit,
+        alert_threshold: object | Omit = omit,
         categories: Iterable[budget_update_params.Category] | Omit = omit,
-        end_date: Union[str, date] | Omit = omit,
-        name: str | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
+        name: object | Omit = omit,
+        start_date: object | Omit = omit,
         status: Literal["active", "archived", "ended"] | Omit = omit,
-        total_amount: float | Omit = omit,
+        total_amount: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -468,8 +459,6 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         return await self._put(
             f"/budgets/{budget_id}",
             body=await async_maybe_transform(
@@ -493,8 +482,8 @@ class AsyncBudgetsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -539,7 +528,7 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
     async def delete(
         self,
-        budget_id: str,
+        budget_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -560,8 +549,6 @@ class AsyncBudgetsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not budget_id:
-            raise ValueError(f"Expected a non-empty value for `budget_id` but received {budget_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/budgets/{budget_id}",

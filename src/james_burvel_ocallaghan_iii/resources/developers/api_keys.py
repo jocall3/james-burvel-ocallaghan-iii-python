@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -47,9 +47,9 @@ class APIKeysResource(SyncAPIResource):
     def create(
         self,
         *,
-        name: str,
-        scopes: SequenceNotStr[str],
-        expires_in_days: Optional[int] | Omit = omit,
+        name: object,
+        scopes: Iterable[object],
+        expires_in_days: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -96,8 +96,8 @@ class APIKeysResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -141,7 +141,7 @@ class APIKeysResource(SyncAPIResource):
 
     def revoke(
         self,
-        key_id: str,
+        key_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,8 +162,6 @@ class APIKeysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not key_id:
-            raise ValueError(f"Expected a non-empty value for `key_id` but received {key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/developers/api-keys/{key_id}",
@@ -197,9 +195,9 @@ class AsyncAPIKeysResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        name: str,
-        scopes: SequenceNotStr[str],
-        expires_in_days: Optional[int] | Omit = omit,
+        name: object,
+        scopes: Iterable[object],
+        expires_in_days: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -246,8 +244,8 @@ class AsyncAPIKeysResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -291,7 +289,7 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
     async def revoke(
         self,
-        key_id: str,
+        key_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -312,8 +310,6 @@ class AsyncAPIKeysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not key_id:
-            raise ValueError(f"Expected a non-empty value for `key_id` but received {key_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/developers/api-keys/{key_id}",

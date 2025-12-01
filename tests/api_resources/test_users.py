@@ -10,7 +10,6 @@ import pytest
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
 from james_burvel_ocallaghan_iii.types import User, UserLoginResponse
-from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -83,7 +82,7 @@ class TestUsers:
                 "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1990-05-10"),
+            date_of_birth="1990-05-10",
             phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])
@@ -187,7 +186,7 @@ class TestAsyncUsers:
                 "street": "123 Main St",
                 "zip": "90210",
             },
-            date_of_birth=parse_date("1990-05-10"),
+            date_of_birth="1990-05-10",
             phone="+1-555-987-6543",
         )
         assert_matches_type(User, user, path=["response"])

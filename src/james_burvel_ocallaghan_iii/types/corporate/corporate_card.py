@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import date, datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -13,10 +12,10 @@ __all__ = ["CorporateCard"]
 
 
 class CorporateCard(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the corporate card."""
 
-    card_number_mask: str = FieldInfo(alias="cardNumberMask")
+    card_number_mask: object = FieldInfo(alias="cardNumberMask")
     """Masked card number for display purposes."""
 
     card_type: Literal["physical", "virtual"] = FieldInfo(alias="cardType")
@@ -25,26 +24,26 @@ class CorporateCard(BaseModel):
     controls: CorporateCardControls
     """Granular spending controls for a corporate card."""
 
-    created_date: datetime = FieldInfo(alias="createdDate")
+    created_date: object = FieldInfo(alias="createdDate")
     """Timestamp when the card was created."""
 
-    currency: str
+    currency: object
     """Currency of the card's limits and transactions."""
 
-    expiration_date: date = FieldInfo(alias="expirationDate")
+    expiration_date: object = FieldInfo(alias="expirationDate")
     """Expiration date of the card (YYYY-MM-DD)."""
 
-    frozen: bool
+    frozen: object
     """If true, the card is temporarily frozen and cannot be used."""
 
-    holder_name: str = FieldInfo(alias="holderName")
+    holder_name: object = FieldInfo(alias="holderName")
     """Name of the card holder."""
 
     status: Literal["Active", "Suspended", "Deactivated", "Pending Activation"]
     """Current status of the card."""
 
-    associated_employee_id: Optional[str] = FieldInfo(alias="associatedEmployeeId", default=None)
+    associated_employee_id: Optional[object] = FieldInfo(alias="associatedEmployeeId", default=None)
     """Optional: ID of the employee associated with this card."""
 
-    spending_policy_id: Optional[str] = FieldInfo(alias="spendingPolicyId", default=None)
+    spending_policy_id: Optional[object] = FieldInfo(alias="spendingPolicyId", default=None)
     """Optional: ID of the overarching spending policy applied to this card."""
