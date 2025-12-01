@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -46,7 +45,7 @@ class OverdraftSettingsResource(SyncAPIResource):
 
     def retrieve_settings(
         self,
-        account_id: str,
+        account_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -67,8 +66,6 @@ class OverdraftSettingsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
             f"/accounts/{account_id}/overdraft-settings",
             options=make_request_options(
@@ -79,13 +76,13 @@ class OverdraftSettingsResource(SyncAPIResource):
 
     def update_settings(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        enabled: bool | Omit = omit,
+        enabled: object | Omit = omit,
         fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
-        linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: Optional[bool] | Omit = omit,
-        protection_limit: Optional[float] | Omit = omit,
+        linked_savings_account_id: object | Omit = omit,
+        link_to_savings: object | Omit = omit,
+        protection_limit: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -117,8 +114,6 @@ class OverdraftSettingsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._put(
             f"/accounts/{account_id}/overdraft-settings",
             body=maybe_transform(
@@ -160,7 +155,7 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
 
     async def retrieve_settings(
         self,
-        account_id: str,
+        account_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -181,8 +176,6 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
             f"/accounts/{account_id}/overdraft-settings",
             options=make_request_options(
@@ -193,13 +186,13 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
 
     async def update_settings(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        enabled: bool | Omit = omit,
+        enabled: object | Omit = omit,
         fee_preference: Literal["always_pay", "decline_if_over_limit", "ask_me_first"] | Omit = omit,
-        linked_savings_account_id: Optional[str] | Omit = omit,
-        link_to_savings: Optional[bool] | Omit = omit,
-        protection_limit: Optional[float] | Omit = omit,
+        linked_savings_account_id: object | Omit = omit,
+        link_to_savings: object | Omit = omit,
+        protection_limit: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -231,8 +224,6 @@ class AsyncOverdraftSettingsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._put(
             f"/accounts/{account_id}/overdraft-settings",
             body=await async_maybe_transform(

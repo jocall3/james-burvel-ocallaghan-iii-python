@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,23 +11,23 @@ __all__ = ["QuantumWeaverState", "Question"]
 
 
 class Question(BaseModel):
-    id: Optional[str] = None
+    id: Optional[object] = None
 
-    category: Optional[str] = None
+    category: Optional[object] = None
 
-    is_required: Optional[bool] = FieldInfo(alias="isRequired", default=None)
+    is_required: Optional[object] = FieldInfo(alias="isRequired", default=None)
 
-    question: Optional[str] = None
+    question: Optional[object] = None
 
 
 class QuantumWeaverState(BaseModel):
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp of the last status update."""
 
-    next_steps: str = FieldInfo(alias="nextSteps")
+    next_steps: object = FieldInfo(alias="nextSteps")
     """Guidance on the next actions for the user."""
 
-    pitch_id: str = FieldInfo(alias="pitchId")
+    pitch_id: object = FieldInfo(alias="pitchId")
     """Unique identifier for the business pitch."""
 
     stage: Literal[
@@ -44,13 +43,13 @@ class QuantumWeaverState(BaseModel):
     ]
     """Current stage of the business pitch in the incubation process."""
 
-    status_message: str = FieldInfo(alias="statusMessage")
+    status_message: object = FieldInfo(alias="statusMessage")
     """A human-readable status message."""
 
-    estimated_funding_offer: Optional[float] = FieldInfo(alias="estimatedFundingOffer", default=None)
+    estimated_funding_offer: Optional[object] = FieldInfo(alias="estimatedFundingOffer", default=None)
     """AI's estimated funding offer, if the pitch progresses."""
 
-    feedback_summary: Optional[str] = FieldInfo(alias="feedbackSummary", default=None)
+    feedback_summary: Optional[object] = FieldInfo(alias="feedbackSummary", default=None)
     """A summary of AI-generated feedback, if applicable."""
 
     questions: Optional[List[Question]] = None

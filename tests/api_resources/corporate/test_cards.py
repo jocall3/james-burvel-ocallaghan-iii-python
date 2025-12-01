@@ -10,7 +10,6 @@ import pytest
 from tests.utils import assert_matches_type
 from james_burvel_ocallaghan_iii import JamesBurvelOcallaghanIii, AsyncJamesBurvelOcallaghanIii
 from james_burvel_ocallaghan_iii.types import PaginatedTransactions
-from james_burvel_ocallaghan_iii._utils import parse_date
 from james_burvel_ocallaghan_iii.types.corporate import (
     CorporateCard,
     CardListResponse,
@@ -30,8 +29,8 @@ class TestCards:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         card = client.corporate.cards.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(CardListResponse, card, path=["response"])
 
@@ -59,7 +58,7 @@ class TestCards:
     def test_method_create_virtual(self, client: JamesBurvelOcallaghanIii) -> None:
         card = client.corporate.cards.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         )
@@ -79,7 +78,7 @@ class TestCards:
                 "single_transaction_limit": 200,
                 "vendor_restrictions": ["Facebook Ads", "Google Ads"],
             },
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
             associated_employee_id="emp_marketing_01",
@@ -91,7 +90,7 @@ class TestCards:
     def test_raw_response_create_virtual(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.corporate.cards.with_raw_response.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         )
@@ -105,7 +104,7 @@ class TestCards:
     def test_streaming_response_create_virtual(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.corporate.cards.with_streaming_response.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         ) as response:
@@ -152,14 +151,6 @@ class TestCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_freeze(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            client.corporate.cards.with_raw_response.freeze(
-                card_id="",
-                freeze=True,
-            )
-
-    @parametrize
     def test_method_list_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
         card = client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
@@ -170,10 +161,10 @@ class TestCards:
     def test_method_list_transactions_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         card = client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
-            end_date=parse_date("2024-12-31"),
-            limit=1,
-            offset=0,
-            start_date=parse_date("2024-01-01"),
+            end_date="2024-12-31",
+            limit={},
+            offset={},
+            start_date="2024-01-01",
         )
         assert_matches_type(PaginatedTransactions, card, path=["response"])
 
@@ -200,13 +191,6 @@ class TestCards:
             assert_matches_type(PaginatedTransactions, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_path_params_list_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            client.corporate.cards.with_raw_response.list_transactions(
-                card_id="",
-            )
 
     @parametrize
     def test_method_update_controls(self, client: JamesBurvelOcallaghanIii) -> None:
@@ -255,13 +239,6 @@ class TestCards:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_update_controls(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            client.corporate.cards.with_raw_response.update_controls(
-                card_id="",
-            )
-
 
 class TestAsyncCards:
     parametrize = pytest.mark.parametrize(
@@ -276,8 +253,8 @@ class TestAsyncCards:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         card = await async_client.corporate.cards.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(CardListResponse, card, path=["response"])
 
@@ -305,7 +282,7 @@ class TestAsyncCards:
     async def test_method_create_virtual(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         card = await async_client.corporate.cards.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         )
@@ -325,7 +302,7 @@ class TestAsyncCards:
                 "single_transaction_limit": 200,
                 "vendor_restrictions": ["Facebook Ads", "Google Ads"],
             },
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
             associated_employee_id="emp_marketing_01",
@@ -337,7 +314,7 @@ class TestAsyncCards:
     async def test_raw_response_create_virtual(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.corporate.cards.with_raw_response.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         )
@@ -351,7 +328,7 @@ class TestAsyncCards:
     async def test_streaming_response_create_virtual(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.corporate.cards.with_streaming_response.create_virtual(
             controls={},
-            expiration_date=parse_date("2025-12-31"),
+            expiration_date="2025-12-31",
             holder_name="Marketing Campaign Q4",
             purpose="Online advertising for Q4 campaigns",
         ) as response:
@@ -398,14 +375,6 @@ class TestAsyncCards:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_freeze(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            await async_client.corporate.cards.with_raw_response.freeze(
-                card_id="",
-                freeze=True,
-            )
-
-    @parametrize
     async def test_method_list_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         card = await async_client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
@@ -416,10 +385,10 @@ class TestAsyncCards:
     async def test_method_list_transactions_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         card = await async_client.corporate.cards.list_transactions(
             card_id="corp_card_xyz987654",
-            end_date=parse_date("2024-12-31"),
-            limit=1,
-            offset=0,
-            start_date=parse_date("2024-01-01"),
+            end_date="2024-12-31",
+            limit={},
+            offset={},
+            start_date="2024-01-01",
         )
         assert_matches_type(PaginatedTransactions, card, path=["response"])
 
@@ -446,13 +415,6 @@ class TestAsyncCards:
             assert_matches_type(PaginatedTransactions, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_list_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            await async_client.corporate.cards.with_raw_response.list_transactions(
-                card_id="",
-            )
 
     @parametrize
     async def test_method_update_controls(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
@@ -500,10 +462,3 @@ class TestAsyncCards:
             assert_matches_type(CorporateCard, card, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_update_controls(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `card_id` but received ''"):
-            await async_client.corporate.cards.with_raw_response.update_controls(
-                card_id="",
-            )

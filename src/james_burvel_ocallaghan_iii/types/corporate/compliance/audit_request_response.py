@@ -11,7 +11,7 @@ __all__ = ["AuditRequestResponse"]
 
 
 class AuditRequestResponse(BaseModel):
-    audit_id: Optional[str] = FieldInfo(alias="auditId", default=None)
+    audit_id: Optional[object] = FieldInfo(alias="auditId", default=None)
     """Unique identifier for the initiated audit."""
 
     status: Optional[Literal["initiated", "processing", "completed", "failed"]] = None

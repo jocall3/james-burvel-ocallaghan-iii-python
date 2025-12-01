@@ -2,20 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["GenerateStandardParams"]
 
 
 class GenerateStandardParams(TypedDict, total=False):
-    length_seconds: Required[Annotated[int, PropertyInfo(alias="lengthSeconds")]]
+    length_seconds: Required[Annotated[object, PropertyInfo(alias="lengthSeconds")]]
     """Desired length of the video in seconds."""
 
-    prompt: Required[str]
+    prompt: Required[object]
     """The textual prompt to guide the AI video generation."""
 
     style: Required[Literal["Cinematic", "Explainer", "Documentary", "Abstract", "Minimalist"]]
@@ -26,8 +25,8 @@ class GenerateStandardParams(TypedDict, total=False):
     Aspect ratio of the video (e.g., 16:9 for widescreen, 9:16 for vertical shorts).
     """
 
-    brand_colors: Annotated[Optional[SequenceNotStr[str]], PropertyInfo(alias="brandColors")]
+    brand_colors: Annotated[Optional[Iterable[object]], PropertyInfo(alias="brandColors")]
     """Optional: Hex color codes to influence the video's aesthetic."""
 
-    keywords: Optional[SequenceNotStr[str]]
+    keywords: Optional[Iterable[object]]
     """Optional: Additional keywords to guide the AI's content generation."""

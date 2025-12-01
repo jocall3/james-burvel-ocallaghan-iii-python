@@ -8,10 +8,10 @@ __all__ = ["AccountRetrieveAccountStatementsParams"]
 
 
 class AccountRetrieveAccountStatementsParams(TypedDict, total=False):
-    month: Required[int]
+    month: Required[object]
     """Month for the statement (1-12)."""
 
-    year: Required[int]
+    year: Required[object]
     """Year for the statement."""
 
     format: Literal["pdf", "csv"]

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -46,7 +45,7 @@ class ApplicationsResource(SyncAPIResource):
 
     def retrieve(
         self,
-        application_id: str,
+        application_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -68,8 +67,6 @@ class ApplicationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not application_id:
-            raise ValueError(f"Expected a non-empty value for `application_id` but received {application_id!r}")
         return self._get(
             f"/lending/applications/{application_id}",
             options=make_request_options(
@@ -81,13 +78,13 @@ class ApplicationsResource(SyncAPIResource):
     def submit(
         self,
         *,
-        loan_amount: float,
+        loan_amount: object,
         loan_purpose: Literal[
             "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
-        repayment_term_months: int,
-        additional_notes: Optional[str] | Omit = omit,
-        co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
+        repayment_term_months: object,
+        additional_notes: object | Omit = omit,
+        co_applicant: application_submit_params.CoApplicant | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -160,7 +157,7 @@ class AsyncApplicationsResource(AsyncAPIResource):
 
     async def retrieve(
         self,
-        application_id: str,
+        application_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -182,8 +179,6 @@ class AsyncApplicationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not application_id:
-            raise ValueError(f"Expected a non-empty value for `application_id` but received {application_id!r}")
         return await self._get(
             f"/lending/applications/{application_id}",
             options=make_request_options(
@@ -195,13 +190,13 @@ class AsyncApplicationsResource(AsyncAPIResource):
     async def submit(
         self,
         *,
-        loan_amount: float,
+        loan_amount: object,
         loan_purpose: Literal[
             "home_improvement", "debt_consolidation", "medical_expense", "education", "auto_purchase", "other"
         ],
-        repayment_term_months: int,
-        additional_notes: Optional[str] | Omit = omit,
-        co_applicant: Optional[application_submit_params.CoApplicant] | Omit = omit,
+        repayment_term_months: object,
+        additional_notes: object | Omit = omit,
+        co_applicant: application_submit_params.CoApplicant | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

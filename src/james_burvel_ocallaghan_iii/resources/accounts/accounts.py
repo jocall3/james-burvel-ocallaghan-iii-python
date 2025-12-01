@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -78,10 +77,10 @@ class AccountsResource(SyncAPIResource):
     def link_new_institution(
         self,
         *,
-        country_code: str,
-        institution_name: str,
-        provider_identifier: Optional[str] | Omit = omit,
-        redirect_uri: Optional[str] | Omit = omit,
+        country_code: object,
+        institution_name: object,
+        provider_identifier: object | Omit = omit,
+        redirect_uri: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -133,8 +132,8 @@ class AccountsResource(SyncAPIResource):
     def list_linked_accounts(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,7 +179,7 @@ class AccountsResource(SyncAPIResource):
 
     def retrieve_account_details(
         self,
-        account_id: str,
+        account_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -203,8 +202,6 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
             f"/accounts/{account_id}/details",
             options=make_request_options(
@@ -215,10 +212,10 @@ class AccountsResource(SyncAPIResource):
 
     def retrieve_account_statements(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        month: int,
-        year: int,
+        month: object,
+        year: object,
         format: Literal["pdf", "csv"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -247,8 +244,6 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return self._get(
             f"/accounts/{account_id}/statements",
             options=make_request_options(
@@ -300,10 +295,10 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def link_new_institution(
         self,
         *,
-        country_code: str,
-        institution_name: str,
-        provider_identifier: Optional[str] | Omit = omit,
-        redirect_uri: Optional[str] | Omit = omit,
+        country_code: object,
+        institution_name: object,
+        provider_identifier: object | Omit = omit,
+        redirect_uri: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -355,8 +350,8 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def list_linked_accounts(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -402,7 +397,7 @@ class AsyncAccountsResource(AsyncAPIResource):
 
     async def retrieve_account_details(
         self,
-        account_id: str,
+        account_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -425,8 +420,6 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
             f"/accounts/{account_id}/details",
             options=make_request_options(
@@ -437,10 +430,10 @@ class AsyncAccountsResource(AsyncAPIResource):
 
     async def retrieve_account_statements(
         self,
-        account_id: str,
+        account_id: object,
         *,
-        month: int,
-        year: int,
+        month: object,
+        year: object,
         format: Literal["pdf", "csv"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -469,8 +462,6 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not account_id:
-            raise ValueError(f"Expected a non-empty value for `account_id` but received {account_id!r}")
         return await self._get(
             f"/accounts/{account_id}/statements",
             options=make_request_options(

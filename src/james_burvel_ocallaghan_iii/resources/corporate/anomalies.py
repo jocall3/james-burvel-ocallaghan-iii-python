@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
 from typing_extensions import Literal
 
 import httpx
@@ -49,12 +47,12 @@ class AnomaliesResource(SyncAPIResource):
     def list(
         self,
         *,
-        end_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
         entity_type: Literal["PaymentOrder", "Transaction", "Counterparty", "CorporateCard", "Invoice"] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        start_date: object | Omit = omit,
         status: Literal["New", "Under Review", "Escalated", "Dismissed", "Resolved"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -116,10 +114,10 @@ class AnomaliesResource(SyncAPIResource):
 
     def update_status(
         self,
-        anomaly_id: str,
+        anomaly_id: object,
         *,
         status: Literal["Dismissed", "Resolved", "Under Review", "Escalated"],
-        resolution_notes: Optional[str] | Omit = omit,
+        resolution_notes: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,8 +143,6 @@ class AnomaliesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not anomaly_id:
-            raise ValueError(f"Expected a non-empty value for `anomaly_id` but received {anomaly_id!r}")
         return self._put(
             f"/corporate/anomalies/{anomaly_id}/status",
             body=maybe_transform(
@@ -186,12 +182,12 @@ class AsyncAnomaliesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        end_date: Union[str, date] | Omit = omit,
+        end_date: object | Omit = omit,
         entity_type: Literal["PaymentOrder", "Transaction", "Counterparty", "CorporateCard", "Invoice"] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
-        start_date: Union[str, date] | Omit = omit,
+        start_date: object | Omit = omit,
         status: Literal["New", "Under Review", "Escalated", "Dismissed", "Resolved"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -253,10 +249,10 @@ class AsyncAnomaliesResource(AsyncAPIResource):
 
     async def update_status(
         self,
-        anomaly_id: str,
+        anomaly_id: object,
         *,
         status: Literal["Dismissed", "Resolved", "Under Review", "Escalated"],
-        resolution_notes: Optional[str] | Omit = omit,
+        resolution_notes: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,8 +278,6 @@ class AsyncAnomaliesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not anomaly_id:
-            raise ValueError(f"Expected a non-empty value for `anomaly_id` but received {anomaly_id!r}")
         return await self._put(
             f"/corporate/anomalies/{anomaly_id}/status",
             body=await async_maybe_transform(

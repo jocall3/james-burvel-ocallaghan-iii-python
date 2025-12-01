@@ -13,3 +13,9 @@ from .biometric_enroll_params import BiometricEnrollParams as BiometricEnrollPar
 from .biometric_verify_params import BiometricVerifyParams as BiometricVerifyParams
 from .preference_update_params import PreferenceUpdateParams as PreferenceUpdateParams
 from .biometric_verify_response import BiometricVerifyResponse as BiometricVerifyResponse
+from .user_preferences_notification_channels import (
+    UserPreferencesNotificationChannels as UserPreferencesNotificationChannels,
+)
+from .user_preferences_notification_channels_param import (
+    UserPreferencesNotificationChannelsParam as UserPreferencesNotificationChannelsParam,
+)

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -16,20 +15,20 @@ class DeviceRegisterParams(TypedDict, total=False):
     ]
     """Type of the device being registered."""
 
-    model: Required[str]
+    model: Required[object]
     """Model of the device."""
 
-    os: Required[str]
+    os: Required[object]
     """Operating system of the device."""
 
-    biometric_signature: Annotated[Optional[str], PropertyInfo(alias="biometricSignature")]
+    biometric_signature: Annotated[object, PropertyInfo(alias="biometricSignature")]
     """
     Optional: Base64 encoded biometric signature for initial enrollment (e.g., for
     Passkey registration).
     """
 
-    device_name: Annotated[Optional[str], PropertyInfo(alias="deviceName")]
+    device_name: Annotated[object, PropertyInfo(alias="deviceName")]
     """Optional: A friendly name for the device."""
 
-    push_token: Annotated[Optional[str], PropertyInfo(alias="pushToken")]
+    push_token: Annotated[object, PropertyInfo(alias="pushToken")]
     """Optional: Push notification token for the device."""

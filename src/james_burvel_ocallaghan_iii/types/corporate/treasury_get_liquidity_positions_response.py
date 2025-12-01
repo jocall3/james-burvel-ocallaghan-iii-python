@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -19,29 +18,29 @@ __all__ = [
 
 
 class AccountTypeBreakdown(BaseModel):
-    amount: Optional[float] = None
+    amount: Optional[object] = None
 
-    type: Optional[str] = None
+    type: Optional[object] = None
 
 
 class AILiquidityAssessment(BaseModel):
-    message: Optional[str] = None
+    message: Optional[object] = None
 
     status: Optional[Literal["optimal", "sufficient", "tight", "critical"]] = None
 
 
 class CurrencyBreakdown(BaseModel):
-    amount: Optional[float] = None
+    amount: Optional[object] = None
 
-    currency: Optional[str] = None
+    currency: Optional[object] = None
 
-    percentage: Optional[float] = None
+    percentage: Optional[object] = None
 
 
 class ShortTermInvestments(BaseModel):
-    maturing_next30_days: Optional[float] = FieldInfo(alias="maturingNext30Days", default=None)
+    maturing_next30_days: Optional[object] = FieldInfo(alias="maturingNext30Days", default=None)
 
-    total_value: Optional[float] = FieldInfo(alias="totalValue", default=None)
+    total_value: Optional[object] = FieldInfo(alias="totalValue", default=None)
 
 
 class TreasuryGetLiquidityPositionsResponse(BaseModel):
@@ -60,8 +59,8 @@ class TreasuryGetLiquidityPositionsResponse(BaseModel):
     short_term_investments: ShortTermInvestments = FieldInfo(alias="shortTermInvestments")
     """Details on short-term investments contributing to liquidity."""
 
-    snapshot_time: datetime = FieldInfo(alias="snapshotTime")
+    snapshot_time: object = FieldInfo(alias="snapshotTime")
     """Timestamp of the liquidity snapshot."""
 
-    total_liquid_assets: float = FieldInfo(alias="totalLiquidAssets")
+    total_liquid_assets: object = FieldInfo(alias="totalLiquidAssets")
     """Total value of all liquid assets across the organization."""

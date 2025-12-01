@@ -5,18 +5,9 @@ from __future__ import annotations
 from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .user_preferences_notification_channels_param import UserPreferencesNotificationChannelsParam
 
-__all__ = ["UserPreferencesParam", "NotificationChannels"]
-
-
-class NotificationChannels(TypedDict, total=False):
-    email: bool
-
-    in_app: Annotated[bool, PropertyInfo(alias="inApp")]
-
-    push: bool
-
-    sms: bool
+__all__ = ["UserPreferencesParam"]
 
 
 class UserPreferencesParam(TypedDict, total=False):
@@ -28,19 +19,21 @@ class UserPreferencesParam(TypedDict, total=False):
     demand).
     """
 
-    data_sharing_consent: Annotated[bool, PropertyInfo(alias="dataSharingConsent")]
+    data_sharing_consent: Annotated[object, PropertyInfo(alias="dataSharingConsent")]
     """
     Consent status for sharing anonymized data for AI improvement and personalized
     offers.
     """
 
-    notification_channels: Annotated[NotificationChannels, PropertyInfo(alias="notificationChannels")]
+    notification_channels: Annotated[
+        UserPreferencesNotificationChannelsParam, PropertyInfo(alias="notificationChannels")
+    ]
     """Preferred channels for receiving notifications."""
 
-    preferred_language: Annotated[str, PropertyInfo(alias="preferredLanguage")]
+    preferred_language: Annotated[object, PropertyInfo(alias="preferredLanguage")]
     """Preferred language for the user interface."""
 
-    theme: str
+    theme: object
     """Preferred UI theme (e.g., Light-Default, Dark-Quantum)."""
 
     transaction_grouping: Annotated[

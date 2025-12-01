@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -11,7 +10,7 @@ __all__ = ["ApplicationSubmitParams", "CoApplicant"]
 
 
 class ApplicationSubmitParams(TypedDict, total=False):
-    loan_amount: Required[Annotated[float, PropertyInfo(alias="loanAmount")]]
+    loan_amount: Required[Annotated[object, PropertyInfo(alias="loanAmount")]]
     """The desired loan amount."""
 
     loan_purpose: Required[
@@ -22,19 +21,19 @@ class ApplicationSubmitParams(TypedDict, total=False):
     ]
     """The purpose of the loan."""
 
-    repayment_term_months: Required[Annotated[int, PropertyInfo(alias="repaymentTermMonths")]]
+    repayment_term_months: Required[Annotated[object, PropertyInfo(alias="repaymentTermMonths")]]
     """The desired repayment term in months."""
 
-    additional_notes: Annotated[Optional[str], PropertyInfo(alias="additionalNotes")]
+    additional_notes: Annotated[object, PropertyInfo(alias="additionalNotes")]
     """Optional notes or details for the application."""
 
-    co_applicant: Annotated[Optional[CoApplicant], PropertyInfo(alias="coApplicant")]
+    co_applicant: Annotated[CoApplicant, PropertyInfo(alias="coApplicant")]
     """Optional: Details of a co-applicant for the loan."""
 
 
 class CoApplicant(TypedDict, total=False):
-    email: str
+    email: object
 
-    income: float
+    income: object
 
-    name: str
+    name: object

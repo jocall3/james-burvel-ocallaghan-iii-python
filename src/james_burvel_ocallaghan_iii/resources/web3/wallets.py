@@ -46,8 +46,8 @@ class WalletsResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -94,11 +94,11 @@ class WalletsResource(SyncAPIResource):
     def connect(
         self,
         *,
-        blockchain_network: str,
-        signed_message: str,
-        wallet_address: str,
-        wallet_provider: str,
-        request_write_access: bool | Omit = omit,
+        blockchain_network: object,
+        signed_message: object,
+        wallet_address: object,
+        wallet_provider: object,
+        request_write_access: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -151,10 +151,10 @@ class WalletsResource(SyncAPIResource):
 
     def retrieve_balances(
         self,
-        wallet_id: str,
+        wallet_id: object,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -179,8 +179,6 @@ class WalletsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not wallet_id:
-            raise ValueError(f"Expected a non-empty value for `wallet_id` but received {wallet_id!r}")
         return self._get(
             f"/web3/wallets/{wallet_id}/balances",
             options=make_request_options(
@@ -223,8 +221,8 @@ class AsyncWalletsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,11 +269,11 @@ class AsyncWalletsResource(AsyncAPIResource):
     async def connect(
         self,
         *,
-        blockchain_network: str,
-        signed_message: str,
-        wallet_address: str,
-        wallet_provider: str,
-        request_write_access: bool | Omit = omit,
+        blockchain_network: object,
+        signed_message: object,
+        wallet_address: object,
+        wallet_provider: object,
+        request_write_access: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,10 +326,10 @@ class AsyncWalletsResource(AsyncAPIResource):
 
     async def retrieve_balances(
         self,
-        wallet_id: str,
+        wallet_id: object,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -356,8 +354,6 @@ class AsyncWalletsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not wallet_id:
-            raise ValueError(f"Expected a non-empty value for `wallet_id` but received {wallet_id!r}")
         return await self._get(
             f"/web3/wallets/{wallet_id}/balances",
             options=make_request_options(

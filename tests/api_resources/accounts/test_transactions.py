@@ -30,8 +30,8 @@ class TestTransactions:
     def test_method_list_pending_transactions_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         transaction = client.accounts.transactions.list_pending_transactions(
             account_id="acc_chase_checking_4567",
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
 
@@ -59,13 +59,6 @@ class TestTransactions:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_list_pending_transactions(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            client.accounts.transactions.with_raw_response.list_pending_transactions(
-                account_id="",
-            )
-
 
 class TestAsyncTransactions:
     parametrize = pytest.mark.parametrize(
@@ -85,8 +78,8 @@ class TestAsyncTransactions:
     ) -> None:
         transaction = await async_client.accounts.transactions.list_pending_transactions(
             account_id="acc_chase_checking_4567",
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
 
@@ -115,10 +108,3 @@ class TestAsyncTransactions:
             assert_matches_type(TransactionListPendingTransactionsResponse, transaction, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_list_pending_transactions(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `account_id` but received ''"):
-            await async_client.accounts.transactions.with_raw_response.list_pending_transactions(
-                account_id="",
-            )

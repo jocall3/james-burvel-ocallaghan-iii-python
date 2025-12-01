@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,19 +11,19 @@ __all__ = ["CorporatePerformSanctionScreeningResponse", "MatchDetail"]
 
 
 class MatchDetail(BaseModel):
-    list_name: Optional[str] = FieldInfo(alias="listName", default=None)
+    list_name: Optional[object] = FieldInfo(alias="listName", default=None)
     """Name of the sanction list where a match was found."""
 
-    matched_name: Optional[str] = FieldInfo(alias="matchedName", default=None)
+    matched_name: Optional[object] = FieldInfo(alias="matchedName", default=None)
     """The name on the sanction list that matched."""
 
-    public_url: Optional[str] = FieldInfo(alias="publicUrl", default=None)
+    public_url: Optional[object] = FieldInfo(alias="publicUrl", default=None)
     """Optional: URL to public record of the sanction list entry."""
 
-    reason: Optional[str] = None
+    reason: Optional[object] = None
     """Reason for the match (e.g., exact name, alias, partial match)."""
 
-    score: Optional[float] = None
+    score: Optional[object] = None
     """Match confidence score (0-1)."""
 
 
@@ -32,17 +31,17 @@ class CorporatePerformSanctionScreeningResponse(BaseModel):
     match_details: List[MatchDetail] = FieldInfo(alias="matchDetails")
     """Details of any potential or exact matches found."""
 
-    match_found: bool = FieldInfo(alias="matchFound")
+    match_found: object = FieldInfo(alias="matchFound")
     """True if any potential matches were found on sanction lists."""
 
-    screening_id: str = FieldInfo(alias="screeningId")
+    screening_id: object = FieldInfo(alias="screeningId")
     """Unique identifier for this screening operation."""
 
-    screening_timestamp: datetime = FieldInfo(alias="screeningTimestamp")
+    screening_timestamp: object = FieldInfo(alias="screeningTimestamp")
     """Timestamp when the screening was performed."""
 
     status: Literal["clear", "potential_match", "confirmed_match", "error"]
     """Overall status of the screening result."""
 
-    message: Optional[str] = None
+    message: Optional[object] = None
     """An optional message providing more context on the status."""

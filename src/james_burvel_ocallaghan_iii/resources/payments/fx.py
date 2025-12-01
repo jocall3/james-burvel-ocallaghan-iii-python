@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -47,12 +45,12 @@ class FxResource(SyncAPIResource):
     def convert(
         self,
         *,
-        source_account_id: str,
-        source_amount: float,
-        source_currency: str,
-        target_currency: str,
-        fx_rate_lock: bool | Omit = omit,
-        target_account_id: Optional[str] | Omit = omit,
+        source_account_id: object,
+        source_amount: object,
+        source_currency: object,
+        target_currency: object,
+        fx_rate_lock: object | Omit = omit,
+        target_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,9 +106,9 @@ class FxResource(SyncAPIResource):
     def retrieve_rates(
         self,
         *,
-        base_currency: str,
-        target_currency: str,
-        forecast_days: int | Omit = omit,
+        base_currency: object,
+        target_currency: object,
+        forecast_days: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -181,12 +179,12 @@ class AsyncFxResource(AsyncAPIResource):
     async def convert(
         self,
         *,
-        source_account_id: str,
-        source_amount: float,
-        source_currency: str,
-        target_currency: str,
-        fx_rate_lock: bool | Omit = omit,
-        target_account_id: Optional[str] | Omit = omit,
+        source_account_id: object,
+        source_amount: object,
+        source_currency: object,
+        target_currency: object,
+        fx_rate_lock: object | Omit = omit,
+        target_account_id: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -242,9 +240,9 @@ class AsyncFxResource(AsyncAPIResource):
     async def retrieve_rates(
         self,
         *,
-        base_currency: str,
-        target_currency: str,
-        forecast_days: int | Omit = omit,
+        base_currency: object,
+        target_currency: object,
+        forecast_days: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

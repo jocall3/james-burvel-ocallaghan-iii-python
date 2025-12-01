@@ -11,16 +11,16 @@ __all__ = ["APIKeyListResponse"]
 
 
 class APIKeyListResponse(BaseModel):
-    limit: int
+    limit: object
     """The maximum number of items returned in the current page."""
 
-    offset: int
+    offset: object
     """The number of items skipped before the current page."""
 
-    total: int
+    total: object
     """The total number of items available across all pages."""
 
     data: Optional[List[APIKey]] = None
 
-    next_offset: Optional[int] = FieldInfo(alias="nextOffset", default=None)
+    next_offset: Optional[object] = FieldInfo(alias="nextOffset", default=None)
     """The offset for the next page of results, if available. Null if no more pages."""

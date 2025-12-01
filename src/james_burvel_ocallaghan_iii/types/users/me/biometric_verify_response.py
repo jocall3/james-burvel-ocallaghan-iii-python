@@ -11,7 +11,7 @@ __all__ = ["BiometricVerifyResponse"]
 
 
 class BiometricVerifyResponse(BaseModel):
-    message: Optional[str] = None
+    message: Optional[object] = None
     """A descriptive message for the verification result."""
 
     verification_status: Optional[Literal["success", "failed"]] = FieldInfo(alias="verificationStatus", default=None)

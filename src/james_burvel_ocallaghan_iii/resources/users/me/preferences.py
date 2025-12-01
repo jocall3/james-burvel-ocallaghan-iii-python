@@ -19,6 +19,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.users.me import preference_update_params
 from ....types.users.me.user_preferences import UserPreferences
+from ....types.users.me.user_preferences_notification_channels_param import UserPreferencesNotificationChannelsParam
 
 __all__ = ["PreferencesResource", "AsyncPreferencesResource"]
 
@@ -70,10 +71,10 @@ class PreferencesResource(SyncAPIResource):
         self,
         *,
         ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
-        data_sharing_consent: bool | Omit = omit,
-        notification_channels: preference_update_params.NotificationChannels | Omit = omit,
-        preferred_language: str | Omit = omit,
-        theme: str | Omit = omit,
+        data_sharing_consent: object | Omit = omit,
+        notification_channels: UserPreferencesNotificationChannelsParam | Omit = omit,
+        preferred_language: object | Omit = omit,
+        theme: object | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -177,10 +178,10 @@ class AsyncPreferencesResource(AsyncAPIResource):
         self,
         *,
         ai_interaction_mode: Literal["proactive", "balanced", "on_demand"] | Omit = omit,
-        data_sharing_consent: bool | Omit = omit,
-        notification_channels: preference_update_params.NotificationChannels | Omit = omit,
-        preferred_language: str | Omit = omit,
-        theme: str | Omit = omit,
+        data_sharing_consent: object | Omit = omit,
+        notification_channels: UserPreferencesNotificationChannelsParam | Omit = omit,
+        preferred_language: object | Omit = omit,
+        theme: object | Omit = omit,
         transaction_grouping: Literal["category", "merchant", "date", "account"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

@@ -52,13 +52,6 @@ class TestPitch:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve_details(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `pitch_id` but received ''"):
-            client.ai.incubator.pitch.with_raw_response.retrieve_details(
-                "",
-            )
-
-    @parametrize
     def test_method_submit(self, client: JamesBurvelOcallaghanIii) -> None:
         pitch = client.ai.incubator.pitch.submit(
             business_plan="Quantum-AI powered financial advisor platform leveraging neural networks for predictive analytics and hyper-personalized advice...",
@@ -174,13 +167,6 @@ class TestPitch:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_submit_feedback(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `pitch_id` but received ''"):
-            client.ai.incubator.pitch.with_raw_response.submit_feedback(
-                pitch_id="",
-            )
-
 
 class TestAsyncPitch:
     parametrize = pytest.mark.parametrize(
@@ -217,13 +203,6 @@ class TestAsyncPitch:
             assert_matches_type(PitchRetrieveDetailsResponse, pitch, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve_details(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `pitch_id` but received ''"):
-            await async_client.ai.incubator.pitch.with_raw_response.retrieve_details(
-                "",
-            )
 
     @parametrize
     async def test_method_submit(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
@@ -340,10 +319,3 @@ class TestAsyncPitch:
             assert_matches_type(QuantumWeaverState, pitch, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_submit_feedback(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `pitch_id` but received ''"):
-            await async_client.ai.incubator.pitch.with_raw_response.submit_feedback(
-                pitch_id="",
-            )

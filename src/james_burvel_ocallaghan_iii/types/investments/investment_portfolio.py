@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -13,42 +12,42 @@ __all__ = ["InvestmentPortfolio", "Holding"]
 
 
 class Holding(BaseModel):
-    average_cost: float = FieldInfo(alias="averageCost")
+    average_cost: object = FieldInfo(alias="averageCost")
     """Average cost per unit."""
 
-    current_price: float = FieldInfo(alias="currentPrice")
+    current_price: object = FieldInfo(alias="currentPrice")
     """Current market price per unit."""
 
-    market_value: float = FieldInfo(alias="marketValue")
+    market_value: object = FieldInfo(alias="marketValue")
     """Total market value of the holding."""
 
-    name: str
+    name: object
     """Full name of the investment asset."""
 
-    percentage_of_portfolio: float = FieldInfo(alias="percentageOfPortfolio")
+    percentage_of_portfolio: object = FieldInfo(alias="percentageOfPortfolio")
     """Percentage of the total portfolio value this holding represents."""
 
-    quantity: float
+    quantity: object
     """Number of units held."""
 
-    symbol: str
+    symbol: object
     """Stock ticker or asset symbol."""
 
-    esg_score: Optional[float] = FieldInfo(alias="esgScore", default=None)
+    esg_score: Optional[object] = FieldInfo(alias="esgScore", default=None)
     """Overall ESG (Environmental, Social, Governance) score of the asset (0-10)."""
 
 
 class InvestmentPortfolio(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the investment portfolio."""
 
-    currency: str
+    currency: object
     """ISO 4217 currency code of the portfolio."""
 
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp when the portfolio data was last updated."""
 
-    name: str
+    name: object
     """Name of the portfolio."""
 
     risk_tolerance: Literal["conservative", "moderate", "aggressive", "very_aggressive"] = FieldInfo(
@@ -56,16 +55,16 @@ class InvestmentPortfolio(BaseModel):
     )
     """User's stated or AI-assessed risk tolerance for this portfolio."""
 
-    today_gain_loss: float = FieldInfo(alias="todayGainLoss")
+    today_gain_loss: object = FieldInfo(alias="todayGainLoss")
     """Daily gain or loss on the portfolio."""
 
-    total_value: float = FieldInfo(alias="totalValue")
+    total_value: object = FieldInfo(alias="totalValue")
     """Current total market value of the portfolio."""
 
     type: Literal["equities", "bonds", "diversified", "crypto", "retirement", "other"]
     """General type or strategy of the portfolio."""
 
-    unrealized_gain_loss: float = FieldInfo(alias="unrealizedGainLoss")
+    unrealized_gain_loss: object = FieldInfo(alias="unrealizedGainLoss")
     """Total unrealized gain or loss on the portfolio."""
 
     ai_performance_insights: Optional[List[AIInsight]] = FieldInfo(alias="aiPerformanceInsights", default=None)

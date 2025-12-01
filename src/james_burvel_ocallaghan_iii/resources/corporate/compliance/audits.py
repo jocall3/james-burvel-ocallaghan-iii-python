@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
-from datetime import date
+from typing import List
 from typing_extensions import Literal
 
 import httpx
@@ -50,10 +49,10 @@ class AuditsResource(SyncAPIResource):
         self,
         *,
         audit_scope: Literal["all_transactions", "specific_accounts", "specific_cards", "all_users"],
-        end_date: Union[str, date],
+        end_date: object,
         regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX", "OFAC"]],
-        start_date: Union[str, date],
-        additional_context: Optional[str] | Omit = omit,
+        start_date: object,
+        additional_context: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,7 +104,7 @@ class AuditsResource(SyncAPIResource):
 
     def retrieve_report(
         self,
-        audit_id: str,
+        audit_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -126,8 +125,6 @@ class AuditsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not audit_id:
-            raise ValueError(f"Expected a non-empty value for `audit_id` but received {audit_id!r}")
         return self._get(
             f"/corporate/compliance/audits/{audit_id}/report",
             options=make_request_options(
@@ -161,10 +158,10 @@ class AsyncAuditsResource(AsyncAPIResource):
         self,
         *,
         audit_scope: Literal["all_transactions", "specific_accounts", "specific_cards", "all_users"],
-        end_date: Union[str, date],
+        end_date: object,
         regulatory_frameworks: List[Literal["AML", "KYC", "PCI-DSS", "GDPR", "CCPA", "SOX", "OFAC"]],
-        start_date: Union[str, date],
-        additional_context: Optional[str] | Omit = omit,
+        start_date: object,
+        additional_context: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,7 +213,7 @@ class AsyncAuditsResource(AsyncAPIResource):
 
     async def retrieve_report(
         self,
-        audit_id: str,
+        audit_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -237,8 +234,6 @@ class AsyncAuditsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not audit_id:
-            raise ValueError(f"Expected a non-empty value for `audit_id` but received {audit_id!r}")
         return await self._get(
             f"/corporate/compliance/audits/{audit_id}/report",
             options=make_request_options(

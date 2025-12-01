@@ -13,7 +13,6 @@ from james_burvel_ocallaghan_iii.types import (
     FinancialGoal,
     GoalListResponse,
 )
-from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +25,7 @@ class TestGoals:
         goal = client.goals.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
@@ -36,9 +35,9 @@ class TestGoals:
         goal = client.goals.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
-            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            contributing_accounts=[{}],
             generate_ai_plan=True,
             initial_contribution=1000,
             risk_tolerance="conservative",
@@ -50,7 +49,7 @@ class TestGoals:
         response = client.goals.with_raw_response.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         )
 
@@ -64,7 +63,7 @@ class TestGoals:
         with client.goals.with_streaming_response.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         ) as response:
             assert not response.is_closed
@@ -107,13 +106,6 @@ class TestGoals:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            client.goals.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     def test_method_update(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.update(
             goal_id="goal_retirement_2050",
@@ -124,13 +116,13 @@ class TestGoals:
     def test_method_update_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.update(
             goal_id="goal_retirement_2050",
-            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            contributing_accounts=[{}],
             generate_ai_plan=True,
             name="Revised Retirement Fund Goal",
             risk_tolerance="conservative",
             status="paused",
             target_amount=1200000,
-            target_date=parse_date("2029-12-31"),
+            target_date="2029-12-31",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -159,13 +151,6 @@ class TestGoals:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_update(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            client.goals.with_raw_response.update(
-                goal_id="",
-            )
-
-    @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.list()
         assert_matches_type(GoalListResponse, goal, path=["response"])
@@ -173,8 +158,8 @@ class TestGoals:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         goal = client.goals.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
@@ -229,13 +214,6 @@ class TestGoals:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_delete(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            client.goals.with_raw_response.delete(
-                "",
-            )
-
 
 class TestAsyncGoals:
     parametrize = pytest.mark.parametrize(
@@ -247,7 +225,7 @@ class TestAsyncGoals:
         goal = await async_client.goals.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
@@ -257,9 +235,9 @@ class TestAsyncGoals:
         goal = await async_client.goals.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
-            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            contributing_accounts=[{}],
             generate_ai_plan=True,
             initial_contribution=1000,
             risk_tolerance="conservative",
@@ -271,7 +249,7 @@ class TestAsyncGoals:
         response = await async_client.goals.with_raw_response.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         )
 
@@ -285,7 +263,7 @@ class TestAsyncGoals:
         async with async_client.goals.with_streaming_response.create(
             name="Dream Vacation Fund",
             target_amount=15000,
-            target_date=parse_date("2026-06-30"),
+            target_date="2026-06-30",
             type="large_purchase",
         ) as response:
             assert not response.is_closed
@@ -328,13 +306,6 @@ class TestAsyncGoals:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            await async_client.goals.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     async def test_method_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.update(
             goal_id="goal_retirement_2050",
@@ -345,13 +316,13 @@ class TestAsyncGoals:
     async def test_method_update_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.update(
             goal_id="goal_retirement_2050",
-            contributing_accounts=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            contributing_accounts=[{}],
             generate_ai_plan=True,
             name="Revised Retirement Fund Goal",
             risk_tolerance="conservative",
             status="paused",
             target_amount=1200000,
-            target_date=parse_date("2029-12-31"),
+            target_date="2029-12-31",
         )
         assert_matches_type(FinancialGoal, goal, path=["response"])
 
@@ -380,13 +351,6 @@ class TestAsyncGoals:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            await async_client.goals.with_raw_response.update(
-                goal_id="",
-            )
-
-    @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.list()
         assert_matches_type(GoalListResponse, goal, path=["response"])
@@ -394,8 +358,8 @@ class TestAsyncGoals:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         goal = await async_client.goals.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(GoalListResponse, goal, path=["response"])
 
@@ -449,10 +413,3 @@ class TestAsyncGoals:
             assert goal is None
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `goal_id` but received ''"):
-            await async_client.goals.with_raw_response.delete(
-                "",
-            )

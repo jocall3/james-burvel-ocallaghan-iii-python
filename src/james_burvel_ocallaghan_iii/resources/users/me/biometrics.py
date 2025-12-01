@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
@@ -71,10 +70,10 @@ class BiometricsResource(SyncAPIResource):
     def enroll(
         self,
         *,
-        biometric_signature: str,
+        biometric_signature: object,
         biometric_type: Literal["fingerprint", "facial_recognition", "voice_recognition"],
-        device_id: str,
-        device_name: Optional[str] | Omit = omit,
+        device_id: object,
+        device_name: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -146,9 +145,9 @@ class BiometricsResource(SyncAPIResource):
     def verify(
         self,
         *,
-        biometric_signature: str,
+        biometric_signature: object,
         biometric_type: Literal["fingerprint", "facial_recognition", "voice_recognition"],
-        device_id: str,
+        device_id: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -238,10 +237,10 @@ class AsyncBiometricsResource(AsyncAPIResource):
     async def enroll(
         self,
         *,
-        biometric_signature: str,
+        biometric_signature: object,
         biometric_type: Literal["fingerprint", "facial_recognition", "voice_recognition"],
-        device_id: str,
-        device_name: Optional[str] | Omit = omit,
+        device_id: object,
+        device_name: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -313,9 +312,9 @@ class AsyncBiometricsResource(AsyncAPIResource):
     async def verify(
         self,
         *,
-        biometric_signature: str,
+        biometric_signature: object,
         biometric_type: Literal["fingerprint", "facial_recognition", "voice_recognition"],
-        device_id: str,
+        device_id: object,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

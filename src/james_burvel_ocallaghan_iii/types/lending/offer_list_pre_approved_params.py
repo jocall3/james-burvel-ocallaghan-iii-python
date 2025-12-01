@@ -8,8 +8,8 @@ __all__ = ["OfferListPreApprovedParams"]
 
 
 class OfferListPreApprovedParams(TypedDict, total=False):
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""

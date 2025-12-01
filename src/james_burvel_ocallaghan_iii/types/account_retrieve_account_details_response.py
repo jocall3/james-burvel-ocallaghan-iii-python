@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import datetime
 from typing import List, Optional
 
 from pydantic import Field as FieldInfo
@@ -16,24 +15,24 @@ __all__ = [
 
 
 class AccountRetrieveAccountDetailsResponseBalanceHistory(BaseModel):
-    balance: Optional[float] = None
+    balance: Optional[object] = None
 
-    date: Optional[datetime.date] = None
+    date: Optional[object] = None
 
 
 class AccountRetrieveAccountDetailsResponseProjectedCashFlow(BaseModel):
-    confidence_score: Optional[int] = FieldInfo(alias="confidenceScore", default=None)
+    confidence_score: Optional[object] = FieldInfo(alias="confidenceScore", default=None)
     """AI confidence score for the cash flow projection (0-100)."""
 
-    days30: Optional[float] = None
+    days30: Optional[object] = None
     """Projected cash flow for the next 30 days."""
 
-    days90: Optional[float] = None
+    days90: Optional[object] = None
     """Projected cash flow for the next 90 days."""
 
 
 class AccountRetrieveAccountDetailsResponse(LinkedAccount):
-    account_holder: Optional[str] = FieldInfo(alias="accountHolder", default=None)
+    account_holder: Optional[object] = FieldInfo(alias="accountHolder", default=None)
     """Name of the primary holder for this account."""
 
     balance_history: Optional[List[AccountRetrieveAccountDetailsResponseBalanceHistory]] = FieldInfo(
@@ -41,15 +40,15 @@ class AccountRetrieveAccountDetailsResponse(LinkedAccount):
     )
     """Historical daily balance data."""
 
-    interest_rate: Optional[float] = FieldInfo(alias="interestRate", default=None)
+    interest_rate: Optional[object] = FieldInfo(alias="interestRate", default=None)
     """Annual interest rate (if applicable)."""
 
-    opened_date: Optional[datetime.date] = FieldInfo(alias="openedDate", default=None)
+    opened_date: Optional[object] = FieldInfo(alias="openedDate", default=None)
     """Date the account was opened."""
 
     projected_cash_flow: Optional[AccountRetrieveAccountDetailsResponseProjectedCashFlow] = FieldInfo(
         alias="projectedCashFlow", default=None
     )
 
-    transactions_count: Optional[int] = FieldInfo(alias="transactionsCount", default=None)
+    transactions_count: Optional[object] = FieldInfo(alias="transactionsCount", default=None)
     """Total number of transactions in this account."""

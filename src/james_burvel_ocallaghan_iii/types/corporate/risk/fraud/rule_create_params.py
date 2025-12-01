@@ -17,10 +17,10 @@ class RuleCreateParams(TypedDict, total=False):
     criteria: Required[FraudRuleCriteriaParam]
     """Criteria that define when a fraud rule should trigger."""
 
-    description: Required[str]
+    description: Required[object]
     """Detailed description of what the rule detects."""
 
-    name: Required[str]
+    name: Required[object]
     """Name of the new fraud rule."""
 
     severity: Required[Literal["Low", "Medium", "High", "Critical"]]

@@ -25,8 +25,8 @@ class TestIncubator:
     @parametrize
     def test_method_list_pitches_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         incubator = client.ai.incubator.list_pitches(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
             status="feedback_required",
         )
         assert_matches_type(IncubatorListPitchesResponse, incubator, path=["response"])
@@ -65,8 +65,8 @@ class TestAsyncIncubator:
     @parametrize
     async def test_method_list_pitches_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         incubator = await async_client.ai.incubator.list_pitches(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
             status="feedback_required",
         )
         assert_matches_type(IncubatorListPitchesResponse, incubator, path=["response"])

@@ -13,7 +13,6 @@ from james_burvel_ocallaghan_iii.types import (
     Budget,
     BudgetListResponse,
 )
-from james_burvel_ocallaghan_iii._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -24,10 +23,10 @@ class TestBudgets:
     @parametrize
     def test_method_create(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         )
         assert_matches_type(Budget, budget, path=["response"])
@@ -35,10 +34,10 @@ class TestBudgets:
     @parametrize
     def test_method_create_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
             ai_auto_populate=True,
             alert_threshold=75,
@@ -58,10 +57,10 @@ class TestBudgets:
     @parametrize
     def test_raw_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         response = client.budgets.with_raw_response.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         )
 
@@ -73,10 +72,10 @@ class TestBudgets:
     @parametrize
     def test_streaming_response_create(self, client: JamesBurvelOcallaghanIii) -> None:
         with client.budgets.with_streaming_response.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         ) as response:
             assert not response.is_closed
@@ -119,13 +118,6 @@ class TestBudgets:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            client.budgets.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     def test_method_update(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.update(
             budget_id="budget_monthly_aug",
@@ -143,9 +135,9 @@ class TestBudgets:
                     "name": "Groceries",
                 }
             ],
-            end_date=parse_date("2024-08-31"),
+            end_date="2024-08-31",
             name="August 2024 Revised Household Budget",
-            start_date=parse_date("2024-08-01"),
+            start_date="2024-08-01",
             status="active",
             total_amount=3200,
         )
@@ -176,13 +168,6 @@ class TestBudgets:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_update(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            client.budgets.with_raw_response.update(
-                budget_id="",
-            )
-
-    @parametrize
     def test_method_list(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.list()
         assert_matches_type(BudgetListResponse, budget, path=["response"])
@@ -190,8 +175,8 @@ class TestBudgets:
     @parametrize
     def test_method_list_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         budget = client.budgets.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(BudgetListResponse, budget, path=["response"])
 
@@ -246,13 +231,6 @@ class TestBudgets:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_delete(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            client.budgets.with_raw_response.delete(
-                "",
-            )
-
 
 class TestAsyncBudgets:
     parametrize = pytest.mark.parametrize(
@@ -262,10 +240,10 @@ class TestAsyncBudgets:
     @parametrize
     async def test_method_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         )
         assert_matches_type(Budget, budget, path=["response"])
@@ -273,10 +251,10 @@ class TestAsyncBudgets:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
             ai_auto_populate=True,
             alert_threshold=75,
@@ -296,10 +274,10 @@ class TestAsyncBudgets:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         response = await async_client.budgets.with_raw_response.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         )
 
@@ -311,10 +289,10 @@ class TestAsyncBudgets:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         async with async_client.budgets.with_streaming_response.create(
-            end_date=parse_date("2024-09-30"),
+            end_date="2024-09-30",
             name="September Living Expenses",
             period="monthly",
-            start_date=parse_date("2024-09-01"),
+            start_date="2024-09-01",
             total_amount=2800,
         ) as response:
             assert not response.is_closed
@@ -357,13 +335,6 @@ class TestAsyncBudgets:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            await async_client.budgets.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     async def test_method_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.update(
             budget_id="budget_monthly_aug",
@@ -381,9 +352,9 @@ class TestAsyncBudgets:
                     "name": "Groceries",
                 }
             ],
-            end_date=parse_date("2024-08-31"),
+            end_date="2024-08-31",
             name="August 2024 Revised Household Budget",
-            start_date=parse_date("2024-08-01"),
+            start_date="2024-08-01",
             status="active",
             total_amount=3200,
         )
@@ -414,13 +385,6 @@ class TestAsyncBudgets:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            await async_client.budgets.with_raw_response.update(
-                budget_id="",
-            )
-
-    @parametrize
     async def test_method_list(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.list()
         assert_matches_type(BudgetListResponse, budget, path=["response"])
@@ -428,8 +392,8 @@ class TestAsyncBudgets:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         budget = await async_client.budgets.list(
-            limit=1,
-            offset=0,
+            limit={},
+            offset={},
         )
         assert_matches_type(BudgetListResponse, budget, path=["response"])
 
@@ -483,10 +447,3 @@ class TestAsyncBudgets:
             assert budget is None
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_delete(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `budget_id` but received ''"):
-            await async_client.budgets.with_raw_response.delete(
-                "",
-            )

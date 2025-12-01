@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Iterable
 
 import httpx
 
@@ -47,10 +47,10 @@ class SimulateResource(SyncAPIResource):
     def run_advanced(
         self,
         *,
-        prompt: str,
+        prompt: object,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        global_economic_factors: Optional[simulate_run_advanced_params.GlobalEconomicFactors] | Omit = omit,
-        personal_assumptions: Optional[simulate_run_advanced_params.PersonalAssumptions] | Omit = omit,
+        global_economic_factors: simulate_run_advanced_params.GlobalEconomicFactors | Omit = omit,
+        personal_assumptions: simulate_run_advanced_params.PersonalAssumptions | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,8 +99,8 @@ class SimulateResource(SyncAPIResource):
     def run_standard(
         self,
         *,
-        prompt: str,
-        parameters: Optional[object] | Omit = omit,
+        prompt: object,
+        parameters: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -166,10 +166,10 @@ class AsyncSimulateResource(AsyncAPIResource):
     async def run_advanced(
         self,
         *,
-        prompt: str,
+        prompt: object,
         scenarios: Iterable[simulate_run_advanced_params.Scenario],
-        global_economic_factors: Optional[simulate_run_advanced_params.GlobalEconomicFactors] | Omit = omit,
-        personal_assumptions: Optional[simulate_run_advanced_params.PersonalAssumptions] | Omit = omit,
+        global_economic_factors: simulate_run_advanced_params.GlobalEconomicFactors | Omit = omit,
+        personal_assumptions: simulate_run_advanced_params.PersonalAssumptions | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -218,8 +218,8 @@ class AsyncSimulateResource(AsyncAPIResource):
     async def run_standard(
         self,
         *,
-        prompt: str,
-        parameters: Optional[object] | Omit = omit,
+        prompt: object,
+        parameters: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

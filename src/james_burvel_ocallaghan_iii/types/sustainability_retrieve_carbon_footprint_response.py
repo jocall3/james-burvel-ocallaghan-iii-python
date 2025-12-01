@@ -11,21 +11,21 @@ __all__ = ["SustainabilityRetrieveCarbonFootprintResponse", "BreakdownByCategory
 
 
 class BreakdownByCategory(BaseModel):
-    carbon_footprint_kg_co2e: Optional[float] = FieldInfo(alias="carbonFootprintKgCO2e", default=None)
+    carbon_footprint_kg_co2e: Optional[object] = FieldInfo(alias="carbonFootprintKgCO2e", default=None)
 
-    category: Optional[str] = None
+    category: Optional[object] = None
 
-    percentage: Optional[float] = None
+    percentage: Optional[object] = None
 
 
 class OffsetRecommendation(BaseModel):
-    cost_per_ton_usd: Optional[float] = FieldInfo(alias="costPerTonUSD", default=None)
+    cost_per_ton_usd: Optional[object] = FieldInfo(alias="costPerTonUSD", default=None)
 
-    offset_amount_kg_co2e: Optional[float] = FieldInfo(alias="offsetAmountKgCO2e", default=None)
+    offset_amount_kg_co2e: Optional[object] = FieldInfo(alias="offsetAmountKgCO2e", default=None)
 
-    project: Optional[str] = None
+    project: Optional[object] = None
 
-    total_cost_usd: Optional[float] = FieldInfo(alias="totalCostUSD", default=None)
+    total_cost_usd: Optional[object] = FieldInfo(alias="totalCostUSD", default=None)
 
 
 class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
@@ -35,13 +35,13 @@ class SustainabilityRetrieveCarbonFootprintResponse(BaseModel):
     breakdown_by_category: List[BreakdownByCategory] = FieldInfo(alias="breakdownByCategory")
     """Breakdown of carbon footprint by spending categories."""
 
-    period: str
+    period: object
     """The period covered by the report."""
 
-    report_id: str = FieldInfo(alias="reportId")
+    report_id: object = FieldInfo(alias="reportId")
     """Unique identifier for the carbon footprint report."""
 
-    total_carbon_footprint_kg_co2e: float = FieldInfo(alias="totalCarbonFootprintKgCO2e")
+    total_carbon_footprint_kg_co2e: object = FieldInfo(alias="totalCarbonFootprintKgCO2e")
     """Total estimated carbon footprint in kilograms of CO2 equivalent."""
 
     offset_recommendations: Optional[List[OffsetRecommendation]] = FieldInfo(

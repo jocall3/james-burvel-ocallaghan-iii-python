@@ -41,9 +41,9 @@ class TestInternational:
                 "address": "Hauptstrasse 1, 10115 Berlin, Germany",
                 "bank_name": "Deutsche Bank",
                 "name": "Maria Schmidt",
-                "account_number": "accountNumber",
+                "account_number": {},
                 "iban": "DE89370400440532013000",
-                "routing_number": "routingNumber",
+                "routing_number": {},
                 "swift_bic": "DEUTDEFF",
             },
             purpose="Vendor payment for Q2 services.",
@@ -52,7 +52,7 @@ class TestInternational:
             target_currency="EUR",
             fx_rate_lock=True,
             fx_rate_provider="proprietary_ai",
-            reference="reference",
+            reference={},
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
@@ -129,13 +129,6 @@ class TestInternational:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_retrieve_status(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_id` but received ''"):
-            client.payments.international.with_raw_response.retrieve_status(
-                "",
-            )
-
 
 class TestAsyncInternational:
     parametrize = pytest.mark.parametrize(
@@ -166,9 +159,9 @@ class TestAsyncInternational:
                 "address": "Hauptstrasse 1, 10115 Berlin, Germany",
                 "bank_name": "Deutsche Bank",
                 "name": "Maria Schmidt",
-                "account_number": "accountNumber",
+                "account_number": {},
                 "iban": "DE89370400440532013000",
-                "routing_number": "routingNumber",
+                "routing_number": {},
                 "swift_bic": "DEUTDEFF",
             },
             purpose="Vendor payment for Q2 services.",
@@ -177,7 +170,7 @@ class TestAsyncInternational:
             target_currency="EUR",
             fx_rate_lock=True,
             fx_rate_provider="proprietary_ai",
-            reference="reference",
+            reference={},
         )
         assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
@@ -253,10 +246,3 @@ class TestAsyncInternational:
             assert_matches_type(InternationalPaymentStatus, international, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_retrieve_status(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `payment_id` but received ''"):
-            await async_client.payments.international.with_raw_response.retrieve_status(
-                "",
-            )

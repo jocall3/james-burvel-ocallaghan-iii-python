@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -13,28 +12,28 @@ __all__ = ["FraudRule"]
 
 
 class FraudRule(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the fraud detection rule."""
 
     action: FraudRuleAction
     """Action to take when a fraud rule is triggered."""
 
-    created_at: datetime = FieldInfo(alias="createdAt")
+    created_at: object = FieldInfo(alias="createdAt")
     """Timestamp when the rule was created."""
 
-    created_by: str = FieldInfo(alias="createdBy")
+    created_by: object = FieldInfo(alias="createdBy")
     """Identifier of who created the rule (e.g., user ID, 'system:ai-risk-engine')."""
 
     criteria: FraudRuleCriteria
     """Criteria that define when a fraud rule should trigger."""
 
-    description: str
+    description: object
     """Detailed description of what the rule detects."""
 
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp when the rule was last updated."""
 
-    name: str
+    name: object
     """Name of the fraud rule."""
 
     severity: Literal["Low", "Medium", "High", "Critical"]

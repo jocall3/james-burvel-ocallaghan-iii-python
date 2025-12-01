@@ -17,7 +17,7 @@ class PortfolioUpdateParams(TypedDict, total=False):
     ]
     """Updated frequency for AI-driven rebalancing."""
 
-    name: str
+    name: object
     """Updated name of the portfolio."""
 
     risk_tolerance: Annotated[

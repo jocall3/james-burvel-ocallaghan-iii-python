@@ -28,9 +28,9 @@ class TestAssets:
     def test_method_search_with_all_params(self, client: JamesBurvelOcallaghanIii) -> None:
         asset = client.investments.assets.search(
             query="Tesla",
-            limit=1,
+            limit={},
             min_esg_score=7,
-            offset=0,
+            offset={},
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 
@@ -75,9 +75,9 @@ class TestAsyncAssets:
     async def test_method_search_with_all_params(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         asset = await async_client.investments.assets.search(
             query="Tesla",
-            limit=1,
+            limit={},
             min_esg_score=7,
-            offset=0,
+            offset={},
         )
         assert_matches_type(AssetSearchResponse, asset, path=["response"])
 

@@ -55,8 +55,8 @@ class RulesResource(SyncAPIResource):
         *,
         action: FraudRuleActionParam,
         criteria: FraudRuleCriteriaParam,
-        description: str,
-        name: str,
+        description: object,
+        name: object,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -113,12 +113,12 @@ class RulesResource(SyncAPIResource):
 
     def update(
         self,
-        rule_id: str,
+        rule_id: object,
         *,
         action: FraudRuleActionParam | Omit = omit,
         criteria: FraudRuleCriteriaParam | Omit = omit,
-        description: str | Omit = omit,
-        name: str | Omit = omit,
+        description: object | Omit = omit,
+        name: object | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -133,9 +133,9 @@ class RulesResource(SyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          action: Updated action to take when the rule is triggered.
+          action: Action to take when a fraud rule is triggered.
 
-          criteria: Updated criteria for the rule.
+          criteria: Criteria that define when a fraud rule should trigger.
 
           description: Updated description of what the rule detects.
 
@@ -153,8 +153,6 @@ class RulesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not rule_id:
-            raise ValueError(f"Expected a non-empty value for `rule_id` but received {rule_id!r}")
         return self._put(
             f"/corporate/risk/fraud/rules/{rule_id}",
             body=maybe_transform(
@@ -177,8 +175,8 @@ class RulesResource(SyncAPIResource):
     def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -224,7 +222,7 @@ class RulesResource(SyncAPIResource):
 
     def delete(
         self,
-        rule_id: str,
+        rule_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -245,8 +243,6 @@ class RulesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not rule_id:
-            raise ValueError(f"Expected a non-empty value for `rule_id` but received {rule_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/corporate/risk/fraud/rules/{rule_id}",
@@ -282,8 +278,8 @@ class AsyncRulesResource(AsyncAPIResource):
         *,
         action: FraudRuleActionParam,
         criteria: FraudRuleCriteriaParam,
-        description: str,
-        name: str,
+        description: object,
+        name: object,
         severity: Literal["Low", "Medium", "High", "Critical"],
         status: Literal["active", "inactive", "draft"],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -340,12 +336,12 @@ class AsyncRulesResource(AsyncAPIResource):
 
     async def update(
         self,
-        rule_id: str,
+        rule_id: object,
         *,
         action: FraudRuleActionParam | Omit = omit,
         criteria: FraudRuleCriteriaParam | Omit = omit,
-        description: str | Omit = omit,
-        name: str | Omit = omit,
+        description: object | Omit = omit,
+        name: object | Omit = omit,
         severity: Literal["Low", "Medium", "High", "Critical"] | Omit = omit,
         status: Literal["active", "inactive", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -360,9 +356,9 @@ class AsyncRulesResource(AsyncAPIResource):
         criteria, actions, or status.
 
         Args:
-          action: Updated action to take when the rule is triggered.
+          action: Action to take when a fraud rule is triggered.
 
-          criteria: Updated criteria for the rule.
+          criteria: Criteria that define when a fraud rule should trigger.
 
           description: Updated description of what the rule detects.
 
@@ -380,8 +376,6 @@ class AsyncRulesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not rule_id:
-            raise ValueError(f"Expected a non-empty value for `rule_id` but received {rule_id!r}")
         return await self._put(
             f"/corporate/risk/fraud/rules/{rule_id}",
             body=await async_maybe_transform(
@@ -404,8 +398,8 @@ class AsyncRulesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
+        limit: object | Omit = omit,
+        offset: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -451,7 +445,7 @@ class AsyncRulesResource(AsyncAPIResource):
 
     async def delete(
         self,
-        rule_id: str,
+        rule_id: object,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -472,8 +466,6 @@ class AsyncRulesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not rule_id:
-            raise ValueError(f"Expected a non-empty value for `rule_id` but received {rule_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/corporate/risk/fraud/rules/{rule_id}",

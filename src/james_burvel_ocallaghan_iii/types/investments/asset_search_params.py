@@ -10,14 +10,14 @@ __all__ = ["AssetSearchParams"]
 
 
 class AssetSearchParams(TypedDict, total=False):
-    query: Required[str]
+    query: Required[object]
     """Search query for asset name or symbol."""
 
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    min_esg_score: Annotated[float, PropertyInfo(alias="minESGScore")]
+    min_esg_score: Annotated[object, PropertyInfo(alias="minESGScore")]
     """Minimum desired ESG score (0-10)."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""

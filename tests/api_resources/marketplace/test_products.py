@@ -31,9 +31,9 @@ class TestProducts:
         product = client.marketplace.products.list(
             ai_personalization_level="high",
             category="insurance",
-            limit=1,
+            limit={},
             min_rating=4,
-            offset=0,
+            offset={},
         )
         assert_matches_type(ProductListResponse, product, path=["response"])
 
@@ -97,13 +97,6 @@ class TestProducts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_redeem_marketplace_offer(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `offer_id` but received ''"):
-            client.marketplace.products.with_raw_response.redeem_marketplace_offer(
-                offer_id="",
-            )
-
-    @parametrize
     def test_method_simulate_purchase(self, client: JamesBurvelOcallaghanIii) -> None:
         product = client.marketplace.products.simulate_purchase(
             product_id="prod_home_insurance_quantum",
@@ -145,13 +138,6 @@ class TestProducts:
 
         assert cast(Any, response.is_closed) is True
 
-    @parametrize
-    def test_path_params_simulate_purchase(self, client: JamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `product_id` but received ''"):
-            client.marketplace.products.with_raw_response.simulate_purchase(
-                product_id="",
-            )
-
 
 class TestAsyncProducts:
     parametrize = pytest.mark.parametrize(
@@ -168,9 +154,9 @@ class TestAsyncProducts:
         product = await async_client.marketplace.products.list(
             ai_personalization_level="high",
             category="insurance",
-            limit=1,
+            limit={},
             min_rating=4,
-            offset=0,
+            offset={},
         )
         assert_matches_type(ProductListResponse, product, path=["response"])
 
@@ -238,13 +224,6 @@ class TestAsyncProducts:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_redeem_marketplace_offer(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `offer_id` but received ''"):
-            await async_client.marketplace.products.with_raw_response.redeem_marketplace_offer(
-                offer_id="",
-            )
-
-    @parametrize
     async def test_method_simulate_purchase(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
         product = await async_client.marketplace.products.simulate_purchase(
             product_id="prod_home_insurance_quantum",
@@ -285,10 +264,3 @@ class TestAsyncProducts:
             assert_matches_type(ProductSimulatePurchaseResponse, product, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_path_params_simulate_purchase(self, async_client: AsyncJamesBurvelOcallaghanIii) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `product_id` but received ''"):
-            await async_client.marketplace.products.with_raw_response.simulate_purchase(
-                product_id="",
-            )

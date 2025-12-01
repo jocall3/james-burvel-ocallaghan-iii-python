@@ -23,11 +23,11 @@ class ProductListParams(TypedDict, total=False):
     Filter products by category (e.g., loans, insurance, credit_cards, investments).
     """
 
-    limit: int
+    limit: object
     """Maximum number of items to return in a single page."""
 
-    min_rating: Annotated[float, PropertyInfo(alias="minRating")]
+    min_rating: Annotated[object, PropertyInfo(alias="minRating")]
     """Minimum user rating for products (0-5)."""
 
-    offset: int
+    offset: object
     """Number of items to skip before starting to collect the result set."""

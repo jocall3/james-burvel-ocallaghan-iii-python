@@ -2,19 +2,19 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Literal, Annotated, TypedDict
 
-from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = ["WebhookUpdateParams"]
 
 
 class WebhookUpdateParams(TypedDict, total=False):
-    callback_url: Annotated[str, PropertyInfo(alias="callbackUrl")]
+    callback_url: Annotated[object, PropertyInfo(alias="callbackUrl")]
     """Updated URL where webhook events will be sent."""
 
-    events: SequenceNotStr[str]
+    events: Iterable[object]
     """Updated list of event types subscribed to."""
 
     status: Literal["active", "paused", "suspended"]

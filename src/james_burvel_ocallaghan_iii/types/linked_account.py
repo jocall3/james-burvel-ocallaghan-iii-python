@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -12,35 +11,35 @@ __all__ = ["LinkedAccount"]
 
 
 class LinkedAccount(BaseModel):
-    id: str
+    id: object
     """Unique identifier for the linked account within ."""
 
-    currency: str
+    currency: object
     """ISO 4217 currency code of the account."""
 
-    current_balance: float = FieldInfo(alias="currentBalance")
+    current_balance: object = FieldInfo(alias="currentBalance")
     """Current balance of the account."""
 
-    institution_name: str = FieldInfo(alias="institutionName")
+    institution_name: object = FieldInfo(alias="institutionName")
     """Name of the financial institution where the account is held."""
 
-    last_updated: datetime = FieldInfo(alias="lastUpdated")
+    last_updated: object = FieldInfo(alias="lastUpdated")
     """Timestamp when the account balance was last synced."""
 
-    name: str
+    name: object
     """Display name of the account."""
 
     type: Literal["depository", "credit", "loan", "investment", "other"]
     """General type of the account."""
 
-    available_balance: Optional[float] = FieldInfo(alias="availableBalance", default=None)
+    available_balance: Optional[object] = FieldInfo(alias="availableBalance", default=None)
     """Available balance (after pending transactions) of the account."""
 
-    external_id: Optional[str] = FieldInfo(alias="externalId", default=None)
+    external_id: Optional[object] = FieldInfo(alias="externalId", default=None)
     """Optional: Identifier from the external data provider (e.g., Plaid)."""
 
-    mask: Optional[str] = None
+    mask: Optional[object] = None
     """Masked account number (e.g., last 4 digits)."""
 
-    subtype: Optional[str] = None
+    subtype: Optional[object] = None
     """Specific subtype of the account (e.g., checking, savings, IRA, 401k)."""

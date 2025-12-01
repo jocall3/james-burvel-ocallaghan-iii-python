@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -11,14 +10,14 @@ __all__ = ["TransactionCategorizeParams"]
 
 
 class TransactionCategorizeParams(TypedDict, total=False):
-    category: Required[str]
+    category: Required[object]
     """The new category for the transaction. Can be hierarchical."""
 
-    apply_to_future: Annotated[bool, PropertyInfo(alias="applyToFuture")]
+    apply_to_future: Annotated[object, PropertyInfo(alias="applyToFuture")]
     """
     If true, the AI will learn from this correction and try to apply it to similar
     future transactions.
     """
 
-    notes: Optional[str]
+    notes: object
     """Optional notes to add to the transaction."""
