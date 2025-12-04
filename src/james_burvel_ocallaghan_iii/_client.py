@@ -120,7 +120,7 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_BASE_URL")
         if base_url is None:
-            base_url = f"https://virtserver.swaggerhub.com/JOCALL3_1/jamesburvelocallaghaniiiapi/1.0"
+            base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
 
         super().__init__(
             version=__version__,
@@ -351,7 +351,7 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_BASE_URL")
         if base_url is None:
-            base_url = f"https://virtserver.swaggerhub.com/JOCALL3_1/jamesburvelocallaghaniiiapi/1.0"
+            base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
 
         super().__init__(
             version=__version__,
