@@ -1,6 +1,6 @@
 [project]
 name = "james_burvel_ocallaghan_iii"
-version = "1.1.0"
+version = "1.2.0"
 description = "The official Python library for the james-burvel-ocallaghan-iii API"
 dynamic = ["readme"]
 license = "Apache-2.0"
