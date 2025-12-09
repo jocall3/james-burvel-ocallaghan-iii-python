@@ -19,6 +19,8 @@ class EnrolledBiometric(BaseModel):
 
 
 class BiometricStatus(BaseModel):
+    """Current biometric enrollment status for a user."""
+
     biometrics_enrolled: object = FieldInfo(alias="biometricsEnrolled")
     """Overall status indicating if any biometrics are enrolled."""
 

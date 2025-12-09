@@ -11,6 +11,8 @@ __all__ = ["CorporateCardControlsParam"]
 
 
 class CorporateCardControlsParam(TypedDict, total=False):
+    """Granular spending controls for a corporate card."""
+
     atm_withdrawals: Annotated[object, PropertyInfo(alias="atmWithdrawals")]
     """If true, ATM cash withdrawals are allowed."""
 

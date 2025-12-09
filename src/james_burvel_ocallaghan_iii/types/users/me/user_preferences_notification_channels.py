@@ -10,6 +10,8 @@ __all__ = ["UserPreferencesNotificationChannels"]
 
 
 class UserPreferencesNotificationChannels(BaseModel):
+    """Preferred channels for receiving notifications."""
+
     email: Optional[object] = None
 
     in_app: Optional[object] = FieldInfo(alias="inApp", default=None)

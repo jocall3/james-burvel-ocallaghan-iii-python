@@ -11,6 +11,8 @@ __all__ = ["FraudRuleAction"]
 
 
 class FraudRuleAction(BaseModel):
+    """Action to take when a fraud rule is triggered."""
+
     details: object
     """Details or instructions for the action."""
 

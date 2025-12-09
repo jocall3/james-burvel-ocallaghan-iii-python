@@ -10,6 +10,8 @@ __all__ = ["AccountRetrieveAccountStatementsResponse", "DownloadURLs"]
 
 
 class DownloadURLs(BaseModel):
+    """Map of available download URLs for different formats."""
+
     csv: Optional[object] = None
     """Signed URL to download the statement in CSV format."""
 

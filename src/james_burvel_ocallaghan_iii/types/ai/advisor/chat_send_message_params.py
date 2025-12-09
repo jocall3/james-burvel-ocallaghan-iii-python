@@ -27,6 +27,10 @@ class ChatSendMessageParams(TypedDict, total=False):
 
 
 class FunctionResponse(TypedDict, total=False):
+    """
+    Optional: The output from a tool function that the AI previously requested to be executed.
+    """
+
     name: object
     """The name of the tool function for which this is a response."""
 

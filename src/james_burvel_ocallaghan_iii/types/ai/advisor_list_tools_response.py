@@ -11,6 +11,8 @@ __all__ = ["AdvisorListToolsResponse", "Data", "DataParameters"]
 
 
 class DataParameters(BaseModel):
+    """OpenAPI schema object defining the input parameters for the tool function."""
+
     properties: Optional[object] = None
 
     required: Optional[List[object]] = None
