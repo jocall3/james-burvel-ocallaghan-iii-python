@@ -24,6 +24,8 @@ class AccountTypeBreakdown(BaseModel):
 
 
 class AILiquidityAssessment(BaseModel):
+    """AI's overall assessment of liquidity."""
+
     message: Optional[object] = None
 
     status: Optional[Literal["optimal", "sufficient", "tight", "critical"]] = None
@@ -38,6 +40,8 @@ class CurrencyBreakdown(BaseModel):
 
 
 class ShortTermInvestments(BaseModel):
+    """Details on short-term investments contributing to liquidity."""
+
     maturing_next30_days: Optional[object] = FieldInfo(alias="maturingNext30Days", default=None)
 
     total_value: Optional[object] = FieldInfo(alias="totalValue", default=None)

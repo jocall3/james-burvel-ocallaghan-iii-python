@@ -20,6 +20,8 @@ class KeyImpact(BaseModel):
 
 
 class RiskAnalysis(BaseModel):
+    """AI-driven risk assessment of the simulated scenario."""
+
     max_drawdown: Optional[object] = FieldInfo(alias="maxDrawdown", default=None)
     """Maximum potential loss from peak to trough (e.g., 0.25 for 25%)."""
 

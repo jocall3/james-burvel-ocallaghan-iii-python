@@ -11,6 +11,8 @@ __all__ = ["ProductListResponse", "Data", "DataOfferDetails"]
 
 
 class DataOfferDetails(BaseModel):
+    """Details of any special offers associated with the product."""
+
     code: Optional[object] = None
     """Optional redemption code."""
 

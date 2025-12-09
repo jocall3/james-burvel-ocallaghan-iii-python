@@ -12,6 +12,8 @@ __all__ = ["UserPreferences"]
 
 
 class UserPreferences(BaseModel):
+    """User's personalized preferences for the platform."""
+
     ai_interaction_mode: Optional[Literal["proactive", "balanced", "on_demand"]] = FieldInfo(
         alias="aiInteractionMode", default=None
     )

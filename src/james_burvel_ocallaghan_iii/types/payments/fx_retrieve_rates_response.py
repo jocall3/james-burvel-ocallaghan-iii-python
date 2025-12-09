@@ -10,6 +10,8 @@ __all__ = ["FxRetrieveRatesResponse", "CurrentRate", "HistoricalVolatility", "Pr
 
 
 class CurrentRate(BaseModel):
+    """Real-time foreign exchange rates."""
+
     ask: Optional[object] = None
     """
     Current ask rate (price at which a currency dealer will sell the base currency).

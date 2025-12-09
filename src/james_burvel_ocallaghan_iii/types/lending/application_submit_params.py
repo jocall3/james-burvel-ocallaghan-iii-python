@@ -32,6 +32,8 @@ class ApplicationSubmitParams(TypedDict, total=False):
 
 
 class CoApplicant(TypedDict, total=False):
+    """Optional: Details of a co-applicant for the loan."""
+
     email: object
 
     income: object
