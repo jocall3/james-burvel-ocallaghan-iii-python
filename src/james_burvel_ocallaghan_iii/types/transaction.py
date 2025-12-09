@@ -12,6 +12,8 @@ __all__ = ["Transaction", "Location", "MerchantDetails"]
 
 
 class Location(BaseModel):
+    """Geographic location details for a transaction."""
+
     city: Optional[object] = None
     """City where the transaction occurred."""
 
@@ -29,6 +31,8 @@ class Location(BaseModel):
 
 
 class MerchantDetails(BaseModel):
+    """Detailed information about a merchant associated with a transaction."""
+
     address: Optional[Address] = None
 
     logo_url: Optional[object] = FieldInfo(alias="logoUrl", default=None)

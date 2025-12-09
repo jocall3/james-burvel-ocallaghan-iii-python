@@ -25,6 +25,8 @@ class InflowForecastBySource(BaseModel):
 
 
 class InflowForecast(BaseModel):
+    """Forecast of cash inflows by source."""
+
     by_source: Optional[List[InflowForecastBySource]] = FieldInfo(alias="bySource", default=None)
 
     total_projected: Optional[object] = FieldInfo(alias="totalProjected", default=None)
@@ -37,6 +39,8 @@ class OutflowForecastByCategory(BaseModel):
 
 
 class OutflowForecast(BaseModel):
+    """Forecast of cash outflows by category."""
+
     by_category: Optional[List[OutflowForecastByCategory]] = FieldInfo(alias="byCategory", default=None)
 
     total_projected: Optional[object] = FieldInfo(alias="totalProjected", default=None)

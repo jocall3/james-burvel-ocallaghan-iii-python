@@ -39,6 +39,8 @@ class InternationalInitiateParams(TypedDict, total=False):
 
 
 class Beneficiary(TypedDict, total=False):
+    """Details of the payment beneficiary."""
+
     address: Required[object]
     """Full address of the beneficiary."""
 

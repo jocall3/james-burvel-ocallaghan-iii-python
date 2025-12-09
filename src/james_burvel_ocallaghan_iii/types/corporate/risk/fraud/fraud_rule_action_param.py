@@ -10,6 +10,8 @@ __all__ = ["FraudRuleActionParam"]
 
 
 class FraudRuleActionParam(TypedDict, total=False):
+    """Action to take when a fraud rule is triggered."""
+
     details: Required[object]
     """Details or instructions for the action."""
 

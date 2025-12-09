@@ -11,6 +11,8 @@ __all__ = ["RecurringTransaction"]
 
 
 class RecurringTransaction(BaseModel):
+    """Details of a detected or user-defined recurring transaction."""
+
     id: object
     """Unique identifier for the recurring transaction."""
 

@@ -20,6 +20,8 @@ class AIStrategicPlanStep(BaseModel):
 
 
 class AIStrategicPlan(BaseModel):
+    """AI-generated strategic plan for achieving the goal."""
+
     plan_id: Optional[object] = FieldInfo(alias="planId", default=None)
 
     steps: Optional[List[AIStrategicPlanStep]] = None

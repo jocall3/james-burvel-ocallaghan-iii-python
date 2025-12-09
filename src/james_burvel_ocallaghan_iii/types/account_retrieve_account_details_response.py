@@ -32,6 +32,8 @@ class AccountRetrieveAccountDetailsResponseProjectedCashFlow(BaseModel):
 
 
 class AccountRetrieveAccountDetailsResponse(LinkedAccount):
+    """Summary information for a linked financial account."""
+
     account_holder: Optional[object] = FieldInfo(alias="accountHolder", default=None)
     """Name of the primary holder for this account."""
 

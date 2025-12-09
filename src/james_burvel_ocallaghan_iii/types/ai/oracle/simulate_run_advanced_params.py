@@ -71,12 +71,16 @@ class Scenario(TypedDict, total=False):
 
 
 class GlobalEconomicFactors(TypedDict, total=False):
+    """Optional: Global economic conditions to apply to all scenarios."""
+
     inflation_rate: Annotated[object, PropertyInfo(alias="inflationRate")]
 
     interest_rate_baseline: Annotated[object, PropertyInfo(alias="interestRateBaseline")]
 
 
 class PersonalAssumptions(TypedDict, total=False):
+    """Optional: Personal financial assumptions to override defaults."""
+
     annual_savings_rate: Annotated[object, PropertyInfo(alias="annualSavingsRate")]
 
     risk_tolerance: Annotated[Literal["conservative", "moderate", "aggressive"], PropertyInfo(alias="riskTolerance")]

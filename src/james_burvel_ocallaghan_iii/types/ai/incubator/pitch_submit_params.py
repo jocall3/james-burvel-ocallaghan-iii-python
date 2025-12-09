@@ -31,6 +31,8 @@ class PitchSubmitParams(TypedDict, total=False):
 
 
 class FinancialProjections(TypedDict, total=False):
+    """Key financial metrics and projections for the next 3-5 years."""
+
     profitability_estimate: Annotated[object, PropertyInfo(alias="profitabilityEstimate")]
     """Estimated time to profitability."""
 

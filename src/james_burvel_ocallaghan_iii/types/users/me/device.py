@@ -11,6 +11,8 @@ __all__ = ["Device"]
 
 
 class Device(BaseModel):
+    """Information about a connected device."""
+
     id: object
     """Unique identifier for the device."""
 

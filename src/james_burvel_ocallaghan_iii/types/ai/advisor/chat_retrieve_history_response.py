@@ -11,12 +11,16 @@ __all__ = ["ChatRetrieveHistoryResponse", "Data", "DataFunctionCall", "DataFunct
 
 
 class DataFunctionCall(BaseModel):
+    """If role is 'tool_call', details of the tool function called by the AI."""
+
     args: Optional[object] = None
 
     name: Optional[object] = None
 
 
 class DataFunctionResponse(BaseModel):
+    """If role is 'tool_response', the output from the tool function."""
+
     name: Optional[object] = None
 
     response: Optional[object] = None

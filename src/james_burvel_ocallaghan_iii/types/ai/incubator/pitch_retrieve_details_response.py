@@ -39,6 +39,8 @@ class PitchRetrieveDetailsResponseAICoachingPlanStep(BaseModel):
 
 
 class PitchRetrieveDetailsResponseAICoachingPlan(BaseModel):
+    """AI-generated coaching plan for the entrepreneur."""
+
     steps: Optional[List[PitchRetrieveDetailsResponseAICoachingPlanStep]] = None
 
     summary: Optional[object] = None
@@ -55,6 +57,8 @@ class PitchRetrieveDetailsResponseAIFinancialModelSensitivityAnalysis(BaseModel)
 
 
 class PitchRetrieveDetailsResponseAIFinancialModel(BaseModel):
+    """AI's detailed financial model analysis."""
+
     breakeven_point: Optional[object] = FieldInfo(alias="breakevenPoint", default=None)
 
     capital_requirements: Optional[object] = FieldInfo(alias="capitalRequirements", default=None)
@@ -69,6 +73,8 @@ class PitchRetrieveDetailsResponseAIFinancialModel(BaseModel):
 
 
 class PitchRetrieveDetailsResponseAIMarketAnalysis(BaseModel):
+    """AI's detailed market analysis."""
+
     competitive_advantages: Optional[List[object]] = FieldInfo(alias="competitiveAdvantages", default=None)
 
     growth_opportunities: Optional[object] = FieldInfo(alias="growthOpportunities", default=None)
@@ -79,6 +85,8 @@ class PitchRetrieveDetailsResponseAIMarketAnalysis(BaseModel):
 
 
 class PitchRetrieveDetailsResponseAIRiskAssessment(BaseModel):
+    """AI's assessment of risks associated with the venture."""
+
     market_risk: Optional[object] = FieldInfo(alias="marketRisk", default=None)
 
     team_risk: Optional[object] = FieldInfo(alias="teamRisk", default=None)

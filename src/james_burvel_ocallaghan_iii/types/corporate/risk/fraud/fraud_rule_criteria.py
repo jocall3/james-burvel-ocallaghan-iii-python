@@ -11,6 +11,8 @@ __all__ = ["FraudRuleCriteria"]
 
 
 class FraudRuleCriteria(BaseModel):
+    """Criteria that define when a fraud rule should trigger."""
+
     account_inactivity_days: Optional[object] = FieldInfo(alias="accountInactivityDays", default=None)
     """Number of days an account must be inactive for the rule to apply."""
 

@@ -23,6 +23,8 @@ class Finding(BaseModel):
 
 
 class PeriodCovered(BaseModel):
+    """The period covered by this audit report."""
+
     end_date: Optional[object] = FieldInfo(alias="endDate", default=None)
 
     start_date: Optional[object] = FieldInfo(alias="startDate", default=None)

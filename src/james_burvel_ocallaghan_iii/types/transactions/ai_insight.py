@@ -11,6 +11,8 @@ __all__ = ["AIInsight"]
 
 
 class AIInsight(BaseModel):
+    """An AI-generated insight, alert, or recommendation."""
+
     id: object
     """Unique identifier for the AI insight."""
 

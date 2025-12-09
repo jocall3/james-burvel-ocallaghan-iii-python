@@ -11,6 +11,8 @@ __all__ = ["LinkedAccount"]
 
 
 class LinkedAccount(BaseModel):
+    """Summary information for a linked financial account."""
+
     id: object
     """Unique identifier for the linked account within ."""
 

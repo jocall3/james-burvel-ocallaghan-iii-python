@@ -11,6 +11,8 @@ __all__ = ["InvestmentAnalyzeImpactResponse", "BreakdownByEsgFactors", "LowestEs
 
 
 class BreakdownByEsgFactors(BaseModel):
+    """Breakdown of the portfolio's ESG score by individual factors."""
+
     environmental_score: Optional[object] = FieldInfo(alias="environmentalScore", default=None)
 
     governance_score: Optional[object] = FieldInfo(alias="governanceScore", default=None)
