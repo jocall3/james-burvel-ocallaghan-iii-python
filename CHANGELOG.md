@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.2.0 (2025-12-09)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** manual updates ([f6debd6](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/f6debd672c23a24760f6ab4a35b432336ff19c2e))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([fd480bd](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/fd480bd1d6affa53f4094cf630cc35418ff7e296))
+
+
+### Chores
+
+* add missing docstrings ([2efd8d4](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/2efd8d48ac127a5be64d15cdda791dc1efb9027b))
+* update lockfile ([368dd93](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/368dd93151ea5d57056b4f275ded4998cab109ae))
+
 ## 1.1.0 (2025-12-01)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v1.0.0...v1.1.0)
