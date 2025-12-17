@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -21,8 +21,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import goals, budgets
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError
 from ._base_client import (
@@ -30,19 +30,40 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.ai import ai
-from .resources.web3 import web3
-from .resources.users import users
-from .resources.lending import lending
-from .resources.accounts import accounts
-from .resources.identity import identity
-from .resources.payments import payments
-from .resources.corporate import corporate
-from .resources.developers import developers
-from .resources.investments import investments
-from .resources.marketplace import marketplace
-from .resources.transactions import transactions
-from .resources.sustainability import sustainability
+
+if TYPE_CHECKING:
+    from .resources import (
+        ai,
+        web3,
+        goals,
+        users,
+        budgets,
+        lending,
+        accounts,
+        identity,
+        payments,
+        corporate,
+        developers,
+        investments,
+        marketplace,
+        transactions,
+        sustainability,
+    )
+    from .resources.ai.ai import AIResource, AsyncAIResource
+    from .resources.goals import GoalsResource, AsyncGoalsResource
+    from .resources.budgets import BudgetsResource, AsyncBudgetsResource
+    from .resources.web3.web3 import Web3Resource, AsyncWeb3Resource
+    from .resources.users.users import UsersResource, AsyncUsersResource
+    from .resources.lending.lending import LendingResource, AsyncLendingResource
+    from .resources.accounts.accounts import AccountsResource, AsyncAccountsResource
+    from .resources.identity.identity import IdentityResource, AsyncIdentityResource
+    from .resources.payments.payments import PaymentsResource, AsyncPaymentsResource
+    from .resources.corporate.corporate import CorporateResource, AsyncCorporateResource
+    from .resources.developers.developers import DevelopersResource, AsyncDevelopersResource
+    from .resources.investments.investments import InvestmentsResource, AsyncInvestmentsResource
+    from .resources.marketplace.marketplace import MarketplaceResource, AsyncMarketplaceResource
+    from .resources.transactions.transactions import TransactionsResource, AsyncTransactionsResource
+    from .resources.sustainability.sustainability import SustainabilityResource, AsyncSustainabilityResource
 
 __all__ = [
     "Timeout",
@@ -57,24 +78,6 @@ __all__ = [
 
 
 class JamesBurvelOcallaghanIii(SyncAPIClient):
-    users: users.UsersResource
-    accounts: accounts.AccountsResource
-    transactions: transactions.TransactionsResource
-    budgets: budgets.BudgetsResource
-    investments: investments.InvestmentsResource
-    ai: ai.AIResource
-    corporate: corporate.CorporateResource
-    web3: web3.Web3Resource
-    payments: payments.PaymentsResource
-    sustainability: sustainability.SustainabilityResource
-    lending: lending.LendingResource
-    developers: developers.DevelopersResource
-    identity: identity.IdentityResource
-    goals: goals.GoalsResource
-    marketplace: marketplace.MarketplaceResource
-    with_raw_response: JamesBurvelOcallaghanIiiWithRawResponse
-    with_streaming_response: JamesBurvelOcallaghanIiiWithStreamedResponse
-
     # client options
     api_key: str | None
     bearer_token: str | None
@@ -133,23 +136,103 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.users = users.UsersResource(self)
-        self.accounts = accounts.AccountsResource(self)
-        self.transactions = transactions.TransactionsResource(self)
-        self.budgets = budgets.BudgetsResource(self)
-        self.investments = investments.InvestmentsResource(self)
-        self.ai = ai.AIResource(self)
-        self.corporate = corporate.CorporateResource(self)
-        self.web3 = web3.Web3Resource(self)
-        self.payments = payments.PaymentsResource(self)
-        self.sustainability = sustainability.SustainabilityResource(self)
-        self.lending = lending.LendingResource(self)
-        self.developers = developers.DevelopersResource(self)
-        self.identity = identity.IdentityResource(self)
-        self.goals = goals.GoalsResource(self)
-        self.marketplace = marketplace.MarketplaceResource(self)
-        self.with_raw_response = JamesBurvelOcallaghanIiiWithRawResponse(self)
-        self.with_streaming_response = JamesBurvelOcallaghanIiiWithStreamedResponse(self)
+    @cached_property
+    def users(self) -> UsersResource:
+        from .resources.users import UsersResource
+
+        return UsersResource(self)
+
+    @cached_property
+    def accounts(self) -> AccountsResource:
+        from .resources.accounts import AccountsResource
+
+        return AccountsResource(self)
+
+    @cached_property
+    def transactions(self) -> TransactionsResource:
+        from .resources.transactions import TransactionsResource
+
+        return TransactionsResource(self)
+
+    @cached_property
+    def budgets(self) -> BudgetsResource:
+        from .resources.budgets import BudgetsResource
+
+        return BudgetsResource(self)
+
+    @cached_property
+    def investments(self) -> InvestmentsResource:
+        from .resources.investments import InvestmentsResource
+
+        return InvestmentsResource(self)
+
+    @cached_property
+    def ai(self) -> AIResource:
+        from .resources.ai import AIResource
+
+        return AIResource(self)
+
+    @cached_property
+    def corporate(self) -> CorporateResource:
+        from .resources.corporate import CorporateResource
+
+        return CorporateResource(self)
+
+    @cached_property
+    def web3(self) -> Web3Resource:
+        from .resources.web3 import Web3Resource
+
+        return Web3Resource(self)
+
+    @cached_property
+    def payments(self) -> PaymentsResource:
+        from .resources.payments import PaymentsResource
+
+        return PaymentsResource(self)
+
+    @cached_property
+    def sustainability(self) -> SustainabilityResource:
+        from .resources.sustainability import SustainabilityResource
+
+        return SustainabilityResource(self)
+
+    @cached_property
+    def lending(self) -> LendingResource:
+        from .resources.lending import LendingResource
+
+        return LendingResource(self)
+
+    @cached_property
+    def developers(self) -> DevelopersResource:
+        from .resources.developers import DevelopersResource
+
+        return DevelopersResource(self)
+
+    @cached_property
+    def identity(self) -> IdentityResource:
+        from .resources.identity import IdentityResource
+
+        return IdentityResource(self)
+
+    @cached_property
+    def goals(self) -> GoalsResource:
+        from .resources.goals import GoalsResource
+
+        return GoalsResource(self)
+
+    @cached_property
+    def marketplace(self) -> MarketplaceResource:
+        from .resources.marketplace import MarketplaceResource
+
+        return MarketplaceResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> JamesBurvelOcallaghanIiiWithRawResponse:
+        return JamesBurvelOcallaghanIiiWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> JamesBurvelOcallaghanIiiWithStreamedResponse:
+        return JamesBurvelOcallaghanIiiWithStreamedResponse(self)
 
     @property
     @override
@@ -288,24 +371,6 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
 
 class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
-    users: users.AsyncUsersResource
-    accounts: accounts.AsyncAccountsResource
-    transactions: transactions.AsyncTransactionsResource
-    budgets: budgets.AsyncBudgetsResource
-    investments: investments.AsyncInvestmentsResource
-    ai: ai.AsyncAIResource
-    corporate: corporate.AsyncCorporateResource
-    web3: web3.AsyncWeb3Resource
-    payments: payments.AsyncPaymentsResource
-    sustainability: sustainability.AsyncSustainabilityResource
-    lending: lending.AsyncLendingResource
-    developers: developers.AsyncDevelopersResource
-    identity: identity.AsyncIdentityResource
-    goals: goals.AsyncGoalsResource
-    marketplace: marketplace.AsyncMarketplaceResource
-    with_raw_response: AsyncJamesBurvelOcallaghanIiiWithRawResponse
-    with_streaming_response: AsyncJamesBurvelOcallaghanIiiWithStreamedResponse
-
     # client options
     api_key: str | None
     bearer_token: str | None
@@ -364,23 +429,103 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.users = users.AsyncUsersResource(self)
-        self.accounts = accounts.AsyncAccountsResource(self)
-        self.transactions = transactions.AsyncTransactionsResource(self)
-        self.budgets = budgets.AsyncBudgetsResource(self)
-        self.investments = investments.AsyncInvestmentsResource(self)
-        self.ai = ai.AsyncAIResource(self)
-        self.corporate = corporate.AsyncCorporateResource(self)
-        self.web3 = web3.AsyncWeb3Resource(self)
-        self.payments = payments.AsyncPaymentsResource(self)
-        self.sustainability = sustainability.AsyncSustainabilityResource(self)
-        self.lending = lending.AsyncLendingResource(self)
-        self.developers = developers.AsyncDevelopersResource(self)
-        self.identity = identity.AsyncIdentityResource(self)
-        self.goals = goals.AsyncGoalsResource(self)
-        self.marketplace = marketplace.AsyncMarketplaceResource(self)
-        self.with_raw_response = AsyncJamesBurvelOcallaghanIiiWithRawResponse(self)
-        self.with_streaming_response = AsyncJamesBurvelOcallaghanIiiWithStreamedResponse(self)
+    @cached_property
+    def users(self) -> AsyncUsersResource:
+        from .resources.users import AsyncUsersResource
+
+        return AsyncUsersResource(self)
+
+    @cached_property
+    def accounts(self) -> AsyncAccountsResource:
+        from .resources.accounts import AsyncAccountsResource
+
+        return AsyncAccountsResource(self)
+
+    @cached_property
+    def transactions(self) -> AsyncTransactionsResource:
+        from .resources.transactions import AsyncTransactionsResource
+
+        return AsyncTransactionsResource(self)
+
+    @cached_property
+    def budgets(self) -> AsyncBudgetsResource:
+        from .resources.budgets import AsyncBudgetsResource
+
+        return AsyncBudgetsResource(self)
+
+    @cached_property
+    def investments(self) -> AsyncInvestmentsResource:
+        from .resources.investments import AsyncInvestmentsResource
+
+        return AsyncInvestmentsResource(self)
+
+    @cached_property
+    def ai(self) -> AsyncAIResource:
+        from .resources.ai import AsyncAIResource
+
+        return AsyncAIResource(self)
+
+    @cached_property
+    def corporate(self) -> AsyncCorporateResource:
+        from .resources.corporate import AsyncCorporateResource
+
+        return AsyncCorporateResource(self)
+
+    @cached_property
+    def web3(self) -> AsyncWeb3Resource:
+        from .resources.web3 import AsyncWeb3Resource
+
+        return AsyncWeb3Resource(self)
+
+    @cached_property
+    def payments(self) -> AsyncPaymentsResource:
+        from .resources.payments import AsyncPaymentsResource
+
+        return AsyncPaymentsResource(self)
+
+    @cached_property
+    def sustainability(self) -> AsyncSustainabilityResource:
+        from .resources.sustainability import AsyncSustainabilityResource
+
+        return AsyncSustainabilityResource(self)
+
+    @cached_property
+    def lending(self) -> AsyncLendingResource:
+        from .resources.lending import AsyncLendingResource
+
+        return AsyncLendingResource(self)
+
+    @cached_property
+    def developers(self) -> AsyncDevelopersResource:
+        from .resources.developers import AsyncDevelopersResource
+
+        return AsyncDevelopersResource(self)
+
+    @cached_property
+    def identity(self) -> AsyncIdentityResource:
+        from .resources.identity import AsyncIdentityResource
+
+        return AsyncIdentityResource(self)
+
+    @cached_property
+    def goals(self) -> AsyncGoalsResource:
+        from .resources.goals import AsyncGoalsResource
+
+        return AsyncGoalsResource(self)
+
+    @cached_property
+    def marketplace(self) -> AsyncMarketplaceResource:
+        from .resources.marketplace import AsyncMarketplaceResource
+
+        return AsyncMarketplaceResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncJamesBurvelOcallaghanIiiWithRawResponse:
+        return AsyncJamesBurvelOcallaghanIiiWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
+        return AsyncJamesBurvelOcallaghanIiiWithStreamedResponse(self)
 
     @property
     @override
@@ -519,79 +664,391 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
 
 class JamesBurvelOcallaghanIiiWithRawResponse:
+    _client: JamesBurvelOcallaghanIii
+
     def __init__(self, client: JamesBurvelOcallaghanIii) -> None:
-        self.users = users.UsersResourceWithRawResponse(client.users)
-        self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
-        self.transactions = transactions.TransactionsResourceWithRawResponse(client.transactions)
-        self.budgets = budgets.BudgetsResourceWithRawResponse(client.budgets)
-        self.investments = investments.InvestmentsResourceWithRawResponse(client.investments)
-        self.ai = ai.AIResourceWithRawResponse(client.ai)
-        self.corporate = corporate.CorporateResourceWithRawResponse(client.corporate)
-        self.web3 = web3.Web3ResourceWithRawResponse(client.web3)
-        self.payments = payments.PaymentsResourceWithRawResponse(client.payments)
-        self.sustainability = sustainability.SustainabilityResourceWithRawResponse(client.sustainability)
-        self.lending = lending.LendingResourceWithRawResponse(client.lending)
-        self.developers = developers.DevelopersResourceWithRawResponse(client.developers)
-        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
-        self.goals = goals.GoalsResourceWithRawResponse(client.goals)
-        self.marketplace = marketplace.MarketplaceResourceWithRawResponse(client.marketplace)
+        self._client = client
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithRawResponse:
+        from .resources.users import UsersResourceWithRawResponse
+
+        return UsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithRawResponse:
+        from .resources.accounts import AccountsResourceWithRawResponse
+
+        return AccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsResourceWithRawResponse:
+        from .resources.transactions import TransactionsResourceWithRawResponse
+
+        return TransactionsResourceWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def budgets(self) -> budgets.BudgetsResourceWithRawResponse:
+        from .resources.budgets import BudgetsResourceWithRawResponse
+
+        return BudgetsResourceWithRawResponse(self._client.budgets)
+
+    @cached_property
+    def investments(self) -> investments.InvestmentsResourceWithRawResponse:
+        from .resources.investments import InvestmentsResourceWithRawResponse
+
+        return InvestmentsResourceWithRawResponse(self._client.investments)
+
+    @cached_property
+    def ai(self) -> ai.AIResourceWithRawResponse:
+        from .resources.ai import AIResourceWithRawResponse
+
+        return AIResourceWithRawResponse(self._client.ai)
+
+    @cached_property
+    def corporate(self) -> corporate.CorporateResourceWithRawResponse:
+        from .resources.corporate import CorporateResourceWithRawResponse
+
+        return CorporateResourceWithRawResponse(self._client.corporate)
+
+    @cached_property
+    def web3(self) -> web3.Web3ResourceWithRawResponse:
+        from .resources.web3 import Web3ResourceWithRawResponse
+
+        return Web3ResourceWithRawResponse(self._client.web3)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsResourceWithRawResponse:
+        from .resources.payments import PaymentsResourceWithRawResponse
+
+        return PaymentsResourceWithRawResponse(self._client.payments)
+
+    @cached_property
+    def sustainability(self) -> sustainability.SustainabilityResourceWithRawResponse:
+        from .resources.sustainability import SustainabilityResourceWithRawResponse
+
+        return SustainabilityResourceWithRawResponse(self._client.sustainability)
+
+    @cached_property
+    def lending(self) -> lending.LendingResourceWithRawResponse:
+        from .resources.lending import LendingResourceWithRawResponse
+
+        return LendingResourceWithRawResponse(self._client.lending)
+
+    @cached_property
+    def developers(self) -> developers.DevelopersResourceWithRawResponse:
+        from .resources.developers import DevelopersResourceWithRawResponse
+
+        return DevelopersResourceWithRawResponse(self._client.developers)
+
+    @cached_property
+    def identity(self) -> identity.IdentityResourceWithRawResponse:
+        from .resources.identity import IdentityResourceWithRawResponse
+
+        return IdentityResourceWithRawResponse(self._client.identity)
+
+    @cached_property
+    def goals(self) -> goals.GoalsResourceWithRawResponse:
+        from .resources.goals import GoalsResourceWithRawResponse
+
+        return GoalsResourceWithRawResponse(self._client.goals)
+
+    @cached_property
+    def marketplace(self) -> marketplace.MarketplaceResourceWithRawResponse:
+        from .resources.marketplace import MarketplaceResourceWithRawResponse
+
+        return MarketplaceResourceWithRawResponse(self._client.marketplace)
 
 
 class AsyncJamesBurvelOcallaghanIiiWithRawResponse:
+    _client: AsyncJamesBurvelOcallaghanIii
+
     def __init__(self, client: AsyncJamesBurvelOcallaghanIii) -> None:
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
-        self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
-        self.transactions = transactions.AsyncTransactionsResourceWithRawResponse(client.transactions)
-        self.budgets = budgets.AsyncBudgetsResourceWithRawResponse(client.budgets)
-        self.investments = investments.AsyncInvestmentsResourceWithRawResponse(client.investments)
-        self.ai = ai.AsyncAIResourceWithRawResponse(client.ai)
-        self.corporate = corporate.AsyncCorporateResourceWithRawResponse(client.corporate)
-        self.web3 = web3.AsyncWeb3ResourceWithRawResponse(client.web3)
-        self.payments = payments.AsyncPaymentsResourceWithRawResponse(client.payments)
-        self.sustainability = sustainability.AsyncSustainabilityResourceWithRawResponse(client.sustainability)
-        self.lending = lending.AsyncLendingResourceWithRawResponse(client.lending)
-        self.developers = developers.AsyncDevelopersResourceWithRawResponse(client.developers)
-        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
-        self.goals = goals.AsyncGoalsResourceWithRawResponse(client.goals)
-        self.marketplace = marketplace.AsyncMarketplaceResourceWithRawResponse(client.marketplace)
+        self._client = client
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        from .resources.users import AsyncUsersResourceWithRawResponse
+
+        return AsyncUsersResourceWithRawResponse(self._client.users)
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithRawResponse:
+        from .resources.accounts import AsyncAccountsResourceWithRawResponse
+
+        return AsyncAccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsResourceWithRawResponse:
+        from .resources.transactions import AsyncTransactionsResourceWithRawResponse
+
+        return AsyncTransactionsResourceWithRawResponse(self._client.transactions)
+
+    @cached_property
+    def budgets(self) -> budgets.AsyncBudgetsResourceWithRawResponse:
+        from .resources.budgets import AsyncBudgetsResourceWithRawResponse
+
+        return AsyncBudgetsResourceWithRawResponse(self._client.budgets)
+
+    @cached_property
+    def investments(self) -> investments.AsyncInvestmentsResourceWithRawResponse:
+        from .resources.investments import AsyncInvestmentsResourceWithRawResponse
+
+        return AsyncInvestmentsResourceWithRawResponse(self._client.investments)
+
+    @cached_property
+    def ai(self) -> ai.AsyncAIResourceWithRawResponse:
+        from .resources.ai import AsyncAIResourceWithRawResponse
+
+        return AsyncAIResourceWithRawResponse(self._client.ai)
+
+    @cached_property
+    def corporate(self) -> corporate.AsyncCorporateResourceWithRawResponse:
+        from .resources.corporate import AsyncCorporateResourceWithRawResponse
+
+        return AsyncCorporateResourceWithRawResponse(self._client.corporate)
+
+    @cached_property
+    def web3(self) -> web3.AsyncWeb3ResourceWithRawResponse:
+        from .resources.web3 import AsyncWeb3ResourceWithRawResponse
+
+        return AsyncWeb3ResourceWithRawResponse(self._client.web3)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsResourceWithRawResponse:
+        from .resources.payments import AsyncPaymentsResourceWithRawResponse
+
+        return AsyncPaymentsResourceWithRawResponse(self._client.payments)
+
+    @cached_property
+    def sustainability(self) -> sustainability.AsyncSustainabilityResourceWithRawResponse:
+        from .resources.sustainability import AsyncSustainabilityResourceWithRawResponse
+
+        return AsyncSustainabilityResourceWithRawResponse(self._client.sustainability)
+
+    @cached_property
+    def lending(self) -> lending.AsyncLendingResourceWithRawResponse:
+        from .resources.lending import AsyncLendingResourceWithRawResponse
+
+        return AsyncLendingResourceWithRawResponse(self._client.lending)
+
+    @cached_property
+    def developers(self) -> developers.AsyncDevelopersResourceWithRawResponse:
+        from .resources.developers import AsyncDevelopersResourceWithRawResponse
+
+        return AsyncDevelopersResourceWithRawResponse(self._client.developers)
+
+    @cached_property
+    def identity(self) -> identity.AsyncIdentityResourceWithRawResponse:
+        from .resources.identity import AsyncIdentityResourceWithRawResponse
+
+        return AsyncIdentityResourceWithRawResponse(self._client.identity)
+
+    @cached_property
+    def goals(self) -> goals.AsyncGoalsResourceWithRawResponse:
+        from .resources.goals import AsyncGoalsResourceWithRawResponse
+
+        return AsyncGoalsResourceWithRawResponse(self._client.goals)
+
+    @cached_property
+    def marketplace(self) -> marketplace.AsyncMarketplaceResourceWithRawResponse:
+        from .resources.marketplace import AsyncMarketplaceResourceWithRawResponse
+
+        return AsyncMarketplaceResourceWithRawResponse(self._client.marketplace)
 
 
 class JamesBurvelOcallaghanIiiWithStreamedResponse:
+    _client: JamesBurvelOcallaghanIii
+
     def __init__(self, client: JamesBurvelOcallaghanIii) -> None:
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
-        self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
-        self.transactions = transactions.TransactionsResourceWithStreamingResponse(client.transactions)
-        self.budgets = budgets.BudgetsResourceWithStreamingResponse(client.budgets)
-        self.investments = investments.InvestmentsResourceWithStreamingResponse(client.investments)
-        self.ai = ai.AIResourceWithStreamingResponse(client.ai)
-        self.corporate = corporate.CorporateResourceWithStreamingResponse(client.corporate)
-        self.web3 = web3.Web3ResourceWithStreamingResponse(client.web3)
-        self.payments = payments.PaymentsResourceWithStreamingResponse(client.payments)
-        self.sustainability = sustainability.SustainabilityResourceWithStreamingResponse(client.sustainability)
-        self.lending = lending.LendingResourceWithStreamingResponse(client.lending)
-        self.developers = developers.DevelopersResourceWithStreamingResponse(client.developers)
-        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
-        self.goals = goals.GoalsResourceWithStreamingResponse(client.goals)
-        self.marketplace = marketplace.MarketplaceResourceWithStreamingResponse(client.marketplace)
+        self._client = client
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithStreamingResponse:
+        from .resources.users import UsersResourceWithStreamingResponse
+
+        return UsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithStreamingResponse:
+        from .resources.accounts import AccountsResourceWithStreamingResponse
+
+        return AccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.TransactionsResourceWithStreamingResponse:
+        from .resources.transactions import TransactionsResourceWithStreamingResponse
+
+        return TransactionsResourceWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def budgets(self) -> budgets.BudgetsResourceWithStreamingResponse:
+        from .resources.budgets import BudgetsResourceWithStreamingResponse
+
+        return BudgetsResourceWithStreamingResponse(self._client.budgets)
+
+    @cached_property
+    def investments(self) -> investments.InvestmentsResourceWithStreamingResponse:
+        from .resources.investments import InvestmentsResourceWithStreamingResponse
+
+        return InvestmentsResourceWithStreamingResponse(self._client.investments)
+
+    @cached_property
+    def ai(self) -> ai.AIResourceWithStreamingResponse:
+        from .resources.ai import AIResourceWithStreamingResponse
+
+        return AIResourceWithStreamingResponse(self._client.ai)
+
+    @cached_property
+    def corporate(self) -> corporate.CorporateResourceWithStreamingResponse:
+        from .resources.corporate import CorporateResourceWithStreamingResponse
+
+        return CorporateResourceWithStreamingResponse(self._client.corporate)
+
+    @cached_property
+    def web3(self) -> web3.Web3ResourceWithStreamingResponse:
+        from .resources.web3 import Web3ResourceWithStreamingResponse
+
+        return Web3ResourceWithStreamingResponse(self._client.web3)
+
+    @cached_property
+    def payments(self) -> payments.PaymentsResourceWithStreamingResponse:
+        from .resources.payments import PaymentsResourceWithStreamingResponse
+
+        return PaymentsResourceWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def sustainability(self) -> sustainability.SustainabilityResourceWithStreamingResponse:
+        from .resources.sustainability import SustainabilityResourceWithStreamingResponse
+
+        return SustainabilityResourceWithStreamingResponse(self._client.sustainability)
+
+    @cached_property
+    def lending(self) -> lending.LendingResourceWithStreamingResponse:
+        from .resources.lending import LendingResourceWithStreamingResponse
+
+        return LendingResourceWithStreamingResponse(self._client.lending)
+
+    @cached_property
+    def developers(self) -> developers.DevelopersResourceWithStreamingResponse:
+        from .resources.developers import DevelopersResourceWithStreamingResponse
+
+        return DevelopersResourceWithStreamingResponse(self._client.developers)
+
+    @cached_property
+    def identity(self) -> identity.IdentityResourceWithStreamingResponse:
+        from .resources.identity import IdentityResourceWithStreamingResponse
+
+        return IdentityResourceWithStreamingResponse(self._client.identity)
+
+    @cached_property
+    def goals(self) -> goals.GoalsResourceWithStreamingResponse:
+        from .resources.goals import GoalsResourceWithStreamingResponse
+
+        return GoalsResourceWithStreamingResponse(self._client.goals)
+
+    @cached_property
+    def marketplace(self) -> marketplace.MarketplaceResourceWithStreamingResponse:
+        from .resources.marketplace import MarketplaceResourceWithStreamingResponse
+
+        return MarketplaceResourceWithStreamingResponse(self._client.marketplace)
 
 
 class AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
+    _client: AsyncJamesBurvelOcallaghanIii
+
     def __init__(self, client: AsyncJamesBurvelOcallaghanIii) -> None:
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
-        self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
-        self.transactions = transactions.AsyncTransactionsResourceWithStreamingResponse(client.transactions)
-        self.budgets = budgets.AsyncBudgetsResourceWithStreamingResponse(client.budgets)
-        self.investments = investments.AsyncInvestmentsResourceWithStreamingResponse(client.investments)
-        self.ai = ai.AsyncAIResourceWithStreamingResponse(client.ai)
-        self.corporate = corporate.AsyncCorporateResourceWithStreamingResponse(client.corporate)
-        self.web3 = web3.AsyncWeb3ResourceWithStreamingResponse(client.web3)
-        self.payments = payments.AsyncPaymentsResourceWithStreamingResponse(client.payments)
-        self.sustainability = sustainability.AsyncSustainabilityResourceWithStreamingResponse(client.sustainability)
-        self.lending = lending.AsyncLendingResourceWithStreamingResponse(client.lending)
-        self.developers = developers.AsyncDevelopersResourceWithStreamingResponse(client.developers)
-        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
-        self.goals = goals.AsyncGoalsResourceWithStreamingResponse(client.goals)
-        self.marketplace = marketplace.AsyncMarketplaceResourceWithStreamingResponse(client.marketplace)
+        self._client = client
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        from .resources.users import AsyncUsersResourceWithStreamingResponse
+
+        return AsyncUsersResourceWithStreamingResponse(self._client.users)
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithStreamingResponse:
+        from .resources.accounts import AsyncAccountsResourceWithStreamingResponse
+
+        return AsyncAccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def transactions(self) -> transactions.AsyncTransactionsResourceWithStreamingResponse:
+        from .resources.transactions import AsyncTransactionsResourceWithStreamingResponse
+
+        return AsyncTransactionsResourceWithStreamingResponse(self._client.transactions)
+
+    @cached_property
+    def budgets(self) -> budgets.AsyncBudgetsResourceWithStreamingResponse:
+        from .resources.budgets import AsyncBudgetsResourceWithStreamingResponse
+
+        return AsyncBudgetsResourceWithStreamingResponse(self._client.budgets)
+
+    @cached_property
+    def investments(self) -> investments.AsyncInvestmentsResourceWithStreamingResponse:
+        from .resources.investments import AsyncInvestmentsResourceWithStreamingResponse
+
+        return AsyncInvestmentsResourceWithStreamingResponse(self._client.investments)
+
+    @cached_property
+    def ai(self) -> ai.AsyncAIResourceWithStreamingResponse:
+        from .resources.ai import AsyncAIResourceWithStreamingResponse
+
+        return AsyncAIResourceWithStreamingResponse(self._client.ai)
+
+    @cached_property
+    def corporate(self) -> corporate.AsyncCorporateResourceWithStreamingResponse:
+        from .resources.corporate import AsyncCorporateResourceWithStreamingResponse
+
+        return AsyncCorporateResourceWithStreamingResponse(self._client.corporate)
+
+    @cached_property
+    def web3(self) -> web3.AsyncWeb3ResourceWithStreamingResponse:
+        from .resources.web3 import AsyncWeb3ResourceWithStreamingResponse
+
+        return AsyncWeb3ResourceWithStreamingResponse(self._client.web3)
+
+    @cached_property
+    def payments(self) -> payments.AsyncPaymentsResourceWithStreamingResponse:
+        from .resources.payments import AsyncPaymentsResourceWithStreamingResponse
+
+        return AsyncPaymentsResourceWithStreamingResponse(self._client.payments)
+
+    @cached_property
+    def sustainability(self) -> sustainability.AsyncSustainabilityResourceWithStreamingResponse:
+        from .resources.sustainability import AsyncSustainabilityResourceWithStreamingResponse
+
+        return AsyncSustainabilityResourceWithStreamingResponse(self._client.sustainability)
+
+    @cached_property
+    def lending(self) -> lending.AsyncLendingResourceWithStreamingResponse:
+        from .resources.lending import AsyncLendingResourceWithStreamingResponse
+
+        return AsyncLendingResourceWithStreamingResponse(self._client.lending)
+
+    @cached_property
+    def developers(self) -> developers.AsyncDevelopersResourceWithStreamingResponse:
+        from .resources.developers import AsyncDevelopersResourceWithStreamingResponse
+
+        return AsyncDevelopersResourceWithStreamingResponse(self._client.developers)
+
+    @cached_property
+    def identity(self) -> identity.AsyncIdentityResourceWithStreamingResponse:
+        from .resources.identity import AsyncIdentityResourceWithStreamingResponse
+
+        return AsyncIdentityResourceWithStreamingResponse(self._client.identity)
+
+    @cached_property
+    def goals(self) -> goals.AsyncGoalsResourceWithStreamingResponse:
+        from .resources.goals import AsyncGoalsResourceWithStreamingResponse
+
+        return AsyncGoalsResourceWithStreamingResponse(self._client.goals)
+
+    @cached_property
+    def marketplace(self) -> marketplace.AsyncMarketplaceResourceWithStreamingResponse:
+        from .resources.marketplace import AsyncMarketplaceResourceWithStreamingResponse
+
+        return AsyncMarketplaceResourceWithStreamingResponse(self._client.marketplace)
 
 
 Client = JamesBurvelOcallaghanIii
