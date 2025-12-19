@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.2.0 (2025-12-19)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** manual updates ([f6debd6](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/f6debd672c23a24760f6ab4a35b432336ff19c2e))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([fd480bd](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/fd480bd1d6affa53f4094cf630cc35418ff7e296))
+* use async_to_httpx_files in patch method ([f2925ce](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/f2925ce34b55f5e0a62ccf4455306db1d67c5110))
+
+
+### Chores
+
+* add missing docstrings ([2efd8d4](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/2efd8d48ac127a5be64d15cdda791dc1efb9027b))
+* **internal:** add `--fix` argument to lint script ([2ba6f37](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/2ba6f37bfee8021d3f9e062dd2d0981056fd9918))
+* **internal:** add missing files argument to base client ([7d28e83](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/7d28e83162d98e253021a09677a0e9f55bb0aaf9))
+* speedup initial import ([c961559](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/c96155974a614cd379b632eb1d6df17b60db3ca3))
+* update lockfile ([368dd93](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/368dd93151ea5d57056b4f275ded4998cab109ae))
+
+
+### Refactors
+
+* **internal:** switch from rye to uv ([14f4bf0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/commit/14f4bf03da270536bbbb09aecb22089ce9048ce3))
+
 ## 1.1.0 (2025-12-01)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/jocall3/james-burvel-ocallaghan-iii-python/compare/v1.0.0...v1.1.0)
