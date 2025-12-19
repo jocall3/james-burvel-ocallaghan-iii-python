@@ -14217,6 +14217,7 @@
       "description": "Biometric authentication token for sensitive operations.",
       "scheme": "bearer",
       "bearerFormat": "JWT"
-    }
+   }
   }
 }
+---
