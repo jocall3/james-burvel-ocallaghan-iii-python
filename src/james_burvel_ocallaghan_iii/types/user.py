@@ -12,6 +12,8 @@ __all__ = ["User", "SecurityStatus"]
 
 
 class SecurityStatus(BaseModel):
+    """Security-related status for the user account."""
+
     biometrics_enrolled: Optional[object] = FieldInfo(alias="biometricsEnrolled", default=None)
     """Indicates if biometric authentication is enrolled."""
 

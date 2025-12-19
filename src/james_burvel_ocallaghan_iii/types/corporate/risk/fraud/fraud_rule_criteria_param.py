@@ -11,6 +11,8 @@ __all__ = ["FraudRuleCriteriaParam"]
 
 
 class FraudRuleCriteriaParam(TypedDict, total=False):
+    """Criteria that define when a fraud rule should trigger."""
+
     account_inactivity_days: Annotated[object, PropertyInfo(alias="accountInactivityDays")]
     """Number of days an account must be inactive for the rule to apply."""
 

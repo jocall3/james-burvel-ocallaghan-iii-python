@@ -10,6 +10,8 @@ __all__ = ["CorporateCardControls"]
 
 
 class CorporateCardControls(BaseModel):
+    """Granular spending controls for a corporate card."""
+
     atm_withdrawals: Optional[object] = FieldInfo(alias="atmWithdrawals", default=None)
     """If true, ATM cash withdrawals are allowed."""
 

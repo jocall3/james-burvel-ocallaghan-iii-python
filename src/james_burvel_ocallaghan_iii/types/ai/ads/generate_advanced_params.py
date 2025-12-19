@@ -58,6 +58,8 @@ class GenerateAdvancedParams(TypedDict, total=False):
 
 
 class CallToAction(TypedDict, total=False):
+    """Call-to-action text and URL to be displayed."""
+
     display_time_seconds: Annotated[object, PropertyInfo(alias="displayTimeSeconds")]
 
     text: object

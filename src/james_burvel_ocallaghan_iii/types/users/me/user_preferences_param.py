@@ -11,6 +11,8 @@ __all__ = ["UserPreferencesParam"]
 
 
 class UserPreferencesParam(TypedDict, total=False):
+    """User's personalized preferences for the platform."""
+
     ai_interaction_mode: Annotated[
         Literal["proactive", "balanced", "on_demand"], PropertyInfo(alias="aiInteractionMode")
     ]

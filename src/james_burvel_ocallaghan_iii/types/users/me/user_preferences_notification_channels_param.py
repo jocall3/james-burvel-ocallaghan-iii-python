@@ -10,6 +10,8 @@ __all__ = ["UserPreferencesNotificationChannelsParam"]
 
 
 class UserPreferencesNotificationChannelsParam(TypedDict, total=False):
+    """Preferred channels for receiving notifications."""
+
     email: object
 
     in_app: Annotated[object, PropertyInfo(alias="inApp")]
