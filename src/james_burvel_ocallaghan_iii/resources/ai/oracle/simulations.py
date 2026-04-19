@@ -7,7 +7,7 @@ from typing import Any, cast
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -25,6 +25,11 @@ __all__ = ["SimulationsResource", "AsyncSimulationsResource"]
 
 
 class SimulationsResource(SyncAPIResource):
+    """Unleash the power of 'what-if' scenario modeling.
+
+    Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> SimulationsResourceWithRawResponse:
         """
@@ -71,7 +76,7 @@ class SimulationsResource(SyncAPIResource):
         return cast(
             SimulationRetrieveResponse,
             self._get(
-                f"/ai/oracle/simulations/{simulation_id}",
+                path_template("/ai/oracle/simulations/{simulation_id}", simulation_id=simulation_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -153,7 +158,7 @@ class SimulationsResource(SyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/ai/oracle/simulations/{simulation_id}",
+            path_template("/ai/oracle/simulations/{simulation_id}", simulation_id=simulation_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -162,6 +167,11 @@ class SimulationsResource(SyncAPIResource):
 
 
 class AsyncSimulationsResource(AsyncAPIResource):
+    """Unleash the power of 'what-if' scenario modeling.
+
+    Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSimulationsResourceWithRawResponse:
         """
@@ -208,7 +218,7 @@ class AsyncSimulationsResource(AsyncAPIResource):
         return cast(
             SimulationRetrieveResponse,
             await self._get(
-                f"/ai/oracle/simulations/{simulation_id}",
+                path_template("/ai/oracle/simulations/{simulation_id}", simulation_id=simulation_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -290,7 +300,7 @@ class AsyncSimulationsResource(AsyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/ai/oracle/simulations/{simulation_id}",
+            path_template("/ai/oracle/simulations/{simulation_id}", simulation_id=simulation_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

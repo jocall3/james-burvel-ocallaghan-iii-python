@@ -25,6 +25,10 @@ __all__ = ["PreferencesResource", "AsyncPreferencesResource"]
 
 
 class PreferencesResource(SyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> PreferencesResourceWithRawResponse:
         """
@@ -132,6 +136,10 @@ class PreferencesResource(SyncAPIResource):
 
 
 class AsyncPreferencesResource(AsyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPreferencesResourceWithRawResponse:
         """

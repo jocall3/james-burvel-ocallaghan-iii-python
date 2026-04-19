@@ -19,6 +19,9 @@ __all__ = ["FraudResource", "AsyncFraudResource"]
 class FraudResource(SyncAPIResource):
     @cached_property
     def rules(self) -> RulesResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return RulesResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class FraudResource(SyncAPIResource):
 class AsyncFraudResource(AsyncAPIResource):
     @cached_property
     def rules(self) -> AsyncRulesResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncRulesResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class FraudResourceWithRawResponse:
 
     @cached_property
     def rules(self) -> RulesResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return RulesResourceWithRawResponse(self._fraud.rules)
 
 
@@ -81,6 +90,9 @@ class AsyncFraudResourceWithRawResponse:
 
     @cached_property
     def rules(self) -> AsyncRulesResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncRulesResourceWithRawResponse(self._fraud.rules)
 
 
@@ -90,6 +102,9 @@ class FraudResourceWithStreamingResponse:
 
     @cached_property
     def rules(self) -> RulesResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return RulesResourceWithStreamingResponse(self._fraud.rules)
 
 
@@ -99,4 +114,7 @@ class AsyncFraudResourceWithStreamingResponse:
 
     @cached_property
     def rules(self) -> AsyncRulesResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncRulesResourceWithStreamingResponse(self._fraud.rules)

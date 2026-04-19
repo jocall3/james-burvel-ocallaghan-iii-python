@@ -30,8 +30,15 @@ __all__ = ["AdvisorResource", "AsyncAdvisorResource"]
 
 
 class AdvisorResource(SyncAPIResource):
+    """
+    Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+    """
+
     @cached_property
     def chat(self) -> ChatResource:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return ChatResource(self._client)
 
     @cached_property
@@ -103,8 +110,15 @@ class AdvisorResource(SyncAPIResource):
 
 
 class AsyncAdvisorResource(AsyncAPIResource):
+    """
+    Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+    """
+
     @cached_property
     def chat(self) -> AsyncChatResource:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncChatResource(self._client)
 
     @cached_property
@@ -185,6 +199,9 @@ class AdvisorResourceWithRawResponse:
 
     @cached_property
     def chat(self) -> ChatResourceWithRawResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return ChatResourceWithRawResponse(self._advisor.chat)
 
 
@@ -198,6 +215,9 @@ class AsyncAdvisorResourceWithRawResponse:
 
     @cached_property
     def chat(self) -> AsyncChatResourceWithRawResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncChatResourceWithRawResponse(self._advisor.chat)
 
 
@@ -211,6 +231,9 @@ class AdvisorResourceWithStreamingResponse:
 
     @cached_property
     def chat(self) -> ChatResourceWithStreamingResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return ChatResourceWithStreamingResponse(self._advisor.chat)
 
 
@@ -224,4 +247,7 @@ class AsyncAdvisorResourceWithStreamingResponse:
 
     @cached_property
     def chat(self) -> AsyncChatResourceWithStreamingResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncChatResourceWithStreamingResponse(self._advisor.chat)

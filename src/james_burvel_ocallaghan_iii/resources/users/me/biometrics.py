@@ -25,6 +25,10 @@ __all__ = ["BiometricsResource", "AsyncBiometricsResource"]
 
 
 class BiometricsResource(SyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> BiometricsResourceWithRawResponse:
         """
@@ -192,6 +196,10 @@ class BiometricsResource(SyncAPIResource):
 
 
 class AsyncBiometricsResource(AsyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncBiometricsResourceWithRawResponse:
         """

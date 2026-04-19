@@ -12,7 +12,7 @@ from ...types import (
     account_retrieve_account_statements_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -47,12 +47,22 @@ __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
 class AccountsResource(SyncAPIResource):
+    """
+    Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+    """
+
     @cached_property
     def transactions(self) -> TransactionsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return TransactionsResource(self._client)
 
     @cached_property
     def overdraft_settings(self) -> OverdraftSettingsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return OverdraftSettingsResource(self._client)
 
     @cached_property
@@ -203,7 +213,7 @@ class AccountsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/accounts/{account_id}/details",
+            path_template("/accounts/{account_id}/details", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -245,7 +255,7 @@ class AccountsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/accounts/{account_id}/statements",
+            path_template("/accounts/{account_id}/statements", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -265,12 +275,22 @@ class AccountsResource(SyncAPIResource):
 
 
 class AsyncAccountsResource(AsyncAPIResource):
+    """
+    Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+    """
+
     @cached_property
     def transactions(self) -> AsyncTransactionsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncTransactionsResource(self._client)
 
     @cached_property
     def overdraft_settings(self) -> AsyncOverdraftSettingsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncOverdraftSettingsResource(self._client)
 
     @cached_property
@@ -421,7 +441,7 @@ class AsyncAccountsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/accounts/{account_id}/details",
+            path_template("/accounts/{account_id}/details", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -463,7 +483,7 @@ class AsyncAccountsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/accounts/{account_id}/statements",
+            path_template("/accounts/{account_id}/statements", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -501,10 +521,16 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def transactions(self) -> TransactionsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return TransactionsResourceWithRawResponse(self._accounts.transactions)
 
     @cached_property
     def overdraft_settings(self) -> OverdraftSettingsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return OverdraftSettingsResourceWithRawResponse(self._accounts.overdraft_settings)
 
 
@@ -527,10 +553,16 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncTransactionsResourceWithRawResponse(self._accounts.transactions)
 
     @cached_property
     def overdraft_settings(self) -> AsyncOverdraftSettingsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncOverdraftSettingsResourceWithRawResponse(self._accounts.overdraft_settings)
 
 
@@ -553,10 +585,16 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def transactions(self) -> TransactionsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return TransactionsResourceWithStreamingResponse(self._accounts.transactions)
 
     @cached_property
     def overdraft_settings(self) -> OverdraftSettingsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return OverdraftSettingsResourceWithStreamingResponse(self._accounts.overdraft_settings)
 
 
@@ -579,8 +617,14 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncTransactionsResourceWithStreamingResponse(self._accounts.transactions)
 
     @cached_property
     def overdraft_settings(self) -> AsyncOverdraftSettingsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         return AsyncOverdraftSettingsResourceWithStreamingResponse(self._accounts.overdraft_settings)

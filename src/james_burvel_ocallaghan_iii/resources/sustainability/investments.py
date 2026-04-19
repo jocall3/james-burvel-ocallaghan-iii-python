@@ -20,6 +20,10 @@ __all__ = ["InvestmentsResource", "AsyncInvestmentsResource"]
 
 
 class InvestmentsResource(SyncAPIResource):
+    """
+    Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> InvestmentsResourceWithRawResponse:
         """
@@ -64,6 +68,10 @@ class InvestmentsResource(SyncAPIResource):
 
 
 class AsyncInvestmentsResource(AsyncAPIResource):
+    """
+    Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInvestmentsResourceWithRawResponse:
         """

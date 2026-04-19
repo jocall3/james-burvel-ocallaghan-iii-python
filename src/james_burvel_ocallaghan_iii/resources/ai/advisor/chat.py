@@ -23,6 +23,10 @@ __all__ = ["ChatResource", "AsyncChatResource"]
 
 
 class ChatResource(SyncAPIResource):
+    """
+    Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+    """
+
     @cached_property
     def with_raw_response(self) -> ChatResourceWithRawResponse:
         """
@@ -149,6 +153,10 @@ class ChatResource(SyncAPIResource):
 
 
 class AsyncChatResource(AsyncAPIResource):
+    """
+    Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncChatResourceWithRawResponse:
         """

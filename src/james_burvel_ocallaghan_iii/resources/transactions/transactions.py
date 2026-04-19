@@ -14,7 +14,7 @@ from ...types import (
     transaction_update_notes_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from .insights import (
     InsightsResource,
     AsyncInsightsResource,
@@ -48,12 +48,22 @@ __all__ = ["TransactionsResource", "AsyncTransactionsResource"]
 
 
 class TransactionsResource(SyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def recurring(self) -> RecurringResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return RecurringResource(self._client)
 
     @cached_property
     def insights(self) -> InsightsResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return InsightsResource(self._client)
 
     @cached_property
@@ -101,7 +111,7 @@ class TransactionsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/transactions/{transaction_id}",
+            path_template("/transactions/{transaction_id}", transaction_id=transaction_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -219,7 +229,7 @@ class TransactionsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/transactions/{transaction_id}/categorize",
+            path_template("/transactions/{transaction_id}/categorize", transaction_id=transaction_id),
             body=maybe_transform(
                 {
                     "category": category,
@@ -268,7 +278,7 @@ class TransactionsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/transactions/{transaction_id}/dispute",
+            path_template("/transactions/{transaction_id}/dispute", transaction_id=transaction_id),
             body=maybe_transform(
                 {
                     "details": details,
@@ -310,7 +320,7 @@ class TransactionsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/transactions/{transaction_id}/notes",
+            path_template("/transactions/{transaction_id}/notes", transaction_id=transaction_id),
             body=maybe_transform({"notes": notes}, transaction_update_notes_params.TransactionUpdateNotesParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -320,12 +330,22 @@ class TransactionsResource(SyncAPIResource):
 
 
 class AsyncTransactionsResource(AsyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def recurring(self) -> AsyncRecurringResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncRecurringResource(self._client)
 
     @cached_property
     def insights(self) -> AsyncInsightsResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncInsightsResource(self._client)
 
     @cached_property
@@ -373,7 +393,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/transactions/{transaction_id}",
+            path_template("/transactions/{transaction_id}", transaction_id=transaction_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -491,7 +511,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/transactions/{transaction_id}/categorize",
+            path_template("/transactions/{transaction_id}/categorize", transaction_id=transaction_id),
             body=await async_maybe_transform(
                 {
                     "category": category,
@@ -540,7 +560,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/transactions/{transaction_id}/dispute",
+            path_template("/transactions/{transaction_id}/dispute", transaction_id=transaction_id),
             body=await async_maybe_transform(
                 {
                     "details": details,
@@ -582,7 +602,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/transactions/{transaction_id}/notes",
+            path_template("/transactions/{transaction_id}/notes", transaction_id=transaction_id),
             body=await async_maybe_transform(
                 {"notes": notes}, transaction_update_notes_params.TransactionUpdateNotesParams
             ),
@@ -615,10 +635,16 @@ class TransactionsResourceWithRawResponse:
 
     @cached_property
     def recurring(self) -> RecurringResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return RecurringResourceWithRawResponse(self._transactions.recurring)
 
     @cached_property
     def insights(self) -> InsightsResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return InsightsResourceWithRawResponse(self._transactions.insights)
 
 
@@ -644,10 +670,16 @@ class AsyncTransactionsResourceWithRawResponse:
 
     @cached_property
     def recurring(self) -> AsyncRecurringResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncRecurringResourceWithRawResponse(self._transactions.recurring)
 
     @cached_property
     def insights(self) -> AsyncInsightsResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncInsightsResourceWithRawResponse(self._transactions.insights)
 
 
@@ -673,10 +705,16 @@ class TransactionsResourceWithStreamingResponse:
 
     @cached_property
     def recurring(self) -> RecurringResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return RecurringResourceWithStreamingResponse(self._transactions.recurring)
 
     @cached_property
     def insights(self) -> InsightsResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return InsightsResourceWithStreamingResponse(self._transactions.insights)
 
 
@@ -702,8 +740,14 @@ class AsyncTransactionsResourceWithStreamingResponse:
 
     @cached_property
     def recurring(self) -> AsyncRecurringResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncRecurringResourceWithStreamingResponse(self._transactions.recurring)
 
     @cached_property
     def insights(self) -> AsyncInsightsResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         return AsyncInsightsResourceWithStreamingResponse(self._transactions.insights)

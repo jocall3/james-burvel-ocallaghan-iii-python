@@ -27,10 +27,16 @@ __all__ = ["DevelopersResource", "AsyncDevelopersResource"]
 class DevelopersResource(SyncAPIResource):
     @cached_property
     def webhooks(self) -> WebhooksResource:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return WebhooksResource(self._client)
 
     @cached_property
     def api_keys(self) -> APIKeysResource:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return APIKeysResource(self._client)
 
     @cached_property
@@ -56,10 +62,16 @@ class DevelopersResource(SyncAPIResource):
 class AsyncDevelopersResource(AsyncAPIResource):
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return AsyncWebhooksResource(self._client)
 
     @cached_property
     def api_keys(self) -> AsyncAPIKeysResource:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return AsyncAPIKeysResource(self._client)
 
     @cached_property
@@ -88,10 +100,16 @@ class DevelopersResourceWithRawResponse:
 
     @cached_property
     def webhooks(self) -> WebhooksResourceWithRawResponse:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return WebhooksResourceWithRawResponse(self._developers.webhooks)
 
     @cached_property
     def api_keys(self) -> APIKeysResourceWithRawResponse:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return APIKeysResourceWithRawResponse(self._developers.api_keys)
 
 
@@ -101,10 +119,16 @@ class AsyncDevelopersResourceWithRawResponse:
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResourceWithRawResponse:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return AsyncWebhooksResourceWithRawResponse(self._developers.webhooks)
 
     @cached_property
     def api_keys(self) -> AsyncAPIKeysResourceWithRawResponse:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return AsyncAPIKeysResourceWithRawResponse(self._developers.api_keys)
 
 
@@ -114,10 +138,16 @@ class DevelopersResourceWithStreamingResponse:
 
     @cached_property
     def webhooks(self) -> WebhooksResourceWithStreamingResponse:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return WebhooksResourceWithStreamingResponse(self._developers.webhooks)
 
     @cached_property
     def api_keys(self) -> APIKeysResourceWithStreamingResponse:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return APIKeysResourceWithStreamingResponse(self._developers.api_keys)
 
 
@@ -127,8 +157,14 @@ class AsyncDevelopersResourceWithStreamingResponse:
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResourceWithStreamingResponse:
+        """
+        Tools for developers to integrate deeply with , including webhook management, API key lifecycle, event logging, and SDK access.
+        """
         return AsyncWebhooksResourceWithStreamingResponse(self._developers.webhooks)
 
     @cached_property
     def api_keys(self) -> AsyncAPIKeysResourceWithStreamingResponse:
+        """
+        Manage advanced security settings, monitor login activity, control third-party application connections, and oversee API key access for external integrations.
+        """
         return AsyncAPIKeysResourceWithStreamingResponse(self._developers.api_keys)

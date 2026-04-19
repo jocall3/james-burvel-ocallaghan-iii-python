@@ -48,16 +48,29 @@ __all__ = ["MeResource", "AsyncMeResource"]
 
 
 class MeResource(SyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def preferences(self) -> PreferencesResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PreferencesResource(self._client)
 
     @cached_property
     def devices(self) -> DevicesResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return DevicesResource(self._client)
 
     @cached_property
     def biometrics(self) -> BiometricsResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return BiometricsResource(self._client)
 
     @cached_property
@@ -154,16 +167,29 @@ class MeResource(SyncAPIResource):
 
 
 class AsyncMeResource(AsyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def preferences(self) -> AsyncPreferencesResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPreferencesResource(self._client)
 
     @cached_property
     def devices(self) -> AsyncDevicesResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncDevicesResource(self._client)
 
     @cached_property
     def biometrics(self) -> AsyncBiometricsResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncBiometricsResource(self._client)
 
     @cached_property
@@ -272,14 +298,23 @@ class MeResourceWithRawResponse:
 
     @cached_property
     def preferences(self) -> PreferencesResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PreferencesResourceWithRawResponse(self._me.preferences)
 
     @cached_property
     def devices(self) -> DevicesResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return DevicesResourceWithRawResponse(self._me.devices)
 
     @cached_property
     def biometrics(self) -> BiometricsResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return BiometricsResourceWithRawResponse(self._me.biometrics)
 
 
@@ -296,14 +331,23 @@ class AsyncMeResourceWithRawResponse:
 
     @cached_property
     def preferences(self) -> AsyncPreferencesResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPreferencesResourceWithRawResponse(self._me.preferences)
 
     @cached_property
     def devices(self) -> AsyncDevicesResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncDevicesResourceWithRawResponse(self._me.devices)
 
     @cached_property
     def biometrics(self) -> AsyncBiometricsResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncBiometricsResourceWithRawResponse(self._me.biometrics)
 
 
@@ -320,14 +364,23 @@ class MeResourceWithStreamingResponse:
 
     @cached_property
     def preferences(self) -> PreferencesResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PreferencesResourceWithStreamingResponse(self._me.preferences)
 
     @cached_property
     def devices(self) -> DevicesResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return DevicesResourceWithStreamingResponse(self._me.devices)
 
     @cached_property
     def biometrics(self) -> BiometricsResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return BiometricsResourceWithStreamingResponse(self._me.biometrics)
 
 
@@ -344,12 +397,21 @@ class AsyncMeResourceWithStreamingResponse:
 
     @cached_property
     def preferences(self) -> AsyncPreferencesResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPreferencesResourceWithStreamingResponse(self._me.preferences)
 
     @cached_property
     def devices(self) -> AsyncDevicesResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncDevicesResourceWithStreamingResponse(self._me.devices)
 
     @cached_property
     def biometrics(self) -> AsyncBiometricsResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncBiometricsResourceWithStreamingResponse(self._me.biometrics)

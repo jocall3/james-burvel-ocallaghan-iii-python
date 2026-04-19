@@ -7,7 +7,7 @@ from typing import Iterable
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -25,6 +25,11 @@ __all__ = ["PitchResource", "AsyncPitchResource"]
 
 
 class PitchResource(SyncAPIResource):
+    """The AI-driven seed funding and incubation platform.
+
+    Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+    """
+
     @cached_property
     def with_raw_response(self) -> PitchResourceWithRawResponse:
         """
@@ -70,7 +75,7 @@ class PitchResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/ai/incubator/pitch/{pitch_id}/details",
+            path_template("/ai/incubator/pitch/{pitch_id}/details", pitch_id=pitch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -163,7 +168,7 @@ class PitchResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/ai/incubator/pitch/{pitch_id}/feedback",
+            path_template("/ai/incubator/pitch/{pitch_id}/feedback", pitch_id=pitch_id),
             body=maybe_transform(
                 {
                     "answers": answers,
@@ -179,6 +184,11 @@ class PitchResource(SyncAPIResource):
 
 
 class AsyncPitchResource(AsyncAPIResource):
+    """The AI-driven seed funding and incubation platform.
+
+    Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPitchResourceWithRawResponse:
         """
@@ -224,7 +234,7 @@ class AsyncPitchResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/ai/incubator/pitch/{pitch_id}/details",
+            path_template("/ai/incubator/pitch/{pitch_id}/details", pitch_id=pitch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -317,7 +327,7 @@ class AsyncPitchResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/ai/incubator/pitch/{pitch_id}/feedback",
+            path_template("/ai/incubator/pitch/{pitch_id}/feedback", pitch_id=pitch_id),
             body=await async_maybe_transform(
                 {
                     "answers": answers,

@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -25,6 +25,10 @@ __all__ = ["AnomaliesResource", "AsyncAnomaliesResource"]
 
 
 class AnomaliesResource(SyncAPIResource):
+    """
+    Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+    """
+
     @cached_property
     def with_raw_response(self) -> AnomaliesResourceWithRawResponse:
         """
@@ -144,7 +148,7 @@ class AnomaliesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/corporate/anomalies/{anomaly_id}/status",
+            path_template("/corporate/anomalies/{anomaly_id}/status", anomaly_id=anomaly_id),
             body=maybe_transform(
                 {
                     "status": status,
@@ -160,6 +164,10 @@ class AnomaliesResource(SyncAPIResource):
 
 
 class AsyncAnomaliesResource(AsyncAPIResource):
+    """
+    Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncAnomaliesResourceWithRawResponse:
         """
@@ -279,7 +287,7 @@ class AsyncAnomaliesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/corporate/anomalies/{anomaly_id}/status",
+            path_template("/corporate/anomalies/{anomaly_id}/status", anomaly_id=anomaly_id),
             body=await async_maybe_transform(
                 {
                     "status": status,

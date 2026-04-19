@@ -40,12 +40,22 @@ __all__ = ["UsersResource", "AsyncUsersResource"]
 
 
 class UsersResource(SyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def password_reset(self) -> PasswordResetResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PasswordResetResource(self._client)
 
     @cached_property
     def me(self) -> MeResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return MeResource(self._client)
 
     @cached_property
@@ -177,12 +187,22 @@ class UsersResource(SyncAPIResource):
 
 
 class AsyncUsersResource(AsyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def password_reset(self) -> AsyncPasswordResetResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPasswordResetResource(self._client)
 
     @cached_property
     def me(self) -> AsyncMeResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncMeResource(self._client)
 
     @cached_property
@@ -326,10 +346,16 @@ class UsersResourceWithRawResponse:
 
     @cached_property
     def password_reset(self) -> PasswordResetResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PasswordResetResourceWithRawResponse(self._users.password_reset)
 
     @cached_property
     def me(self) -> MeResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return MeResourceWithRawResponse(self._users.me)
 
 
@@ -346,10 +372,16 @@ class AsyncUsersResourceWithRawResponse:
 
     @cached_property
     def password_reset(self) -> AsyncPasswordResetResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPasswordResetResourceWithRawResponse(self._users.password_reset)
 
     @cached_property
     def me(self) -> AsyncMeResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncMeResourceWithRawResponse(self._users.me)
 
 
@@ -366,10 +398,16 @@ class UsersResourceWithStreamingResponse:
 
     @cached_property
     def password_reset(self) -> PasswordResetResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return PasswordResetResourceWithStreamingResponse(self._users.password_reset)
 
     @cached_property
     def me(self) -> MeResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return MeResourceWithStreamingResponse(self._users.me)
 
 
@@ -386,8 +424,14 @@ class AsyncUsersResourceWithStreamingResponse:
 
     @cached_property
     def password_reset(self) -> AsyncPasswordResetResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncPasswordResetResourceWithStreamingResponse(self._users.password_reset)
 
     @cached_property
     def me(self) -> AsyncMeResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncMeResourceWithStreamingResponse(self._users.me)
