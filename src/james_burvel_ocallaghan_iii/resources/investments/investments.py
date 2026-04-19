@@ -27,10 +27,16 @@ __all__ = ["InvestmentsResource", "AsyncInvestmentsResource"]
 class InvestmentsResource(SyncAPIResource):
     @cached_property
     def portfolios(self) -> PortfoliosResource:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return PortfoliosResource(self._client)
 
     @cached_property
     def assets(self) -> AssetsResource:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AssetsResource(self._client)
 
     @cached_property
@@ -56,10 +62,16 @@ class InvestmentsResource(SyncAPIResource):
 class AsyncInvestmentsResource(AsyncAPIResource):
     @cached_property
     def portfolios(self) -> AsyncPortfoliosResource:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncPortfoliosResource(self._client)
 
     @cached_property
     def assets(self) -> AsyncAssetsResource:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncAssetsResource(self._client)
 
     @cached_property
@@ -88,10 +100,16 @@ class InvestmentsResourceWithRawResponse:
 
     @cached_property
     def portfolios(self) -> PortfoliosResourceWithRawResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return PortfoliosResourceWithRawResponse(self._investments.portfolios)
 
     @cached_property
     def assets(self) -> AssetsResourceWithRawResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AssetsResourceWithRawResponse(self._investments.assets)
 
 
@@ -101,10 +119,16 @@ class AsyncInvestmentsResourceWithRawResponse:
 
     @cached_property
     def portfolios(self) -> AsyncPortfoliosResourceWithRawResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncPortfoliosResourceWithRawResponse(self._investments.portfolios)
 
     @cached_property
     def assets(self) -> AsyncAssetsResourceWithRawResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncAssetsResourceWithRawResponse(self._investments.assets)
 
 
@@ -114,10 +138,16 @@ class InvestmentsResourceWithStreamingResponse:
 
     @cached_property
     def portfolios(self) -> PortfoliosResourceWithStreamingResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return PortfoliosResourceWithStreamingResponse(self._investments.portfolios)
 
     @cached_property
     def assets(self) -> AssetsResourceWithStreamingResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AssetsResourceWithStreamingResponse(self._investments.assets)
 
 
@@ -127,8 +157,14 @@ class AsyncInvestmentsResourceWithStreamingResponse:
 
     @cached_property
     def portfolios(self) -> AsyncPortfoliosResourceWithStreamingResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncPortfoliosResourceWithStreamingResponse(self._investments.portfolios)
 
     @cached_property
     def assets(self) -> AsyncAssetsResourceWithStreamingResponse:
+        """
+        Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+        """
         return AsyncAssetsResourceWithStreamingResponse(self._investments.assets)

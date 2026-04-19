@@ -19,6 +19,9 @@ __all__ = ["ComplianceResource", "AsyncComplianceResource"]
 class ComplianceResource(SyncAPIResource):
     @cached_property
     def audits(self) -> AuditsResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AuditsResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class ComplianceResource(SyncAPIResource):
 class AsyncComplianceResource(AsyncAPIResource):
     @cached_property
     def audits(self) -> AsyncAuditsResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAuditsResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class ComplianceResourceWithRawResponse:
 
     @cached_property
     def audits(self) -> AuditsResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AuditsResourceWithRawResponse(self._compliance.audits)
 
 
@@ -81,6 +90,9 @@ class AsyncComplianceResourceWithRawResponse:
 
     @cached_property
     def audits(self) -> AsyncAuditsResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAuditsResourceWithRawResponse(self._compliance.audits)
 
 
@@ -90,6 +102,9 @@ class ComplianceResourceWithStreamingResponse:
 
     @cached_property
     def audits(self) -> AuditsResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AuditsResourceWithStreamingResponse(self._compliance.audits)
 
 
@@ -99,4 +114,7 @@ class AsyncComplianceResourceWithStreamingResponse:
 
     @cached_property
     def audits(self) -> AsyncAuditsResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAuditsResourceWithStreamingResponse(self._compliance.audits)

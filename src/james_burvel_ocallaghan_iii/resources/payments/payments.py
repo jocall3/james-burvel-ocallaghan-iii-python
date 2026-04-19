@@ -27,6 +27,9 @@ __all__ = ["PaymentsResource", "AsyncPaymentsResource"]
 class PaymentsResource(SyncAPIResource):
     @cached_property
     def international(self) -> InternationalResource:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return InternationalResource(self._client)
 
     @cached_property
@@ -56,6 +59,9 @@ class PaymentsResource(SyncAPIResource):
 class AsyncPaymentsResource(AsyncAPIResource):
     @cached_property
     def international(self) -> AsyncInternationalResource:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncInternationalResource(self._client)
 
     @cached_property
@@ -88,6 +94,9 @@ class PaymentsResourceWithRawResponse:
 
     @cached_property
     def international(self) -> InternationalResourceWithRawResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return InternationalResourceWithRawResponse(self._payments.international)
 
     @cached_property
@@ -101,6 +110,9 @@ class AsyncPaymentsResourceWithRawResponse:
 
     @cached_property
     def international(self) -> AsyncInternationalResourceWithRawResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncInternationalResourceWithRawResponse(self._payments.international)
 
     @cached_property
@@ -114,6 +126,9 @@ class PaymentsResourceWithStreamingResponse:
 
     @cached_property
     def international(self) -> InternationalResourceWithStreamingResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return InternationalResourceWithStreamingResponse(self._payments.international)
 
     @cached_property
@@ -127,6 +142,9 @@ class AsyncPaymentsResourceWithStreamingResponse:
 
     @cached_property
     def international(self) -> AsyncInternationalResourceWithStreamingResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncInternationalResourceWithStreamingResponse(self._payments.international)
 
     @cached_property

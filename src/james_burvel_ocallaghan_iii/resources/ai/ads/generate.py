@@ -26,6 +26,10 @@ __all__ = ["GenerateResource", "AsyncGenerateResource"]
 
 
 class GenerateResource(SyncAPIResource):
+    """
+    Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+    """
+
     @cached_property
     def with_raw_response(self) -> GenerateResourceWithRawResponse:
         """
@@ -195,6 +199,10 @@ class GenerateResource(SyncAPIResource):
 
 
 class AsyncGenerateResource(AsyncAPIResource):
+    """
+    Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncGenerateResourceWithRawResponse:
         """

@@ -7,7 +7,7 @@ from typing import Iterable, Optional
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -33,6 +33,10 @@ __all__ = ["CardsResource", "AsyncCardsResource"]
 
 
 class CardsResource(SyncAPIResource):
+    """
+    Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+    """
+
     @cached_property
     def with_raw_response(self) -> CardsResourceWithRawResponse:
         """
@@ -190,7 +194,7 @@ class CardsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/corporate/cards/{card_id}/freeze",
+            path_template("/corporate/cards/{card_id}/freeze", card_id=card_id),
             body=maybe_transform({"freeze": freeze}, card_freeze_params.CardFreezeParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -235,7 +239,7 @@ class CardsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/corporate/cards/{card_id}/transactions",
+            path_template("/corporate/cards/{card_id}/transactions", card_id=card_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -308,7 +312,7 @@ class CardsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/corporate/cards/{card_id}/controls",
+            path_template("/corporate/cards/{card_id}/controls", card_id=card_id),
             body=maybe_transform(
                 {
                     "atm_withdrawals": atm_withdrawals,
@@ -331,6 +335,10 @@ class CardsResource(SyncAPIResource):
 
 
 class AsyncCardsResource(AsyncAPIResource):
+    """
+    Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncCardsResourceWithRawResponse:
         """
@@ -488,7 +496,7 @@ class AsyncCardsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/corporate/cards/{card_id}/freeze",
+            path_template("/corporate/cards/{card_id}/freeze", card_id=card_id),
             body=await async_maybe_transform({"freeze": freeze}, card_freeze_params.CardFreezeParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -533,7 +541,7 @@ class AsyncCardsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/corporate/cards/{card_id}/transactions",
+            path_template("/corporate/cards/{card_id}/transactions", card_id=card_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -606,7 +614,7 @@ class AsyncCardsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/corporate/cards/{card_id}/controls",
+            path_template("/corporate/cards/{card_id}/controls", card_id=card_id),
             body=await async_maybe_transform(
                 {
                     "atm_withdrawals": atm_withdrawals,

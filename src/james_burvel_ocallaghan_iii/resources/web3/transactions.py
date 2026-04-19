@@ -22,6 +22,10 @@ __all__ = ["TransactionsResource", "AsyncTransactionsResource"]
 
 
 class TransactionsResource(SyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def with_raw_response(self) -> TransactionsResourceWithRawResponse:
         """
@@ -108,6 +112,10 @@ class TransactionsResource(SyncAPIResource):
 
 
 class AsyncTransactionsResource(AsyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTransactionsResourceWithRawResponse:
         """

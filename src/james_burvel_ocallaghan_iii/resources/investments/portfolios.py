@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -32,6 +32,10 @@ __all__ = ["PortfoliosResource", "AsyncPortfoliosResource"]
 
 
 class PortfoliosResource(SyncAPIResource):
+    """
+    Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> PortfoliosResourceWithRawResponse:
         """
@@ -140,7 +144,7 @@ class PortfoliosResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/investments/portfolios/{portfolio_id}",
+            path_template("/investments/portfolios/{portfolio_id}", portfolio_id=portfolio_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -182,7 +186,7 @@ class PortfoliosResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/investments/portfolios/{portfolio_id}",
+            path_template("/investments/portfolios/{portfolio_id}", portfolio_id=portfolio_id),
             body=maybe_transform(
                 {
                     "ai_rebalancing_frequency": ai_rebalancing_frequency,
@@ -279,7 +283,7 @@ class PortfoliosResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/investments/portfolios/{portfolio_id}/rebalance",
+            path_template("/investments/portfolios/{portfolio_id}/rebalance", portfolio_id=portfolio_id),
             body=maybe_transform(
                 {
                     "target_risk_tolerance": target_risk_tolerance,
@@ -296,6 +300,10 @@ class PortfoliosResource(SyncAPIResource):
 
 
 class AsyncPortfoliosResource(AsyncAPIResource):
+    """
+    Sophisticated management of investment portfolios, AI-driven asset discovery, ESG impact analysis, predictive growth simulations, and automated rebalancing strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPortfoliosResourceWithRawResponse:
         """
@@ -404,7 +412,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/investments/portfolios/{portfolio_id}",
+            path_template("/investments/portfolios/{portfolio_id}", portfolio_id=portfolio_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -446,7 +454,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/investments/portfolios/{portfolio_id}",
+            path_template("/investments/portfolios/{portfolio_id}", portfolio_id=portfolio_id),
             body=await async_maybe_transform(
                 {
                     "ai_rebalancing_frequency": ai_rebalancing_frequency,
@@ -543,7 +551,7 @@ class AsyncPortfoliosResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/investments/portfolios/{portfolio_id}/rebalance",
+            path_template("/investments/portfolios/{portfolio_id}/rebalance", portfolio_id=portfolio_id),
             body=await async_maybe_transform(
                 {
                     "target_risk_tolerance": target_risk_tolerance,

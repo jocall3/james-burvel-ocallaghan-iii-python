@@ -9,7 +9,7 @@ import httpx
 
 from ..types import goal_list_params, goal_create_params, goal_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -26,6 +26,10 @@ __all__ = ["GoalsResource", "AsyncGoalsResource"]
 
 
 class GoalsResource(SyncAPIResource):
+    """
+    Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+    """
+
     @cached_property
     def with_raw_response(self) -> GoalsResourceWithRawResponse:
         """
@@ -137,7 +141,7 @@ class GoalsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -191,7 +195,7 @@ class GoalsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._put(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             body=maybe_transform(
                 {
                     "contributing_accounts": contributing_accounts,
@@ -282,7 +286,7 @@ class GoalsResource(SyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -291,6 +295,10 @@ class GoalsResource(SyncAPIResource):
 
 
 class AsyncGoalsResource(AsyncAPIResource):
+    """
+    Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncGoalsResourceWithRawResponse:
         """
@@ -402,7 +410,7 @@ class AsyncGoalsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -456,7 +464,7 @@ class AsyncGoalsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._put(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             body=await async_maybe_transform(
                 {
                     "contributing_accounts": contributing_accounts,
@@ -547,7 +555,7 @@ class AsyncGoalsResource(AsyncAPIResource):
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/goals/{goal_id}",
+            path_template("/goals/{goal_id}", goal_id=goal_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

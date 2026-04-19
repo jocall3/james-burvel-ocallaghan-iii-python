@@ -32,8 +32,17 @@ __all__ = ["IncubatorResource", "AsyncIncubatorResource"]
 
 
 class IncubatorResource(SyncAPIResource):
+    """The AI-driven seed funding and incubation platform.
+
+    Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+    """
+
     @cached_property
     def pitch(self) -> PitchResource:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return PitchResource(self._client)
 
     @cached_property
@@ -119,8 +128,17 @@ class IncubatorResource(SyncAPIResource):
 
 
 class AsyncIncubatorResource(AsyncAPIResource):
+    """The AI-driven seed funding and incubation platform.
+
+    Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+    """
+
     @cached_property
     def pitch(self) -> AsyncPitchResource:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncPitchResource(self._client)
 
     @cached_property
@@ -215,6 +233,10 @@ class IncubatorResourceWithRawResponse:
 
     @cached_property
     def pitch(self) -> PitchResourceWithRawResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return PitchResourceWithRawResponse(self._incubator.pitch)
 
 
@@ -228,6 +250,10 @@ class AsyncIncubatorResourceWithRawResponse:
 
     @cached_property
     def pitch(self) -> AsyncPitchResourceWithRawResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncPitchResourceWithRawResponse(self._incubator.pitch)
 
 
@@ -241,6 +267,10 @@ class IncubatorResourceWithStreamingResponse:
 
     @cached_property
     def pitch(self) -> PitchResourceWithStreamingResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return PitchResourceWithStreamingResponse(self._incubator.pitch)
 
 
@@ -254,4 +284,8 @@ class AsyncIncubatorResourceWithStreamingResponse:
 
     @cached_property
     def pitch(self) -> AsyncPitchResourceWithStreamingResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncPitchResourceWithStreamingResponse(self._incubator.pitch)

@@ -43,6 +43,9 @@ __all__ = ["AIResource", "AsyncAIResource"]
 class AIResource(SyncAPIResource):
     @cached_property
     def advisor(self) -> AdvisorResource:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AdvisorResource(self._client)
 
     @cached_property
@@ -51,10 +54,17 @@ class AIResource(SyncAPIResource):
 
     @cached_property
     def incubator(self) -> IncubatorResource:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return IncubatorResource(self._client)
 
     @cached_property
     def ads(self) -> AdsResource:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AdsResource(self._client)
 
     @cached_property
@@ -80,6 +90,9 @@ class AIResource(SyncAPIResource):
 class AsyncAIResource(AsyncAPIResource):
     @cached_property
     def advisor(self) -> AsyncAdvisorResource:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncAdvisorResource(self._client)
 
     @cached_property
@@ -88,10 +101,17 @@ class AsyncAIResource(AsyncAPIResource):
 
     @cached_property
     def incubator(self) -> AsyncIncubatorResource:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncIncubatorResource(self._client)
 
     @cached_property
     def ads(self) -> AsyncAdsResource:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncAdsResource(self._client)
 
     @cached_property
@@ -120,6 +140,9 @@ class AIResourceWithRawResponse:
 
     @cached_property
     def advisor(self) -> AdvisorResourceWithRawResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AdvisorResourceWithRawResponse(self._ai.advisor)
 
     @cached_property
@@ -128,10 +151,17 @@ class AIResourceWithRawResponse:
 
     @cached_property
     def incubator(self) -> IncubatorResourceWithRawResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return IncubatorResourceWithRawResponse(self._ai.incubator)
 
     @cached_property
     def ads(self) -> AdsResourceWithRawResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AdsResourceWithRawResponse(self._ai.ads)
 
 
@@ -141,6 +171,9 @@ class AsyncAIResourceWithRawResponse:
 
     @cached_property
     def advisor(self) -> AsyncAdvisorResourceWithRawResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncAdvisorResourceWithRawResponse(self._ai.advisor)
 
     @cached_property
@@ -149,10 +182,17 @@ class AsyncAIResourceWithRawResponse:
 
     @cached_property
     def incubator(self) -> AsyncIncubatorResourceWithRawResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncIncubatorResourceWithRawResponse(self._ai.incubator)
 
     @cached_property
     def ads(self) -> AsyncAdsResourceWithRawResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncAdsResourceWithRawResponse(self._ai.ads)
 
 
@@ -162,6 +202,9 @@ class AIResourceWithStreamingResponse:
 
     @cached_property
     def advisor(self) -> AdvisorResourceWithStreamingResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AdvisorResourceWithStreamingResponse(self._ai.advisor)
 
     @cached_property
@@ -170,10 +213,17 @@ class AIResourceWithStreamingResponse:
 
     @cached_property
     def incubator(self) -> IncubatorResourceWithStreamingResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return IncubatorResourceWithStreamingResponse(self._ai.incubator)
 
     @cached_property
     def ads(self) -> AdsResourceWithStreamingResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AdsResourceWithStreamingResponse(self._ai.ads)
 
 
@@ -183,6 +233,9 @@ class AsyncAIResourceWithStreamingResponse:
 
     @cached_property
     def advisor(self) -> AsyncAdvisorResourceWithStreamingResponse:
+        """
+        Engage with our state-of-the-art conversational AI, Quantum, for deeply personalized financial insights, proactive advice, and autonomous task execution via a rich tool ecosystem.
+        """
         return AsyncAdvisorResourceWithStreamingResponse(self._ai.advisor)
 
     @cached_property
@@ -191,8 +244,15 @@ class AsyncAIResourceWithStreamingResponse:
 
     @cached_property
     def incubator(self) -> AsyncIncubatorResourceWithStreamingResponse:
+        """The AI-driven seed funding and incubation platform.
+
+        Submit, refine, and track business plans, receive AI-generated feedback, and secure investment capital.
+        """
         return AsyncIncubatorResourceWithStreamingResponse(self._ai.incubator)
 
     @cached_property
     def ads(self) -> AsyncAdsResourceWithStreamingResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncAdsResourceWithStreamingResponse(self._ai.ads)

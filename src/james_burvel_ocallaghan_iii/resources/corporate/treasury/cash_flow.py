@@ -22,6 +22,10 @@ __all__ = ["CashFlowResource", "AsyncCashFlowResource"]
 
 
 class CashFlowResource(SyncAPIResource):
+    """
+    Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+    """
+
     @cached_property
     def with_raw_response(self) -> CashFlowResourceWithRawResponse:
         """
@@ -93,6 +97,10 @@ class CashFlowResource(SyncAPIResource):
 
 
 class AsyncCashFlowResource(AsyncAPIResource):
+    """
+    Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncCashFlowResourceWithRawResponse:
         """

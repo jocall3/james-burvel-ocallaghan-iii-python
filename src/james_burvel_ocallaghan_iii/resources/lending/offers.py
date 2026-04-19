@@ -22,6 +22,10 @@ __all__ = ["OffersResource", "AsyncOffersResource"]
 
 
 class OffersResource(SyncAPIResource):
+    """
+    Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+    """
+
     @cached_property
     def with_raw_response(self) -> OffersResourceWithRawResponse:
         """
@@ -90,6 +94,10 @@ class OffersResource(SyncAPIResource):
 
 
 class AsyncOffersResource(AsyncAPIResource):
+    """
+    Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncOffersResourceWithRawResponse:
         """

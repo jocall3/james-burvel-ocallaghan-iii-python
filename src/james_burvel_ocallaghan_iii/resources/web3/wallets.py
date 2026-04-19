@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -24,6 +24,10 @@ __all__ = ["WalletsResource", "AsyncWalletsResource"]
 
 
 class WalletsResource(SyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def with_raw_response(self) -> WalletsResourceWithRawResponse:
         """
@@ -180,7 +184,7 @@ class WalletsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/web3/wallets/{wallet_id}/balances",
+            path_template("/web3/wallets/{wallet_id}/balances", wallet_id=wallet_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -199,6 +203,10 @@ class WalletsResource(SyncAPIResource):
 
 
 class AsyncWalletsResource(AsyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncWalletsResourceWithRawResponse:
         """
@@ -355,7 +363,7 @@ class AsyncWalletsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/web3/wallets/{wallet_id}/balances",
+            path_template("/web3/wallets/{wallet_id}/balances", wallet_id=wallet_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

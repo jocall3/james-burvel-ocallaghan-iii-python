@@ -15,7 +15,7 @@ from .generate import (
     AsyncGenerateResourceWithStreamingResponse,
 )
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ...._utils import maybe_transform, async_maybe_transform
+from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.ai import ad_list_generated_params
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -33,8 +33,15 @@ __all__ = ["AdsResource", "AsyncAdsResource"]
 
 
 class AdsResource(SyncAPIResource):
+    """
+    Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+    """
+
     @cached_property
     def generate(self) -> GenerateResource:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return GenerateResource(self._client)
 
     @cached_property
@@ -134,7 +141,7 @@ class AdsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/ai/ads/operations/{operation_id}",
+            path_template("/ai/ads/operations/{operation_id}", operation_id=operation_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -143,8 +150,15 @@ class AdsResource(SyncAPIResource):
 
 
 class AsyncAdsResource(AsyncAPIResource):
+    """
+    Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+    """
+
     @cached_property
     def generate(self) -> AsyncGenerateResource:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncGenerateResource(self._client)
 
     @cached_property
@@ -244,7 +258,7 @@ class AsyncAdsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/ai/ads/operations/{operation_id}",
+            path_template("/ai/ads/operations/{operation_id}", operation_id=operation_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -265,6 +279,9 @@ class AdsResourceWithRawResponse:
 
     @cached_property
     def generate(self) -> GenerateResourceWithRawResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return GenerateResourceWithRawResponse(self._ads.generate)
 
 
@@ -281,6 +298,9 @@ class AsyncAdsResourceWithRawResponse:
 
     @cached_property
     def generate(self) -> AsyncGenerateResourceWithRawResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncGenerateResourceWithRawResponse(self._ads.generate)
 
 
@@ -297,6 +317,9 @@ class AdsResourceWithStreamingResponse:
 
     @cached_property
     def generate(self) -> GenerateResourceWithStreamingResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return GenerateResourceWithStreamingResponse(self._ads.generate)
 
 
@@ -313,4 +336,7 @@ class AsyncAdsResourceWithStreamingResponse:
 
     @cached_property
     def generate(self) -> AsyncGenerateResourceWithStreamingResponse:
+        """
+        Programmatically generate high-fidelity, commercially viable video content from text prompts, leveraging cutting-edge generative AI models for targeted marketing campaigns.
+        """
         return AsyncGenerateResourceWithStreamingResponse(self._ads.generate)

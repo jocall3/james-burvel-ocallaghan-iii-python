@@ -38,12 +38,22 @@ __all__ = ["Web3Resource", "AsyncWeb3Resource"]
 
 
 class Web3Resource(SyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def wallets(self) -> WalletsResource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return WalletsResource(self._client)
 
     @cached_property
     def transactions(self) -> TransactionsResource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return TransactionsResource(self._client)
 
     @cached_property
@@ -115,12 +125,22 @@ class Web3Resource(SyncAPIResource):
 
 
 class AsyncWeb3Resource(AsyncAPIResource):
+    """
+    Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+    """
+
     @cached_property
     def wallets(self) -> AsyncWalletsResource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncWalletsResource(self._client)
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncTransactionsResource(self._client)
 
     @cached_property
@@ -201,10 +221,16 @@ class Web3ResourceWithRawResponse:
 
     @cached_property
     def wallets(self) -> WalletsResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return WalletsResourceWithRawResponse(self._web3.wallets)
 
     @cached_property
     def transactions(self) -> TransactionsResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return TransactionsResourceWithRawResponse(self._web3.transactions)
 
 
@@ -218,10 +244,16 @@ class AsyncWeb3ResourceWithRawResponse:
 
     @cached_property
     def wallets(self) -> AsyncWalletsResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncWalletsResourceWithRawResponse(self._web3.wallets)
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncTransactionsResourceWithRawResponse(self._web3.transactions)
 
 
@@ -235,10 +267,16 @@ class Web3ResourceWithStreamingResponse:
 
     @cached_property
     def wallets(self) -> WalletsResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return WalletsResourceWithStreamingResponse(self._web3.wallets)
 
     @cached_property
     def transactions(self) -> TransactionsResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return TransactionsResourceWithStreamingResponse(self._web3.transactions)
 
 
@@ -252,8 +290,14 @@ class AsyncWeb3ResourceWithStreamingResponse:
 
     @cached_property
     def wallets(self) -> AsyncWalletsResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncWalletsResourceWithStreamingResponse(self._web3.wallets)
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         return AsyncTransactionsResourceWithStreamingResponse(self._web3.transactions)

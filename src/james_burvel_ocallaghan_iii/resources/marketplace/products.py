@@ -7,7 +7,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -30,6 +30,10 @@ __all__ = ["ProductsResource", "AsyncProductsResource"]
 
 
 class ProductsResource(SyncAPIResource):
+    """
+    Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+    """
+
     @cached_property
     def with_raw_response(self) -> ProductsResourceWithRawResponse:
         """
@@ -141,7 +145,7 @@ class ProductsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/marketplace/offers/{offer_id}/redeem",
+            path_template("/marketplace/offers/{offer_id}/redeem", offer_id=offer_id),
             body=maybe_transform(
                 {"payment_account_id": payment_account_id},
                 product_redeem_marketplace_offer_params.ProductRedeemMarketplaceOfferParams,
@@ -182,7 +186,7 @@ class ProductsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/marketplace/products/{product_id}/impact-simulate",
+            path_template("/marketplace/products/{product_id}/impact-simulate", product_id=product_id),
             body=maybe_transform(
                 {"simulation_parameters": simulation_parameters},
                 product_simulate_purchase_params.ProductSimulatePurchaseParams,
@@ -195,6 +199,10 @@ class ProductsResource(SyncAPIResource):
 
 
 class AsyncProductsResource(AsyncAPIResource):
+    """
+    Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncProductsResourceWithRawResponse:
         """
@@ -306,7 +314,7 @@ class AsyncProductsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/marketplace/offers/{offer_id}/redeem",
+            path_template("/marketplace/offers/{offer_id}/redeem", offer_id=offer_id),
             body=await async_maybe_transform(
                 {"payment_account_id": payment_account_id},
                 product_redeem_marketplace_offer_params.ProductRedeemMarketplaceOfferParams,
@@ -347,7 +355,7 @@ class AsyncProductsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/marketplace/products/{product_id}/impact-simulate",
+            path_template("/marketplace/products/{product_id}/impact-simulate", product_id=product_id),
             body=await async_maybe_transform(
                 {"simulation_parameters": simulation_parameters},
                 product_simulate_purchase_params.ProductSimulatePurchaseParams,

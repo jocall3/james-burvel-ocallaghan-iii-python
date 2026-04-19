@@ -23,6 +23,10 @@ __all__ = ["PasswordResetResource", "AsyncPasswordResetResource"]
 
 
 class PasswordResetResource(SyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> PasswordResetResourceWithRawResponse:
         """
@@ -129,6 +133,10 @@ class PasswordResetResource(SyncAPIResource):
 
 
 class AsyncPasswordResetResource(AsyncAPIResource):
+    """
+    Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPasswordResetResourceWithRawResponse:
         """
