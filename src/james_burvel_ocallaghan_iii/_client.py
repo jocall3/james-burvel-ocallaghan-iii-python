@@ -20,7 +20,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -124,6 +128,15 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
             base_url = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_BASE_URL")
         if base_url is None:
             base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
+
+        custom_headers_env = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
@@ -437,6 +450,15 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
             base_url = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_BASE_URL")
         if base_url is None:
             base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
+
+        custom_headers_env = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
