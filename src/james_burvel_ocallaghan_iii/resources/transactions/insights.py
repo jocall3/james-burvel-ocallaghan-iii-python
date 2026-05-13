@@ -20,6 +20,10 @@ __all__ = ["InsightsResource", "AsyncInsightsResource"]
 
 
 class InsightsResource(SyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def with_raw_response(self) -> InsightsResourceWithRawResponse:
         """
@@ -63,6 +67,10 @@ class InsightsResource(SyncAPIResource):
 
 
 class AsyncInsightsResource(AsyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInsightsResourceWithRawResponse:
         """

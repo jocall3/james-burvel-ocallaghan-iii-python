@@ -28,8 +28,15 @@ __all__ = ["TreasuryResource", "AsyncTreasuryResource"]
 
 
 class TreasuryResource(SyncAPIResource):
+    """
+    Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+    """
+
     @cached_property
     def cash_flow(self) -> CashFlowResource:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return CashFlowResource(self._client)
 
     @cached_property
@@ -75,8 +82,15 @@ class TreasuryResource(SyncAPIResource):
 
 
 class AsyncTreasuryResource(AsyncAPIResource):
+    """
+    Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+    """
+
     @cached_property
     def cash_flow(self) -> AsyncCashFlowResource:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncCashFlowResource(self._client)
 
     @cached_property
@@ -131,6 +145,9 @@ class TreasuryResourceWithRawResponse:
 
     @cached_property
     def cash_flow(self) -> CashFlowResourceWithRawResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return CashFlowResourceWithRawResponse(self._treasury.cash_flow)
 
 
@@ -144,6 +161,9 @@ class AsyncTreasuryResourceWithRawResponse:
 
     @cached_property
     def cash_flow(self) -> AsyncCashFlowResourceWithRawResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncCashFlowResourceWithRawResponse(self._treasury.cash_flow)
 
 
@@ -157,6 +177,9 @@ class TreasuryResourceWithStreamingResponse:
 
     @cached_property
     def cash_flow(self) -> CashFlowResourceWithStreamingResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return CashFlowResourceWithStreamingResponse(self._treasury.cash_flow)
 
 
@@ -170,4 +193,7 @@ class AsyncTreasuryResourceWithStreamingResponse:
 
     @cached_property
     def cash_flow(self) -> AsyncCashFlowResourceWithStreamingResponse:
+        """
+        Streamlined management of payment orders, automated invoice processing, multi-currency transactions, international transfers, and AI-driven treasury optimization.
+        """
         return AsyncCashFlowResourceWithStreamingResponse(self._treasury.cash_flow)

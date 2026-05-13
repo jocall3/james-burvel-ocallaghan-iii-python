@@ -65,12 +65,22 @@ __all__ = ["CorporateResource", "AsyncCorporateResource"]
 
 
 class CorporateResource(SyncAPIResource):
+    """
+    Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+    """
+
     @cached_property
     def cards(self) -> CardsResource:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return CardsResource(self._client)
 
     @cached_property
     def anomalies(self) -> AnomaliesResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AnomaliesResource(self._client)
 
     @cached_property
@@ -79,6 +89,9 @@ class CorporateResource(SyncAPIResource):
 
     @cached_property
     def treasury(self) -> TreasuryResource:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return TreasuryResource(self._client)
 
     @cached_property
@@ -166,12 +179,22 @@ class CorporateResource(SyncAPIResource):
 
 
 class AsyncCorporateResource(AsyncAPIResource):
+    """
+    Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+    """
+
     @cached_property
     def cards(self) -> AsyncCardsResource:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return AsyncCardsResource(self._client)
 
     @cached_property
     def anomalies(self) -> AsyncAnomaliesResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAnomaliesResource(self._client)
 
     @cached_property
@@ -180,6 +203,9 @@ class AsyncCorporateResource(AsyncAPIResource):
 
     @cached_property
     def treasury(self) -> AsyncTreasuryResource:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return AsyncTreasuryResource(self._client)
 
     @cached_property
@@ -276,10 +302,16 @@ class CorporateResourceWithRawResponse:
 
     @cached_property
     def cards(self) -> CardsResourceWithRawResponse:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return CardsResourceWithRawResponse(self._corporate.cards)
 
     @cached_property
     def anomalies(self) -> AnomaliesResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AnomaliesResourceWithRawResponse(self._corporate.anomalies)
 
     @cached_property
@@ -288,6 +320,9 @@ class CorporateResourceWithRawResponse:
 
     @cached_property
     def treasury(self) -> TreasuryResourceWithRawResponse:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return TreasuryResourceWithRawResponse(self._corporate.treasury)
 
     @cached_property
@@ -305,10 +340,16 @@ class AsyncCorporateResourceWithRawResponse:
 
     @cached_property
     def cards(self) -> AsyncCardsResourceWithRawResponse:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return AsyncCardsResourceWithRawResponse(self._corporate.cards)
 
     @cached_property
     def anomalies(self) -> AsyncAnomaliesResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAnomaliesResourceWithRawResponse(self._corporate.anomalies)
 
     @cached_property
@@ -317,6 +358,9 @@ class AsyncCorporateResourceWithRawResponse:
 
     @cached_property
     def treasury(self) -> AsyncTreasuryResourceWithRawResponse:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return AsyncTreasuryResourceWithRawResponse(self._corporate.treasury)
 
     @cached_property
@@ -334,10 +378,16 @@ class CorporateResourceWithStreamingResponse:
 
     @cached_property
     def cards(self) -> CardsResourceWithStreamingResponse:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return CardsResourceWithStreamingResponse(self._corporate.cards)
 
     @cached_property
     def anomalies(self) -> AnomaliesResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AnomaliesResourceWithStreamingResponse(self._corporate.anomalies)
 
     @cached_property
@@ -346,6 +396,9 @@ class CorporateResourceWithStreamingResponse:
 
     @cached_property
     def treasury(self) -> TreasuryResourceWithStreamingResponse:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return TreasuryResourceWithStreamingResponse(self._corporate.treasury)
 
     @cached_property
@@ -363,10 +416,16 @@ class AsyncCorporateResourceWithStreamingResponse:
 
     @cached_property
     def cards(self) -> AsyncCardsResourceWithStreamingResponse:
+        """
+        Sophisticated management of corporate card programs, granular spending controls, virtual card issuance, and intelligent compliance monitoring.
+        """
         return AsyncCardsResourceWithStreamingResponse(self._corporate.cards)
 
     @cached_property
     def anomalies(self) -> AsyncAnomaliesResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         return AsyncAnomaliesResourceWithStreamingResponse(self._corporate.anomalies)
 
     @cached_property
@@ -375,6 +434,9 @@ class AsyncCorporateResourceWithStreamingResponse:
 
     @cached_property
     def treasury(self) -> AsyncTreasuryResourceWithStreamingResponse:
+        """
+        Unlocking advanced, AI-driven analytics dashboards, predictive financial forecasting, and custom report generation for both personal and corporate users.
+        """
         return AsyncTreasuryResourceWithStreamingResponse(self._corporate.treasury)
 
     @cached_property

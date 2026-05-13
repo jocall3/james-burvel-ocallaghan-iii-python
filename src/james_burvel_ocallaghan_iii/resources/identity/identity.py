@@ -19,6 +19,9 @@ __all__ = ["IdentityResource", "AsyncIdentityResource"]
 class IdentityResource(SyncAPIResource):
     @cached_property
     def kyc(self) -> KYCResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return KYCResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class IdentityResource(SyncAPIResource):
 class AsyncIdentityResource(AsyncAPIResource):
     @cached_property
     def kyc(self) -> AsyncKYCResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncKYCResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class IdentityResourceWithRawResponse:
 
     @cached_property
     def kyc(self) -> KYCResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return KYCResourceWithRawResponse(self._identity.kyc)
 
 
@@ -81,6 +90,9 @@ class AsyncIdentityResourceWithRawResponse:
 
     @cached_property
     def kyc(self) -> AsyncKYCResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncKYCResourceWithRawResponse(self._identity.kyc)
 
 
@@ -90,6 +102,9 @@ class IdentityResourceWithStreamingResponse:
 
     @cached_property
     def kyc(self) -> KYCResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return KYCResourceWithStreamingResponse(self._identity.kyc)
 
 
@@ -99,4 +114,7 @@ class AsyncIdentityResourceWithStreamingResponse:
 
     @cached_property
     def kyc(self) -> AsyncKYCResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         return AsyncKYCResourceWithStreamingResponse(self._identity.kyc)

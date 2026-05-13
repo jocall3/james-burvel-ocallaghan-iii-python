@@ -25,6 +25,10 @@ __all__ = ["RecurringResource", "AsyncRecurringResource"]
 
 
 class RecurringResource(SyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def with_raw_response(self) -> RecurringResourceWithRawResponse:
         """
@@ -156,6 +160,10 @@ class RecurringResource(SyncAPIResource):
 
 
 class AsyncRecurringResource(AsyncAPIResource):
+    """
+    Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncRecurringResourceWithRawResponse:
         """

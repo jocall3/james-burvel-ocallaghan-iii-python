@@ -27,10 +27,18 @@ __all__ = ["OracleResource", "AsyncOracleResource"]
 class OracleResource(SyncAPIResource):
     @cached_property
     def simulate(self) -> SimulateResource:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulateResource(self._client)
 
     @cached_property
     def simulations(self) -> SimulationsResource:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulationsResource(self._client)
 
     @cached_property
@@ -56,10 +64,18 @@ class OracleResource(SyncAPIResource):
 class AsyncOracleResource(AsyncAPIResource):
     @cached_property
     def simulate(self) -> AsyncSimulateResource:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulateResource(self._client)
 
     @cached_property
     def simulations(self) -> AsyncSimulationsResource:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulationsResource(self._client)
 
     @cached_property
@@ -88,10 +104,18 @@ class OracleResourceWithRawResponse:
 
     @cached_property
     def simulate(self) -> SimulateResourceWithRawResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulateResourceWithRawResponse(self._oracle.simulate)
 
     @cached_property
     def simulations(self) -> SimulationsResourceWithRawResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulationsResourceWithRawResponse(self._oracle.simulations)
 
 
@@ -101,10 +125,18 @@ class AsyncOracleResourceWithRawResponse:
 
     @cached_property
     def simulate(self) -> AsyncSimulateResourceWithRawResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulateResourceWithRawResponse(self._oracle.simulate)
 
     @cached_property
     def simulations(self) -> AsyncSimulationsResourceWithRawResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulationsResourceWithRawResponse(self._oracle.simulations)
 
 
@@ -114,10 +146,18 @@ class OracleResourceWithStreamingResponse:
 
     @cached_property
     def simulate(self) -> SimulateResourceWithStreamingResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulateResourceWithStreamingResponse(self._oracle.simulate)
 
     @cached_property
     def simulations(self) -> SimulationsResourceWithStreamingResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return SimulationsResourceWithStreamingResponse(self._oracle.simulations)
 
 
@@ -127,8 +167,16 @@ class AsyncOracleResourceWithStreamingResponse:
 
     @cached_property
     def simulate(self) -> AsyncSimulateResourceWithStreamingResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulateResourceWithStreamingResponse(self._oracle.simulate)
 
     @cached_property
     def simulations(self) -> AsyncSimulationsResourceWithStreamingResponse:
+        """Unleash the power of 'what-if' scenario modeling.
+
+        Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+        """
         return AsyncSimulationsResourceWithStreamingResponse(self._oracle.simulations)

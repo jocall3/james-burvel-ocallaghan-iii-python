@@ -27,10 +27,16 @@ __all__ = ["LendingResource", "AsyncLendingResource"]
 class LendingResource(SyncAPIResource):
     @cached_property
     def applications(self) -> ApplicationsResource:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return ApplicationsResource(self._client)
 
     @cached_property
     def offers(self) -> OffersResource:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return OffersResource(self._client)
 
     @cached_property
@@ -56,10 +62,16 @@ class LendingResource(SyncAPIResource):
 class AsyncLendingResource(AsyncAPIResource):
     @cached_property
     def applications(self) -> AsyncApplicationsResource:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncApplicationsResource(self._client)
 
     @cached_property
     def offers(self) -> AsyncOffersResource:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncOffersResource(self._client)
 
     @cached_property
@@ -88,10 +100,16 @@ class LendingResourceWithRawResponse:
 
     @cached_property
     def applications(self) -> ApplicationsResourceWithRawResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return ApplicationsResourceWithRawResponse(self._lending.applications)
 
     @cached_property
     def offers(self) -> OffersResourceWithRawResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return OffersResourceWithRawResponse(self._lending.offers)
 
 
@@ -101,10 +119,16 @@ class AsyncLendingResourceWithRawResponse:
 
     @cached_property
     def applications(self) -> AsyncApplicationsResourceWithRawResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncApplicationsResourceWithRawResponse(self._lending.applications)
 
     @cached_property
     def offers(self) -> AsyncOffersResourceWithRawResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncOffersResourceWithRawResponse(self._lending.offers)
 
 
@@ -114,10 +138,16 @@ class LendingResourceWithStreamingResponse:
 
     @cached_property
     def applications(self) -> ApplicationsResourceWithStreamingResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return ApplicationsResourceWithStreamingResponse(self._lending.applications)
 
     @cached_property
     def offers(self) -> OffersResourceWithStreamingResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return OffersResourceWithStreamingResponse(self._lending.offers)
 
 
@@ -127,8 +157,14 @@ class AsyncLendingResourceWithStreamingResponse:
 
     @cached_property
     def applications(self) -> AsyncApplicationsResourceWithStreamingResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncApplicationsResourceWithStreamingResponse(self._lending.applications)
 
     @cached_property
     def offers(self) -> AsyncOffersResourceWithStreamingResponse:
+        """
+        Comprehensive access to credit scores, detailed history, AI-generated improvement plans, and personalized lending offers with instant underwriting.
+        """
         return AsyncOffersResourceWithStreamingResponse(self._lending.offers)

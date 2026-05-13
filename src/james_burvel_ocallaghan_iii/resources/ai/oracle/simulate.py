@@ -25,6 +25,11 @@ __all__ = ["SimulateResource", "AsyncSimulateResource"]
 
 
 class SimulateResource(SyncAPIResource):
+    """Unleash the power of 'what-if' scenario modeling.
+
+    Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> SimulateResourceWithRawResponse:
         """
@@ -144,6 +149,11 @@ class SimulateResource(SyncAPIResource):
 
 
 class AsyncSimulateResource(AsyncAPIResource):
+    """Unleash the power of 'what-if' scenario modeling.
+
+    Run complex, multi-variable financial simulations with AI-powered foresight to understand future impacts and optimize strategies.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSimulateResourceWithRawResponse:
         """

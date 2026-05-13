@@ -20,7 +20,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -125,6 +129,15 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
         if base_url is None:
             base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
 
+        custom_headers_env = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -138,24 +151,36 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @cached_property
     def users(self) -> UsersResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import UsersResource
 
         return UsersResource(self)
 
     @cached_property
     def accounts(self) -> AccountsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AccountsResource
 
         return AccountsResource(self)
 
     @cached_property
     def transactions(self) -> TransactionsResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import TransactionsResource
 
         return TransactionsResource(self)
 
     @cached_property
     def budgets(self) -> BudgetsResource:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import BudgetsResource
 
         return BudgetsResource(self)
@@ -174,12 +199,18 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @cached_property
     def corporate(self) -> CorporateResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import CorporateResource
 
         return CorporateResource(self)
 
     @cached_property
     def web3(self) -> Web3Resource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import Web3Resource
 
         return Web3Resource(self)
@@ -192,6 +223,9 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @cached_property
     def sustainability(self) -> SustainabilityResource:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import SustainabilityResource
 
         return SustainabilityResource(self)
@@ -216,6 +250,9 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @cached_property
     def goals(self) -> GoalsResource:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import GoalsResource
 
         return GoalsResource(self)
@@ -269,14 +306,10 @@ class JamesBurvelOcallaghanIii(SyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
+        if headers.get("X-API-Key") or isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
-        if self.bearer_token and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
             return
 
         raise TypeError(
@@ -418,6 +451,15 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
         if base_url is None:
             base_url = f"https://ce47fe80-dabc-4ad0-b0e7-cf285695b8b8.mock.pstmn.io"
 
+        custom_headers_env = os.environ.get("JAMES_BURVEL_OCALLAGHAN_III_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -431,24 +473,36 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @cached_property
     def users(self) -> AsyncUsersResource:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import AsyncUsersResource
 
         return AsyncUsersResource(self)
 
     @cached_property
     def accounts(self) -> AsyncAccountsResource:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AsyncAccountsResource
 
         return AsyncAccountsResource(self)
 
     @cached_property
     def transactions(self) -> AsyncTransactionsResource:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import AsyncTransactionsResource
 
         return AsyncTransactionsResource(self)
 
     @cached_property
     def budgets(self) -> AsyncBudgetsResource:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import AsyncBudgetsResource
 
         return AsyncBudgetsResource(self)
@@ -467,12 +521,18 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @cached_property
     def corporate(self) -> AsyncCorporateResource:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import AsyncCorporateResource
 
         return AsyncCorporateResource(self)
 
     @cached_property
     def web3(self) -> AsyncWeb3Resource:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import AsyncWeb3Resource
 
         return AsyncWeb3Resource(self)
@@ -485,6 +545,9 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @cached_property
     def sustainability(self) -> AsyncSustainabilityResource:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import AsyncSustainabilityResource
 
         return AsyncSustainabilityResource(self)
@@ -509,6 +572,9 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @cached_property
     def goals(self) -> AsyncGoalsResource:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import AsyncGoalsResource
 
         return AsyncGoalsResource(self)
@@ -562,14 +628,10 @@ class AsyncJamesBurvelOcallaghanIii(AsyncAPIClient):
 
     @override
     def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
+        if headers.get("X-API-Key") or isinstance(custom_headers.get("X-API-Key"), Omit):
             return
 
-        if self.bearer_token and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
+        if headers.get("Authorization") or isinstance(custom_headers.get("Authorization"), Omit):
             return
 
         raise TypeError(
@@ -671,24 +733,36 @@ class JamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def users(self) -> users.UsersResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import UsersResourceWithRawResponse
 
         return UsersResourceWithRawResponse(self._client.users)
 
     @cached_property
     def accounts(self) -> accounts.AccountsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AccountsResourceWithRawResponse
 
         return AccountsResourceWithRawResponse(self._client.accounts)
 
     @cached_property
     def transactions(self) -> transactions.TransactionsResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import TransactionsResourceWithRawResponse
 
         return TransactionsResourceWithRawResponse(self._client.transactions)
 
     @cached_property
     def budgets(self) -> budgets.BudgetsResourceWithRawResponse:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import BudgetsResourceWithRawResponse
 
         return BudgetsResourceWithRawResponse(self._client.budgets)
@@ -707,12 +781,18 @@ class JamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def corporate(self) -> corporate.CorporateResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import CorporateResourceWithRawResponse
 
         return CorporateResourceWithRawResponse(self._client.corporate)
 
     @cached_property
     def web3(self) -> web3.Web3ResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import Web3ResourceWithRawResponse
 
         return Web3ResourceWithRawResponse(self._client.web3)
@@ -725,6 +805,9 @@ class JamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def sustainability(self) -> sustainability.SustainabilityResourceWithRawResponse:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import SustainabilityResourceWithRawResponse
 
         return SustainabilityResourceWithRawResponse(self._client.sustainability)
@@ -749,6 +832,9 @@ class JamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def goals(self) -> goals.GoalsResourceWithRawResponse:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import GoalsResourceWithRawResponse
 
         return GoalsResourceWithRawResponse(self._client.goals)
@@ -768,24 +854,36 @@ class AsyncJamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import AsyncUsersResourceWithRawResponse
 
         return AsyncUsersResourceWithRawResponse(self._client.users)
 
     @cached_property
     def accounts(self) -> accounts.AsyncAccountsResourceWithRawResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AsyncAccountsResourceWithRawResponse
 
         return AsyncAccountsResourceWithRawResponse(self._client.accounts)
 
     @cached_property
     def transactions(self) -> transactions.AsyncTransactionsResourceWithRawResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import AsyncTransactionsResourceWithRawResponse
 
         return AsyncTransactionsResourceWithRawResponse(self._client.transactions)
 
     @cached_property
     def budgets(self) -> budgets.AsyncBudgetsResourceWithRawResponse:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import AsyncBudgetsResourceWithRawResponse
 
         return AsyncBudgetsResourceWithRawResponse(self._client.budgets)
@@ -804,12 +902,18 @@ class AsyncJamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def corporate(self) -> corporate.AsyncCorporateResourceWithRawResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import AsyncCorporateResourceWithRawResponse
 
         return AsyncCorporateResourceWithRawResponse(self._client.corporate)
 
     @cached_property
     def web3(self) -> web3.AsyncWeb3ResourceWithRawResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import AsyncWeb3ResourceWithRawResponse
 
         return AsyncWeb3ResourceWithRawResponse(self._client.web3)
@@ -822,6 +926,9 @@ class AsyncJamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def sustainability(self) -> sustainability.AsyncSustainabilityResourceWithRawResponse:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import AsyncSustainabilityResourceWithRawResponse
 
         return AsyncSustainabilityResourceWithRawResponse(self._client.sustainability)
@@ -846,6 +953,9 @@ class AsyncJamesBurvelOcallaghanIiiWithRawResponse:
 
     @cached_property
     def goals(self) -> goals.AsyncGoalsResourceWithRawResponse:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import AsyncGoalsResourceWithRawResponse
 
         return AsyncGoalsResourceWithRawResponse(self._client.goals)
@@ -865,24 +975,36 @@ class JamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def users(self) -> users.UsersResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import UsersResourceWithStreamingResponse
 
         return UsersResourceWithStreamingResponse(self._client.users)
 
     @cached_property
     def accounts(self) -> accounts.AccountsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AccountsResourceWithStreamingResponse
 
         return AccountsResourceWithStreamingResponse(self._client.accounts)
 
     @cached_property
     def transactions(self) -> transactions.TransactionsResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import TransactionsResourceWithStreamingResponse
 
         return TransactionsResourceWithStreamingResponse(self._client.transactions)
 
     @cached_property
     def budgets(self) -> budgets.BudgetsResourceWithStreamingResponse:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import BudgetsResourceWithStreamingResponse
 
         return BudgetsResourceWithStreamingResponse(self._client.budgets)
@@ -901,12 +1023,18 @@ class JamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def corporate(self) -> corporate.CorporateResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import CorporateResourceWithStreamingResponse
 
         return CorporateResourceWithStreamingResponse(self._client.corporate)
 
     @cached_property
     def web3(self) -> web3.Web3ResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import Web3ResourceWithStreamingResponse
 
         return Web3ResourceWithStreamingResponse(self._client.web3)
@@ -919,6 +1047,9 @@ class JamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def sustainability(self) -> sustainability.SustainabilityResourceWithStreamingResponse:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import SustainabilityResourceWithStreamingResponse
 
         return SustainabilityResourceWithStreamingResponse(self._client.sustainability)
@@ -943,6 +1074,9 @@ class JamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def goals(self) -> goals.GoalsResourceWithStreamingResponse:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import GoalsResourceWithStreamingResponse
 
         return GoalsResourceWithStreamingResponse(self._client.goals)
@@ -962,24 +1096,36 @@ class AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        """
+        Comprehensive management of user profiles, advanced biometric authentication, multi-factor security, and digital identity verification (KYC/AML).
+        """
         from .resources.users import AsyncUsersResourceWithStreamingResponse
 
         return AsyncUsersResourceWithStreamingResponse(self._client.users)
 
     @cached_property
     def accounts(self) -> accounts.AsyncAccountsResourceWithStreamingResponse:
+        """
+        Real-time interaction with all linked financial accounts, including comprehensive balance sheets, predictive cash flow, and intelligent overdraft management.
+        """
         from .resources.accounts import AsyncAccountsResourceWithStreamingResponse
 
         return AsyncAccountsResourceWithStreamingResponse(self._client.accounts)
 
     @cached_property
     def transactions(self) -> transactions.AsyncTransactionsResourceWithStreamingResponse:
+        """
+        Access, intelligent categorization, real-time analysis, and AI-driven insights into transaction data, including advanced dispute resolution and trend detection.
+        """
         from .resources.transactions import AsyncTransactionsResourceWithStreamingResponse
 
         return AsyncTransactionsResourceWithStreamingResponse(self._client.transactions)
 
     @cached_property
     def budgets(self) -> budgets.AsyncBudgetsResourceWithStreamingResponse:
+        """
+        AI-powered creation and dynamic management of user spending budgets, real-time progress tracking, and proactive alert systems.
+        """
         from .resources.budgets import AsyncBudgetsResourceWithStreamingResponse
 
         return AsyncBudgetsResourceWithStreamingResponse(self._client.budgets)
@@ -998,12 +1144,18 @@ class AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def corporate(self) -> corporate.AsyncCorporateResourceWithStreamingResponse:
+        """
+        Advanced access to compliance cases, AI-powered financial anomaly detection, real-time risk assessments, and automated sanction screening for enterprise clients.
+        """
         from .resources.corporate import AsyncCorporateResourceWithStreamingResponse
 
         return AsyncCorporateResourceWithStreamingResponse(self._client.corporate)
 
     @cached_property
     def web3(self) -> web3.AsyncWeb3ResourceWithStreamingResponse:
+        """
+        Seamless integration with digital assets, cryptocurrencies, NFTs, and DeFi protocols. Connect wallets, execute on-chain transactions, and manage your Web3 portfolio.
+        """
         from .resources.web3 import AsyncWeb3ResourceWithStreamingResponse
 
         return AsyncWeb3ResourceWithStreamingResponse(self._client.web3)
@@ -1016,6 +1168,9 @@ class AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def sustainability(self) -> sustainability.AsyncSustainabilityResourceWithStreamingResponse:
+        """
+        Measure, track, and improve personal and corporate environmental, social, and governance (ESG) impact, including carbon footprint analysis and green investment opportunities.
+        """
         from .resources.sustainability import AsyncSustainabilityResourceWithStreamingResponse
 
         return AsyncSustainabilityResourceWithStreamingResponse(self._client.sustainability)
@@ -1040,6 +1195,9 @@ class AsyncJamesBurvelOcallaghanIiiWithStreamedResponse:
 
     @cached_property
     def goals(self) -> goals.AsyncGoalsResourceWithStreamingResponse:
+        """
+        Define, manage, and accelerate progress towards long-term financial goals with AI-generated strategic plans, real-time progress tracking, and adaptive adjustments.
+        """
         from .resources.goals import AsyncGoalsResourceWithStreamingResponse
 
         return AsyncGoalsResourceWithStreamingResponse(self._client.goals)

@@ -19,6 +19,9 @@ __all__ = ["MarketplaceResource", "AsyncMarketplaceResource"]
 class MarketplaceResource(SyncAPIResource):
     @cached_property
     def products(self) -> ProductsResource:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return ProductsResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class MarketplaceResource(SyncAPIResource):
 class AsyncMarketplaceResource(AsyncAPIResource):
     @cached_property
     def products(self) -> AsyncProductsResource:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return AsyncProductsResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class MarketplaceResourceWithRawResponse:
 
     @cached_property
     def products(self) -> ProductsResourceWithRawResponse:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return ProductsResourceWithRawResponse(self._marketplace.products)
 
 
@@ -81,6 +90,9 @@ class AsyncMarketplaceResourceWithRawResponse:
 
     @cached_property
     def products(self) -> AsyncProductsResourceWithRawResponse:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return AsyncProductsResourceWithRawResponse(self._marketplace.products)
 
 
@@ -90,6 +102,9 @@ class MarketplaceResourceWithStreamingResponse:
 
     @cached_property
     def products(self) -> ProductsResourceWithStreamingResponse:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return ProductsResourceWithStreamingResponse(self._marketplace.products)
 
 
@@ -99,4 +114,7 @@ class AsyncMarketplaceResourceWithStreamingResponse:
 
     @cached_property
     def products(self) -> AsyncProductsResourceWithStreamingResponse:
+        """
+        Access a dynamic, AI-curated marketplace offering hyper-personalized product recommendations, simulate purchase impacts, and discover exclusive partner offers.
+        """
         return AsyncProductsResourceWithStreamingResponse(self._marketplace.products)
